@@ -16,6 +16,7 @@ import ArtistTopTracks from "../../../components/artist-top-tracks/artist-top-tr
 import axios from "axios";
 import useGetSimilarArtist from "../../../hooks/useGetSimilarArtist";
 import RevenueGraph from "../../graph/revenuegraph/graph";
+import SwotGraph from "../../graph/swotanalysisgraph/graph";
 import GenreGraph from "../../graph/streamGraph/graph";
 import SocialMediaGraph from "../../graph/socialMediaGraph/graph";
 import { toast } from "react-toastify";
@@ -808,7 +809,15 @@ const ViewArtist = () => {
 
         {/* Third Grid Starts From Here */}
 
-        <Grid item xs={12} sm={12} lg={3} xl={4}></Grid>
+        <Grid item xs={12} sm={12} lg={3} xl={4}>
+          <Box
+            component="div"
+            variant="div"
+            className={classess.page__artist__box3}
+          >
+            <SwotGraph artist={artist} />
+          </Box>
+        </Grid>
 
         <Grid item xs={12} sm={12} lg={12} xl={8}>
           <Box>

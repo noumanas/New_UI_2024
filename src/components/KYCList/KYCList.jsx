@@ -17,33 +17,27 @@ import AuthEnum from "../../enums/auth.enum";
 import { getItemToLocalStorage } from "../../services/storage";
 import { Container, Grid, IconButton } from "@mui/material";
 import moment from "moment";
-import { GrView } from "react-icons/gr";
-import { AiOutlineCloudDownload, AiOutlineCheck } from "react-icons/ai";
-import { RiExternalLinkFill } from "react-icons/ri";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import CloudDownloadOutlinedIcon from "@mui/icons-material/CloudDownloadOutlined";
 import CheckIcon from "@mui/icons-material/Check";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
-import ScreenShareOutlinedIcon from "@mui/icons-material/ScreenShareOutlined";
 import PdfImage from "../../assets/pdf-image.png";
 import Modal from "@mui/material/Modal";
-import Dialog from "@mui/material/Dialog";
-import VerificationPortalConfirmationDialog from "../../dialogs/verification-portal-confirmation-dialog/verification-portal-confirmation-dialog";
 import CustomModal from "../custom-modal/CustomModal";
 import Tooltip from "@mui/material/Tooltip";
 import CreateIcon from "@mui/icons-material/Create";
-// import { Modal, Dialog, Image } from "@mui";
-// import {Modal} from"@m
 
 const KYCList = () => {
   const [list, setList] = useState([]);
   const [visibility, setVisibility] = useState(null);
   const [openFront, setOpenFront] = useState(false);
   const [openBack, setOpenBack] = useState(false);
+  const [selectedReq, setSelectedReq] = useState({});
 
   const handleOpenFront = () => {
     setOpenFront(true);
   };
+
   const handleCloseFront = () => {
     setOpenFront(false);
   };
@@ -51,6 +45,7 @@ const KYCList = () => {
   const handleOpenBack = () => {
     setOpenBack(true);
   };
+
   const handleCloseBack = () => {
     setOpenBack(false);
   };
@@ -151,19 +146,12 @@ const KYCList = () => {
       .then((e) => {})
       .catch((error) => {});
   };
-  // const [modalOpen, setModalOpen] = useState(false); // State for modal
 
-  // const handleShowModal = () => {
-  //   setModalOpen(true);
-  // };
-
-  // const handleCloseModal = () => {
-  //   setModalOpen(false);
-  // };
   const [open, setOpen] = useState(false);
   const [approve, setApprove] = useState(false);
 
   const handleOpenCustomModal = () => {
+    setSelectedReq();
     setOpen(true);
   };
   const handleCloseCustomModal = () => {
@@ -259,7 +247,10 @@ const KYCList = () => {
                           </span>
                         </TableCell>
 
-                        <TableCell className={classess.table__row}>
+                        <TableCell
+                          className={classess.table__row}
+                          sx={{ color: "#fff" }}
+                        >
                           {/* {row.user?.username} */}
                           {"Approve By"}
                         </TableCell>
@@ -273,91 +264,126 @@ const KYCList = () => {
                                 gap: "10px",
                               }}
                             >
-                              <IconButton
-                                style={{
-                                  backgroundColor: "#F831FF",
-                                  height: "30px",
-                                  width: "30px",
-                                }}
-                                onClick={() => handleToggle(index)}
+                              <Tooltip
+                                title="View Documents"
+                                placement="top"
+                                arrow
+                                enterDelay={100}
                               >
-                                <VisibilityIcon
+                                <IconButton
                                   style={{
-                                    color: "#000",
-                                    fontSize: "20px",
+                                    backgroundColor: "#F831FF",
+                                    height: "30px",
+                                    width: "30px",
                                   }}
-                                />
-                              </IconButton>
+                                  onClick={() => handleToggle(index)}
+                                >
+                                  <VisibilityIcon
+                                    style={{
+                                      color: "#000",
+                                      fontSize: "20px",
+                                    }}
+                                  />
+                                </IconButton>
+                              </Tooltip>
 
-                              <IconButton
-                                style={{
-                                  backgroundColor: "#4FB7FC",
-                                  height: "30px",
-                                  width: "30px",
-                                }}
+                              <Tooltip
+                                title="Download Documents"
+                                placement="top"
+                                arrow
+                                enterDelay={100}
                               >
-                                <CloudDownloadOutlinedIcon
-                                  sx={{
+                                <IconButton
+                                  style={{
                                     backgroundColor: "#4FB7FC",
-                                    color: "#000000",
-                                    fontSize: "20px",
+                                    height: "30px",
+                                    width: "30px",
                                   }}
-                                />
-                              </IconButton>
+                                >
+                                  <CloudDownloadOutlinedIcon
+                                    sx={{
+                                      backgroundColor: "#4FB7FC",
+                                      color: "#000000",
+                                      fontSize: "20px",
+                                    }}
+                                  />
+                                </IconButton>
+                              </Tooltip>
 
-                              <IconButton
-                                style={{
-                                  backgroundColor: "#FCB74F",
-                                  height: "30px",
-                                  width: "30px",
-                                }}
+                              <Tooltip
+                                title="Add Comments"
+                                placement="top"
+                                arrow
+                                enterDelay={100}
                               >
-                                <ScreenShareOutlinedIcon
-                                  sx={{
+                                <IconButton
+                                  style={{
                                     backgroundColor: "#FCB74F",
-                                    color: "#000000",
-                                    fontSize: "20px",
+                                    height: "30px",
+                                    width: "30px",
                                   }}
-                                />
-                              </IconButton>
+                                >
+                                  <CreateIcon
+                                    sx={{
+                                      backgroundColor: "#FCB74F",
+                                      color: "#000000",
+                                      fontSize: "20px",
+                                    }}
+                                  />
+                                </IconButton>
+                              </Tooltip>
 
-                              <IconButton
-                                style={{
-                                  backgroundColor: "#ff0000",
-                                  height: "30px",
-                                  width: "30px",
-                                }}
-                                // onClick={() => rejectHandler(row?._id)}
-                                // onClick={handleShowModal}
-                                onClick={() => handleOpenCustomModal()}
+                              <Tooltip
+                                title="Decline Request"
+                                placement="top"
+                                arrow
+                                enterDelay={100}
                               >
-                                <CancelOutlinedIcon
-                                  sx={{
+                                <IconButton
+                                  style={{
                                     backgroundColor: "#ff0000",
-                                    color: "#000000",
-                                    fontSize: "20px",
+                                    height: "30px",
+                                    width: "30px",
                                   }}
-                                />
-                              </IconButton>
+                                  // onClick={() => rejectHandler(row?._id)}
+                                  // onClick={handleShowModal}
+                                  onClick={() => handleOpenCustomModal()}
+                                >
+                                  <CancelOutlinedIcon
+                                    sx={{
+                                      backgroundColor: "#ff0000",
+                                      color: "#000000",
+                                      fontSize: "20px",
+                                    }}
+                                  />
+                                </IconButton>
+                              </Tooltip>
 
-                              <IconButton
-                                style={{
-                                  backgroundColor: "#1BB86A",
-                                  height: "30px",
-                                  width: "30px",
-                                }}
-                                onClick={() => handleApproveCustomModal()}
-                                // onClick={() => approveHandler(row?._id)}
+                              <Tooltip
+                                title="Approve Request"
+                                placement="top"
+                                arrow
+                                enterDelay={100}
                               >
-                                <CheckIcon
-                                  sx={{
+                                <IconButton
+                                  style={{
                                     backgroundColor: "#1BB86A",
-                                    color: "#000",
-                                    cursor: "pointer",
-                                    fontSize: "20px",
+                                    height: "30px",
+                                    width: "30px",
                                   }}
-                                />
-                              </IconButton>
+                                  onClick={() => handleApproveCustomModal()}
+                                  // onClick={() => approveHandler(row?._id)}
+                                >
+                                  <CheckIcon
+                                    sx={{
+                                      backgroundColor: "#1BB86A",
+                                      color: "#000",
+                                      cursor: "pointer",
+                                      fontSize: "20px",
+                                    }}
+                                  />
+                                </IconButton>
+                              </Tooltip>
                             </Box>
                           )}
                         </TableCell>

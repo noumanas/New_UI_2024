@@ -29,6 +29,7 @@ const LoginContainer = () => {
               justifyContent: "center",
               alignItems: "center",
               gap: "10px",
+              fontFamily: "DM Sans",
             }}
           >
             <Box>
@@ -59,10 +60,17 @@ const LoginContainer = () => {
             gap: "10px",
             fontSize: "13px",
             marginTop: "40px",
+            fontFamily: "DM Sans",
           }}
         >
           <span>Version 1.12.0</span>
-          <span style={{ color: "#4FFCB7", cursor: "pointer" }}>
+          <span
+            style={{
+              color: "#4FFCB7",
+              cursor: "pointer",
+              // fontFamily: "DM Sans",
+            }}
+          >
             Release Notes
           </span>
           <span style={{ color: "#4FFCB7", cursor: "pointer" }}>

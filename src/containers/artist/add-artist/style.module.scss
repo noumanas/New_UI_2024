@@ -11,14 +11,7 @@
     display: flex;
     width: 100% !important;
     // background-image: url("../../../assets//searchBg.png");
-    background-image: linear-gradient(
-      to right,
-      #175668,
-      #175668,
-      #19c39e,
-      #e4f1ee,
-      #e4f1ee
-    );
+    background-image: linear-gradient(to right, #175668, #175668, #19c39e, #e4f1ee, #e4f1ee);
     align-items: center;
     flex-direction: row;
     justify-content: center;
@@ -72,12 +65,7 @@
 
     &__background {
       &__conatiner {
-        @include flexProperties(
-          column,
-          space-between,
-          flex-start,
-          $fullWidth: false
-        );
+        @include flexProperties(column, space-between, flex-start, $fullWidth: false);
         gap: 20px;
         height: 11.2rem;
 
@@ -197,16 +185,12 @@
       }
 
       &__cancel_btn {
-        @include deActiveThemeBotton(16px, 10px);
-        @include fontSize(16px);
-        height: 40px;
-        // width: 100%
+        @include deActiveThemeBotton(16px, 12px);
+        border: 1px solid #4ffcb7 !important;
       }
 
       &__submit_btn {
-        @include activeThemeBotton(16px, 10px);
-        @include fontSize(16px);
-        height: 40px;
+        @include activeThemeBotton(16px, 12px);
       }
 
       &__choose_file {

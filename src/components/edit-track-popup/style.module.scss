@@ -6,12 +6,13 @@
     min-height: 100vh;
     height: 100%;
     width: 100%;
+    font-family: "DM Sans";
 
-    &__dialog {        
+    &__dialog {
         height: 100%;
         overflow: auto;
         width: 100%;
-        background-color: $secondary-bg-color-1;
+        background-color: #222c41;
         border-radius: 10px;
         box-shadow: 2px 2px 4px #000000;
         padding: 20px;
@@ -20,7 +21,7 @@
         &__header {
             &__title {
                 @include fontSize(18px);
-                color: $base-text-color;
+                color: $base-text-color-secondary;
                 text-transform: capitalize;
                 letter-spacing: 0px;
             }
@@ -42,39 +43,41 @@
                     gap: 10px;
 
                     &__label {
-                        color: $base-text-color;
+                        color: $base-text-color-secondary;
                     }
 
                     &__input {
                         width: 100%;
                         color: #c2c2c2 !important;
-                        border: 1px solid $secondary-bg-color-3 !important;
-                        background: transparent;
+                        // border: 1px solid #4ffcb7 !important;
+                        background: #192233 !important;
                         outline: none;
                         padding: 15px;
                         font-size: 18px;
                         border-radius: 8px;
+                        border-style: none !important;
                         &:focus {
-                            outline: $secondary-bg-color-3 solid 2px !important;
+                            outline: #4ffcb7 solid 2px !important;
                         }
                     }
                     &__input_date {
                         width: 100%;
                         color: #c2c2c2 !important;
-                        border: 1px solid $secondary-bg-color-3 !important;
-                        background: transparent;
+                        // border: 1px solid #4ffcb7 !important;
+                        background: #192233;
                         outline: none;
                         font-size: 18px;
                         border-radius: 8px;
+                        border-style: none !important;
                         &:focus {
-                            outline: $secondary-bg-color-3 solid 2px !important;
+                            outline: #4ffcb7 solid 2px !important;
                         }
                     }
 
                     &__select {
                         width: 100%;
                         color: #c2c2c2;
-                        border: 1px solid $secondary-bg-color-3 !important;
+                        border: 1px solid #4ffcb7 !important;
                         background: transparent;
                         outline: none;
                         padding: 15px;
@@ -89,20 +92,17 @@
                 width: 100%;
 
                 &__cancel_btn {
-                    @include normalThemeButton(16px, 10px);
-                    @include fontSize();
+                    @include deActiveThemeBotton(16px, 10px);
                 }
 
                 &__submit_btn {
                     gap: 20px;
-                    @include pinkThemeButton(16px, 10px);
-                    @include fontSize();
+                    @include activeThemeBotton(16px, 10px);
                 }
             }
         }
     }
 }
-
 
 @media only screen and (max-width: 767px) {
     .page {

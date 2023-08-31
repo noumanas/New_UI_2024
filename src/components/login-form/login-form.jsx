@@ -15,6 +15,7 @@ import { _fetchToken } from "../../utils/spotifyApiServiceHandler";
 import { FiEyeOff, FiEye } from "react-icons/fi";
 import { toast } from "react-toastify";
 import { createNewSession } from "../../services/session";
+import LoginTopLogo from "../../assets/LoginTopLogo.png.png";
 const LoginForm = () => {
   const rememberMe = JSON.parse(localStorage.getItem("rememberMe"));
   const dispatch = useDispatch();
@@ -51,7 +52,13 @@ const LoginForm = () => {
   return (
     <Box varient="div" component="div" className={classess.page}>
       <Box varient="div" component="div" className={classess.page__logo}>
-        <img src={logo} alt="logo" className={classess.page__logo__img} />
+        <img
+          src={LoginTopLogo}
+          alt="logo"
+          className={classess.page__logo__img}
+          height={90}
+          width={232}
+        />
       </Box>
 
       <div className={classess.page__horizontalLine}></div>
@@ -142,7 +149,7 @@ const LoginForm = () => {
                   sx={{
                     color: "white",
                     "&.Mui-checked": {
-                      color: "#01a177",
+                      color: "#4FFCB7",
                       fontSize: 14,
                     },
                   }}
@@ -156,7 +163,7 @@ const LoginForm = () => {
               onClick={() => navigate("/forgot-password")}
               variant="text"
               sx={{
-                color: "#00CD98",
+                color: "#4FFCB7",
                 // backgroundColor: "orange",
                 // borderColor: "green",
               }}

@@ -90,6 +90,7 @@ const ViewFundingDashboard = () => {
 
   const d = new Date();
   d.setDate(d.getDate() - 1);
+
   const handleCloseModal = () => {
     dispatch(closeModal({ name: "track-chart", data: "" }));
   };
@@ -97,6 +98,7 @@ const ViewFundingDashboard = () => {
   window.addEventListener("popstate", () => {
     handleCloseModal();
   });
+
   useEffect(() => {
     if (id) {
       dispatchRef.current(
@@ -116,6 +118,7 @@ const ViewFundingDashboard = () => {
     dispatchRef.current(setTotalTracks(0));
     dispatchRef.current(setTracks([]));
   }, [dispatchRef]);
+
   const historicTrackData = async (spotify_id) => {
     axios
       .get(`${URLconfig.BASE_URL}/artist-tracks/historic/${spotify_id}`)
@@ -128,6 +131,7 @@ const ViewFundingDashboard = () => {
         console.log("Error Of GetTracks " + error);
       });
   };
+
   useEffect(() => {
     console.log("totalTracks", totalTracks);
     if (artist?.spotify_id !== undefined) {
@@ -183,6 +187,7 @@ const ViewFundingDashboard = () => {
         console.log(err);
       });
   }
+
   useEffect(() => {
     if (artist?.spotify_id !== undefined) {
       const getArtistFundingMetaData = async () => {
@@ -582,6 +587,7 @@ const ViewFundingDashboard = () => {
     setBorderRadius("12px");
     setContentVisibility(!isContentVisible);
   };
+
   const [isContentVisible, setContentVisibility] = useState(false);
   // const [containerHeight1, setContainerHeight1] = useState(85);
   // const [containerHeight2, setContainerHeight2] = useState(85);
