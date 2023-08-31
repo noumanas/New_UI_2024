@@ -1,0 +1,387 @@
+@import "../../../../styles/scss.scss";
+@import "../../../../styles/colors.scss";
+
+.page {
+    @include flexProperties(column, flex-start, flex-start, $fullWidth: false);
+    gap: 20px;
+    width: 100%;
+
+    &__header {
+        @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
+        gap: 10px;
+        width: 100%;
+
+        &__heading {
+            @include fontSize(22px);
+            color: $base-text-color !important;
+        }
+    }
+
+    &__details {
+        @include flexProperties(column, flex-start, flex-start, $fullWidth: false);
+        gap: 10px;
+        margin-top: 10px;
+
+
+
+        &__heading {
+            @include fontSize(20px);
+            color: $base-text-color !important;
+        }
+        
+        &__total {
+            @include fontSize(25px);
+            text-align: center;
+            margin-bottom: 0px !important;
+            margin-top: 20px !important
+        }
+
+        &__para {
+            @include fontSize(14px);
+            color: $base-text-color !important;
+            // font-style: italic;
+        }
+
+        &__button_container {
+            margin-top: 15px;
+            width: 100%;
+            flex-wrap: nowrap !important;
+
+            &__button {
+                width: 50% !important;
+                text-transform: capitalize !important;
+                @include normalThemeButton(16px, 10px);
+            }
+
+            &__button_pink {
+                width: 50% !important;
+                text-transform: capitalize !important;
+                @include pinkThemeButton(16px, 10px);
+            }
+        }
+    }
+
+    &__youtube {
+        &__list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            &__item {
+                @include flexProperties(row, flex-start, center, $fullWidth: true);
+                gap: 20px;
+
+                &__content {
+                    @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
+                    gap: 10px;
+
+                    &__title {
+                        @include fontSize(12px);
+                        @include textEllipsisLineClamp(2);
+                        width: 200px;
+                    }
+
+                    &__link {
+                        @include fontSize(10px);
+                        @include textEllipsis(100%);
+                        text-decoration: none;
+                        color: $secondary-bg-color-3;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1605px) {
+    .page {
+        &__youtube {
+            &__list {
+                &__item {
+                    &__img {
+                        height: 70px;
+                        width: 100px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1552px) {
+    .page {
+        &__youtube {
+            &__list {
+                &__item {
+                    @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
+                    gap: 10px;
+                    margin-top: 20px;
+
+                    &__content {
+                        &__title {
+                            @include fontSize(12px);
+                            @include textEllipsisLineClamp(2);
+                            width: 100%;
+                        }
+
+                        &__link {
+                            @include fontSize(10px);
+                            @include textEllipsis(100%);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1476px) {
+    .page {
+        &__youtube {
+            &__list {
+                &__item {
+                    &__content {
+                        &__title {
+                            width: 220px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1454px) {
+    .page {
+        &__youtube {
+            &__list {
+                &__item {
+                    &__content {
+                        &__title {
+                            @include fontSize(10px);
+                            width: 180px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1412px) {
+    .page {
+        &__youtube {
+            &__list {
+                &__item {
+                    &__content {
+                        &__title {
+                            @include fontSize(10px);
+                            width: 150px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1372px) {
+    .page {
+        &__youtube {
+            &__list {
+                &__item {
+                    &__content {
+                        &__title {
+                            @include fontSize(9px);
+                            width: 130px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1355px) {
+    .page {
+        &__youtube {
+            &__list {
+                &__item {
+                    &__content {
+                        &__title {
+                            @include fontSize(12px);
+                            width: 220px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1316px) {
+    .page {
+        &__youtube {
+            &__list {
+                &__item {
+                    &__content {
+                        &__title {
+                            @include fontSize(12px);
+                            width: 200px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1296px) {
+    .page {
+        &__youtube {
+            &__list {
+                &__item {
+                    &__content {
+                        &__title {
+                            @include fontSize(11px);
+                            width: 180px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1276px) {
+    .page {
+        &__youtube {
+            &__list {
+                &__item {
+                    &__content {
+                        &__title {
+                            @include fontSize(10px);
+                            width: 160px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1256px) {
+    .page {
+        &__youtube {
+            &__list {
+                &__item {
+                    &__content {
+                        &__title {
+                            @include fontSize(10px);
+                            width: 140px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1236px) {
+    .page {
+        &__youtube {
+            &__list {
+                &__item {
+                    &__content {
+                        &__title {
+                            @include fontSize(9px);
+                            width: 130px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1224px) {
+    .page {
+        &__youtube {
+            &__list {
+                &__item {
+                    &__content {
+                        &__title {
+                            @include fontSize(10px);
+                            width: 150px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1199px) {
+    .page {
+        &__youtube {
+            &__list {
+                &__item {
+                    @include flexProperties(row, flex-start, center, $fullWidth: true);
+                    gap: 20px;
+
+                    &__content {
+                        @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
+                        gap: 10px;
+
+                        &__title {
+                            @include fontSize(12px);
+                            @include textEllipsisLineClamp(2);
+                            width: 200px;
+                        }
+
+                        &__link {
+                            @include fontSize(10px);
+                            @include textEllipsis(100%);
+                            text-decoration: none;
+                            color: $secondary-bg-color-3;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1224px) {
+    .page {
+        &__youtube {
+            &__list {
+                &__item {
+                    &__content {
+                        &__title {
+                            @include fontSize(12px);
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@media only screen and (max-width: 1454px) and (min-width: 1200px) {
+    .page {
+        &__details {
+            &__button_container {
+                flex-wrap: wrap !important;
+                &__button {
+                    width: 100% !important;
+                }
+                &__button_pink {
+                    width: 100% !important;
+                }
+            }
+        }
+    }
+}

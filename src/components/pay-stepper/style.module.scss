@@ -1,0 +1,32 @@
+@import "../../styles/scss.scss";
+@import "../../styles/colors.scss";
+
+.page{
+    &__stepper_btn_wrapper {
+        &__steps {
+            background-color: #444b61;
+            border: 1px solid #267dff;
+            border-radius: 10px;
+            padding: 8px 8px !important;
+            width: 20%;
+            text-align: center;
+            color: $base-text-color !important;
+        }
+    }
+
+    &__back_btn {
+        @include normalThemeButton(16px, 10px);
+        width: auto;
+        margin-right: 20px !important;
+    }
+    &__download_btn {
+        @include normalThemeButton(16px, 10px);
+        background-color: #1976d2 !important;
+        width: auto;
+        margin-right: 20px !important;
+
+        &:hover {
+            background-color: #1976d2 !important;
+        }
+    }
+}

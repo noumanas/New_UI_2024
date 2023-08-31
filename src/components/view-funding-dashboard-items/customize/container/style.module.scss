@@ -1,0 +1,61 @@
+@import "../../../../styles/scss.scss";
+@import "../../../../styles/colors.scss";
+
+.page {
+    @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
+    gap: 30px;
+    width: 100%;
+    
+    &__heading {
+        @include fontSize(20px);
+    }
+
+
+    &__sub_heading {
+        @include fontSize(14px);
+    }
+
+    &__btn_container {
+        width: 100%;
+        @media only screen and (max-width: 1454px) and (min-width: 1200px) {
+            flex-direction: column !important;
+            
+         }
+
+       
+        &__btn {
+            @include pinkThemeButton(16px, 10px);
+            width: 50%;
+            height: 40px;
+            text-transform: capitalize !important;
+            background-color: transparent !important;
+            border: 1px solid #951057;
+            flex-direction: column;
+
+            &:hover {
+                background: #951057 !important;
+            }
+            @media only screen and (max-width: 1454px) and (min-width: 1200px) {
+                width: 100% !important;
+                text-align: center;
+                justify-content: center;
+                align-items: center;
+               
+             }
+           
+        }
+    
+
+        &__btn_pink {
+            @include pinkThemeButton(16px, 10px);
+            @include fontSize();
+            width: 50%;
+            height: 40px;
+            text-transform: capitalize !important;
+            @media only screen and (max-width: 1454px) and (min-width: 1200px) {
+                width: 100% !important;
+               
+             }
+        }
+    }
+}

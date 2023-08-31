@@ -1,0 +1,639 @@
+@import "../../../styles/scss.scss";
+@import "../../../styles/colors.scss";
+
+.tabDisplay {
+  display: block;
+}
+
+.tabHide {
+  display: none;
+}
+
+.page {
+  @include flexProperties(column, center, flex-start, $fullWidth: true);
+  // gap: 20px;
+  font-family: "DM Sans" !important;
+
+  &__artist {
+    flex: 1;
+    width: 100%;
+
+    &__box {
+      background: $secondary-bg-color-1;
+      border-radius: 12px;
+      width: 100%;
+      min-height: 45.1rem;
+      max-height: 45.1rem;
+
+      &__editbtn {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        width: 100%;
+        z-index: 1;
+        &__icon {
+          padding: 15px !important;
+        }
+      }
+
+      &__topdetails {
+        display: flex;
+        flex-wrap: wrap;
+        padding-left: 20px;
+        width: 100%;
+        gap: 20px;
+        height: 105px !important;
+        margin-top: -25px;
+
+        &__image {
+          height: 85px;
+          width: 85px;
+          .onlineInd {
+            position: absolute;
+            bottom: 15px;
+            right: 0;
+            width: 16px;
+            height: 16px;
+            background-color: #4ffcb7;
+            border-radius: 50%;
+          }
+          &:hover .onlineInd {
+            display: none;
+          }
+        }
+
+        &__details {
+          font-family: "DM Sans";
+          color: #ffffff;
+          align-items: center;
+          justify-content: center;
+
+          &__artistname {
+            font-size: 24px;
+            font-weight: 700;
+            text-align: left;
+          }
+          &__email {
+            font-size: 14px;
+            text-decoration: underline;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+          &__country {
+            // margin-top: 10px;
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            &__flag {
+              margin-left: 10px !important;
+            }
+          }
+        }
+        &__editicon {
+          display: flex;
+          flex: 1;
+          align-items: flex-start;
+        }
+      }
+
+      &__horizontalline {
+        width: calc(100%) !important;
+        height: 1px !important;
+        background-color: #5a7380;
+      }
+
+      &__listnership {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        color: #ffffff;
+        padding: 20px !important;
+        &__topheading {
+          font-size: 12px;
+          color: #4ffcb7;
+          font-family: "DM Sans";
+          font-weight: 500;
+        }
+        &__innerlyer {
+          display: flex;
+          // flex-wrap: wrap;
+          align-items: center;
+          justify-content: space-between;
+          gap: 10px;
+
+          &__text1 {
+            font-size: 12px !important;
+            color: #4ffcb7;
+          }
+          &__text2 {
+            font-size: 38px !important;
+            font-weight: 700;
+          }
+          &__trending {
+            display: flex;
+            flex-direction: row !important;
+            align-items: center;
+            justify-content: center;
+          }
+          &__text3 {
+            font-size: 12px !important;
+          }
+        }
+      }
+
+      &__platforms {
+        width: 100%;
+        padding: 20px;
+        overflow-x: scroll;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+        &__text {
+          font-size: 12px !important;
+          color: #4ffcb7;
+          font-family: "DM Sans";
+          font-weight: 500 !important;
+          margin-bottom: 20px !important;
+        }
+
+        &__socials {
+          width: 100%;
+          @include flexProperties(
+            row,
+            flex-start,
+            flex-start,
+            $fullWidth: false
+          );
+          gap: 5px;
+          &__icons {
+            width: 26px;
+            height: auto;
+            // margin: auto;
+            display: block;
+          }
+        }
+      }
+
+      &__genre {
+        background: $secondary-bg-color-1;
+        width: 100%;
+        height: 102px;
+      }
+
+      &__tracks_info {
+        width: 100%;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        // padding: 20px 10px;
+        gap: 10px;
+        flex-wrap: wrap;
+        &__container {
+          align-items: center;
+          justify-content: center;
+          width: 20%;
+          &__text {
+            color: #4ffcb7;
+            font-size: 12px !important;
+            font-weight: 500 !important;
+          }
+          &__text2 {
+            color: #fff;
+            font-size: 28px !important;
+            font-weight: 700 !important;
+            // text-align: center;
+          }
+        }
+        &__containerright {
+          color: #ffffff;
+          align-items: center;
+          justify-content: center;
+          flex-wrap: nowrap;
+          width: 70%;
+          &__heading_contianer {
+            margin-bottom: 10px !important;
+          }
+          &__text {
+            font-size: 12px;
+            // padding-bottom: 10px;
+          }
+        }
+      }
+
+      &__buttons_container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        &__bottons {
+          &:hover {
+            background-color: "#4FFCB7";
+          }
+        }
+      }
+    }
+  }
+
+  &__loader {
+    @include flexProperties(column, center, center, $fullWidth: true);
+    width: 100%;
+    height: 100%;
+  }
+
+  &__details {
+    flex: 1;
+    width: 100%;
+
+    &__box {
+      @include flexProperties(
+        column,
+        flex-start,
+        flex-start,
+        $fullWidth: false
+      );
+      width: 100%;
+      gap: 20px;
+      border-radius: 12px !important;
+
+      &__adetails {
+        width: 100%;
+        background: $secondary-bg-color-1;
+        padding: 20px;
+        border-radius: 12px !important;
+
+        &__header {
+          @include flexProperties(row, space-between, center, $fullWidth: true);
+          width: 100%;
+
+          &__title {
+            color: $base-text-color-secondary;
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: capitalize;
+          }
+
+          &__btn {
+            background: $secondary-bg-color-3 !important;
+            color: $base-text-color !important;
+            border-radius: 12px !important;
+            font-size: 16px !important;
+            cursor: pointer;
+            text-transform: capitalize !important;
+            width: 139px;
+            height: 40px;
+            border: none;
+            padding: 5px 20px !important;
+            font-family: "DM Sans" !important;
+
+            &:hover {
+              background: #01a177 !important;
+              border-color: #01a177 !important;
+            }
+          }
+        }
+
+        &__content {
+          @include flexProperties(
+            row,
+            space-between,
+            center,
+            $fullWidth: false
+          );
+          flex-wrap: wrap;
+          gap: 10px;
+          margin-top: 40px;
+
+          &__box {
+            @include flexProperties(row, flex-start, center, $fullWidth: false);
+            flex-wrap: wrap;
+            gap: 10px;
+            width: 45%;
+
+            &__title {
+              color: $base-text-color;
+              font-size: 16px;
+
+              &__image {
+                height: 20px;
+                width: 20px;
+                cursor: pointer;
+              }
+            }
+
+            &__value {
+              color: white;
+              font-size: 14px;
+            }
+          }
+        }
+      }
+
+      &__tracks {
+        width: 100%;
+        background: $secondary-bg-color-1;
+        border-radius: 12px;
+        padding: 20px;
+        min-height: 45.1rem;
+        max-height: 45.1rem;
+
+        &__header {
+          @include flexProperties(row, space-between, center, $fullWidth: true);
+          width: 100%;
+
+          &__title {
+            color: $base-text-color;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+          }
+
+          &__btn {
+            background: $secondary-bg-color-3 !important;
+            color: $base-text-color !important;
+            border-radius: 12px !important;
+            font-size: 14px;
+            cursor: pointer;
+            text-transform: uppercase;
+            border: none;
+            padding: 5px 20px !important;
+            font-family: "DM Sans" !important;
+
+            &:hover {
+              background: #01a177 !important;
+            }
+          }
+        }
+      }
+
+      &__social_insights {
+        height: 340px !important;
+        width: 340px !important;
+        border-radius: 12px !important;
+      }
+    }
+  }
+
+  &__similar {
+    flex: 1;
+    height: 100%;
+    width: 100%;
+
+    &__box {
+      background: $secondary-bg-color-1;
+      border-radius: 12px !important;
+      min-height: 45.1rem;
+      max-height: 45.1rem;
+      overflow: hidden;
+    }
+    &__box2 {
+      background: $secondary-bg-color-1;
+      border-radius: 12px !important;
+      height: 340px;
+      max-height: 340px;
+    }
+  }
+}
+
+@media only screen and (max-width: 434px) {
+  .page {
+    &__details {
+      &__box {
+        &__adetails {
+          &__content {
+            @include flexProperties(
+              column,
+              flex-start,
+              flex-start,
+              $fullWidth: false
+            );
+            gap: 20px;
+          }
+        }
+      }
+    }
+    &__artist {
+      &__box {
+        &__tracks_info {
+          &__container {
+            &__text2 {
+              font-size: 28px !important;
+              font-weight: 700 !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 684px) {
+  .page {
+    &__artist {
+      flex: 1;
+
+      &__box {
+        min-height: 500px;
+      }
+    }
+  }
+}
+
+@media (min-width: 630px) and (max-width: 1199.98px) {
+  .page {
+    flex-direction: column;
+    align-items: center;
+    &__artist {
+      &__box {
+        &__tracks_info {
+          &__container {
+            &__text2 {
+              font-size: 28px !important;
+              font-weight: 700 !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1201px) {
+  .page {
+    &__artist {
+      &__box {
+        &__tracks_info {
+          &__container {
+            &__text2 {
+              font-size: 28px !important;
+              font-weight: 700 !important;
+            }
+          }
+        }
+      }
+    }
+  }
+  .tabDisplay {
+    display: none;
+  }
+
+  .tabHide {
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 1356px) {
+  .page {
+    &__artist {
+      &__box {
+        &__topdetails {
+          gap: 10px;
+          padding-left: 10px;
+          height: 80px !important;
+
+          &__image {
+            height: 60px !important;
+            width: 60px !important;
+          }
+          &__details {
+            &__artistname {
+              font-size: 22px;
+            }
+            &__email {
+              font-size: 12px;
+            }
+            &__country {
+              font-size: 12px;
+              &__flag {
+              }
+            }
+          }
+          &__editicon {
+            height: 20px !important;
+            width: 20px !important;
+          }
+        }
+        &__tracks_info {
+          &__container {
+            &__text2 {
+              font-size: 28px !important;
+              font-weight: 700 !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1637px) {
+  .page {
+    &__artist {
+      &__box {
+        &__tracks_info {
+          &__container {
+            &__text {
+              color: #4ffcb7;
+              font-size: 8px !important;
+              font-weight: 500 !important;
+            }
+            &__text2 {
+              color: #fff;
+              font-size: 22px !important;
+              font-weight: 700 !important;
+              // text-align: center;
+            }
+          }
+          &__containerright {
+            flex-wrap: nowrap;
+            &__heading_contianer {
+            }
+            &__text {
+              font-size: 8px !important;
+              // padding-bottom: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1700px) {
+  .page {
+    flex-wrap: wrap;
+  }
+}
+
+@media only screen and (max-width: 1821px) {
+  .page {
+    &__artist {
+      &__box {
+        &__tracks_info {
+          &__container {
+            &__text {
+              color: #4ffcb7;
+              font-size: 12px !important;
+              font-weight: 500 !important;
+            }
+            &__text2 {
+              color: #fff;
+              font-size: 28px !important;
+              font-weight: 700 !important;
+              // text-align: center;
+            }
+          }
+          &__containerright {
+            flex-wrap: nowrap;
+            &__heading_contianer {
+            }
+            &__text {
+              font-size: 10px !important;
+              // padding-bottom: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.wrapper {
+  display: block;
+  &:hover {
+    .controls {
+      display: block !important;
+    }
+  }
+
+  .controls {
+    width: 85px;
+    height: 85px;
+    border: 2px solid $secondary-bg-color-3;
+    position: absolute;
+    display: none !important;
+    background-color: rgba(0, 0, 0, 0.582);
+    backdrop-filter: blur(10px);
+    border-radius: 50%;
+    z-index: 2;
+    top: 0;
+    text-align: center;
+    font-size: 0.7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+
+    .add {
+      height: 100%;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      color: #fff;
+      cursor: pointer;
+    }
+  }
+}

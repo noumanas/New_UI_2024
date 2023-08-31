@@ -1,0 +1,340 @@
+@import "../../../styles/colors.scss";
+@import "../../../styles/scss.scss";
+
+.page {
+  @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
+  gap: 20px;
+
+  &__statusBar {
+    @include flexProperties(row, space-between, flex-start, $fullWidth: false);
+    width: calc(100% - 250px);
+
+    &__heading {
+      font-weight: bold;
+      color: $base-text-color;
+    }
+
+    &__icon {
+      cursor: pointer;
+      width: 25px;
+    }
+  }
+
+  &__banner {
+    background: $secondary-bg-color-1;
+    width: calc(100%);
+    // min-height: 10.8rem;
+    height: 102px;
+    // border-radius: 12px;
+    overflow: hidden;
+    // overflow-x: scroll;
+    // padding: 40px;
+
+    &__conatiner {
+      @include flexProperties(column, center, center, $fullWidth: true);
+      gap: 20px;
+      width: 100%;
+      &__fontSize {
+        font-size: 12px !important;
+        font-weight: 500 !important;
+      }
+      &__bg {
+        width: 100%;
+        height: 100px;
+        background: $profile-gradient-color !important;
+        overflow: hidden;
+      }
+
+      &__chip {
+        margin: "5px 0px 5px 0px";
+      }
+      &__stack {
+        // direction: row;
+        // flex-wrap: wrap;
+        // align-items: center;
+        // align-content: center;
+        margin: "5px 0px 5px 0px";
+      }
+    }
+  }
+
+  &__main_content {
+    width: calc(100%);
+  }
+}
+
+@media only screen and (max-width: 1425px) {
+  .page {
+    &__statusBar {
+      width: 100%;
+    }
+
+    &__banner {
+      width: 100%;
+    }
+
+    &__main_content {
+      width: 100%;
+    }
+  }
+}
+
+@media only screen and (max-width: 1267px) {
+  .page {
+    &__banner {
+      &__conatiner {
+        &__content {
+          &__details {
+            &__box {
+              &__title {
+                font-size: 18px;
+              }
+
+              &__value {
+                font-size: 16px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 944px) {
+  .page {
+    &__banner {
+      &__conatiner {
+        &__content {
+          &__details {
+            &__box {
+              &__title {
+                font-size: 16px;
+              }
+
+              &__value {
+                font-size: 14px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .page {
+    &__statusBar {
+      display: none;
+    }
+
+    &__banner {
+      &__conatiner {
+        flex-direction: column;
+
+        &__image {
+          @include flexProperties(row, center, center, $fullWidth: false);
+          width: 100%;
+        }
+
+        &__content {
+          @include flexProperties(column, center, center, $fullWidth: false);
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 677px) {
+  .page {
+    &__banner {
+      &__conatiner {
+        &__content {
+          &__details {
+            &__box {
+              &__title {
+                font-size: 18px;
+              }
+
+              &__value {
+                font-size: 16px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 582px) {
+  .page {
+    &__banner {
+      &__conatiner {
+        &__content {
+          &__main_heading {
+            font-size: 30px !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 559px) {
+  .page {
+    &__banner {
+      &__conatiner {
+        &__content {
+          &__main_heading {
+            font-size: 28px !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 559px) {
+  .page {
+    &__banner {
+      &__conatiner {
+        &__content {
+          &__main_heading {
+            font-size: 26px !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 430px) {
+  .page {
+    &__banner {
+      &__conatiner {
+        &__content {
+          &__main_heading {
+            font-size: 24px !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 410px) {
+  .page {
+    &__banner {
+      &__conatiner {
+        &__content {
+          &__main_heading {
+            font-size: 22px !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 388px) {
+  .page {
+    &__banner {
+      &__conatiner {
+        &__content {
+          &__main_heading {
+            font-size: 18px !important;
+            letter-spacing: 3px;
+          }
+
+          &__details {
+            &__box {
+              &__title {
+                font-size: 16px;
+              }
+
+              &__value {
+                font-size: 14px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 360px) {
+  .page {
+    &__banner {
+      &__conatiner {
+        &__content {
+          &__main_heading {
+            font-size: 18px !important;
+            letter-spacing: 2px;
+          }
+
+          &__details {
+            &__box {
+              &__title {
+                font-size: 12px;
+              }
+
+              &__value {
+                font-size: 12px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 318px) {
+  .page {
+    &__banner {
+      &__conatiner {
+        &__content {
+          &__main_heading {
+            font-size: 16px !important;
+            letter-spacing: 0px;
+          }
+
+          &__details {
+            &__box {
+              &__title {
+                font-size: 10px;
+              }
+
+              &__value {
+                font-size: 10px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// ? Modal css
+.modalCss {
+  &__heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #222c41;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #4ffcb7;
+    width: 100%;
+    height: 46px;
+    border-radius: 12px 12px 0px 0px;
+  }
+  &__button {
+    color: #e12020 !important;
+    border: 1px solid #e12020 !important;
+    border-radius: 12px !important;
+    padding: 5px 50px !important;
+  }
+}

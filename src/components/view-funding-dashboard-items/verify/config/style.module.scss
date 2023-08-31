@@ -1,0 +1,79 @@
+@import "../../../../styles/scss.scss";
+@import "../../../../styles/colors.scss";
+
+.page {
+  &__header {
+    @include flexProperties(row, space-between, center, $fullWidth: true);
+    margin-bottom: 10px;
+    position: relative;
+    &__seachBar {
+      position: absolute;
+      right: 0;
+      bottom: 40px;
+    }
+
+    &__button {
+      border-radius: 10px !important;
+      background: $secondary-bg-color-3 !important;
+      padding: 7px 10px !important;
+      color: white !important;
+      width: 139px;
+      height: 40px;
+      text-transform: capitalize !important;
+      @include fontSize(16px);
+
+      &:hover {
+        background: #01a177 !important;
+      }
+    }
+
+    &__search {
+      border: 2px solid #5a7380;
+      background-color: #202632;
+      padding: 10px 30px;
+      border-radius: 10px !important;
+      outline: none !important;
+      color: $base-text-color;
+      border-radius: 0px;
+      &::placeholder {
+        color: white;
+      }
+
+      @include fontSize(16px);
+    }
+  }
+}
+.searchBarMob {
+  height: 40px !important;
+  width: 100%;
+  display: none;
+}
+@media only screen and (max-width: 440px) {
+  .page {
+    &__header {
+      @include flexProperties(column-reverse, center, center, $fullWidth: true);
+      gap: 20px;
+      &__button {
+        width: 100%;
+      }
+
+      &__search {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1400px) {
+  .page {
+    &__header {
+      &__seachBar {
+        left: 10px;
+        bottom: 0px;
+      }
+    }
+  }
+  .searchBarMob {
+    display: block !important;
+  }
+}

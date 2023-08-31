@@ -1,0 +1,19 @@
+.page {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    // width: 100%;
+
+    &__app_bar {
+        height: 100px;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.6) !important;
+
+        &__logo {
+            width: 150px;
+            margin-top: 15px;
+        }
+    }
+}

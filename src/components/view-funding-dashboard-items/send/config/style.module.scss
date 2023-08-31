@@ -1,0 +1,140 @@
+@import "../../../../styles/scss.scss";
+@import "../../../../styles/colors.scss";
+
+.page {
+  @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
+  gap: 10px;
+
+  &__green {
+    color: green;
+  }
+
+  &__red {
+    color: red;
+  }
+
+  &__header {
+    @include flexProperties(row, space-between, center, $fullWidth: true);
+    width: 100%;
+    margin-top: 20px;
+
+    &__input {
+      background: #00002a;
+      color: #979797 !important;
+      width: 300px;
+    }
+
+    &__upload_btn {
+      @include normalThemeButton(16px, 10px);
+      @include fontSize();
+      padding: 10px !important;
+      width: 139px;
+      height: 40px;
+      text-transform: capitalize !important;
+      background-color: #4ffcb7 !important;
+      color: #222c41 !important;
+    }
+
+    &__btn_pink {
+      @include pinkThemeButton(16px, 10px);
+      width: 139px;
+      height: 40px;
+      @include fontSize();
+      padding: 10px !important;
+
+      &:hover {
+        background: #951057 !important;
+      }
+    }
+
+    &__btn_normal {
+      @include normalThemeButton(16px, 10px);
+      width: 139px;
+      height: 40px;
+      @include fontSize();
+      padding: 10px !important;
+
+      &:hover {
+        background: #01a177 !important;
+      }
+    }
+  }
+
+  &__content {
+    @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
+    gap: 10px;
+
+    &__heading {
+      @include fontSize(22px);
+      margin-top: 30px;
+    }
+
+    &__sub_heading {
+      @include fontSize();
+      margin-top: 20px;
+    }
+  }
+}
+
+@media only screen and (max-width: 1340px) {
+  .page {
+    &__header {
+      flex-wrap: wrap;
+      gap: 20px;
+
+      &__input {
+        width: 100%;
+      }
+    }
+
+    &__content {
+      margin-top: 20px;
+    }
+  }
+}
+
+@media only screen and (max-width: 1199px) {
+  .page {
+    &__header {
+      flex-wrap: nowrap;
+      gap: 20px;
+
+      &__input {
+        width: 300px;
+      }
+    }
+
+    &__content {
+      margin-top: 20px;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .page {
+    &__header {
+      flex-wrap: wrap;
+      gap: 20px;
+
+      &__input {
+        width: 100%;
+      }
+
+      &__btn_container {
+        width: 100%;
+      }
+
+      &__upload_btn {
+        // width: 100%;
+      }
+
+      &__btn_pink {
+        // width: 100%;
+      }
+    }
+
+    &__content {
+      margin-top: 20px;
+    }
+  }
+}

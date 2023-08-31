@@ -1,0 +1,16 @@
+@import "../../../styles/scss.scss";
+@import "../../../styles/colors.scss";
+
+.page{
+    &__stepper_btn_wrapper {
+        &__steps {
+            // background-color: #444b61;
+            // border: 1px solid #267dff;
+            border-radius: 10px;
+            padding: 8px 8px !important;
+            width: 20%;
+            text-align: center;
+            color: #fff !important;
+        }
+    }    
+}

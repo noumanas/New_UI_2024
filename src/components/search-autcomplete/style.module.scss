@@ -1,0 +1,64 @@
+@import "../../styles/scss.scss";
+@import "../../styles/colors.scss";
+.container {
+    width: 100%;
+    position: relative;
+    z-index: 999;
+    &__search_box {
+        width: 90%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 12px !important;
+        background-color: rgba($color: #020923, $alpha: 0.4);
+        &__search_input {
+            width: 90%;
+            height: 100%;
+            color: #fff !important;
+            background: transparent;
+            outline: none;
+            padding: 15px;
+            font-family: "DM Sans";
+            font-size: 18px;
+            border: none;
+            &::placeholder {
+                color: #fff !important;
+            }
+        }
+
+        &__search_icon {
+            width: 10%;
+        }
+    }
+
+    &__list {
+        position: absolute;
+        z-index: 2;
+        top: 55px;
+        list-style: none;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        background: $secondary-bg-color-1;
+        // background: #020923;
+        padding: 20px;
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+        max-height: 300px;
+        overflow: auto;
+        &__list_item {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            &:hover {
+                background: rgba(255, 255, 255, 0.1);
+            }
+            &__contains {
+                display: flex;
+                flex: 1;
+                align-items: center;
+                gap: 30px;
+                padding: 10px 0;
+            }
+        }
+    }
+}

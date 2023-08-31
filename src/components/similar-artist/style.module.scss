@@ -1,0 +1,204 @@
+@import "../../styles/scss.scss";
+@import "../../styles/colors.scss";
+
+.abc {
+  // display: none !important;
+  width: 100%;
+  display: flex !important;
+  flex-direction: column;
+  gap: 20px !important;
+}
+.modalbox {
+  font-family: "DM Sans";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #222c41;
+  border-radius: 10px;
+  box-shadow: 2px 2px 4px #000000;
+  padding: 20px;
+  color: #ffffff;
+  border: none;
+
+  &__artistbox {
+    padding: 20px;
+    background-color: #192233;
+    border-radius: 10px;
+    min-width: 400px;
+
+    &__title {
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      font-family: "DM Sans";
+      font-size: 28px !important;
+      font-weight: 700;
+    }
+  }
+
+  &__artistboxx {
+    padding: 20px;
+    background-color: $secondary-bg-color-2;
+    border-radius: 10px;
+    min-width: 400px;
+
+    &__title {
+      padding: 20px;
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+.page {
+  height: 100%;
+
+  &__header {
+    height: 100%;
+    // border-bottom: 1px solid rgba(255, 255, 255, .2);
+
+    &__title {
+      font-size: 24px;
+      letter-spacing: 0px;
+      text-transform: capitalize;
+      color: $base-text-color-secondary;
+      font-weight: 700;
+      padding: 34px 30px 0px 30px;
+    }
+  }
+
+  &__list {
+    overflow: auto;
+    min-height: 40rem;
+    max-height: 40rem;
+    padding: 5px;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    &__wrapper {
+      display: block;
+      &:hover {
+        .page__list__wrapper__controls {
+          display: block;
+        }
+      }
+
+      &__controls {
+        width: 80px;
+        height: 80px;
+        border: 2px solid $secondary-bg-color-3;
+        position: absolute;
+        display: none;
+        background-color: rgba(0, 0, 0, 0.582);
+        backdrop-filter: blur(10px);
+        border-radius: 50%;
+        z-index: 2;
+        top: 10px;
+        text-align: center;
+        font-size: 0.7rem;
+
+        &__view {
+          height: 100%;
+          justify-content: center;
+          align-items: center;
+          display: flex;
+          // border-bottom: 2px solid $secondary-bg-color-3;
+        }
+        &__add {
+          height: 100%;
+          justify-content: center;
+          align-items: center;
+          display: flex;
+          color: #fff;
+          cursor: pointer;
+        }
+      }
+    }
+
+    &__ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      &__li {
+        @include flexProperties(row, center, center, $fullWidth: true);
+        gap: 30px;
+        // border-bottom: 1px solid rgba(255, 255, 255, .2);
+        padding: 20px;
+        cursor: pointer;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        &__image {
+          height: 50px;
+          width: 50px;
+        }
+
+        &__content {
+          // @include flexProperties(column, $fullWidth: false);
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+
+          &__name {
+            font-size: 16px;
+            text-transform: capitalize;
+            letter-spacing: 0px;
+            color: $base-text-color-secondary;
+            font-weight: 700;
+            margin-top: 17px;
+            // text-align: center;
+            @include textEllipsis();
+          }
+          &__listners {
+            color: #4ffcb7;
+          }
+
+          &__email {
+            font-size: 12px;
+            color: $base-text-color;
+            @include textEllipsis();
+          }
+        }
+      }
+    }
+
+    &__loader {
+      @include flexProperties(column, center, center, $fullWidth: true);
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  .page {
+    &__list {
+      &__ul {
+        &__li {
+          padding: 13px;
+
+          &__image {
+            height: 40px;
+            width: 40px;
+          }
+
+          &__content {
+            &__name {
+              font-size: 12px;
+            }
+
+            &__email {
+              font-size: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

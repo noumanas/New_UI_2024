@@ -1,0 +1,25 @@
+@import "../../styles/scss.scss";
+@import "../../styles/colors.scss";
+
+.dialog {
+
+    &__title {}
+
+    &__content {
+        &__text {
+            color: $base-text-color !important;
+        }
+    }
+
+    &__actions {
+        &__noButton {
+            @include normalThemeButton(16px, 5px);
+            width: 80px !important;
+        }
+
+        &__yesButton {
+            @include pinkThemeButton(16px, 5px);
+            width: 80px !important;
+        }
+    }
+}

@@ -1,0 +1,71 @@
+@import "../../../styles/colors.scss";
+@import "../../../styles/scss.scss";
+
+.page {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../../assets/login_bg.png);
+    background-position: center;
+    background-size: cover;
+    min-height: 100vh;
+
+    &__login {
+        @include flexProperties(row, space-between, flex-start, $fullWidth: true);
+        gap: 40px;
+
+        &__info {
+            @include flexProperties(column, flex-end, flex-start, $fullWidth: true);
+            gap: 50px;
+
+            &__text {
+                font-size: 46px;
+
+                &__highlighted {
+                    background: $secondary-bg-color-2;
+                }
+            }
+
+            &__list {
+                @include flexProperties(column, flex-start, flex-start, $fullWidth: false);
+                gap: 30px;
+                list-style: none;
+                margin: 0;
+                padding: 0;
+
+                &__item {
+                    @include flexProperties(row, flex-start, center, $fullWidth: true);
+                    gap: 20px;
+
+                    &__text {
+                        font-size: 20px;
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+
+        &__form {
+            @include flexProperties(column, flex-end, center, $fullWidth: true);
+            gap: 20px;
+
+            &__box {
+                min-height: calc(100vh - 240px);
+                background-color: rgba(0, 0, 0, 0.5) !important;
+                border-radius: 8px;
+                border: 2px solid #286397;
+            }
+
+            &__coptrights {
+                color: #DEDEDE;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .page {
+        &__login {
+            &__info {
+                display: none;
+            }   
+        }
+    }
+}

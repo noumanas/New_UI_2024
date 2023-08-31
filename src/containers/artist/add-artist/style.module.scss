@@ -1,0 +1,330 @@
+@import "../../../styles/scss.scss";
+@import "../../../styles/colors.scss";
+
+.page {
+  padding: 0px;
+  color: #f6f6f6 !important;
+  font-family: "DM Sans";
+  width: calc(100%);
+
+  &__searchbanner {
+    display: flex;
+    width: 100% !important;
+    // background-image: url("../../../assets//searchBg.png");
+    background-image: linear-gradient(
+      to right,
+      #175668,
+      #175668,
+      #19c39e,
+      #e4f1ee,
+      #e4f1ee
+    );
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    border-radius: 12px;
+    padding: 40px;
+    height: 118px !important;
+    max-height: 118px !important;
+
+    &__text {
+      width: 40%;
+      color: #ffffff;
+      font-size: 28px !important;
+      font-weight: 700 !important;
+      white-space: nowrap;
+      overflow: hidden;
+      // text-overflow: ellipsis;
+    }
+
+    &__searcharea {
+      width: 50%;
+      &__search {
+        width: 100%;
+        padding: 10px;
+        border-radius: 12px;
+        border-style: none;
+        background-color: rgba(0, 0, 0, 0.3) !important;
+        color: #ffffff;
+        &::placeholder {
+          color: white;
+        }
+      }
+    }
+    &__searchbtnarea {
+      width: 15%;
+      align-items: center;
+      justify-content: center;
+      border-style: none;
+      margin-left: 10px;
+      &__searchbtn {
+        width: 141px;
+        height: 40px;
+        // margin-left: 20px !important;
+        background-color: #4ffcb7 !important;
+        border-style: none;
+        border-radius: 12px !important;
+        color: #000000 !important;
+        font-weight: 700 !important;
+        filter: drop-shadow(5px 5px 10px #000);
+      }
+    }
+
+    &__background {
+      &__conatiner {
+        @include flexProperties(
+          column,
+          space-between,
+          flex-start,
+          $fullWidth: false
+        );
+        gap: 20px;
+        height: 11.2rem;
+
+        &__title {
+          @include fontSize(20px);
+          color: $base-text-color !important;
+          letter-spacing: 0.1rem !important;
+        }
+
+        &__content {
+          display: grid;
+          grid-template-columns: 3fr 1fr;
+          align-items: flex-end;
+          justify-content: center;
+          width: 100%;
+          gap: 20px;
+
+          &__title {
+            color: $base-text-color;
+            @include fontSize(40px);
+            // font-weight: bold;
+          }
+
+          &__text {
+            color: $base-text-color;
+          }
+
+          &__button {
+            background: #1a1a1a !important;
+            color: $base-text-color !important;
+            @include disabledCss();
+          }
+        }
+      }
+    }
+  }
+
+  &__title_bar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    &__title {
+      @include fontSize(25px);
+      font-weight: normal;
+    }
+
+    &__subtitle {
+      color: #c9c9c9 !important;
+    }
+  }
+
+  &__fieldsContainer {
+    background: #222c41;
+    border-radius: 12px;
+
+    &__form {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      margin-top: 20px;
+      gap: 40px;
+      padding-bottom: 40px;
+
+      &__formfield {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        &__label {
+          @include flexProperties(row, flex-start, center, $fullWidth: true);
+          gap: 10px;
+          color: white;
+          margin-left: 10px;
+
+          &__image {
+            height: 18px;
+            width: 18px;
+          }
+        }
+
+        &__input {
+          color: #979797 !important;
+          border: 1px none !important;
+          background: #192233;
+          outline: none;
+          padding: 15px;
+          font-size: 18px;
+          border-radius: 8px;
+          width: 100%;
+
+          option {
+            background-color: #192233;
+          }
+        }
+
+        &__phoneinput {
+          border: 1px none !important;
+          border-radius: 8px;
+          padding: 15px;
+          color: #979797 !important;
+          background: #192233;
+
+          input {
+            color: #979797 !important;
+            background: #192233;
+            outline: none;
+            font-size: 18px;
+            border: none;
+          }
+
+          option {
+            background-color: #192233;
+            color: #c2c2c2;
+          }
+        }
+      }
+
+      &__cancel_btn {
+        @include deActiveThemeBotton(16px, 10px);
+        @include fontSize(16px);
+        height: 40px;
+        // width: 100%
+      }
+
+      &__submit_btn {
+        @include activeThemeBotton(16px, 10px);
+        @include fontSize(16px);
+        height: 40px;
+      }
+
+      &__choose_file {
+        background-color: #dedede !important;
+        background: #dedede !important;
+        padding: 10px;
+        width: 100%;
+        color: #2f3443 !important;
+        border-radius: 8px;
+
+        &:hover {
+          background-color: #c0bcbc !important;
+          background: #c0bcbc !important;
+        }
+      }
+
+      &__upload {
+        padding: 10px;
+        width: 100%;
+        border-radius: 8px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .page {
+    &__fieldsContainer {
+      &__search_container {
+        width: 100%;
+
+        &__search_icon {
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .page {
+    &__fieldsContainer {
+      &__search_container {
+        &__search_icon {
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .page {
+    &__fieldsContainer {
+      &__search_container {
+        &__search_icon {
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .page {
+    &__searchbanner {
+      display: none;
+    }
+    &__fieldsContainer {
+      &__search_container {
+        width: 100%;
+
+        &__search_icon {
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1027px) {
+  .page {
+    &__searchbanner {
+      &__text {
+        font-size: 24px !important;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 950px) {
+  .page {
+    &__searchbanner {
+      display: none;
+    }
+    &__fieldsContainer {
+      &__search_container {
+        &__search_icon {
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+  .page {
+    &__fieldsContainer {
+      &__search_container {
+        &__search_icon {
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 2560px) {
+  .page {
+    &__fieldsContainer {
+      &__search_container {
+        &__search_icon {
+        }
+      }
+    }
+  }
+}

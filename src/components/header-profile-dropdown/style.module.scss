@@ -1,0 +1,23 @@
+.pageContainer {
+
+    &__button_content {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        &__user {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 6px;
+            &__name {
+                text-transform: capitalize;
+                font-size: 22px;
+                color: #f3ebea;
+            }
+            &__role {
+                font-size: 18px;
+                color: #675d5c;
+            }
+        }
+    }
+}

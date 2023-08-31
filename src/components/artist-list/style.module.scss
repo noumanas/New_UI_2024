@@ -1,0 +1,78 @@
+@import "../../styles/colors.scss";
+@import "../../styles/scss.scss";
+
+.page {
+    background: $secondary-bg-color-1;
+    border-radius: 12px;
+    overflow: hidden;
+
+    &__statusBar {
+        @include flexProperties(row, space-between, center, $fullWidth: true);
+        padding: 15px;
+
+        &__title {
+            color: $base-text-color;
+            // font-weight: bold;
+        }
+
+        &__action {
+            background: $secondary-bg-color-2 !important;
+            border-radius: 50px !important;
+        }
+    }
+
+    &__actionBar {
+        padding: 10px 15px;
+
+        &__search {
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid #a9a9a9;
+            outline: none;
+            padding: 10px;
+            color: $base-text-color;
+            border-radius: 0px;
+        }
+
+        &__selectfield {
+            background: transparent;
+            border: 2px solid #a9a9a9;
+            outline: none;
+            padding: 10px;
+            color: $base-text-color;
+            border-radius: 5px;
+            option {
+                color: #000;
+            }
+        }
+    }
+
+    &__table {
+        padding: 0px 20px;
+
+        &__head {
+            background: $secondary-bg-color-1 !important;
+            color: $base-text-color !important;
+            // text-align: center !important;
+            border-bottom: 1px solid $base-text-color !important;
+        }
+
+        &__row {
+            background: $secondary-bg-color-1;
+            color: $base-text-color !important;
+            // text-align: center !important;
+
+            &__placement {
+                @include flexProperties(row, flex-start, center, $fullWidth: false);
+                gap: 20px;
+                font-size: 16px;
+                color: $base-text-color;
+                // padding-left: 15px;
+            }
+            &__icon {
+                cursor: pointer;
+                color: #858997;
+            }
+        }
+    }
+}

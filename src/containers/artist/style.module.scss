@@ -1,0 +1,111 @@
+.page {
+  display: flex;
+
+  &__artistInfo {
+    width: 953px;
+    height: 320px;
+    background: transparent linear-gradient(137deg, #0078ac 0%, #870033f2 100%)
+      0% 0% no-repeat padding-box;
+    border-radius: 15px;
+    align-items: center;
+
+    &__imagleCircle {
+      height: 210px;
+      width: 210px;
+      border-radius: 50%;
+      background: linear-gradient(90deg, #36a1ff, #2f3443);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &__inner_cirlcle {
+        height: 200px;
+        width: 200px;
+        border-radius: 50%;
+        background: linear-gradient(128deg, #016da7 56%, #870033f2 120%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    &__innerdetails {
+      display: flex;
+
+      align-items: center;
+    }
+
+    &__balance {
+      width: 346px;
+      height: 254px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      margin-top: 34px;
+      display: flex;
+      justify-content: space-evenly;
+      flex-direction: column;
+      align-items: center;
+    }
+    &__inputfields {
+    }
+    &__sendTab {
+      &__inputfields {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 25px;
+      }
+    }
+    &__confirmTab {
+      display: flex;
+      justify-content: space-between;
+    }
+    &__offer {
+    }
+    &__Accept {
+    }
+    &__customizeTab {
+      margin-left: 30px;
+    }
+  }
+
+  &__rightsidetabs {
+    margin-left: 24px;
+    border-radius: 15px;
+    color: white;
+    &__searchTracks {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-top: 45px;
+      margin-left: 37px;
+    }
+    &__customizeFunding {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-top: 45px;
+      margin-left: 37px;
+    }
+    &__search_container {
+      width: 90%;
+      position: relative;
+      margin-top: 18px;
+
+      &__search_input {
+        width: 100%;
+        color: white !important;
+        border: 1px solid #36a1ff !important;
+        background: transparent;
+        outline: none;
+        padding: 15px;
+        font-size: 18px;
+        border-radius: 8px;
+      }
+      &__search_icon {
+        position: absolute;
+        right: 20px;
+        top: 13px;
+      }
+    }
+  }
+}

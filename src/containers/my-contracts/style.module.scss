@@ -1,0 +1,332 @@
+@import "../../styles/scss.scss";
+@import "../../styles/colors.scss";
+
+.page {
+    @include flexProperties(row, flex-start, flex-start, $fullWidth: true);
+    gap: 0px;
+
+    &__fieldsContainer {
+        background: #2f3443;
+        border-radius: 8px;
+
+        &__form {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            margin-top: 20px;
+            gap: 40px;
+            padding-bottom: 40px;
+
+            &__formfield {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+
+                &__label {
+                    @include flexProperties(row, flex-start, center, $fullWidth: true);
+                    gap: 10px;
+                    color: white;
+                    margin-left: 10px;
+                }
+
+                &__input {
+                    color: #fff !important;
+                    border: 1px solid #00cd98 !important;
+                    background: transparent;
+                    outline: none;
+                    padding: 8px;
+                    font-size: 15px;
+                    height: 40px;
+                    border-radius: 8px;
+                    width: 230px;
+                    font-family: "DM Sans" !important;
+
+                    option {
+                        background-color: $secondary-bg-color-1;
+                        padding-bottom: 5px !important;
+                    }
+                }
+            }
+
+            &__action {
+                gap: 60px;
+                @include flexProperties(row, flex-end, center, $fullWidth: true);
+                width: 100%;
+
+                &__cancel_btn {
+                    @include normalThemeButton(16px, 10px);
+                    @include fontSize();
+                    height: 40px;
+                    padding: 5px 10px !important;
+                }
+
+                &__submit_btn {
+                    @include pinkThemeButton(16px, 10px);
+                    @include fontSize();
+                    height: 40px;
+                    padding: 5px 10px !important;
+                }
+            }
+        }
+    }
+
+    &__artist {
+        flex: 1;
+        width: 100%;
+
+        &__box {
+            // min-height: 800px;
+            @include flexProperties(column, flex-start, center, $fullWidth: false);
+            // background: $component-box-gradient-color;
+            // padding: 20px;
+            border-radius: 8px;
+            gap: 0px;
+            width: 100%;
+
+            &__image {
+                @include flexProperties(row, center, center, $fullWidth: false);
+
+                &__outer {
+                    @include flexProperties(row, center, center, $fullWidth: false);
+                    height: 190px;
+                    width: 190px;
+                    border-radius: 50%;
+                    background: linear-gradient(90deg, #36a1ff, #0a1230);
+
+                    &__inner {
+                        @include flexProperties(row, center, center, $fullWidth: false);
+                        height: 180px;
+                        width: 180px;
+                        border-radius: 50%;
+                        background: linear-gradient(128deg, #016da7 56%, #870033f2 120%);
+
+                        &__avatar {
+                            height: 140px !important;
+                            width: 140px !important;
+                        }
+                    }
+                }
+            }
+
+            &__name {
+                font-size: 32px;
+                text-transform: capitalize;
+                font-weight: bold;
+                color: $secondary-bg-color-3;
+                letter-spacing: 3px;
+                text-align: center;
+            }
+
+            &__btn_container {
+                &__btn {
+                    @include normalThemeButton(14px, 10px);
+                }
+
+                &__btn_pink {
+                    @include pinkThemeButton(16px, 10px);
+                    @include fontSize();
+                    text-transform: capitalize !important;
+                }
+            }
+        }
+    }
+
+    &__loader {
+        @include flexProperties(column, center, center, $fullWidth: true);
+        width: 100%;
+        height: 100%;
+    }
+
+    &__details {
+        flex: 1;
+        width: 100%;
+
+        &__box {
+            @include flexProperties(column, flex-start, flex-start, $fullWidth: false);
+            width: 100%;
+            gap: 20px;
+
+            &__adetails {
+                width: 100%;
+                background: $secondary-bg-color-1;
+                border-radius: 12px;
+                padding: 20px;
+
+                &__header {
+                    @include flexProperties(row, space-between, center, $fullWidth: true);
+                    width: 100%;
+
+                    &__title {
+                        color: $base-text-color-secondary;
+                        font-size: 30px;
+                        font-weight: 500;
+                        letter-spacing: 1px;
+                        text-transform: capitalize;
+                    }
+                    &__search {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: center;
+                        background-color: #192233;
+                        border-radius: 12px;
+                        padding-top: 10px;
+                        padding-left: 20px;
+                        padding-right: 20px;
+                        padding-bottom: 10px;
+                        &__input {
+                            background: #192233;
+                            // border-bottom: 2px solid #a9a9a9 !important;
+                            outline: none;
+                            // padding: 10px 20px 10px 10px;
+                            color: $base-text-color-secondary;
+                            border-radius: 12px;
+                            border: none;
+                            font-size: 14px;
+                            margin-left: 10px;
+                            // padding: 10px;
+                            &::placeholder {
+                                // Add the ::placeholder pseudo-element
+                                color: white; // Set placeholder color to white
+                            }
+                        }
+                    }
+
+                    &__btn {
+                        background: $contract-btn !important;
+                        color: $base-text-color !important;
+                        border-radius: 10px !important;
+                        font-size: 16px !important;
+                        cursor: pointer;
+                        text-transform: capitalize !important;
+                        width: 25%;
+                        height: 45px;
+                        border: none;
+                        padding: 5px 20px !important;
+
+                        &:hover {
+                            background: $contract-btn !important;
+                            border-color: $contract-btn !important;
+                        }
+                    }
+                }
+
+                &__content {
+                    @include flexProperties(row, space-between, center, $fullWidth: false);
+                    flex-wrap: wrap;
+                    gap: 10px;
+                    margin-top: 40px;
+
+                    &__box {
+                        @include flexProperties(row, flex-start, center, $fullWidth: false);
+                        flex-wrap: wrap;
+                        gap: 10px;
+                        width: 45%;
+
+                        &__title {
+                            color: $base-text-color;
+                            font-size: 16px;
+
+                            &__image {
+                                height: 20px;
+                                width: 20px;
+                                cursor: pointer;
+                            }
+                        }
+
+                        &__value {
+                            color: white;
+                            font-size: 14px;
+                        }
+                    }
+                }
+            }
+
+            &__tracks {
+                width: 100%;
+                background: $secondary-bg-color-1;
+                border-radius: 12px;
+                padding: 20px;
+
+                &__header {
+                    @include flexProperties(row, space-between, center, $fullWidth: true);
+                    width: 100%;
+
+                    &__title {
+                        color: $base-text-color;
+                        font-size: 16px;
+                        font-weight: 700;
+                        text-transform: uppercase;
+                    }
+
+                    &__btn {
+                        background: $secondary-bg-color-3 !important;
+                        color: $base-text-color !important;
+                        border-radius: 25px !important;
+                        font-size: 14px;
+                        cursor: pointer;
+                        text-transform: uppercase;
+                        border: none;
+                        padding: 5px 20px !important;
+
+                        &:hover {
+                            background: #01a177 !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &__similar {
+        flex: 1;
+        height: 100%;
+        width: 100%;
+
+        &__box {
+            background: $secondary-bg-color-1;
+            border-radius: 12px;
+            height: 100%;
+        }
+    }
+}
+
+@media only screen and (max-width: 1700px) {
+    .page {
+        flex-wrap: wrap;
+    }
+}
+
+@media only screen and (max-width: 684px) {
+    .page {
+        &__artist {
+            flex: 1;
+
+            &__box {
+                min-height: 500px;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 434px) {
+    .page {
+        &__details {
+            &__box {
+                &__adetails {
+                    &__content {
+                        @include flexProperties(column, flex-start, flex-start, $fullWidth: false);
+                        gap: 20px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 630px) and (max-width: 1199.98px) {
+    .page {
+        flex-direction: column;
+        align-items: center;
+    }
+}

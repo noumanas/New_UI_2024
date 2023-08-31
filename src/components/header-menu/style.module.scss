@@ -1,0 +1,149 @@
+@import "../../styles/scss.scss";
+@import "../../styles/colors.scss";
+
+.page {
+    @include flexProperties(row, center, center, $fullWidth: false);
+    gap: 20px;
+    margin-right: 5px;
+
+    &__message {
+        position: relative;
+        margin-top: 10px;
+        cursor: pointer;
+
+        &__bubble {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: $secondary-bg-color-2;
+            border-radius: 50%;
+            top: -4px;
+            right: -4px;
+        }
+    }
+
+    &__user {
+        @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
+        text-align: left;
+
+        &__name {
+            color: $base-text-color-secondary;
+            @include fontSize(18px);
+            font-weight: 700 !important;
+            text-transform: capitalize;
+            @include textEllipsis();
+        }
+
+        &__role {
+            @include fontSize(14px);
+            color: #4ffcb7;
+        }
+    }
+
+    &__profile_notification {
+        @include flexProperties(row, flex-start, flex-start, $fullWidth: false);
+        gap: 20px;
+
+        &__bell {
+            @include flexProperties(row, center, center, $fullWidth: false);
+            @include glassColor(#ffffff, 0.3);
+            position: relative;
+            border-radius: 50%;
+            cursor: pointer;
+            height: 40px;
+            width: 40px;
+
+            &__bubble {
+                position: absolute;
+                height: 15px;
+                width: 15px;
+                color: $base-text-color;
+                background: $secondary-bg-color-2;
+                border-radius: 50%;
+                font-size: 10px;
+                text-align: center;
+                top: -3px;
+                right: 0;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 580px) {
+    .page {
+        &__user {
+            display: none !important;
+        }
+
+        &__profile_notification {
+            @include flexProperties(row-reverse, flex-start, flex-start, $fullWidth: false);
+        }
+    }
+}
+
+@media only screen and (max-width: 440px) {
+    .page {
+        gap: 15px;
+
+        &__message {
+            &__icon {
+                height: 22px;
+            }
+        }
+
+        &__profile_notification {
+            @include flexProperties(row-reverse, flex-start, center, $fullWidth: false);
+            gap: 15px;
+
+            &__bell {
+                height: 30px;
+                width: 30px;
+
+                &__icon {
+                    height: 16px;
+                }
+
+                &__bubble {
+                    height: 10px;
+                    width: 10px;
+                    font-size: 8px;
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 340px) {
+    .page {
+        gap: 10px;
+
+        &__message {
+            margin-top: 5px;
+            &__icon {
+                height: 16px;
+            }
+            &__bubble {
+                top: 1px;
+            }
+        }
+
+        &__profile_notification {
+            @include flexProperties(row-reverse, flex-start, center, $fullWidth: false);
+            gap: 10px;
+
+            &__bell {
+                height: 30px;
+                width: 30px;
+
+                &__icon {
+                    height: 16px;
+                }
+
+                &__bubble {
+                    height: 10px;
+                    width: 10px;
+                    font-size: 8px;
+                }
+            }
+        }
+    }
+}

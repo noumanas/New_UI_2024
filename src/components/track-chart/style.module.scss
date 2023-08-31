@@ -1,0 +1,139 @@
+@import "../../styles/scss.scss";
+@import "../../styles/colors.scss";
+
+.page {
+    @include flexProperties(row, center, center, $fullWidth: true);
+    min-height: 100vh;
+    height: 100%;
+    width: 100%;
+
+    &__dialog {
+        height: 100%;
+        overflow: auto;
+        width: 100%;
+        background-color: $secondary-bg-color-1;
+        border-radius: 10px;
+        box-shadow: 2px 2px 4px #000000;
+        padding: 20px;
+        color: #ffffff;
+
+        &__header {
+            &__title {
+                @include fontSize(18px);
+                color: $base-text-color;
+                text-transform: capitalize;
+                letter-spacing: 3px;
+            }
+        }
+
+        &__form {
+            @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
+            gap: 30px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+
+            &__field_container {
+                @include flexProperties(row, flex-start, flex-start, $fullWidth: true);
+                gap: 24px;
+                width: 100%;
+
+                &__field {
+                    @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
+                    gap: 10px;
+
+                    &__label {
+                        color: $base-text-color;
+                    }
+
+                    &__input {
+                        width: 100%;
+                        color: #c2c2c2 !important;
+                        border: 1px solid $secondary-bg-color-3 !important;
+                        background: transparent;
+                        outline: none;
+                        padding: 15px;
+                        font-size: 18px;
+                        border-radius: 8px;
+                        &:focus {
+                            outline: $secondary-bg-color-3 solid 2px !important;
+                        }
+                    }
+
+                    &__input_date {
+                        width: 100%;
+                        color: #c2c2c2 !important;
+                        border: 1px solid $secondary-bg-color-3 !important;
+                        background: transparent;
+                        outline: none;
+                        font-size: 18px;
+                        border-radius: 8px;
+                        &:focus {
+                            outline: $secondary-bg-color-3 solid 2px !important;
+                        }
+                    }
+
+                    &__select {
+                        width: 100%;
+                        color: #c2c2c2;
+                        border: 1px solid $secondary-bg-color-3 !important;
+                        background: transparent;
+                        outline: none;
+                        padding: 15px;
+                        font-size: 18px;
+                        border-radius: 8px;
+                    }
+                }
+            }
+
+            &__actions {
+                @include flexProperties(row, flex-end, center, $fullWidth: true);
+                width: 100%;
+
+                &__cancel_btn {
+                    @include normalThemeButton(16px, 10px);
+                    @include fontSize();
+                    height: 40px;
+                    width: 139px;
+                }
+
+                &__submit_btn {
+                    gap: 20px;
+                    @include pinkThemeButton(16px, 5px);
+                }
+            }
+        }
+    }
+}
+
+
+@media only screen and (max-width: 767px) {
+    .page {
+        &__dialog {
+            &__form {
+                overflow: auto;
+                height: calc(100vh - 180px);
+
+                &__field_container {
+                    @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
+                    width: 100%;
+
+                    &__field {
+                        width: 100%;
+
+                        &__input {
+                            padding: 10px;
+                            font-size: 14px;
+                            border-radius: 3px;
+                        }
+
+                        &__select {
+                            padding: 10px;
+                            font-size: 14px;
+                            border-radius: 3px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,17 @@
+.page {
+  &__inputField {
+    margin-left: 0px;
+    font-size: 16px;
+    max-width: 100px;
+    background-color: inherit;
+    border-radius: 5px;
+    border: 0;
+    padding: 4px 2px;
+    color: #FFF;
+    outline: 0;
+    text-align: right;
+  }
+  &__inputField::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+}

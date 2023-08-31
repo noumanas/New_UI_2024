@@ -1,0 +1,46 @@
+.mainNotFound {
+    text-align: center;
+
+    &__message_box {
+        height: 200px;
+        width: 380px;
+        position: absolute;
+        top: 50%;
+        left: 35%;
+        margin-top: -100px;
+        margin-left: 50px;
+        color: #7393b3;
+        font-family: 'DM Sans';
+        font-weight: 400;
+
+        &__heading {
+            font-size: 110px;
+            line-height: 46px;
+            margin-bottom: 50px;
+        }
+
+        &__button_con {
+            &__action_link_wrap {
+                margin-top: 40px;
+
+                &__link_button {
+                    background: #68c950;
+                    padding: 8px 25px;
+                    border-radius: 4px;
+                    color: #FFF;
+                    font-weight: bold;
+                    font-size: 14px;
+                    transition: all 0.3s linear;
+                    cursor: pointer;
+                    text-decoration: none;
+                    margin-right: 10px;
+
+                    &:hover {
+                        background: #5A5C6C;
+                        color: #fff;
+                    }
+                }
+            }
+        }
+    }
+}

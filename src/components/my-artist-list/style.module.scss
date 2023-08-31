@@ -1,0 +1,121 @@
+@import "../../styles/colors.scss";
+@import "../../styles/scss.scss";
+
+.page {
+    background: $secondary-bg-color-1;
+    border-radius: 12px;
+
+    &__statusBar {
+        @include flexProperties(row, space-between, center, $fullWidth: false);
+        padding: 20px;
+
+        &__title {
+            color: $base-text-color-secondary;
+            font-weight: 700 !important;
+            font-family: "DM Sans";
+        }
+
+        &__action {
+            // @include normalThemeButton(16px, 10px);
+            // @include fontSize(16px);
+            // padding: 5px 20px !important;
+            // width: 139px;
+            // height: 40px;
+            // background: $secondary-bg-color-2  !important;
+            // border-radius: 50px !important;
+        }
+    }
+
+    &__actionBar {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        background: #192233;
+        padding: 10px 20px 10px 10px;
+        border-radius: 12px;
+        &__search {
+            background: #192233;
+            // border-bottom: 2px solid #a9a9a9 !important;
+            outline: none;
+            // padding: 10px 20px 10px 10px;
+            color: $base-text-color-secondary;
+            border-radius: 12px;
+            border: none;
+            font-size: 14px;
+            margin-left: 10px;
+            // padding: 10px;
+            &::placeholder {
+                // Add the ::placeholder pseudo-element
+                color: white; // Set placeholder color to white
+            }
+        }
+    }
+
+    &__table {
+        padding: 20px;
+        background: $secondary-bg-color-1;
+
+        &__head {
+            background: $secondary-bg-color-1 !important;
+            color: $base-text-color !important;
+            @include fontSize(12px);
+        }
+
+        &__row {
+            background-color: #192233 !important;
+            color: $base-text-color-secondary !important;
+            font-weight: 700 !important;
+            @include fontSize(24px);
+
+            &__child {
+                background-color: #192233 !important;
+                color: $base-text-color-secondary !important;
+                @include fontSize(14px);
+                &__country {
+                    color: $base-text-color-secondary !important;
+                    @include fontSize(14px);
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    max-width: 150px !important;
+                }
+                &__email {
+                    color: $base-text-color-secondary !important;
+                    @include fontSize(14px);
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    max-width: 200px !important;
+                }
+            }
+            &__childbiggertext {
+                background-color: #192233 !important;
+                color: $base-text-color-secondary !important;
+                font-weight: 700 !important;
+                @include fontSize(18px);
+            }
+
+            &__placement {
+                @include flexProperties(row, flex-start, center, $fullWidth: false);
+                color: #fff;
+                transition: 0.3s;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 200px;
+                :hover {
+                    color: #4ffcb7;
+                    cursor: pointer;
+                }
+
+                &__artist_image {
+                    width: 50px !important;
+                    height: 50px !important;
+                }
+            }
+            &__icon {
+                cursor: pointer;
+            }
+        }
+    }
+}

@@ -1,0 +1,30 @@
+@import "../../../../styles/scss.scss";
+@import "../../../../styles/colors.scss";
+
+.page {
+    @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
+    gap: 30px;
+    
+    &__heading {
+        @include fontSize(20px);
+    }
+
+    &__sub_heading {
+        @include fontSize(14px);
+    }
+
+    &__submit_btn {
+        @include pinkThemeButton(16px, 10px);
+        @include fontSize();
+        width: auto;
+        height: 40px;
+        text-transform: capitalize !important;
+        // background: $secondary-bg-color-2  !important;
+        // color: white !important;
+        // width: 200px;
+        // border-radius: 25px;
+        // &:hover {
+        //     background: #951057 !important;
+        // }
+    }
+}

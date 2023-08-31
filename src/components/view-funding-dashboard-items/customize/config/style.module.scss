@@ -1,0 +1,274 @@
+@import "../../../../styles/scss.scss";
+@import "../../../../styles/colors.scss";
+
+.header {
+  position: relative;
+  .saveBtn {
+    position: absolute;
+    right: 20px;
+    // top: 0;
+    bottom: 40px;
+    button {
+      background-color: #4ffcb7;
+      color: #222c41;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+  }
+}
+.page {
+  font-family: "DM Sans";
+
+  &__slider_container {
+    // @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
+    // gap: 20px;
+
+    &__slider_box {
+      @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
+      // gap: 20px;
+      width: 100%;
+
+      &__include {
+        margin-top: 20px;
+        @include flexProperties(
+          column,
+          flex-start,
+          flex-start,
+          $fullWidth: true
+        );
+        // gap: 20px;
+
+        &__inputs {
+          @include flexProperties(row, flex-start, center, $fullWidth: true);
+          // gap: 20px;
+
+          &__input {
+            border: 2px solid $secondary-bg-color-3;
+            background: transparent;
+            padding: 10px 20px;
+            color: $base-text-color;
+            border-radius: 10px;
+            @include fontSize(20px);
+          }
+        }
+      }
+
+      &__button {
+        margin-top: 10px;
+      }
+
+      &__title {
+        @include fontSize(12px);
+        color: #4ffcb7;
+        text-transform: uppercase !important;
+      }
+
+      &__slider {
+        @include flexProperties(row, flex-start, center, $fullWidth: true);
+        // gap: 20px;
+        width: 100%;
+
+        &__text {
+          color: $base-text-color;
+          @include fontSize(14px);
+          width: 100px;
+          margin-left: 18px;
+        }
+      }
+    }
+  }
+  &__main {
+    @include flexProperties(row, flex-start, center, $fullWidth: true);
+    flex-wrap: wrap;
+  }
+  &__field {
+    margin-top: 20px;
+    @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
+    gap: 13px;
+
+    &__title {
+      @include fontSize(16px);
+    }
+
+    &__input {
+      border: 2px solid $secondary-bg-color-3;
+      background: transparent;
+      padding: 10px 30px;
+      color: $base-text-color;
+      border-radius: 10px;
+      @include fontSize(20px);
+      &:focus {
+        outline: $secondary-bg-color-3 solid 2px !important;
+      }
+    }
+  }
+
+  &__button {
+    margin-top: 30px;
+    background: $secondary-bg-color-2;
+    color: white;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    text-transform: capitalize;
+    border: none;
+    padding: 10px 30px;
+
+    &:hover {
+      background: #951057 !important;
+    }
+  }
+  &__totalSpend {
+    margin-top: -50px;
+    .walletImg {
+      position: relative;
+
+      img {
+        width: 500px;
+        height: 350px;
+      }
+      .walletContent {
+        position: absolute;
+        bottom: 45px;
+        left: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .page {
+    &__slider_container {
+      &__slider_box {
+        &__title {
+          @include fontSize(20px);
+        }
+      }
+    }
+
+    &__field {
+      &__title {
+        @include fontSize(20px);
+      }
+    }
+    &__totalSpend {
+      // height: 100%;
+      width: 100% !important;
+      margin-top: 40px;
+    }
+  }
+}
+
+@media only screen and (max-width: 580px) {
+  .page {
+    &__slider_container {
+      &__slider_box {
+        gap: 10px;
+
+        &__title {
+          @include fontSize(16px);
+        }
+      }
+    }
+
+    &__field {
+      &__title {
+        @include fontSize(16px);
+      }
+    }
+    &__totalSpend {
+      .walletImg {
+        img {
+          width: 100% !important;
+          height: 100% !important;
+        }
+        .walletContent {
+          bottom: 5px;
+          left: 20px;
+          gap: 10px !important;
+        }
+      }
+    }
+    .fontSize {
+      font-size: 20px;
+    }
+  }
+}
+
+@media only screen and (max-width: 340px) {
+  .page {
+    &__slider_container {
+      &__slider_box {
+        gap: 10px;
+
+        &__title {
+          @include fontSize(14px);
+        }
+      }
+    }
+
+    &__field {
+      &__title {
+        @include fontSize(14px);
+      }
+
+      &__input {
+        padding: 8px 20px;
+        border-radius: 5px;
+        @include fontSize(16px);
+      }
+    }
+  }
+}
+@media only screen and (max-width: 1200px) {
+  .page {
+    &__totalSpend {
+      margin-top: 0px;
+      img {
+      }
+    }
+  }
+}
+
+.mainInputField {
+  position: relative;
+  .inputFileds {
+    border-bottom: 1px solid white !important;
+    color: white;
+    font-size: 38px;
+    font-weight: bold !important;
+    width: 180px;
+    font-family: "DM Sans";
+
+    &::placeholder {
+      color: white !important;
+      font-size: 38px !important;
+    }
+  }
+  .yrs {
+    position: absolute;
+    left: 46px;
+    color: white !important;
+    font-size: 38px !important;
+    font-weight: bold !important;
+  }
+  .dollar {
+    position: absolute;
+    left: 0px;
+    bottom: 7px;
+    color: #6d7480;
+    font-size: 25px !important;
+    font-weight: bold !important;
+    font-family: "DM Sans";
+  }
+  .dollarField {
+    font-size: 30px !important;
+    margin-top: 25px !important;
+    color: #6d7480;
+    // font-family: "DM Sans";
+  }
+}

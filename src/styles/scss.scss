@@ -1,0 +1,150 @@
+@mixin flexProperties($direction: row, $justify: center, $align: center, $fullWidth: false) {
+    display: flex;
+
+    @if $fullWidth {
+        flex: 1;
+    }
+
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+@mixin fontSize($pixels: 16px) {
+    font-size: $pixels !important;
+}
+
+@mixin disabledCss($opc: 0.8) {
+    pointer-events: none;
+    opacity: $opc;
+}
+
+@mixin textEllipsis($width: 100px) {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: $width;
+}
+
+@mixin textEllipsisLineClamp($clamp: 1) {
+    display: -webkit-box;
+    -webkit-line-clamp: $clamp;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+@mixin normalThemeButton($pixels: 16px, $radius: 25px) {
+    background: $secondary-bg-color-3 !important;
+    color: $base-text-color !important;
+    border-radius: $radius !important;
+    font-size: $pixels;
+    cursor: pointer;
+    text-transform: capitalize !important;
+    width: 100%;
+    border: none;
+    padding: 10px 20px !important;
+
+    &:hover {
+        // background: #1565c0 !important;
+        background: #01a177 !important;
+    }
+}
+
+@mixin pinkThemeButton($pixels: 16px, $radius: 25px) {
+    background: $secondary-bg-color-2 !important;
+    color: $base-text-color !important;
+    border-radius: $radius !important;
+    font-size: $pixels;
+    cursor: pointer;
+    text-transform: capitalize !important;
+    width: 100%;
+    border: none;
+    padding: 10px 10px !important;
+
+    &:hover {
+        background: #951057 !important;
+    }
+}
+
+@mixin activeThemeBotton($pixels: 16px, $radius: 25px) {
+    background: #4ffcb7 !important;
+    color: #000 !important;
+    border-radius: $radius !important;
+    font-size: $pixels;
+    cursor: pointer;
+    text-transform: capitalize !important;
+    width: 100%;
+    border: none;
+    padding: 10px 10px !important;
+
+    &:hover {
+        background: #4ffcb7 !important;
+        color: #000 !important;
+    }
+}
+
+@mixin deActiveThemeBotton($pixels: 16px, $radius: 25px) {
+    background: transparent !important;
+    color: #4ffcb7 !important;
+    border-radius: $radius !important;
+    font-size: $pixels;
+    cursor: pointer;
+    text-transform: capitalize !important;
+    width: 100%;
+    padding: 10px 10px !important;
+    border: 1px solid #4ffcb7;
+
+    &:hover {
+        // background: #4ffcb7 !important;
+        // color: #000 !important;
+    }
+}
+
+@mixin cancelDeactiveBtn($pixels: 16px, $radius: 25px) {
+    background: transparent !important;
+    color: #ff0000 !important;
+    border-radius: $radius !important;
+    font-size: $pixels;
+    cursor: pointer;
+    text-transform: capitalize !important;
+    width: 100%;
+    padding: 10px 10px !important;
+    border: 2px solid #ff0000 !important;
+
+    &:hover {
+        // background: #4ffcb7 !important;
+        // color: #000 !important;
+    }
+}
+
+@mixin cancelThemeButton($pixels: 0.875rem, $radius: 25px) {
+    background: $secondary-bg-color-4 !important;
+    color: $base-text-color !important;
+    border-radius: $radius !important;
+    font-size: $pixels;
+    font-family: "DM Sans", "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 500;
+    line-height: 1.75;
+    letter-spacing: 0.02857em;
+    cursor: pointer;
+    text-transform: uppercase;
+    width: 100%;
+    border: none;
+    padding: 10px 30px !important;
+
+    &:hover {
+        background: #a5a4a5 !important;
+    }
+}
+
+@mixin glassColor($mainColor: #ffffff, $density: 0.5) {
+    background: rgba($color: $mainColor, $alpha: $density);
+}
+
+@mixin clearfix() {
+    &::after {
+        clear: both;
+        content: "";
+        display: block;
+    }
+}

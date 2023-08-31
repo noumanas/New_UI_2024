@@ -1,0 +1,12 @@
+@import "../../styles/scss.scss";
+@import "../../styles/colors.scss";
+
+.page {
+    border: 1px solid #267dff;
+    background-color: #444b61;
+    border-radius: 10px;
+    padding: 20px;
+    color: $base-text-color;
+    text-align: center;
+    font-size: 20px;
+}

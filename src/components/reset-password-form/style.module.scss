@@ -1,0 +1,105 @@
+@import "../../styles/scss.scss";
+@import "../../styles/colors.scss";
+
+.page {
+    padding: 30px 60px;
+
+    &__logo {
+        @include flexProperties(row, space-between, center, $fullWidth: true);
+        gap: 30px;
+
+        &__text {
+            font-weight: bold;
+        }
+    }
+
+    &__form {
+        &__main {
+            @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
+            width: 100%;
+            gap: 10px;
+
+            &__field_container {
+                @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
+                width: 100%;
+                gap: 10px;
+
+                &__label {}
+
+                &__input {
+                    background: hsla(0,0%,100%,.9)!important;
+                    border-radius: 5px;
+                    width: 100%;
+                }
+            }
+
+            &__form_action {
+                @include flexProperties(row, space-between, center, $fullWidth: true);
+                width: 100%;
+            }
+
+            &__action {
+                @include flexProperties(row, space-between, center, $fullWidth: true);
+                flex-wrap: wrap;
+                gap: 20px;
+                width: 100%;
+                margin-top: 20px;
+
+                &__btn {
+                    background: $secondary-bg-color-2  !important;
+
+                    &:hover {
+                        background: #951057 !important;
+                    }
+                }
+            }
+        }
+    }
+
+    &__social_media {
+        @include flexProperties(row, space-between, center, $fullWidth: true);
+        gap: 30px;
+        margin-top: 20px;
+        flex-wrap: wrap;
+
+        &__button {
+            padding: 5px;
+            height: 100%;
+            background: "#FFFFFF";
+            min-width: 100px;
+
+            &__img {
+                height: 20px;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 466px) {
+    .page {
+        padding: 20px;
+    }
+}
+
+@media only screen and (max-width: 386px) {
+    .page {
+        padding: 15px;
+    }
+}
+
+@media only screen and (max-width: 375px) {
+    .page {
+        padding: 10px;
+    }
+}
+
+@media only screen and (max-width: 365px) {
+    .page {
+        padding: 8px;
+        &__logo {
+            &__text {
+                font-size: 24px !important;
+            }
+        }
+    }
+}

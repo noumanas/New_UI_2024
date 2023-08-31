@@ -1,0 +1,75 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "DM Sans", "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #d6d6d6;
+  scroll-behavior: smooth;
+  overflow-y: scroll !important;
+  padding-right: 0 !important;
+  font-weight: 900;
+}
+
+a {
+  color: #fff;
+}
+
+code {
+  // font-family: "Sacramento", cursive !important;
+
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.MuiTableCell-root {
+  font-family: "DM Sans" !important;
+}
+
+.MuiTypography-root {
+  font-family: "DM Sans" !important;
+}
+
+.MuiButtonBase-root {
+  font-family: "DM Sans" !important;
+  text-transform: capitalize !important;
+}
+
+.MuiOutlinedInput-input {
+  color: #fff !important;
+  font-family: "DM Sans" !important;
+}
+
+.MuiChip-root {
+  font-family: "DM Sans" !important;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.css-w66kx-MuiChip-root {
+  text-overflow: ellipsis !important;
+  width: 120px !important;
+  background-color: #fff !important;
+}
+
+::-webkit-scrollbar-track {
+  // -webkit-box-shadow: inset 0 0 0px #000;
+  border-radius: 50px;
+  background-color: #2f3443;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 50px;
+  // background: linear-gradient(70deg, rgba(1,0,42,1) 45%, rgba(64,1,50,1) 100%);
+  // background: linear-gradient(0deg, rgb(1, 0, 42) 40%, #ff64b7ab 80%);
+  background: #474d5ec7;
+  // -webkit-box-shadow: inset 0 0 100px #000;
+}

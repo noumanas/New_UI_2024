@@ -1,0 +1,31 @@
+$base-gradient-color: linear-gradient(90deg, #0970a4 20%, hsl(337, 100%, 26%));
+$base-gradient-color-secondary: linear-gradient(90deg, #4ffcb7 20%, #ffffff);
+$drawer-gradient-color: linear-gradient(70deg, rgba(1, 0, 42, 1) 45%, rgba(64, 1, 50, 1) 100%);
+$component-gradient-color: transparent linear-gradient(137deg, #0078ac 0%, #870033f2 100%) 0% 0% no-repeat padding-box;
+$component-box-gradient-color: transparent linear-gradient(220deg, #016da7 20%, #870033f2 100%) 0% 0% no-repeat
+  padding-box;
+$profile-gradient-color: linear-gradient(118deg, #de3870 0%, #5cc2ef 100%) 0% 0% no-repeat padding-box;
+// $base-content-app-bg: radial-gradient(#4ffcb7, #060219);
+$base-content-app-bg: radial-gradient(circle, rgba(79, 252, 183, 1) 0%, rgba(0, 0, 0, 1) 100%);
+$base-text-color: #4ffcb7;
+$base-text-color-secondary: #ffffff;
+$text-color: #858997;
+$tablecell-color: #858997;
+$contract-btn: #267dff;
+$secondary-text-color: #675d5c;
+$primary-header-color: #100000;
+$secondary-bg-color-1: #222c41;
+$secondary-bg-color-1-darken: #222c41;
+$secondary-bg-color-2: #ec1086;
+$secondary-bg-color-3: #00cd98;
+
+// $secondary-bg-color-3: #1976d2;
+$secondary-bg-color-4: grey;
+$circle-box-primary-gradient-color: linear-gradient(90deg, #36a1ff, #0a1230);
+$circle-box-secondary-gradient-color: linear-gradient(117deg, #016da7 86%, #870033f2 100%);
+$primary-shadow-color: #2f3443;
+$white-glass: rgba(255, 255, 255, 0.1);
+
+@function darkenColor($color) {
+  @return darken($color, 30%);
+}
