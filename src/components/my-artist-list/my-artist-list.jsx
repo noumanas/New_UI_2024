@@ -137,14 +137,7 @@ const MyArtistList = () => {
         className={classess.page__statusBar}
         // sx={{ position: "relative" }}
       >
-        <Typography
-          variant="h5"
-          gutterBottom
-          component="div"
-          className={classess.page__statusBar__title}
-        >
-          My Artists
-        </Typography>
+        <span className={classess.page__statusBar__title}>My Artists</span>
         <Box varient="div" component="div" className={classess.page__actionBar}>
           <SearchIcon
             sx={{
@@ -164,7 +157,7 @@ const MyArtistList = () => {
 
       {artistList && artistList.length ? (
         <>
-          <TableContainer>
+          <TableContainer sx={{ height: "67rem" }}>
             <Table
               className={classess.page__table}
               stickyHeader
@@ -174,23 +167,33 @@ const MyArtistList = () => {
                 <TableRow>
                   <TableCell className={classess.page__table__head}></TableCell>
                   <TableCell className={classess.page__table__head}>
-                    ARTIST NAME
+                    <span className={classess.page__table__head__text_styles}>
+                      ARTIST NAME
+                    </span>
                   </TableCell>
 
                   <TableCell className={classess.page__table__head}>
-                    COUNTRY
+                    <span className={classess.page__table__head__text_styles}>
+                      COUNTRY
+                    </span>
                   </TableCell>
 
                   <TableCell className={classess.page__table__head}>
-                    EMAIL
+                    <span className={classess.page__table__head__text_styles}>
+                      EMAIL
+                    </span>
                   </TableCell>
 
                   <TableCell className={classess.page__table__head}>
-                    TOTAL LISTNERSHIP
+                    <span className={classess.page__table__head__text_styles}>
+                      TOTAL LISTNERSHIP
+                    </span>
                   </TableCell>
 
                   <TableCell className={classess.page__table__head}>
-                    ACTION
+                    <span className={classess.page__table__head__text_styles}>
+                      ACTION
+                    </span>
                   </TableCell>
                 </TableRow>
               </TableHead>
