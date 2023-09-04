@@ -243,10 +243,13 @@
     font-weight: bold !important;
     width: 180px;
     font-family: "DM Sans";
-
     &::placeholder {
       color: white !important;
       font-size: 38px !important;
+    }
+
+    &::after {
+      border-bottom: 2px solid #4ffcb7 !important;
     }
   }
   .yrs {
@@ -268,7 +271,10 @@
   .dollarField {
     font-size: 30px !important;
     margin-top: 25px !important;
-    color: #6d7480;
+    color: white !important;
+    &::placeholder {
+      color: #6d7480;
+    }
     // font-family: "DM Sans";
   }
 }

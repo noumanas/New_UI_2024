@@ -226,12 +226,7 @@ const ContractHistory = ({ props, open, onvaluechange }) => {
           setSelectedFile(null);
           onvaluechange(false);
           toast.success("Success");
-          setNotes([
-            res.data.data,
-            ...notes.sort((a, b) =>
-              new Date(a.createdAt) > new Date(b.createdAt) ? 1 : -1
-            ),
-          ]);
+          window.location.reload();
         })
         .catch((error) => {
           console.log(error);
@@ -247,12 +242,20 @@ const ContractHistory = ({ props, open, onvaluechange }) => {
             <TableHead className={classess.table__head}>
               <TableRow>
                 <TableCell className={classess.table__col}></TableCell>
-                <TableCell className={classess.table__col}>TITLE</TableCell>
-                <TableCell className={classess.table__col}>DATe</TableCell>
                 <TableCell className={classess.table__col}>
-                  UPLOADED BY
+                  <span className={classess.table__col__heading}>TITLE</span>
                 </TableCell>
-                <TableCell className={classess.table__col}>VERSION</TableCell>
+                <TableCell className={classess.table__col}>
+                  <span className={classess.table__col__heading}>DATE</span>
+                </TableCell>
+                <TableCell className={classess.table__col}>
+                  <span className={classess.table__col__heading}>
+                    UPLOADED BY
+                  </span>
+                </TableCell>
+                <TableCell className={classess.table__col}>
+                  <span className={classess.table__col__heading}>VERSION</span>
+                </TableCell>
                 <TableCell className={classess.table__col}></TableCell>
               </TableRow>
             </TableHead>

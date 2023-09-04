@@ -58,27 +58,23 @@ const LoginContainer = () => {
             justifyContent: "center",
             alignItems: "center",
             gap: "10px",
-            fontSize: "13px",
             marginTop: "40px",
+            fontSize: "12px",
             fontFamily: "DM Sans",
+            color: "#4FFCB7",
+            fontWeight: "400",
           }}
         >
-          <span>Version 1.12.0</span>
+          <span style={{ color: "#fff" }}>Version 1.12.0</span>
           <span
             style={{
-              color: "#4FFCB7",
               cursor: "pointer",
-              // fontFamily: "DM Sans",
             }}
           >
             Release Notes
           </span>
-          <span style={{ color: "#4FFCB7", cursor: "pointer" }}>
-            Terms & Agreement
-          </span>
-          <span style={{ color: "#4FFCB7", cursor: "pointer" }}>
-            Privacy Right
-          </span>
+          <span style={{ cursor: "pointer" }}>Terms & Agreement</span>
+          <span style={{ cursor: "pointer" }}>Privacy Right</span>
         </Box>
         <Typography
           variant="caption"

@@ -29,20 +29,31 @@ const ArtistTopTracks = ({
             <Table stickyHeader={true} aria-label="sticky table">
               <TableHead className={classess.table__head}>
                 <TableRow>
-                  <TableCell className={classess.table__col}></TableCell>
-                  <TableCell className={classess.table__col}>TITLE</TableCell>
-                  <TableCell className={classess.table__col}>TYPE</TableCell>
                   <TableCell className={classess.table__col}>
-                    EST
+                    {/* <span className={classess.table__col__heading}></span> */}
+                  </TableCell>
+                  <TableCell className={classess.table__col}>
+                    <span className={classess.table__col__heading}>TITLE</span>
+                  </TableCell>
+                  <TableCell className={classess.table__col}>
+                    <span className={classess.table__col__heading}>TYPE</span>
+                  </TableCell>
+                  <TableCell className={classess.table__col}>
+                    <span className={classess.table__col__heading}>EST</span>
+
                     <span className={classess.table__col__lastdays}>
                       {" "}
                       LAST 60 DAYS
                     </span>
                   </TableCell>
                   <TableCell className={classess.table__col}>
-                    % OF OWN
+                    <span className={classess.table__col__heading}>
+                      % OF OWN
+                    </span>
                   </TableCell>
-                  <TableCell className={classess.table__col}></TableCell>
+                  <TableCell className={classess.table__col}>
+                    <span></span>
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -127,9 +138,19 @@ const ArtistTopTracks = ({
                           borderTopRightRadius: "12px",
                         }}
                       >
-                        <IconButton style={{ backgroundColor: "#4FFCB7" }}>
+                        <IconButton
+                          style={{
+                            backgroundColor: "#4FFCB7",
+                            height: "30px",
+                            width: "30px",
+                          }}
+                        >
                           <VisibilityIcon
-                            style={{ color: "#000" }}
+                            style={{
+                              color: "#000",
+                              height: "15px",
+                              width: "15px",
+                            }}
                             className={classess.page__table__row__icon}
                           />
                         </IconButton>

@@ -157,11 +157,7 @@
                     width: 100%;
 
                     &__title {
-                        color: $base-text-color-secondary;
-                        font-size: 30px;
-                        font-weight: 500;
-                        letter-spacing: 1px;
-                        text-transform: capitalize;
+                        @include customHeading();
                     }
                     &__search {
                         display: flex;

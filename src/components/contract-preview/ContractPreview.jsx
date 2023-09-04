@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import classess from "./style.module.scss";
 import Box from "@mui/material/Box";
@@ -6,32 +6,32 @@ import contract from "../../../src/assets/contract.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import ContractHistory from "../ContractHistory/ContractHistory";
 import moment from "moment";
-import Editor from 'ckeditor5-custom-build/build/ckeditor';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
+import Editor from "ckeditor5-custom-build/build/ckeditor";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
 const editorConfiguration = {
   toolbar: [
-    'heading',
-    '|',
-    'bold',
-    'italic',
-    'underline',
-    'strikethrough',
-    'subscript',
-    'superscript',
-    'bulletedList',
-    'numberedList',
-    'alignment',
-    'todoList',
-    'mediaEmbed',
-    'indent',
-    'outdent',
-    'link',
-    'imageUpload',
-    'insertTable',
-    'blockQuote',
-    'undo',
-    'redo'
-  ]
+    "heading",
+    "|",
+    "bold",
+    "italic",
+    "underline",
+    "strikethrough",
+    "subscript",
+    "superscript",
+    "bulletedList",
+    "numberedList",
+    "alignment",
+    "todoList",
+    "mediaEmbed",
+    "indent",
+    "outdent",
+    "link",
+    "imageUpload",
+    "insertTable",
+    "blockQuote",
+    "undo",
+    "redo",
+  ],
 };
 const ContractPreview = (props) => {
   const { contract, contract_length } = props;
@@ -40,11 +40,11 @@ const ContractPreview = (props) => {
   const selected = useSelector((state) => state.artist.selectedTracks);
   const tracks = useSelector((state) => state.artist.tracks);
 
-  const [docxData, SetdocxData] = useState([])
-
+  const [docxData, SetdocxData] = useState([]);
 
   const todayDate = moment().format("MMM-DD-YYYY");
-  const tableData = docxData.map((track) => {
+  const tableData = docxData
+    .map((track) => {
       return `
       <tr>
         <td style="border: 1px solid black;">${track.isrc}</td>
@@ -751,16 +751,21 @@ const ContractPreview = (props) => {
 
 </div>`;
   function getSingleTrack(id) {
-    const { id: trackId, title,stream_income_share,isrc } = tracks.filter((track) => track.id === id)[0];
-    return { trackId,title, stream_income_share,isrc};
+    const {
+      id: trackId,
+      title,
+      stream_income_share,
+      isrc,
+    } = tracks.filter((track) => track.id === id)[0];
+    return { trackId, title, stream_income_share, isrc };
   }
   useEffect(() => {
     const selecttacts = selected.map((e) => getSingleTrack(e));
     SetdocxData(selecttacts);
-  }, [selected])
-  const handleChange =(e, editor)=>{
-    props.SetdocumentData(editor.getData())
-  }
+  }, [selected]);
+  const handleChange = (e, editor) => {
+    props.SetdocumentData(editor.getData());
+  };
   return (
     <Grid container spacing={2} className={classess.page}>
       <Grid item sm={12} lg={12} xl={12} className={classess.page__details}>
@@ -769,8 +774,7 @@ const ContractPreview = (props) => {
           component="div"
           className={classess.page__details__box}
         >
-           
-           <Box
+          <Box
             varient="div"
             component="div"
             className={classess.page__details__box__tracks}
@@ -791,27 +795,26 @@ const ContractPreview = (props) => {
               component="div"
               className={classess.page__details__box__tracks__contract}
             >
-               <div className="App">
+              <div className="App">
                 <CKEditor
-                    editor={ Editor }
-                    config={ editorConfiguration }
-                    data={setdata}
-                    onReady={ editor => {
-                        // You can store the "editor" and use when it is needed.
-                        console.log( 'Editor is ready to use!', editor );
-                    } }
-                    onChange={ ( event, editor ) => {
-                      handleChange(event,editor)
-                      
-                    } }
-                    onBlur={ ( event, editor ) => {
-                        console.log( 'Blur.', editor );
-                    } }
-                    onFocus={ ( event, editor ) => {
-                        console.log( 'Focus.', editor );
-                    } }
+                  editor={Editor}
+                  config={editorConfiguration}
+                  data={setdata}
+                  onReady={(editor) => {
+                    // You can store the "editor" and use when it is needed.
+                    console.log("Editor is ready to use!", editor);
+                  }}
+                  onChange={(event, editor) => {
+                    handleChange(event, editor);
+                  }}
+                  onBlur={(event, editor) => {
+                    console.log("Blur.", editor);
+                  }}
+                  onFocus={(event, editor) => {
+                    console.log("Focus.", editor);
+                  }}
                 />
-            </div>
+              </div>
               {/*
               <div>
                 <h4>DISTRIBUTION AGREEMENT</h4>
@@ -2361,7 +2364,6 @@ const ContractPreview = (props) => {
             </Box>
           </Box>
           {/* <ContractHistory /> */}
-          
         </Box>
       </Grid>
     </Grid>

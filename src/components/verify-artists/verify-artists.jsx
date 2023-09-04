@@ -40,7 +40,7 @@ import { abbreviateNumber } from "../../utils/helper";
 import { muiTableCellUseStyles } from "../../custom-mui-style/custom-mui-styles";
 // import { muiTableCellUseStylesforBorderRedius } from "../../custom-mui-style/custom-mui-styles";
 import { config as URLconfig } from "../../enviorment/enviorment";
-import { IconButton } from "@mui/material";
+import { IconButton, Tooltip } from "@mui/material";
 import { openModal } from "../../redux/slice/modal";
 import { toast } from "react-toastify";
 import { getItemToLocalStorage } from "../../services/storage";
@@ -288,7 +288,11 @@ export default function BasicTable({
                   <TableCell padding="checkbox" className={classess.table__col}>
                     <Checkbox
                       // disabled={isLoading}
-                      sx={{ color: "#4ffcb7" }}
+                      sx={{
+                        svg: {
+                          color: "#4ffcb7",
+                        },
+                      }}
                       indeterminate={
                         selected.length > 0 && selected.length < tracks.length
                       }
@@ -354,7 +358,11 @@ export default function BasicTable({
                             }}
                           >
                             <Checkbox
-                              sx={{ color: "#4ffcb7" }}
+                              sx={{
+                                svg: {
+                                  color: "#4ffcb7",
+                                },
+                              }}
                               checked={isItemSelected}
                               inputProps={{
                                 "aria-labelledby": labelId,
@@ -726,7 +734,11 @@ export default function BasicTable({
                                 }}
                               >
                                 <Checkbox
-                                  sx={{ color: "#4ffcb7" }}
+                                  sx={{
+                                    svg: {
+                                      color: "#4ffcb7",
+                                    },
+                                  }}
                                   checked={isItemSelected}
                                   inputProps={{
                                     "aria-labelledby": labelId,
@@ -859,24 +871,31 @@ export default function BasicTable({
                                   {row.genres &&
                                     row.genres.split(",").length > 2 && (
                                       <React.Fragment>
-                                        <Chip
-                                          label={`+${
-                                            row.genres.split(",").length - 2
-                                          }`}
-                                          size="small"
-                                          className={
-                                            classess.table__row__genre__chip
-                                          }
-                                          onClick={() => {
-                                            const remaining = row.genres
-                                              .split(",")
-                                              .slice(2)
-                                              .map((genre) => genre.trim());
-                                            setRemainingGenres(remaining);
-                                            setModalOpen(true);
-                                          }}
-                                          style={{ cursor: "pointer" }}
-                                        />
+                                        <Tooltip
+                                          title="Remaining Genres"
+                                          placement="top"
+                                          arrow
+                                          enterDelay={100}
+                                        >
+                                          <Chip
+                                            label={`+${
+                                              row.genres.split(",").length - 2
+                                            }`}
+                                            size="small"
+                                            className={
+                                              classess.table__row__genre__chip
+                                            }
+                                            onClick={() => {
+                                              const remaining = row.genres
+                                                .split(",")
+                                                .slice(2)
+                                                .map((genre) => genre.trim());
+                                              setRemainingGenres(remaining);
+                                              setModalOpen(true);
+                                            }}
+                                            style={{ cursor: "pointer" }}
+                                          />
+                                        </Tooltip>
                                       </React.Fragment>
                                     )}
                                 </Box>
@@ -894,46 +913,63 @@ export default function BasicTable({
                                     gap: "10px",
                                   }}
                                 >
-                                  <IconButton
-                                    sx={{
-                                      backgroundColor: "#4FFCB7",
-                                      width: "33px",
-                                      height: "33px",
-                                      fontSize: "20px",
-                                      color: "#222C41",
-                                      ":hover": {
-                                        color: "#222C41",
+                                  <Tooltip
+                                    title="Edit Track"
+                                    placement="top"
+                                    arrow
+                                    enterDelay={100}
+                                  >
+                                    <IconButton
+                                      sx={{
                                         backgroundColor: "#4FFCB7",
-                                      },
-                                    }}
-                                    onClick={() =>
-                                      dispatch(
-                                        openModal({
-                                          name: "edit-track",
-                                          data: row,
-                                        })
-                                      )
-                                    }
-                                  >
-                                    <EditIcon sx={{ fontSize: "20px" }} />
-                                  </IconButton>
-                                  <IconButton
-                                    sx={{
-                                      backgroundColor: "#F95F5F",
-                                      width: "33px",
-                                      height: "33px",
-                                      color: "#222C41",
-                                      ":hover": {
+                                        width: "33px",
+                                        height: "33px",
+                                        fontSize: "20px",
                                         color: "#222C41",
-                                        backgroundColor: "#F95F5F",
-                                      },
-                                    }}
-                                    onClick={() => handleOpenDeleteDialog(row)}
+                                        ":hover": {
+                                          color: "#222C41",
+                                          backgroundColor: "#4FFCB7",
+                                        },
+                                      }}
+                                      onClick={() =>
+                                        dispatch(
+                                          openModal({
+                                            name: "edit-track",
+                                            data: row,
+                                          })
+                                        )
+                                      }
+                                    >
+                                      <EditIcon sx={{ fontSize: "20px" }} />
+                                    </IconButton>
+                                  </Tooltip>
+
+                                  <Tooltip
+                                    title="Delete Track"
+                                    placement="top"
+                                    arrow
+                                    enterDelay={100}
                                   >
-                                    <RiDeleteBin2Fill
-                                      sx={{ fontSize: "20px" }}
-                                    />
-                                  </IconButton>
+                                    <IconButton
+                                      sx={{
+                                        backgroundColor: "#F95F5F",
+                                        width: "33px",
+                                        height: "33px",
+                                        color: "#222C41",
+                                        ":hover": {
+                                          color: "#222C41",
+                                          backgroundColor: "#F95F5F",
+                                        },
+                                      }}
+                                      onClick={() =>
+                                        handleOpenDeleteDialog(row)
+                                      }
+                                    >
+                                      <RiDeleteBin2Fill
+                                        sx={{ fontSize: "20px" }}
+                                      />
+                                    </IconButton>
+                                  </Tooltip>
                                 </Box>
                                 {/* <Grid
                                   container

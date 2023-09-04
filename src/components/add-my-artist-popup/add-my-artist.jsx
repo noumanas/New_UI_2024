@@ -99,7 +99,7 @@ export default function AddMyArtist({ open, handleClose }) {
               >
                 <Typography
                   variant="h5"
-                  sx={{ fontSize: 28, color: "#36A1FF", marginBottom: "20px" }}
+                  sx={{ fontSize: 28, color: "#4FFCB7", marginBottom: "20px" }}
                 >
                   {artist?.name}
                 </Typography>
@@ -124,7 +124,7 @@ export default function AddMyArtist({ open, handleClose }) {
               <Button
                 sx={{
                   borderRadius: "8px",
-                  background: "#36A1FF",
+                  background: "#4FFCB7",
                   padding: "23px",
                   color: "white",
                   fontSize: "12px",

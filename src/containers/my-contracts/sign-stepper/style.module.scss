@@ -1,16 +1,19 @@
 @import "../../../styles/scss.scss";
 @import "../../../styles/colors.scss";
 
-.page{
+.page {
     &__stepper_btn_wrapper {
         &__steps {
-            // background-color: #444b61;
-            // border: 1px solid #267dff;
+            // background-color: #222c41;
+            // border: 1px solid #4ffcb7;
             border-radius: 10px;
             padding: 8px 8px !important;
             width: 20%;
             text-align: center;
             color: #fff !important;
         }
-    }    
+    }
+    &__download_btn {
+        @include activeThemeBotton();
+    }
 }

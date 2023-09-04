@@ -27,11 +27,12 @@ import AuthEnum from "../../enums/auth.enum";
 import { getItemToLocalStorage } from "../../services/storage";
 import { IconButton } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
-
+import CircularProgress from "@mui/material/CircularProgress";
 const ArtistContractList = () => {
   const navigate = useNavigate();
   const [list, setList] = useState([]);
   const [archiveState, setArchiveState] = useState("No");
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleRadioChange = (event) => {
     setArchiveState(event.target.value);
@@ -48,6 +49,7 @@ const ArtistContractList = () => {
     })
       .then((response) => {
         if (isSubscribed) {
+          setIsLoading(false);
           setList(response.data.data);
         }
       })
@@ -63,133 +65,159 @@ const ArtistContractList = () => {
   return (
     <Box varient="div" component="div" className={classess.page}>
       <Box component="div" varient="div" className={classess.page__list}>
-        <TableContainer className={classess.table}>
-          <Table stickyHeader aria-label="sticky table">
-            <TableHead className={classess.table__head}>
-              <TableRow className={classess.table__myTableCss}>
-                <TableCell className={classess.table__col}>
-                  ARTIST NAME
-                </TableCell>
-                <TableCell className={classess.table__col}>
-                  CREATED ON
-                </TableCell>
-                <TableCell className={classess.table__col}>
-                  SUBMITTED BY
-                </TableCell>
-                <TableCell className={classess.table__col}>STATUS</TableCell>
-                <TableCell className={classess.table__col}>ACTION</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {list.map((row, index) => (
-                <>
-                  <Box sx={{ m: "1rem" }}></Box>
-                  <TableRow>
-                    <TableCell
-                      className={classess.table__row}
-                      sx={{
-                        maxWidth: 50,
-                        borderTopLeftRadius: "12px",
-                        borderBottomLeftRadius: "12px",
-                      }}
-                    >
-                      <Tooltip
-                        title="Artist Profile"
-                        placement="top"
-                        arrow
-                        enterDelay={100}
+        {isLoading ? (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center", // Center horizontally
+              alignItems: "center", // Center vertically
+              height: "64vh", // Optional: Set a fixed height for vertical centering
+            }}
+          >
+            <CircularProgress color="success" />
+          </Box>
+        ) : (
+          <TableContainer className={classess.table}>
+            <Table stickyHeader aria-label="sticky table">
+              <TableHead className={classess.table__head}>
+                <TableRow className={classess.table__myTableCss}>
+                  <TableCell className={classess.table__col}>
+                    <span className={classess.table__col__heading}>
+                      ARTIST NAME
+                    </span>
+                  </TableCell>
+                  <TableCell className={classess.table__col}>
+                    <span className={classess.table__col__heading}>
+                      CREATED ON
+                    </span>
+                  </TableCell>
+                  <TableCell className={classess.table__col}>
+                    <span className={classess.table__col__heading}>
+                      SUBMITTED BY
+                    </span>
+                  </TableCell>
+                  <TableCell className={classess.table__col}>
+                    <span className={classess.table__col__heading}>STATUS</span>
+                  </TableCell>
+                  <TableCell className={classess.table__col}>
+                    <span className={classess.table__col__heading}>ACTION</span>
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+
+              <TableBody>
+                {list.map((row, index) => (
+                  <>
+                    <Box sx={{ m: "1rem" }}></Box>
+                    <TableRow>
+                      <TableCell
+                        className={classess.table__row}
+                        sx={{
+                          maxWidth: 50,
+                          borderTopLeftRadius: "12px",
+                          borderBottomLeftRadius: "12px",
+                        }}
                       >
-                        <span className={classess.table__row__artistname}>
-                          <a
-                            className={classess.table__row__href}
-                            href={"/blig/view-artist/" + row?.artist_id}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            {row?.artist_name}
-                          </a>
-                        </span>
-                      </Tooltip>
-                    </TableCell>
-
-                    <TableCell className={classess.table__row}>
-                      <span className={classess.table__row__Date}>
-                        {new Date(row?.createdAt).toLocaleDateString({
-                          weekday: "short",
-                          year: "numeric",
-                          month: "2-digit",
-                          day: "numeric",
-                        })}
-                      </span>
-                    </TableCell>
-
-                    <TableCell className={classess.table__row}>
-                      {"Troy Carter"}
-                    </TableCell>
-
-                    <TableCell
-                      className={classess.table__row}
-                      sx={{ maxWidth: 50 }}
-                    >
-                      <span className={classess.table__row__status}>
-                        <Chip
-                          variant="outlined"
-                          icon={
-                            <Circle
-                              sx={{
-                                fill:
-                                  row?.status === "PENDING" ||
-                                  row?.status === "Approved"
-                                    ? "green"
-                                    : "Orange",
-                                fontSize: "14px",
-                              }}
-                            />
-                          }
-                          label={row?.status}
-                          sx={{ color: "#fff", borderColor: "transparent" }}
-                        />
-                      </span>
-                    </TableCell>
-
-                    <TableCell
-                      className={classess.table__row}
-                      sx={{
-                        maxWidth: "50px",
-                        borderBottomRightRadius: "12px",
-                        borderTopRightRadius: "12px",
-                      }}
-                    >
-                      <Tooltip
-                        title={`View ${row?.artist_name} Contracts`}
-                        placement="top"
-                        arrow
-                        enterDelay={100}
-                      >
-                        <IconButton
-                          style={{
-                            backgroundColor: "#4FFCB7",
-                            height: "30px",
-                            width: "30px",
-                          }}
-                          onClick={() => navigate(`/blig/contracts/${row._id}`)}
+                        <Tooltip
+                          title="Artist Profile"
+                          placement="top"
+                          arrow
+                          enterDelay={100}
                         >
-                          <VisibilityIcon
-                            style={{
-                              color: "#000",
-                              fontSize: "20px",
-                            }}
-                            className={classess.page__table__row__icon}
+                          <span className={classess.table__row__artistname}>
+                            <a
+                              className={classess.table__row__href}
+                              href={"/blig/view-artist/" + row?.artist_id}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {row?.artist_name}
+                            </a>
+                          </span>
+                        </Tooltip>
+                      </TableCell>
+
+                      <TableCell className={classess.table__row}>
+                        <span className={classess.table__row__Date}>
+                          {new Date(row?.createdAt).toLocaleDateString({
+                            weekday: "short",
+                            year: "numeric",
+                            month: "2-digit",
+                            day: "numeric",
+                          })}
+                        </span>
+                      </TableCell>
+
+                      <TableCell className={classess.table__row}>
+                        {row.artist_representative_name}
+                      </TableCell>
+
+                      <TableCell
+                        className={classess.table__row}
+                        sx={{ maxWidth: 50 }}
+                      >
+                        <span className={classess.table__row__status}>
+                          <Chip
+                            variant="outlined"
+                            icon={
+                              <Circle
+                                sx={{
+                                  fill:
+                                    row?.status === "PENDING" ||
+                                    row?.status === "Approved"
+                                      ? "green"
+                                      : "Orange",
+                                  fontSize: "14px",
+                                }}
+                              />
+                            }
+                            label={row?.status}
+                            sx={{ color: "#fff", borderColor: "transparent" }}
                           />
-                        </IconButton>
-                      </Tooltip>
-                    </TableCell>
-                  </TableRow>
-                </>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+                        </span>
+                      </TableCell>
+
+                      <TableCell
+                        className={classess.table__row}
+                        sx={{
+                          maxWidth: "50px",
+                          borderBottomRightRadius: "12px",
+                          borderTopRightRadius: "12px",
+                        }}
+                      >
+                        <Tooltip
+                          title={`View ${row?.artist_name} Contracts`}
+                          placement="top"
+                          arrow
+                          enterDelay={100}
+                        >
+                          <IconButton
+                            style={{
+                              backgroundColor: "#4FFCB7",
+                              height: "30px",
+                              width: "30px",
+                            }}
+                            onClick={() =>
+                              navigate(`/blig/contracts/${row._id}`)
+                            }
+                          >
+                            <VisibilityIcon
+                              style={{
+                                color: "#000",
+                                fontSize: "15px",
+                              }}
+                              className={classess.page__table__row__icon}
+                            />
+                          </IconButton>
+                        </Tooltip>
+                      </TableCell>
+                    </TableRow>
+                  </>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        )}
       </Box>
     </Box>
   );

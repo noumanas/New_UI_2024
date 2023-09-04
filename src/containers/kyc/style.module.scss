@@ -5,132 +5,6 @@
     @include flexProperties(row, flex-start, flex-start, $fullWidth: true);
     gap: 0px;
 
-    // &__fieldsContainer {
-    //     background: #2f3443;
-    //     border-radius: 8px;
-
-    //     &__form {
-    //         display: flex;
-    //         flex-direction: column;
-    //         flex: 1;
-    //         margin-top: 20px;
-    //         gap: 40px;
-    //         padding-bottom: 40px;
-
-    //         &__formfield {
-    //             display: flex;
-    //             flex-direction: column;
-    //             gap: 10px;
-
-    //             &__label {
-    //                 @include flexProperties(row, flex-start, center, $fullWidth: true);
-    //                 gap: 10px;
-    //                 color: white;
-    //                 margin-left: 10px;
-    //             }
-
-    //             &__input {
-    //                 color: #fff !important;
-    //                 border: 1px solid #00cd98 !important;
-    //                 background: transparent;
-    //                 outline: none;
-    //                 padding: 8px;
-    //                 font-size: 15px;
-    //                 height: 40px;
-    //                 border-radius: 8px;
-    //                 width: 230px;
-    //                 font-family: "DM Sans" !important;
-
-    //                 option {
-    //                     background-color: $secondary-bg-color-1;
-    //                     padding-bottom: 5px !important;
-    //                 }
-    //             }
-    //         }
-
-    //         &__action {
-    //             gap: 60px;
-    //             @include flexProperties(row, flex-end, center, $fullWidth: true);
-    //             width: 100%;
-
-    //             &__cancel_btn {
-    //                 @include normalThemeButton(16px, 10px);
-    //                 @include fontSize();
-    //                 height: 40px;
-    //                 padding: 5px 10px !important;
-    //             }
-
-    //             &__submit_btn {
-    //                 @include pinkThemeButton(16px, 10px);
-    //                 @include fontSize();
-    //                 height: 40px;
-    //                 padding: 5px 10px !important;
-    //             }
-    //         }
-    //     }
-    // }
-
-    // &__artist {
-    //     flex: 1;
-    //     width: 100%;
-
-    //     &__box {
-    //         min-height: 700px;
-    //         @include flexProperties(column, flex-start, center, $fullWidth: false);
-    //         // background: $component-box-gradient-color;
-    //         // padding: 20px;
-    //         border-radius: 8px;
-    //         gap: 0px;
-    //         width: 100%;
-
-    //         &__image {
-    //             @include flexProperties(row, center, center, $fullWidth: false);
-
-    //             &__outer {
-    //                 @include flexProperties(row, center, center, $fullWidth: false);
-    //                 height: 190px;
-    //                 width: 190px;
-    //                 border-radius: 50%;
-    //                 background: linear-gradient(90deg, #36a1ff, #0a1230);
-
-    //                 &__inner {
-    //                     @include flexProperties(row, center, center, $fullWidth: false);
-    //                     height: 180px;
-    //                     width: 180px;
-    //                     border-radius: 50%;
-    //                     background: linear-gradient(128deg, #016da7 56%, #870033f2 120%);
-
-    //                     &__avatar {
-    //                         height: 140px !important;
-    //                         width: 140px !important;
-    //                     }
-    //                 }
-    //             }
-    //         }
-
-    //         &__name {
-    //             font-size: 32px;
-    //             text-transform: capitalize;
-    //             font-weight: bold;
-    //             color: $secondary-bg-color-3;
-    //             letter-spacing: 3px;
-    //             text-align: center;
-    //         }
-
-    //         &__btn_container {
-    //             &__btn {
-    //                 @include normalThemeButton(14px, 10px);
-    //             }
-
-    //             &__btn_pink {
-    //                 @include pinkThemeButton(16px, 10px);
-    //                 @include fontSize();
-    //                 text-transform: capitalize !important;
-    //             }
-    //         }
-    //     }
-    // }
-
     &__loader {
         @include flexProperties(column, center, center, $fullWidth: true);
         width: 100%;
@@ -157,10 +31,7 @@
                     width: 100%;
 
                     &__title {
-                        color: $base-text-color-secondary;
-                        font-size: 24px;
-                        font-weight: 700;
-                        font-family: "DM Sans";
+                        @include customHeading();
                     }
                     &__textinput_container {
                         width: 255px;

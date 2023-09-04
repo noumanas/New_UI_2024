@@ -569,9 +569,11 @@ const FundingDetails = ({
                       classess.page__artist__box__listnership__innerlyer__text2
                     }
                   >
-                    {addCommasToNumber(
-                      artist?.chartmetric?.cm_statistics?.sp_monthly_listeners
-                    )}
+                    <Box className={classess.page__artist__box__fontSize}>
+                      {addCommasToNumber(
+                        artist?.chartmetric?.cm_statistics?.sp_monthly_listeners
+                      )}
+                    </Box>
                   </Box>
 
                   {/* <Box
@@ -728,12 +730,14 @@ const FundingDetails = ({
                     {moment(artist?.updatedAt).format("MMMM DD YYYY h:mm:ss A")}
                   </Typography>
                   <Button
+                    className={classess.updateArtist}
                     variant="outlined"
                     style={{
                       width: "100%",
                       color: "#4FFCB7",
                       borderColor: "#4FFCB7",
                       borderRadius: "12px",
+                      fontSize: "12px",
                     }}
                     startIcon={
                       <SyncRoundedIcon
@@ -865,13 +869,15 @@ const FundingDetails = ({
                             classess.page__funding__estimate__amount__value
                           }
                         >
-                          $
-                          {new_music_estimiate < 0
-                            ? internationalNumberFormat.format(totalFunding)
-                            : internationalNumberFormat.format(
-                                new_music_estimiate + totalFunding
-                              )}
-                          {/* <br /> */}
+                          <Box className={classess.page__artist__box__fontSize}>
+                            $
+                            {new_music_estimiate < 0
+                              ? internationalNumberFormat.format(totalFunding)
+                              : internationalNumberFormat.format(
+                                  new_music_estimiate + totalFunding
+                                )}
+                            {/* <br /> */}
+                          </Box>
                         </Box>
                       )}
                     </Box>
@@ -1092,7 +1098,7 @@ const FundingDetails = ({
                     style={{
                       // paddingTop: "20px",
                       position: "absolute",
-                      top: "20px",
+                      top: "26px",
                       width: "100%",
                       padding: "0px",
                     }}
@@ -1391,7 +1397,7 @@ const FundingDetails = ({
                           sx={{
                             color: " #4ffcb7",
                             textTransform: "uppercase",
-                            marginTop: "-43px",
+                            marginTop: "-45px",
                           }}
                           className={classess.fontSize}
                         >

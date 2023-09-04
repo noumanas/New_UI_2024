@@ -65,8 +65,8 @@
 
                 &__input {
                     color: #fff !important;
-                    border: 1px solid #6b7698 !important;
-                    background: #6b7698;
+                    border: 1px solid #4ffcb7 !important;
+                    background: #192233;
                     outline: none;
                     padding: 15px;
                     font-size: 14px;
@@ -83,8 +83,8 @@
                 }
 
                 &__select {
-                    border: 1px solid #6b7698 !important;
-                    background: #6b7698;
+                    border: 1px solid #4ffcb7 !important;
+                    background: #192233;
                     padding: 0px;
                     border-radius: 12px !important;
                     color: #fff !important;
@@ -235,8 +235,8 @@
 
             &__tracks {
                 width: 100%;
-                // background-color: #444c64 !important;
-                // border: 2px solid #2576ee !important;
+                background-color: #222c41 !important;
+                border: 2px solid #4ffcb7 !important;
                 border-radius: 12px;
                 padding: 20px;
 
@@ -247,7 +247,6 @@
                     overflow-y: scroll;
                     margin-top: 20px;
                     color: #fff;
-                    background-color: #72727226;
                     border-radius: 12px;
                 }
 

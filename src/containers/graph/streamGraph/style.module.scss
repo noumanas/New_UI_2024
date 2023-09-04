@@ -31,12 +31,10 @@
     // padding: 40px;
 
     &__conatiner {
-      @include flexProperties(column, center, center, $fullWidth: true);
-      gap: 20px;
-      width: 100%;
+      @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
+      gap: 10px !important;
       &__fontSize {
-        font-size: 12px !important;
-        font-weight: 500 !important;
+        @include customFontsSmallTags();
       }
       &__bg {
         width: 100%;

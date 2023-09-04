@@ -171,9 +171,9 @@ const AddArtist = () => {
     <>
       <Box varient="div" component="div" className={classess.page}>
         <Box className={classess.page__searchbanner}>
-          <Typography className={classess.page__searchbanner__text}>
+          <span className={classess.page__searchbanner__text}>
             Add New Artist
-          </Typography>
+          </span>
 
           <Box sx={{ width: "100%" }}>
             <Stack

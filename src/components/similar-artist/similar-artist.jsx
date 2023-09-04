@@ -18,6 +18,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { abbreviateNumber, addCommasToNumber } from "../../utils/helper";
 
 const SimilarArtist = ({ similarArtist }) => {
   const [selected, setSelected] = useState(null);
@@ -158,7 +159,8 @@ const SimilarArtist = ({ similarArtist }) => {
                     <span
                       className={classess.page__list__ul__li__content__listners}
                     >
-                      {artist?.followers} <span>listeners</span>
+                      {addCommasToNumber(artist?.followers)}{" "}
+                      <span>listeners</span>
                     </span>
                   </Box>
                 </ImageListItem>
@@ -200,7 +202,9 @@ const SimilarArtist = ({ similarArtist }) => {
                     />
                   </Grid>
                   <Grid className={classess.modalbox__artistbox__title}>
-                    <span>{selected?.name}</span>
+                    <span title={selected?.name} onMouseEnter={selected?.name}>
+                      {selected?.name}
+                    </span>
                   </Grid>
                 </Grid>
                 {isLoading ? (

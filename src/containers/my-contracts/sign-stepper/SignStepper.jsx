@@ -21,7 +21,6 @@ import FileDownload from "js-file-download";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-
 const steps = ["Contract Details", "Contract Preview", "Submit for Review"];
 
 const SignStepper = (props) => {
@@ -39,8 +38,6 @@ const SignStepper = (props) => {
   const [backDataSending, setBackDataSending] = useState({});
   const [documentData, SetdocumentData] = useState();
 
-
-
   const isStepOptional = (step) => {
     return step === 1;
   };
@@ -51,8 +48,13 @@ const SignStepper = (props) => {
     return skipped.has(step);
   };
   function getSingleTrack(id) {
-    const { id: trackId, title,stream_income_share,isrc } = tracks.filter((track) => track.id === id)[0];
-    return { trackId,title, stream_income_share,isrc};
+    const {
+      id: trackId,
+      title,
+      stream_income_share,
+      isrc,
+    } = tracks.filter((track) => track.id === id)[0];
+    return { trackId, title, stream_income_share, isrc };
   }
   const handleNext = () => {
     let newSkipped = skipped;
@@ -70,43 +72,40 @@ const SignStepper = (props) => {
     setActiveStep((prevActiveStep) => prevActiveStep + getNumber);
     setSkipped(newSkipped);
   };
-const saveinfo =async(info)=>{
-const payload ={
-  legel_name: info?.legel_name,
-  artist_id: info?.artist_id,
-  artist_name: info?.artist_name,
-  artist_representative_name: info?.artist_representative_name,
-  artist_email: info?.artist_email,
-  artist_phone: info?.artist_phone,
-  artist_representative_email: info?.artist_representative_email,
-  advance:info?.advance,
-  advance_amount: info?.advance_amount,
-  recipient_address: info?.recipient_address,
-  city: info?.city,
-  zip_code: info?.zip_code,
-  country:info?.country,
-  Selected_tracks: info?.Selected_tracks,
-  contract_length: info?.contract_length,
-  document:documentData
-}
-  const res = await fetch(
-    `${URLConfig.BASE_URL}/contracts/create`,
-    {
+  const saveinfo = async (info) => {
+    const payload = {
+      legel_name: info?.legel_name,
+      artist_id: info?.artist_id,
+      artist_name: info?.artist_name,
+      artist_representative_name: info?.artist_representative_name,
+      artist_email: info?.artist_email,
+      artist_phone: info?.artist_phone,
+      artist_representative_email: info?.artist_representative_email,
+      advance: info?.advance,
+      advance_amount: info?.advance_amount,
+      recipient_address: info?.recipient_address,
+      city: info?.city,
+      zip_code: info?.zip_code,
+      country: info?.country,
+      Selected_tracks: info?.Selected_tracks,
+      contract_length: info?.contract_length,
+      document: documentData,
+    };
+    const res = await fetch(`${URLConfig.BASE_URL}/contracts/create`, {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify(payload),
+    });
+    const data = await res.json();
+    if (res.status == 200) {
+      toast.success(`${data.message}`);
+    } else {
+      toast.error(`${data.message}`);
     }
-  );
-  const data = await res.json();
-  if (res.status == 200) {
-    toast.success(`${data.message}`);
-  } else {
-    toast.error(`${data.message}`);
-  }
-}
+  };
   const handleBack = () => {
     setBackDataSending(formData);
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -125,19 +124,19 @@ const payload ={
   //     newSkipped.add(activeStep);
   //     return newSkipped;
   //   });
- 
+
   function convertHtmlToDoc(contract) {
     const data = {
       name: contract?.artist_name,
       email: contract?.artist_email,
       legal_name: contract?.legel_name,
       address: contract?.recipient_address,
-      city:contract?.city,
-      country:contract?.country,
+      city: contract?.city,
+      country: contract?.country,
       zip_code: contract?.zip_code,
-      contract_length : props.contract_length,
+      contract_length: props.contract_length,
       selected_tracks: selected_tracts,
-      document : documentData,
+      document: documentData,
     };
 
     axios({
@@ -147,8 +146,11 @@ const payload ={
       responseType: "blob",
     })
       .then((response) => {
-        FileDownload(response.data, `Contract_agreement_${contract?.artist_name}.docx`);
-        console.log('documentData',documentData);
+        FileDownload(
+          response.data,
+          `Contract_agreement_${contract?.artist_name}.docx`
+        );
+        console.log("documentData", documentData);
         // const reader = new FileReader();
         // reader.onload = () => {
         //   const base64String = reader.result.split(',')[1];
@@ -174,9 +176,9 @@ const payload ={
 
   useEffect(() => {
     const selecttacts = selected.map((e) => getSingleTrack(e));
-    SetSelected_Tracts(selecttacts)
+    SetSelected_Tracts(selecttacts);
     setActiveStep((prevActiveStep) => prevActiveStep + getNumber);
-  }, [getNumber])
+  }, [getNumber]);
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -202,7 +204,7 @@ const payload ={
               className={classess.page__stepper_btn_wrapper__steps}
               sx={{
                 "& .MuiStepLabel-root .Mui-completed": {
-                  color: "#fff", // circle color (COMPLETED)
+                  color: "#000", // circle color (COMPLETED)
                 },
 
                 "& .MuiStepLabel-label.Mui-completed.MuiStepLabel-alternativeLabel":
@@ -235,7 +237,7 @@ const payload ={
               textAlign: "center",
               color: "#fff",
               padding: "30px",
-              background: "#444c64",
+              background: "#222C41",
               borderRadius: 4,
             }}
           >
@@ -257,13 +259,14 @@ const payload ={
               Return Home
             </Button>
             <Button
-              onClick={()=>convertHtmlToDoc(contract)}
+              onClick={() => convertHtmlToDoc(contract)}
               variant="contained"
-              sx={{
-                textTransform: "capitalize",
-                borderRadius: 2,
-                minWidth: 100,
-              }}
+              className={classess.page__download_btn}
+              // sx={{
+              //   textTransform: "capitalize",
+              //   borderRadius: 2,
+              //   minWidth: 100,
+              // }}
             >
               Download a Copy
             </Button>
@@ -271,12 +274,29 @@ const payload ={
         </React.Fragment>
       ) : (
         <React.Fragment>
-         
           {/* {activeStep === 0 ? <ContractDetails ref={childRef} setGetNumber={setGetNumber}/> : null} */}
           {/* {activeStep === 1 ? <ContractPreview  /> : null} */}
-          {activeStep === 0 ? <ContractDetails ref={childRef} setGetNumber={setGetNumber} setContractData={setContractData}  selected_tracts={selected_tracts} contract_length={props.contract_length} setFormData={setFormData} backDataSending={backDataSending}/> : null}
-          {activeStep === 1 ? <ContractPreview contract={contract}  contract_length={props.contract_length} SetdocumentData={SetdocumentData} /> : null}
-          {activeStep === 2 ? <ContractSubmitPreview ref={childRef}  contract={contract}/> : null}
+          {activeStep === 0 ? (
+            <ContractDetails
+              ref={childRef}
+              setGetNumber={setGetNumber}
+              setContractData={setContractData}
+              selected_tracts={selected_tracts}
+              contract_length={props.contract_length}
+              setFormData={setFormData}
+              backDataSending={backDataSending}
+            />
+          ) : null}
+          {activeStep === 1 ? (
+            <ContractPreview
+              contract={contract}
+              contract_length={props.contract_length}
+              SetdocumentData={SetdocumentData}
+            />
+          ) : null}
+          {activeStep === 2 ? (
+            <ContractSubmitPreview ref={childRef} contract={contract} />
+          ) : null}
 
           <Box
             sx={{
@@ -290,17 +310,21 @@ const payload ={
             }}
           >
             <Button
-              color="primary"
-              disabled={activeStep === 0 }
+              // color="primary"
+              disabled={activeStep === 0}
               onClick={handleBack}
               sx={{
                 mr: 1,
                 textTransform: "capitalize",
                 borderRadius: 2,
                 minWidth: 100,
-                background: "#f15f3a",
+                backgroundColor: "transparent",
+                border: "1px solid #E12020",
+                color: "#E12020 !important",
+                padding: "0px 20px !important",
+                fontWeight: "bold",
               }}
-              variant="contained"
+              // variant="contained"
             >
               Back
             </Button>
@@ -313,12 +337,15 @@ const payload ={
 
             <Button
               onClick={handleNext}
-              variant="contained"
+              // variant="contained"
               disabled={false}
               sx={{
                 textTransform: "capitalize",
                 borderRadius: 2,
                 minWidth: 100,
+                backgroundColor: " #4ffcb7 !important",
+                color: "#222c41 !important",
+                fontWeight: "bold",
               }}
             >
               {activeStep === steps.length - 0 ? "Save & Continue" : "Save"}

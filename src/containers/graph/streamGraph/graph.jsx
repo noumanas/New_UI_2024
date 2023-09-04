@@ -5,7 +5,7 @@ import Grid from "@mui/material/Grid";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import Modal from "@mui/material/Modal"; // Import Modal
-import { Button, Typography } from "@mui/material";
+import { Button, Tooltip, Typography } from "@mui/material";
 
 const MAX_DISPLAY_GENRES = 2; // Maximum number of genres to display
 
@@ -43,28 +43,27 @@ const GenreGraph = ({ artist }) => {
   return (
     <div>
       <Box
-        component='div'
-        variant='div'
+        component="div"
+        variant="div"
         className={classess.page__banner}
         p={3}
       >
         <Box
-          variant='div'
-          component='div'
+          variant="div"
+          component="div"
           className={classess.page__banner__conatiner}
         >
-          <Typography
-            component='div'
-            variant='div'
-            sx={{ width: "100%", color: "#4FFCB7" }}
+          <span
+            component="div"
+            variant="div"
             className={classess.page__banner__conatiner__fontSize}
           >
-            GENRES
-          </Typography>
+            GENRES:
+          </span>
           <Grid container>
             <Grid>
               <Box>
-                <Stack direction='row' gap={1}>
+                <Stack direction="row" gap={1}>
                   {displayedGenres.map((genre, index) => (
                     <Chip
                       key={index}
@@ -78,16 +77,23 @@ const GenreGraph = ({ artist }) => {
                     />
                   ))}
                   {remainingGenres.length > 0 && (
-                    <Chip
-                      className={classess.page__banner__conatiner__chip}
-                      label={`+${remainingGenres.length}`}
-                      onClick={handleShowModal} // Open modal on click
-                      sx={{
-                        backgroundColor: "#5A7380",
-                        color: "#fff",
-                        fontSize: "11px",
-                      }}
-                    />
+                    <Tooltip
+                      title="Remaining Genres"
+                      placement="top"
+                      arrow
+                      enterDelay={100}
+                    >
+                      <Chip
+                        className={classess.page__banner__conatiner__chip}
+                        label={`+${remainingGenres.length}`}
+                        onClick={handleShowModal} // Open modal on click
+                        sx={{
+                          backgroundColor: "#5A7380",
+                          color: "#fff",
+                          fontSize: "11px",
+                        }}
+                      />
+                    </Tooltip>
                   )}
                 </Stack>
               </Box>
@@ -100,8 +106,8 @@ const GenreGraph = ({ artist }) => {
       <Modal
         open={modalOpen}
         onClose={handleCloseModal}
-        aria-labelledby='modal-modal-title'
-        aria-describedby='modal-modal-description'
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
       >
         <Box sx={style} className={classess.modalCss}>
           <Box className={classess.modalCss__heading}>Genres: </Box>
@@ -121,7 +127,7 @@ const GenreGraph = ({ artist }) => {
               />
             ))}
           </Box>
-          <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
             <Button
               className={classess.modalCss__button}
               onClick={handleCloseModal}
@@ -136,97 +142,3 @@ const GenreGraph = ({ artist }) => {
 };
 
 export default GenreGraph;
-
-// import React from "react";
-// import classess from "./style.module.scss";
-// import Box from "@mui/material/Box";
-// import Grid from "@mui/material/Grid";
-// import Chip from "@mui/material/Chip";
-// import Stack from "@mui/material/Stack";
-// import { Typography } from "@mui/material";
-
-// const GenreGraph = ({ artist }) => {
-//   return (
-//     <div>
-//       <Box
-//         component='div'
-//         variant='div'
-//         className={classess.page__banner}
-//         // mt={2}
-//         p={3}
-//       >
-//         <Box
-//           variant='div'
-//           component='div'
-//           className={classess.page__banner__conatiner}
-//         >
-//           <Typography
-//             component='div'
-//             variant='div'
-//             sx={{ width: "100%", color: "#4FFCB7" }}
-//             className={classess.page__banner__conatiner__fontSize}
-//           >
-//             GENRES
-//           </Typography>
-//           <Grid container>
-//             <Grid>
-//               <Box>
-//                 <Stack
-//                   direction='row'
-//                   // flexWrap={"wrap"}
-//                   // alignContent='center'
-//                   // alignItems='center'
-//                   gap={1}
-//                   // sx={{ margin: "5px 5px 5px 0px" }}
-//                 >
-//                   {artist?.genres.length > 0 ? (
-//                     artist?.genres.map((genres, index) => {
-//                       return (
-//                         <Chip
-//                           className={classess.page__banner__conatiner__chip}
-//                           key={index}
-//                           label={genres}
-//                           // color="primary"
-//                           sx={{
-//                             backgroundColor: "#5A7380",
-//                             color: "#fff",
-//                             // margin: "5px 5px 5px 5px",
-//                           }}
-//                         ></Chip>
-//                       );
-//                     })
-//                   ) : (
-//                     <>
-//                       <Chip
-//                         className={classess.page__banner__conatiner__chip}
-//                         label={
-//                           Array.isArray(artist?.chartmetric?.genres?.primary)
-//                             ? artist?.chartmetric?.genres?.primary[0]?.name
-//                             : artist?.chartmetric?.genres?.primary?.name
-//                         }
-//                         // color="primary"
-//                         // sx={{ color: "#fff", margin: "5px 5px 5px 5px" }}
-//                       ></Chip>
-//                       <Chip
-//                         className={classess.page__banner__conatiner__chip}
-//                         label={
-//                           Array.isArray(artist?.chartmetric?.genres?.secondary)
-//                             ? artist?.chartmetric?.genres?.secondary[0]?.name
-//                             : artist?.chartmetric?.genres?.secondary?.name
-//                         }
-//                         // color="primary"
-//                         // sx={{ color: "#fff", margin: "5px 5px 5px 5px" }}
-//                       ></Chip>
-//                     </>
-//                   )}
-//                 </Stack>
-//               </Box>
-//             </Grid>
-//           </Grid>
-//         </Box>
-//       </Box>
-//     </div>
-//   );
-// };
-
-// export default GenreGraph;

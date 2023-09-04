@@ -64,14 +64,14 @@
   }
 
   &__col {
-    color: white !important;
     background: #222c41 !important;
     text-align: left !important;
     width: 50px !important;
     border-bottom: 1px solid #474d5e;
-    // font-weight: bold !important;
-    color: #4ffcb7 !important;
     @include textEllipsis();
+    &__heading {
+      @include customFontsSmallTags();
+    }
     &__last {
       color: white !important;
       background: #2f3443 !important;
@@ -92,7 +92,7 @@
     // max-width: 500px;
     // padding-top: 12px !important;
     // padding-bottom: 12px !important;
-    // @include textEllipsis();
+    @include textEllipsis();
     &__green {
       color: green;
     }

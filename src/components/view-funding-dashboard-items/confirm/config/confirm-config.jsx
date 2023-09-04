@@ -40,6 +40,9 @@ const ConfirmConfig = ({
   calcalute_tracks_estimate,
   set_new_music_income,
   artist_id,
+  openNewMusicForm,
+  closeNewMusicForm,
+  openTrackes,
 }) => {
   const cellUseStyles = muiTableCellUseStyles();
   const dispatch = useDispatch();
@@ -197,7 +200,14 @@ const ConfirmConfig = ({
 
     calcalute_tracks_estimate(val);
   };
+  const [isPaperVisible, setIsPaperVisible] = useState(false);
 
+  const Showtracks = () => {
+    setIsPaperVisible(true);
+  };
+  const Hidetracks = () => {
+    setIsPaperVisible(false);
+  };
   return (
     <Box varient="div" component="div" className={classess.page}>
       <Box varient="div" component="div" className={classess.page__header}>
@@ -248,249 +258,274 @@ const ConfirmConfig = ({
         artist_id={artist_id}
         set_new_music_income={set_new_music_income}
         getArtistFunding={getArtistFunding}
+        openNewMusicForm={openNewMusicForm}
+        closeNewMusicForm={closeNewMusicForm}
+        Showtracks={Showtracks}
+        Hidetracks={Hidetracks}
       />
 
-      <Paper
-        sx={{
-          width: "100%",
-          overflow: "hidden",
-          background: "#0A1230",
-          marginTop: "50px",
-          boxShadow: "none",
-        }}
-      >
-        {artist && Object.keys(artist).length ? (
-          <TableContainer className={classess.table}>
-            <Table
-              stickyHeader={true}
-              aria-label="sticky table"
-              sx={{
-                backgroundColor: "#222C41",
-              }}
-            >
-              <TableHead>
-                <TableRow>
-                  <TableCell
-                    padding="checkbox"
-                    className={classess.table__col}
-                  ></TableCell>
-                  <TableCell
-                    className={classess.table__col}
-                    sx={{ maxWidth: 50 }}
-                  >
-                    {/* # */}
-                  </TableCell>
-                  <TableCell className={classess.table__col}>
-                    Track Title
-                  </TableCell>
-                  <TableCell className={classess.table__col}>
-                    Release Date
-                  </TableCell>
-                  <TableCell className={classess.table__col}>
-                    Track Type
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {/* search tracks for look via map */}
-                {searchTracks.map((row, index) => {
-                  const isItemSelected = isSelected(row?.id);
-                  const labelId = `enhanced-table-checkbox-${index}`;
-                  return (
-                    <LazyLoadComponent>
-                      <>
-                        <Box sx={{ m: "1rem" }}></Box>
+      {isPaperVisible && (
+        <Paper
+          sx={{
+            width: "100%",
+            overflow: "hidden",
+            background: "#0A1230",
+            marginTop: "50px",
+            boxShadow: "none",
+          }}
+        >
+          {artist && Object.keys(artist).length ? (
+            <TableContainer className={classess.table}>
+              <Table
+                stickyHeader={true}
+                aria-label="sticky table"
+                sx={{
+                  backgroundColor: "#222C41",
+                }}
+              >
+                <TableHead>
+                  <TableRow>
+                    <TableCell
+                      padding="checkbox"
+                      className={classess.table__col}
+                    >
+                      <Checkbox
+                        sx={{
+                          svg: {
+                            color: "#4ffcb7",
+                          },
+                        }}
+                      />
+                    </TableCell>
+                    <TableCell
+                      className={classess.table__col}
+                      sx={{ maxWidth: 50 }}
+                    >
+                      {/* # */}
+                    </TableCell>
+                    <TableCell className={classess.table__col}>
+                      Track Title
+                    </TableCell>
+                    <TableCell className={classess.table__col}>
+                      Release Date
+                    </TableCell>
+                    <TableCell className={classess.table__col}>
+                      Track Type
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {/* search tracks for look via map */}
+                  {searchTracks.map((row, index) => {
+                    const isItemSelected = isSelected(row?.id);
+                    const labelId = `enhanced-table-checkbox-${index}`;
+                    return (
+                      <LazyLoadComponent>
+                        <>
+                          <Box sx={{ m: "1rem" }}></Box>
 
-                        <TableRow
-                          key={index}
-                          sx={{
-                            "&:last-child td, &:last-child th": { border: 0 },
-                          }}
-                          className={cellUseStyles.row}
-                        >
-                          <TableCell
-                            padding="checkbox"
+                          <TableRow
+                            key={index}
                             sx={{
-                              borderTopLeftRadius: "12px",
-                              borderEndStartRadius: "12px",
+                              "&:last-child td, &:last-child th": { border: 0 },
                             }}
+                            className={cellUseStyles.row}
                           >
-                            <Checkbox
-                              sx={{ color: "#4ffcb7" }}
-                              checked={isItemSelected}
-                              inputProps={{
-                                "aria-labelledby": labelId,
-                              }}
-                              onClick={() => handleSingleSelect(row.id)}
-                            />
-                          </TableCell>
-                          <TableCell
-                            className={classess.table__row}
-                            sx={{ width: "0px" }}
-                          >
-                            <LazyLoadImage
-                              src={row.image}
-                              width={50}
-                              height={50}
-                              style={{ borderRadius: "100%" }}
-                              placeholderSrc={PlaceHolderImage}
-                            />
-                          </TableCell>
-
-                          <TableCell
-                            className={classess.table__row}
-                            sx={{
-                              fontSize: "16px",
-                              fontWeight: "bold",
-                            }}
-                          >
-                            {row.title &&
-                              typeof row.title === "string" &&
-                              row.title.split(" ").slice(0, 5).join(" ")}
-                          </TableCell>
-
-                          <TableCell className={classess.table__row}>
-                            {row.release_date}
-                          </TableCell>
-                          <TableCell
-                            className={classess.table__row}
-                            sx={{
-                              borderTopRightRadius: "12px",
-                              borderEndEndRadius: "12px",
-                            }}
-                          >
-                            {row.track_type}
-                          </TableCell>
-                        </TableRow>
-                      </>
-                    </LazyLoadComponent>
-                  );
-                })}
-
-                {/* if artist tracks 0 in the search, then loop the all tracks */}
-                {searchTracks.length < 1 &&
-                  sortedTracks
-                    .filter((record) => new Date(record.release_date) < end)
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((row, index) => {
-                      const isItemSelected = isSelected(row?.id);
-                      const labelId = `enhanced-table-checkbox-${index}`;
-                      return (
-                        <LazyLoadComponent>
-                          <>
-                            <Box sx={{ m: "1rem" }}></Box>
-
-                            <TableRow
-                              key={index}
+                            <TableCell
+                              padding="checkbox"
                               sx={{
-                                "&:last-child td, &:last-child th": {
-                                  border: 0,
-                                },
+                                borderTopLeftRadius: "12px",
+                                borderEndStartRadius: "12px",
                               }}
-                              className={cellUseStyles.row}
                             >
-                              <TableCell
-                                padding="checkbox"
+                              <Checkbox
                                 sx={{
-                                  borderTopLeftRadius: "12px",
-                                  borderEndStartRadius: "12px",
+                                  svg: {
+                                    color: "#4ffcb7",
+                                  },
                                 }}
-                              >
-                                <Checkbox
-                                  sx={{ color: "#4ffcb7" }}
-                                  checked={isItemSelected}
-                                  inputProps={{
-                                    "aria-labelledby": labelId,
-                                  }}
-                                  onClick={() => handleSingleSelect(row.id)}
-                                />
-                              </TableCell>
-                              <TableCell
-                                className={classess.table__row}
-                                sx={{ width: "0px" }}
-                              >
-                                <LazyLoadImage
-                                  src={row.image}
-                                  width={50}
-                                  height={50}
-                                  style={{ borderRadius: "100%" }}
-                                  placeholderSrc={PlaceHolderImage}
-                                />
-                              </TableCell>
+                                checked={isItemSelected}
+                                inputProps={{
+                                  "aria-labelledby": labelId,
+                                }}
+                                onClick={() => handleSingleSelect(row.id)}
+                              />
+                            </TableCell>
+                            <TableCell
+                              className={classess.table__row}
+                              sx={{ width: "0px" }}
+                            >
+                              <LazyLoadImage
+                                src={row.image}
+                                width={50}
+                                height={50}
+                                style={{ borderRadius: "100%" }}
+                                placeholderSrc={PlaceHolderImage}
+                              />
+                            </TableCell>
 
-                              <TableCell
-                                className={classess.table__row}
+                            <TableCell
+                              className={classess.table__row}
+                              sx={{
+                                fontSize: "16px",
+                                fontWeight: "bold",
+                              }}
+                            >
+                              {row.title &&
+                                typeof row.title === "string" &&
+                                row.title.split(" ").slice(0, 5).join(" ")}
+                            </TableCell>
+
+                            <TableCell className={classess.table__row}>
+                              {row.release_date}
+                            </TableCell>
+                            <TableCell
+                              className={classess.table__row}
+                              sx={{
+                                borderTopRightRadius: "12px",
+                                borderEndEndRadius: "12px",
+                              }}
+                            >
+                              {row.track_type}
+                            </TableCell>
+                          </TableRow>
+                        </>
+                      </LazyLoadComponent>
+                    );
+                  })}
+
+                  {/* if artist tracks 0 in the search, then loop the all tracks */}
+                  {searchTracks.length < 1 &&
+                    sortedTracks
+                      .filter((record) => new Date(record.release_date) < end)
+                      .slice(
+                        page * rowsPerPage,
+                        page * rowsPerPage + rowsPerPage
+                      )
+                      .map((row, index) => {
+                        const isItemSelected = isSelected(row?.id);
+                        const labelId = `enhanced-table-checkbox-${index}`;
+                        return (
+                          <LazyLoadComponent>
+                            <>
+                              <Box sx={{ m: "1rem" }}></Box>
+
+                              <TableRow
+                                key={index}
                                 sx={{
-                                  fontSize: "16px",
-                                  fontWeight: "bold",
+                                  "&:last-child td, &:last-child th": {
+                                    border: 0,
+                                  },
                                 }}
+                                className={cellUseStyles.row}
                               >
-                                {row.title &&
-                                  typeof row.title === "string" &&
-                                  row.title.split(" ").slice(0, 4).join(" ")}
-                              </TableCell>
-                              {/* <TableCell className={classess.table__row}>
+                                <TableCell
+                                  padding="checkbox"
+                                  sx={{
+                                    borderTopLeftRadius: "12px",
+                                    borderEndStartRadius: "12px",
+                                  }}
+                                >
+                                  <Checkbox
+                                    sx={{
+                                      svg: {
+                                        color: "#4ffcb7",
+                                      },
+                                    }}
+                                    checked={isItemSelected}
+                                    inputProps={{
+                                      "aria-labelledby": labelId,
+                                    }}
+                                    onClick={() => handleSingleSelect(row.id)}
+                                  />
+                                </TableCell>
+                                <TableCell
+                                  className={classess.table__row}
+                                  sx={{ width: "0px" }}
+                                >
+                                  <LazyLoadImage
+                                    src={row.image}
+                                    width={50}
+                                    height={50}
+                                    style={{ borderRadius: "100%" }}
+                                    placeholderSrc={PlaceHolderImage}
+                                  />
+                                </TableCell>
+
+                                <TableCell
+                                  className={classess.table__row}
+                                  sx={{
+                                    fontSize: "16px",
+                                    fontWeight: "bold",
+                                  }}
+                                >
+                                  {row.title &&
+                                    typeof row.title === "string" &&
+                                    row.title.split(" ").slice(0, 4).join(" ")}
+                                </TableCell>
+                                {/* <TableCell className={classess.table__row}>
                                 {row.title}
                               </TableCell> */}
-                              <TableCell className={classess.table__row}>
-                                {row.release_date}
-                              </TableCell>
-                              <TableCell
-                                className={classess.table__row}
-                                sx={{
-                                  borderTopRightRadius: "12px",
-                                  borderEndEndRadius: "12px",
-                                }}
-                              >
-                                {row.track_type}
-                              </TableCell>
-                            </TableRow>
-                          </>
-                        </LazyLoadComponent>
-                      );
-                    })}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        ) : (
-          <Box varient="div" component="div" sx={{ p: 4 }}>
-            <Typography
-              variant="h5"
-              gutterBottom
-              component="div"
-              sx={{ color: "#d6d6d6" }}
-            >
-              Waiting for the Response...
-            </Typography>
-          </Box>
-        )}
+                                <TableCell className={classess.table__row}>
+                                  {row.release_date}
+                                </TableCell>
+                                <TableCell
+                                  className={classess.table__row}
+                                  sx={{
+                                    borderTopRightRadius: "12px",
+                                    borderEndEndRadius: "12px",
+                                  }}
+                                >
+                                  {row.track_type}
+                                </TableCell>
+                              </TableRow>
+                            </>
+                          </LazyLoadComponent>
+                        );
+                      })}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          ) : (
+            <Box varient="div" component="div" sx={{ p: 4 }}>
+              <Typography
+                variant="h5"
+                gutterBottom
+                component="div"
+                sx={{ color: "#d6d6d6" }}
+              >
+                Waiting for the Response...
+              </Typography>
+            </Box>
+          )}
 
-        {/* Show only, all tracks */}
-        {searchTracks.length < 1 ? (
-          <TablePagination
-            rowsPerPageOptions={[10, 25, 100]}
-            component="div"
-            sx={{ color: "#d6d6d6", backgroundColor: "#222c41 !important" }}
-            count={sortedTracks.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-            classes={{
-              actions: "custom-pagination-actions",
-              select: "custom-pagination-select",
-            }}
-            SelectProps={{
-              style: {
-                backgroundColor: "#4FFCB7",
-                color: "#222C41",
-                borderRadius: "12px",
-                fontSize: "14px",
-              },
-            }}
-          />
-        ) : null}
-      </Paper>
+          {/* Show only, all tracks */}
+          {searchTracks.length < 1 ? (
+            <TablePagination
+              rowsPerPageOptions={[10, 25, 100]}
+              component="div"
+              sx={{ color: "#d6d6d6", backgroundColor: "#222c41 !important" }}
+              count={sortedTracks.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+              classes={{
+                actions: "custom-pagination-actions",
+                select: "custom-pagination-select",
+              }}
+              SelectProps={{
+                style: {
+                  backgroundColor: "#4FFCB7",
+                  color: "#222C41",
+                  borderRadius: "12px",
+                  fontSize: "14px",
+                },
+              }}
+            />
+          ) : null}
+        </Paper>
+      )}
     </Box>
   );
 };

@@ -15,7 +15,7 @@ import useGooglePlaceAutoComplete from "../../services/google_place_autocomplete
 import PhoneInput from "react-phone-number-input";
 
 const ContractDetails = forwardRef(
-  (props, ref, setContractData, setGetNumber,backDataSending) => {
+  (props, ref, setContractData, setGetNumber, backDataSending) => {
     const address1Ref = useRef();
     const googleAutoCompleteSvc = useGooglePlaceAutoComplete();
     let autoComplete = "";
@@ -39,7 +39,7 @@ const ContractDetails = forwardRef(
       useState("");
     const [advance, setAdvance] = useState("");
     const [advanceAmount, setAdvanceAmount] = useState("");
-    const [errorAdvance, setAdvanceError] = useState("")
+    const [errorAdvance, setAdvanceError] = useState("");
     const [agreement, setAgreement] = useState("");
     const [recipientAddress, setRecipientAddress] = useState("");
     const [recipientAddressError, setRecipientAddressError] = useState("");
@@ -58,7 +58,7 @@ const ContractDetails = forwardRef(
     };
 
     useEffect(() => {
-      setRecipientAddress(props.backDataSending.recipient_address)
+      setRecipientAddress(props.backDataSending.recipient_address);
       setLegelName(props.backDataSending.legel_name);
       setCity(props.backDataSending.city);
       setZipCode(props.backDataSending.zip_code);
@@ -89,8 +89,7 @@ const ContractDetails = forwardRef(
       setLegelName(e.target.value);
     };
     const handleAddress = (e) => {
-        setRecipientAddress(e.target.value);
-      
+      setRecipientAddress(e.target.value);
     };
 
     const handleCity = (e) => {
@@ -114,8 +113,8 @@ const ContractDetails = forwardRef(
     };
 
     const handleAdvance = (e) => {
-      setAdvanceAmount(e.target.value)
-    }
+      setAdvanceAmount(e.target.value);
+    };
 
     const handlePhoneNumber = (e) => {
       // if (e.target.value === "" || numReg.test(e.target.value)) {
@@ -199,27 +198,31 @@ const ContractDetails = forwardRef(
               formdata.append("country", country);
               formdata.append("Selected_tracks", props.selected_tracts);
               formdata.append("contract_length", props.contract_length);
-              
+
               // const res = await fetch(`${URLConfig.BASE_URL}/contracts`, {
               //   method: "POST",
               //   body: formdata,
               // });
               const payload = {
-                legel_name: formdata.get('legel_name'),
-                artist_id: formdata.get('artist_id'),
-                artist_name: formdata.get('artist_name'),
-                artist_representative_name: formdata.get('artist_representative_name'),
-                artist_email: formdata.get('artist_email'),
-                artist_phone: formdata.get('artist_phone'),
-                artist_representative_email: formdata.get('artist_representative_email'),
-                advance: formdata.get('advance'),
-                advance_amount: formdata.get('advance_amount'),
-                recipient_address: formdata.get('recipient_address'),
-                city:formdata.get('city'),
-                zip_code: formdata.get('zip_code'),
-                country:formdata.get('country'),
-                Selected_tracks: formdata.get('Selected_tracks'),
-                contract_length: formdata.get('contract_length'),
+                legel_name: formdata.get("legel_name"),
+                artist_id: formdata.get("artist_id"),
+                artist_name: formdata.get("artist_name"),
+                artist_representative_name: formdata.get(
+                  "artist_representative_name"
+                ),
+                artist_email: formdata.get("artist_email"),
+                artist_phone: formdata.get("artist_phone"),
+                artist_representative_email: formdata.get(
+                  "artist_representative_email"
+                ),
+                advance: formdata.get("advance"),
+                advance_amount: formdata.get("advance_amount"),
+                recipient_address: formdata.get("recipient_address"),
+                city: formdata.get("city"),
+                zip_code: formdata.get("zip_code"),
+                country: formdata.get("country"),
+                Selected_tracks: formdata.get("Selected_tracks"),
+                contract_length: formdata.get("contract_length"),
               };
               props.setContractData(payload);
               // const data = await res.json();
@@ -237,9 +240,8 @@ const ContractDetails = forwardRef(
             if (!legelName) {
               props.setGetNumber(0);
               setLegalError("Enter Legal name");
-              
             }
-            if(!artistEmail || artistEmail.trim()==''){
+            if (!artistEmail || artistEmail.trim() == "") {
               props.setGetNumber(0);
               setArtistEmailError("Enter Artist Email");
             }
@@ -286,7 +288,7 @@ const ContractDetails = forwardRef(
                 country,
                 Selected_tracks: props.selected_tracts,
                 contract_length: props.contract_length,
-              }))
+              }));
               const payload = {
                 legel_name: legelName,
                 artist_id: artist?._id,
@@ -305,7 +307,6 @@ const ContractDetails = forwardRef(
                 contract_length: props.contract_length,
               };
               props.setContractData(payload);
-             
             }
           }
         } catch (e) {
@@ -317,29 +318,25 @@ const ContractDetails = forwardRef(
 
     useEffect(() => {
       setArtistName(artist?.name);
-      
-      if(artist?.email){
+
+      if (artist?.email) {
         setArtistEmail(artist?.email);
-      }
-      else{
+      } else {
         setArtistEmail(props.backDataSending.artist_email);
       }
-      if(artist?.telephone){
+      if (artist?.telephone) {
         setArtistPhone(artist?.telephone);
-      }
-      else{
+      } else {
         setArtistPhone(props.backDataSending.artist_phone);
       }
-      
-      setArtistRepresentativeName(user?.firstName +' '+ user?.lastName);
+
+      setArtistRepresentativeName(user?.firstName + " " + user?.lastName);
       setArtistRepresentativeEmail(user?.email);
-      setRecipientAddress(props.backDataSending.recipient_address)
+      setRecipientAddress(props.backDataSending.recipient_address);
       setLegelName(props.backDataSending.legel_name);
       setCity(props.backDataSending.city);
       setZipCode(props.backDataSending.zip_code);
       setCountry(props.backDataSending.country);
-      
-      
     }, [artist, user]);
 
     return (
@@ -385,7 +382,18 @@ const ContractDetails = forwardRef(
                           classess.page__fieldsContainer__form__formfield__label
                         }
                       >
-                        <span>Legal Name{" "}<span style={{color: 'red', marginLeft: '5px', fontSize: '1.1rem'}}>*</span></span>
+                        <span>
+                          Legal Name{" "}
+                          <span
+                            style={{
+                              color: "red",
+                              marginLeft: "5px",
+                              fontSize: "1.1rem",
+                            }}
+                          >
+                            *
+                          </span>
+                        </span>
                         <span style={{ position: "relative" }}>
                           As Mentioned in ID
                         </span>
@@ -430,8 +438,18 @@ const ContractDetails = forwardRef(
                           classess.page__fieldsContainer__form__formfield__label
                         }
                       >
-                       
-                        <span>Artist's Name{" "}<span style={{color: 'red', marginLeft: '5px', fontSize: '1.1rem'}}>*</span></span>
+                        <span>
+                          Artist's Name{" "}
+                          <span
+                            style={{
+                              color: "red",
+                              marginLeft: "5px",
+                              fontSize: "1.1rem",
+                            }}
+                          >
+                            *
+                          </span>
+                        </span>
                       </label>
                       <input
                         className={
@@ -461,8 +479,18 @@ const ContractDetails = forwardRef(
                           classess.page__fieldsContainer__form__formfield__label
                         }
                       >
-                       
-                        <span>Artist's Representative Name{" "}<span style={{color: 'red', marginLeft: '5px', fontSize: '1.1rem'}}>*</span></span>
+                        <span>
+                          Artist's Representative Name{" "}
+                          <span
+                            style={{
+                              color: "red",
+                              marginLeft: "5px",
+                              fontSize: "1.1rem",
+                            }}
+                          >
+                            *
+                          </span>
+                        </span>
                       </label>
                       <input
                         className={
@@ -494,9 +522,18 @@ const ContractDetails = forwardRef(
                           classess.page__fieldsContainer__form__formfield__label
                         }
                       >
-                        
-                        <span>Artist's Email{" "}<span style={{color: 'red', marginLeft: '5px', fontSize: '1.1rem'}}>*</span></span>
-                        
+                        <span>
+                          Artist's Email{" "}
+                          <span
+                            style={{
+                              color: "red",
+                              marginLeft: "5px",
+                              fontSize: "1.1rem",
+                            }}
+                          >
+                            *
+                          </span>
+                        </span>
                       </label>
                       <input
                         className={
@@ -536,8 +573,18 @@ const ContractDetails = forwardRef(
                           classess.page__fieldsContainer__form__formfield__label
                         }
                       >
-                        
-                        <span>Artist's Phone Number{" "}<span style={{color: 'red', marginLeft: '5px', fontSize: '1.1rem'}}>*</span></span>
+                        <span>
+                          Artist's Phone Number{" "}
+                          <span
+                            style={{
+                              color: "red",
+                              marginLeft: "5px",
+                              fontSize: "1.1rem",
+                            }}
+                          >
+                            *
+                          </span>
+                        </span>
                       </label>
 
                       <PhoneInput
@@ -580,8 +627,18 @@ const ContractDetails = forwardRef(
                           classess.page__fieldsContainer__form__formfield__label
                         }
                       >
-                        
-                        <span>Artist's Representative Email{" "}<span style={{color: 'red', marginLeft: '5px', fontSize: '1.1rem'}}>*</span></span>
+                        <span>
+                          Artist's Representative Email{" "}
+                          <span
+                            style={{
+                              color: "red",
+                              marginLeft: "5px",
+                              fontSize: "1.1rem",
+                            }}
+                          >
+                            *
+                          </span>
+                        </span>
                       </label>
                       <input
                         className={
@@ -648,7 +705,18 @@ const ContractDetails = forwardRef(
                             classess.page__fieldsContainer__form__formfield__label
                           }
                         >
-                           <span>Please Enter Advance Amount{" "}<span style={{color: 'red', marginLeft: '5px', fontSize: '1.1rem'}}>*</span></span>
+                          <span>
+                            Please Enter Advance Amount{" "}
+                            <span
+                              style={{
+                                color: "red",
+                                marginLeft: "5px",
+                                fontSize: "1.1rem",
+                              }}
+                            >
+                              *
+                            </span>
+                          </span>
                         </label>
                         <Box
                           variant="span"
@@ -671,7 +739,6 @@ const ContractDetails = forwardRef(
                           required={true}
                           // required={false}
                         />
-                       
                       </Box>
                       {errorAdvance && (
                         <p
@@ -701,66 +768,66 @@ const ContractDetails = forwardRef(
                           classess.page__fieldsContainer__form__formfield__label
                         }
                       >
-                        
-                        <span>Upload Distribution Agreement{" "}</span>
+                        <span>Upload Distribution Agreement </span>
                       </label>
-                      {advance === "YES" ? ( 
+                      {advance === "YES" ? (
                         <>
-                      <Button
-                        variant="contained"
-                        component="label"
-                        className={
-                          classess.page__fieldsContainer__form__formfield__button
-                        }
-                      >
-                        <span>
-                          <UploadFileIcon
+                          <Button
+                            // variant="contained"
+
+                            component="label"
                             className={
-                              classess.page__fieldsContainer__form__formfield__button__upload
+                              classess.page__fieldsContainer__form__formfield__button
                             }
-                          />
-                        </span>{" "}
-                        Drag & Drop files here or click to select files
-                        <input
-                          name="agreement"
-                          hidden
-                          accept="application/msword, application/pdf"
-                          multiple
-                          type="file"
-                          onChange={(e) => setAgreement(e.target.files[0])}
-                          required={true}
-                        />
-                      </Button>
-                      </>
+                          >
+                            <span>
+                              <UploadFileIcon
+                                className={
+                                  classess.page__fieldsContainer__form__formfield__button__upload
+                                }
+                              />
+                            </span>{" "}
+                            Drag & Drop files here or click to select files
+                            <input
+                              name="agreement"
+                              hidden
+                              accept="application/msword, application/pdf"
+                              multiple
+                              type="file"
+                              onChange={(e) => setAgreement(e.target.files[0])}
+                              required={true}
+                            />
+                          </Button>
+                        </>
                       ) : (
                         <>
-                        <Button
-                        variant="contained"
-                        component="label"
-                        disabled={true}
-                        className={
-                          classess.page__fieldsContainer__form__formfield__button
-                        }
-                      >
-                        <span>
-                          <UploadFileIcon
+                          <Button
+                            variant="contained"
+                            component="label"
+                            disabled={true}
                             className={
-                              classess.page__fieldsContainer__form__formfield__button__upload
+                              classess.page__fieldsContainer__form__formfield__button
                             }
-                          />
-                        </span>{" "}
-                        Drag & Drop files here or click to select files
-                        <input
-                          name="agreement"
-                          hidden
-                          accept="application/msword, application/pdf"
-                          multiple
-                          type="file"
-                          onChange={(e) => setAgreement(e.target.files[0])}
-                          required={true}
-                        />
-                      </Button>
-                      </>
+                          >
+                            <span>
+                              <UploadFileIcon
+                                className={
+                                  classess.page__fieldsContainer__form__formfield__button__upload
+                                }
+                              />
+                            </span>{" "}
+                            Drag & Drop files here or click to select files
+                            <input
+                              name="agreement"
+                              hidden
+                              accept="application/msword, application/pdf"
+                              multiple
+                              type="file"
+                              onChange={(e) => setAgreement(e.target.files[0])}
+                              required={true}
+                            />
+                          </Button>
+                        </>
                       )}
                     </Box>
                   </Grid>
@@ -779,8 +846,18 @@ const ContractDetails = forwardRef(
                           classess.page__fieldsContainer__form__formfield__label
                         }
                       >
-                        
-                        <span>Recipient Address{" "}<span style={{color: 'red', marginLeft: '5px', fontSize: '1.1rem'}}>*</span></span>
+                        <span>
+                          Recipient Address{" "}
+                          <span
+                            style={{
+                              color: "red",
+                              marginLeft: "5px",
+                              fontSize: "1.1rem",
+                            }}
+                          >
+                            *
+                          </span>
+                        </span>
                       </label>
                       <input
                         className={
@@ -822,8 +899,18 @@ const ContractDetails = forwardRef(
                           classess.page__fieldsContainer__form__formfield__label
                         }
                       >
-                       
-                        <span>City{" "}<span style={{color: 'red', marginLeft: '5px', fontSize: '1.1rem'}}>*</span></span>
+                        <span>
+                          City{" "}
+                          <span
+                            style={{
+                              color: "red",
+                              marginLeft: "5px",
+                              fontSize: "1.1rem",
+                            }}
+                          >
+                            *
+                          </span>
+                        </span>
                       </label>
                       <input
                         className={
@@ -864,8 +951,18 @@ const ContractDetails = forwardRef(
                           classess.page__fieldsContainer__form__formfield__label
                         }
                       >
-                       
-                        <span>Zip/Postal Code{" "}<span style={{color: 'red', marginLeft: '5px', fontSize: '1.1rem'}}>*</span></span>
+                        <span>
+                          Zip/Postal Code{" "}
+                          <span
+                            style={{
+                              color: "red",
+                              marginLeft: "5px",
+                              fontSize: "1.1rem",
+                            }}
+                          >
+                            *
+                          </span>
+                        </span>
                       </label>
                       <input
                         className={
@@ -905,8 +1002,18 @@ const ContractDetails = forwardRef(
                           classess.page__fieldsContainer__form__formfield__label
                         }
                       >
-                        
-                        <span>Country{" "}<span style={{color: 'red', marginLeft: '5px', fontSize: '1.1rem'}}>*</span></span>
+                        <span>
+                          Country{" "}
+                          <span
+                            style={{
+                              color: "red",
+                              marginLeft: "5px",
+                              fontSize: "1.1rem",
+                            }}
+                          >
+                            *
+                          </span>
+                        </span>
                       </label>
                       <input
                         className={

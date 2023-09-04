@@ -169,13 +169,9 @@ const RecommendCollaborations = ({ artist_collaborations }) => {
           >
             <Grid item xs={12} sm={12} md={4} lg={12} xl={4}>
               <Box component="div" variant="div" sx={{ color: "#fff" }}>
-                <Typography
-                  variant="h6"
-                  component="h6"
-                  className={classess.page__banner__insights_title}
-                >
+                <span className={classess.page__banner__insights_title}>
                   Smart Insights
-                </Typography>
+                </span>
               </Box>
             </Grid>
             <Grid

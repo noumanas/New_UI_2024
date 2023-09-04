@@ -55,7 +55,7 @@ export default function EditTrackPopup() {
       youtube_video_views_total: removeNonNumeric(youtube_video_views_total),
       spotify_streams_total: removeNonNumeric(spotify_streams_total),
       tiktok_views_total: removeNonNumeric(tiktok_views_total),
-      tiktok_shares_total:removeNonNumeric(tiktok_shares_total),
+      tiktok_shares_total: removeNonNumeric(tiktok_shares_total),
       deezer_reach_total: removeNonNumeric(deezer_reach_total),
       isrc: isrc,
       release_date,
@@ -94,7 +94,9 @@ export default function EditTrackPopup() {
               deezer_reach_total: parseInt(
                 removeNonNumeric(deezer_reach_total)
               ),
-              tiktok_shares_total: parseInt(removeNonNumeric(tiktok_shares_total)),
+              tiktok_shares_total: parseInt(
+                removeNonNumeric(tiktok_shares_total)
+              ),
               isrc,
               release_date,
               genres,
@@ -123,7 +125,9 @@ export default function EditTrackPopup() {
               deezer_reach_total: parseInt(
                 removeNonNumeric(deezer_reach_total)
               ),
-              tiktok_shares_total:parseInt(removeNonNumeric(tiktok_shares_total)),
+              tiktok_shares_total: parseInt(
+                removeNonNumeric(tiktok_shares_total)
+              ),
               isrc,
               release_date,
               genres,
@@ -410,7 +414,6 @@ export default function EditTrackPopup() {
                       }
                       min={0}
                       required
-
                     />
                   </Box>
                   <Box

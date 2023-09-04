@@ -14,6 +14,28 @@
     font-size: $pixels !important;
 }
 
+@mixin customFontsSmallTags($pixels: 12px) {
+    font-size: $pixels !important;
+    font-weight: 500 !important;
+    color: #4ffcb7;
+    font-family: "DM Sans";
+    text-transform: uppercase;
+}
+
+@mixin customParagraph($pixels: 12px) {
+    font-size: $pixels !important;
+    font-weight: 500;
+    color: #ffffff;
+    font-family: "DM Sans";
+}
+@mixin customHeading($pixels: 28px) {
+    font-size: $pixels !important;
+    font-weight: 700;
+    color: #ffffff;
+    font-family: "DM Sans";
+    text-transform: capitalize;
+}
+
 @mixin disabledCss($opc: 0.8) {
     pointer-events: none;
     opacity: $opc;
@@ -71,6 +93,7 @@
     color: #000 !important;
     border-radius: $radius !important;
     font-size: $pixels;
+    font-weight: 700 !important;
     cursor: pointer;
     text-transform: capitalize !important;
     width: 100%;

@@ -21,12 +21,13 @@
     max-height: 118px !important;
 
     &__text {
+      @include customHeading();
       width: 40%;
-      color: #ffffff;
-      font-size: 28px !important;
-      font-weight: 700 !important;
-      white-space: nowrap;
-      overflow: hidden;
+      // color: #ffffff;
+      // font-size: 28px !important;
+      // font-weight: 700 !important;
+      // white-space: nowrap;
+      // overflow: hidden;
       // text-overflow: ellipsis;
     }
 
@@ -53,7 +54,7 @@
       &__searchbtn {
         width: 141px;
         height: 40px;
-        // margin-left: 20px !important;
+        // margin-left: -110px !important;
         background-color: #4ffcb7 !important;
         border-style: none;
         border-radius: 12px !important;

@@ -37,8 +37,7 @@
         gap: 10px;
 
         &__label {
-          color: #4ffcb7;
-          font-size: 12px;
+          @include customFontsSmallTags();
         }
 
         &__input {
@@ -63,15 +62,14 @@
       }
 
       &__action {
-        @include flexProperties(row, space-between, center, $fullWidth: true);
+        @include flexProperties(row, center, center, $fullWidth: true);
         flex-wrap: nowrap;
         gap: 20px;
-        width: 100%;
+        width: 105% !important;
         margin-top: 20px;
 
         &__btn {
-          @include deActiveThemeBotton(14px, 10px);
-          width: 100% !important;
+          @include activeThemeBotton(16px, 10px);
           &:hover {
             background-color: #4ffcb7 !important;
             color: #000000 !important;
@@ -85,7 +83,8 @@
       }
 
       &__dnthaveaccount {
-        margin-top: 10px;
+        @include customParagraph(12px);
+        font-weight: 400 !important;
         &__spantwo {
           text-decoration: none;
           padding-left: 10px;

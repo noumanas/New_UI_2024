@@ -16,6 +16,7 @@ import { FiEyeOff, FiEye } from "react-icons/fi";
 import { toast } from "react-toastify";
 import { createNewSession } from "../../services/session";
 import LoginTopLogo from "../../assets/LoginTopLogo.png.png";
+
 const LoginForm = () => {
   const rememberMe = JSON.parse(localStorage.getItem("rememberMe"));
   const dispatch = useDispatch();
@@ -48,6 +49,7 @@ const LoginForm = () => {
     event.target.email.value = "";
     event.target.password.value = "";
   };
+
   const fetchSpotifyToken = async () => await _fetchToken();
   return (
     <Box varient="div" component="div" className={classess.page}>
@@ -74,11 +76,9 @@ const LoginForm = () => {
             component="div"
             className={classess.page__form__main__field_container}
           >
-            <label
-              className={classess.page__form__main__field_container__label}
-            >
+            <span className={classess.page__form__main__field_container__label}>
               USERNAME
-            </label>
+            </span>
             <FormControl variant="filled" color="info" fullWidth>
               <input
                 id="component-filled"
@@ -96,11 +96,9 @@ const LoginForm = () => {
             component="div"
             className={classess.page__form__main__field_container}
           >
-            <label
-              className={classess.page__form__main__field_container__label}
-            >
+            <span className={classess.page__form__main__field_container__label}>
               PASSWORD
-            </label>
+            </span>
             <FormControl variant="filled" color="info" fullWidth>
               <input
                 id="component-filled"
@@ -150,13 +148,12 @@ const LoginForm = () => {
                     color: "white",
                     "&.Mui-checked": {
                       color: "#4FFCB7",
-                      fontSize: 14,
                     },
                   }}
                 />
               }
               label="Remember me"
-              sx={{ color: "white" }}
+              sx={{ color: "white", fontWeight: "500", fontSize: 14 }}
             />
 
             <Button
@@ -172,7 +169,7 @@ const LoginForm = () => {
             </Button>
           </Box>
 
-          <Box
+          <div
             varient="div"
             component="div"
             className={classess.page__form__main__action}
@@ -184,7 +181,7 @@ const LoginForm = () => {
             >
               Sign In
             </Button>
-          </Box>
+          </div>
 
           <Box
             varient="div"
@@ -200,7 +197,7 @@ const LoginForm = () => {
               <span
                 className={classess.page__form__main__dnthaveaccount__spantwo}
               >
-                <u>Click here to request access</u>
+                <span>Click here to request access</span>
               </span>
             </span>
           </Box>

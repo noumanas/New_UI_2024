@@ -48,7 +48,7 @@
             width: 90%;
 
             &__formfield {
-                background-color: #6b7698;
+                background: #192233;
                 padding: 15px;
                 border-radius: 10px;
                 display: flex;
@@ -77,15 +77,16 @@
                 }
 
                 &__download_btn {
-                    @include normalThemeButton(16px, 10px);
-                    background-color: #267dff !important;
-                    width: fit-content;
-                    margin: 0 auto !important;
-                    display: block;
+                    @include activeThemeBotton();
+                    // @include normalThemeButton(16px, 10px);
+                    // background-color: #267dff !important;
+                    // width: fit-content;
+                    // margin: 0 auto !important;
+                    // display: block;
 
-                    &:hover {
-                        background-color: #267dff !important;
-                    }
+                    // &:hover {
+                    //     background-color: #267dff !important;
+                    // }
                 }
 
                 &__input {
@@ -248,8 +249,8 @@
 
             &__tracks {
                 width: 100%;
-                background-color: #444c64 !important;
-                border: 2px solid #2576ee !important;
+                background-color: #222c41 !important;
+                border: 2px solid #4ffcb7 !important;
                 border-radius: 12px;
                 padding: 20px;
 

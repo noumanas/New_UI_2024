@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 import { config as configURL } from "../../enviorment/enviorment";
 import CancelIcon from "@mui/icons-material/Cancel";
 
-const ContractSubmitPreview = forwardRef((props, ref,contract) => {
+const ContractSubmitPreview = forwardRef((props, ref, contract) => {
   // const [visible, setVisible] = useState(true);
   const [email, setEmail] = useState("");
   const [list, setList] = useState([]);
@@ -45,7 +45,7 @@ const ContractSubmitPreview = forwardRef((props, ref,contract) => {
       toast.warning("Email is already in the list.");
     } else {
       setList([...list, { email }]);
-      console.log('list',list);
+      console.log("list", list);
       setEmail("");
     }
   };
@@ -57,7 +57,8 @@ const ContractSubmitPreview = forwardRef((props, ref,contract) => {
           await axios.post(`${configURL.BASE_URL}/contract-gen/send-email`, {
             recipients: list,
             artistname: props.contract?.artist_name,
-            artist_representative_name: props.contract?.artist_representative_name
+            artist_representative_name:
+              props.contract?.artist_representative_name,
           });
           toast.success("Email sent successfully.");
         } catch (error) {

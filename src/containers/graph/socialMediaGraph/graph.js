@@ -99,7 +99,7 @@ const SocialMediaGraph = (artist) => {
     //   textStyle: { color: "white", fontSize: "14" },
     //   alignment: "left",
     // }
-    chartArea: { left: 10, top: 20, width: "100%", height: "100%" },
+    chartArea: { left: 10, top: 20, width: "90%", height: "90%" },
   };
 
   async function getdrawdata(spotify_id) {
@@ -212,8 +212,7 @@ const SocialMediaGraph = (artist) => {
                   chartType="PieChart"
                   data={social_media_followers}
                   options={options}
-                  width={"250px"}
-                  height={"250px"}
+                  className={classess.chartResp}
                 />
               </Grid>
             )}

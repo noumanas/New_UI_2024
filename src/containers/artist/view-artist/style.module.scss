@@ -69,9 +69,12 @@
           justify-content: center;
 
           &__artistname {
-            font-size: 24px;
-            font-weight: 700;
-            text-align: left;
+            // @include textEllipsis(170px);
+
+            &__name {
+              @include customHeading(1.2rem);
+              text-align: left;
+            }
           }
           &__email {
             font-size: 14px;
@@ -91,6 +94,7 @@
             }
           }
         }
+
         &__editicon {
           display: flex;
           flex: 1;
@@ -111,10 +115,7 @@
         color: #ffffff;
         padding: 20px !important;
         &__topheading {
-          font-size: 12px;
-          color: #4ffcb7;
-          font-family: "DM Sans";
-          font-weight: 500;
+          @include customFontsSmallTags();
         }
         &__innerlyer {
           display: flex;
@@ -151,22 +152,13 @@
           display: none;
         }
         &__text {
-          font-size: 12px !important;
-          color: #4ffcb7;
-          font-family: "DM Sans";
-          font-weight: 500 !important;
-          margin-bottom: 20px !important;
+          @include customFontsSmallTags();
         }
 
         &__socials {
           width: 100%;
-          @include flexProperties(
-            row,
-            flex-start,
-            flex-start,
-            $fullWidth: false
-          );
-          gap: 5px;
+          @include flexProperties(row, flex-start, flex-start, $fullWidth: false);
+          margin-top: 10px !important;
           &__icons {
             width: 26px;
             height: auto;
@@ -196,9 +188,7 @@
           justify-content: center;
           width: 20%;
           &__text {
-            color: #4ffcb7;
-            font-size: 12px !important;
-            font-weight: 500 !important;
+            @include customFontsSmallTags();
           }
           &__text2 {
             color: #fff;
@@ -249,12 +239,7 @@
     width: 100%;
 
     &__box {
-      @include flexProperties(
-        column,
-        flex-start,
-        flex-start,
-        $fullWidth: false
-      );
+      @include flexProperties(column, flex-start, flex-start, $fullWidth: false);
       width: 100%;
       gap: 20px;
       border-radius: 12px !important;
@@ -270,9 +255,7 @@
           width: 100%;
 
           &__title {
-            color: $base-text-color-secondary;
-            font-size: 24px;
-            font-weight: 700;
+            @include customHeading(24px);
             text-transform: capitalize;
           }
 
@@ -297,12 +280,7 @@
         }
 
         &__content {
-          @include flexProperties(
-            row,
-            space-between,
-            center,
-            $fullWidth: false
-          );
+          @include flexProperties(row, space-between, center, $fullWidth: false);
           flex-wrap: wrap;
           gap: 10px;
           margin-top: 40px;
@@ -404,12 +382,7 @@
       &__box {
         &__adetails {
           &__content {
-            @include flexProperties(
-              column,
-              flex-start,
-              flex-start,
-              $fullWidth: false
-            );
+            @include flexProperties(column, flex-start, flex-start, $fullWidth: false);
             gap: 20px;
           }
         }
@@ -492,11 +465,11 @@
         &__topdetails {
           gap: 10px;
           padding-left: 10px;
-          height: 80px !important;
+          height: 100px !important;
 
           &__image {
-            height: 60px !important;
-            width: 60px !important;
+            height: 80px !important;
+            width: 80px !important;
           }
           &__details {
             &__artistname {

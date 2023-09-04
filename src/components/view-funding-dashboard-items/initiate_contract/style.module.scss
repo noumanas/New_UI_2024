@@ -1,4 +1,5 @@
 .customPanel {
+  font-family: "DM Sans";
   width: 100% !important;
   height: 100% !important;
   background: #222c41 !important;
@@ -14,13 +15,14 @@
       gap: 20px;
       .list {
         width: 100%;
-        // height: 85px;
         background-color: #192233;
         border-radius: 12px;
         padding: 20px 30px;
-        display: flex;
-        justify-content: space-between;
-        // align-items: center;
+        .listContent {
+          display: flex;
+          justify-content: space-between;
+          // align-items: center;
+        }
       }
     }
   }

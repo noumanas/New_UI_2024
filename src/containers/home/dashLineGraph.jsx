@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ReactApexChart from "react-apexcharts";
 
-const ChartApexLine = ({ options, series, type, height }) => {
+const ChartApexLine = ({ options, series, type, height, Revenue }) => {
   return (
     <>
       <div
@@ -26,7 +26,7 @@ const ChartApexLine = ({ options, series, type, height }) => {
             // paddingLeft: "50px",
           }}
         >
-          Revenue (100K)
+          {Revenue} (100K)
         </div>
         <div id="chart" style={{ width: "100%" }}>
           <ReactApexChart

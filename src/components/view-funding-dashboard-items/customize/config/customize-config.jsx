@@ -730,8 +730,8 @@ const CustomizedConfig = ({
                           type="number"
                           className={`${classess.inputFileds} ${classess.dollarField}`}
                           sx={{ pl: 2 }}
-                          defaultValue={0}
-                          value={change_new_music_estimiate}
+                          // placeholder="0"
+                          placeholder={change_new_music_estimiate}
                           aria-label="Default"
                           valueLabelDisplay="auto"
                           onChange={(e) => {
@@ -803,7 +803,7 @@ const CustomizedConfig = ({
                       >
                         <span className={classess.dollar}>$</span>
                         <Input
-                          defaultValue={internationalNumberFormat.format(
+                          placeholder={internationalNumberFormat.format(
                             Math.round(marketing_budget)
                           )}
                           inputProps={ariaLabel}

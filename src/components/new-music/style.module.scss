@@ -1,6 +1,31 @@
 @import "../../styles/scss.scss";
 @import "../../styles/colors.scss";
+.table {
+  //   background: $secondary-bg-color-1 !important;
+  background: #222c41 !important;
 
+  &__col {
+    color: #4ffcb7 !important;
+    background: #222c41 !important;
+    text-align: left !important;
+    white-space: nowrap;
+    border-bottom: 1px solid #5a7380 !important;
+    text-transform: uppercase;
+    font-size: 12px !important;
+  }
+
+  &__row {
+    color: #d6d6d6 !important;
+    text-align: left !important;
+    max-width: 100% !important;
+    text-transform: capitalize;
+    img {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+    }
+  }
+}
 .page {
   margin-top: 20px;
 
@@ -37,14 +62,15 @@
             border-right: none;
             outline: none !important;
             background: transparent;
-            padding: 8px 15px;
+            padding: 5px 0px;
             color: $tablecell-color;
-            @include fontSize(16px);
+            @include fontSize(20px);
             background-color: transparent;
             width: 110px;
+            font-weight: bold;
             &::placeholder {
               color: #6d7480;
-              font-size: 18px;
+              font-size: 20px;
               font-weight: bold;
             }
 
@@ -64,17 +90,15 @@
             border-right: none;
             outline: none !important;
             background: transparent;
-            padding: 8px 15px;
-            // color: $tablecell-color;
-            @include fontSize(16px);
+            padding: 5px 0px;
+            width: 160px;
+            @include fontSize(20px);
             background-color: transparent;
             color: #6d7480;
-            // opacity: 0.3;
-            font-size: 18px;
             font-weight: bold !important;
-
             option {
               background-color: $secondary-bg-color-1;
+              font-size: 1px !important;
             }
 
             &:focus {

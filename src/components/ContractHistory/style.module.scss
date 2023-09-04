@@ -106,7 +106,7 @@
   }
 
   &__list {
-    overflow-y: scroll;
+    // overflow-y: scroll;
     min-height: 39.1rem;
     max-height: 39.1rem;
     width: 100% !important;
@@ -190,13 +190,13 @@
   }
 
   &__col {
-    color: #4ffcb7 !important;
     background: #222c41 !important;
     text-align: left !important;
     width: auto !important;
-    text-transform: uppercase;
-    font-size: 12px !important;
     border-bottom: 1px solid #2f3443 !important;
+    &__heading {
+      @include customFontsSmallTags();
+    }
     &:first-child {
       width: 30px !important;
     }

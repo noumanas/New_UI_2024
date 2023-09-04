@@ -8,6 +8,7 @@
   flex-direction: column;
   gap: 20px !important;
 }
+
 .modalbox {
   font-family: "DM Sans";
   position: absolute;
@@ -59,12 +60,8 @@
     // border-bottom: 1px solid rgba(255, 255, 255, .2);
 
     &__title {
-      font-size: 24px;
-      letter-spacing: 0px;
-      text-transform: capitalize;
-      color: $base-text-color-secondary;
-      font-weight: 700;
-      padding: 34px 30px 0px 30px;
+      @include customHeading(24px);
+      padding: 20px 0px 0px 20px;
     }
   }
 
@@ -146,17 +143,13 @@
           gap: 2px;
 
           &__name {
-            font-size: 16px;
-            text-transform: capitalize;
-            letter-spacing: 0px;
-            color: $base-text-color-secondary;
-            font-weight: 700;
+            @include customHeading(16px);
             margin-top: 17px;
             // text-align: center;
             @include textEllipsis();
           }
           &__listners {
-            color: #4ffcb7;
+            @include customFontsSmallTags();
           }
 
           &__email {

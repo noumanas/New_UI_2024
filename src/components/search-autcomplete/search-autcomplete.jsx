@@ -27,13 +27,13 @@ const SearchAutcomplete = ({ list, search, onInput, handleSearchItem }) => {
           autoComplete="off"
           className={classess.container__search_box__search_input}
         />
-        <Box className={classess.container__search_box__search_icon}>
+        {/* <Box className={classess.container__search_box__search_icon}>
           <SearchIcon
             sx={{
               color: "black",
             }}
           />
-        </Box>
+        </Box> */}
       </Box>
       {list && list.length ? (
         <ul className={classess.container__list}>

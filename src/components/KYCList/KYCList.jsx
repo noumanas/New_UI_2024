@@ -176,17 +176,27 @@ const KYCList = () => {
                 <TableRow>
                   <TableCell className={classess.table__col}></TableCell>
                   <TableCell className={classess.table__col}>
-                    ARTIST NAME
+                    <span className={classess.table__col__heading}>
+                      ARTIST NAME
+                    </span>
                   </TableCell>
                   <TableCell className={classess.table__col}>
-                    SUBMITTED ON
+                    <span className={classess.table__col__heading}>
+                      SUBMITTED ON
+                    </span>
                   </TableCell>
-                  <TableCell className={classess.table__col}>STATUS</TableCell>
+                  <TableCell className={classess.table__col}>
+                    <span className={classess.table__col__heading}>STATUS</span>
+                  </TableCell>
 
                   <TableCell className={classess.table__col}>
-                    APPROVED BY
+                    <span className={classess.table__col__heading}>
+                      APPROVED BY
+                    </span>
                   </TableCell>
-                  <TableCell className={classess.table__col}>Action</TableCell>
+                  <TableCell className={classess.table__col}>
+                    <span className={classess.table__col__heading}>Action</span>
+                  </TableCell>
                 </TableRow>
               </TableHead>
 

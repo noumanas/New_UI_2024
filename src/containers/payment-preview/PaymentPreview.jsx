@@ -123,7 +123,7 @@ const PaymentPreview = () => {
                       classess.page__details__box__adetails__header__innertitle
                     }
                   >
-                    VALUATION{" "}
+                    VALUATION
                   </span>
                   <span
                     className={
@@ -202,7 +202,7 @@ const PaymentPreview = () => {
               </Box>
               <TransferPaymentlist
                 transefered_payments={transefered_payments}
-              ></TransferPaymentlist>
+              />
             </Box>
           </Box>
         </Grid>

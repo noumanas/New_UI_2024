@@ -2,29 +2,46 @@ import React, { useState } from "react";
 import { Box, IconButton, Typography } from "@mui/material";
 import classess from "./style.module.scss";
 import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
+import SignStepper from "../../../containers/my-contracts/sign-stepper/SignStepper";
+import PayStepper from "../../../containers/my-contracts/pay-stepper/PayStepper";
 
-const InitiateContract = ({ contractName }) => {
-  const [containerHeights, setContainerHeights] = useState([85, 85, 85]);
+const InitiateContract = ({
+  contract_length,
+  artist_advance,
+  marketing_budget,
+}) => {
+  const [containerExpanded, setContainerExpanded] = useState([
+    false,
+    false,
+    false,
+  ]);
 
-  const toggleHeight = (index) => {
-    const updatedHeights = containerHeights.map((height, i) =>
-      i === index ? (height === 85 ? 300 : 85) : 85
+  const toggleExpansion = (index) => {
+    const updatedExpanded = containerExpanded.map((expanded, i) =>
+      i === index ? !expanded : false
     );
-    setContainerHeights(updatedHeights);
+    setContainerExpanded(updatedExpanded);
   };
 
   const data = [
     {
       name: "Contract Details",
-      function: () => toggleHeight(0),
+      function: () => toggleExpansion(0),
+      component: <SignStepper contract_length={contract_length} />,
     },
     {
       name: "Payment Details",
-      function: () => toggleHeight(1),
+      function: () => toggleExpansion(1),
+      component: (
+        <PayStepper
+          artist_advance={artist_advance}
+          marketing_budget={marketing_budget}
+        />
+      ),
     },
     {
       name: "Review Details",
-      function: () => toggleHeight(2),
+      function: () => toggleExpansion(2),
     },
   ];
 
@@ -38,7 +55,7 @@ const InitiateContract = ({ contractName }) => {
             textTransform: "uppercase",
           }}
         >
-          lets get started
+          Let's get started
         </Typography>
         <Box className={classess.contractList}>
           {data.map((item, index) => (
@@ -46,35 +63,39 @@ const InitiateContract = ({ contractName }) => {
               key={item.name}
               className={classess.list}
               style={{
-                height: containerHeights[index] + "px",
-                overflow: containerHeights[index] === 300 ? "hidden" : "unset",
-                transition: "height 0.3s ease",
+                maxHeight: containerExpanded[index] ? "100%" : "85px",
+                // transition: "max-height 0.3s ease",
               }}
             >
-              <Box sx={{ fontSize: "30px", fontWeight: "bold" }}>
-                {item.name}
-              </Box>
-              <Box sx={{ mt: 1 }}>
-                <IconButton
-                  sx={{
-                    backgroundColor: "#4ffcb7",
-                    color: "#000000",
-                    width: "30px",
-                    height: "30px",
-                    transition: "color 0.3s ease",
-                    ":hover": {
+              <Box className={classess.listContent}>
+                <Box sx={{ fontSize: "30px", fontWeight: "bold" }}>
+                  {item.name}
+                </Box>
+                <Box sx={{ mt: 1 }}>
+                  <IconButton
+                    sx={{
                       backgroundColor: "#4ffcb7",
                       color: "#000000",
-                    },
-                  }}
-                  onClick={item.function}
-                >
-                  {containerHeights[index] === 300 ? (
-                    <IoIosArrowForward />
-                  ) : (
-                    <IoIosArrowDown />
-                  )}
-                </IconButton>
+                      width: "30px",
+                      height: "30px",
+                      transition: "color 0.3s ease",
+                      ":hover": {
+                        backgroundColor: "#4ffcb7",
+                        color: "#000000",
+                      },
+                    }}
+                    onClick={item.function}
+                  >
+                    {containerExpanded[index] ? (
+                      <IoIosArrowForward />
+                    ) : (
+                      <IoIosArrowDown />
+                    )}
+                  </IconButton>
+                </Box>
+              </Box>
+              <Box sx={{ mt: 10 }}>
+                {containerExpanded[index] && item.component}
               </Box>
             </Box>
           ))}

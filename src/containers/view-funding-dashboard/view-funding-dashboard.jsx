@@ -53,6 +53,7 @@ import {
 import { toast } from "react-toastify";
 import SignStepper from "../../containers/my-contracts/sign-stepper/SignStepper";
 import PayStepper from "../../containers/my-contracts/pay-stepper/PayStepper";
+import { SignalWifiStatusbarConnectedNoInternet4Sharp } from "@mui/icons-material";
 const ViewFundingDashboard = () => {
   const dispatch = useDispatch();
   const dispatchRef = useRef(dispatch);
@@ -566,9 +567,13 @@ const ViewFundingDashboard = () => {
   });
 
   const styles = viewFundingDashboardSelectUseStyles();
-
+  const [openNewMusicForm, setOpenNewMusicForm] = useState(false);
   const openConfirmConfigTab = () => {
     setValue("4");
+    setOpenNewMusicForm(true);
+  };
+  const closeNewMusicForm = () => {
+    setOpenNewMusicForm(false);
   };
   const openConfirmConfigTab2 = () => {
     setValue("2");
@@ -704,7 +709,9 @@ const ViewFundingDashboard = () => {
                       value="1"
                       disabled={isLoading}
                       sx={{
-                        "&.Mui-selected": {},
+                        "& .Mui-selected": {
+                          color: "#ffffff !important",
+                        },
                       }}
                     />
                     <Tab
@@ -713,8 +720,11 @@ const ViewFundingDashboard = () => {
                       value="4"
                       disabled={isLoading}
                       sx={{
-                        "&.Mui-selected": {},
+                        "& .Mui-selected": {
+                          color: "#ffffff !important",
+                        },
                       }}
+                      onClick={() => setOpenNewMusicForm(false)}
                     />
                     <Tab
                       className={classess.page__config__box__tabs__tab}
@@ -722,7 +732,9 @@ const ViewFundingDashboard = () => {
                       value="2"
                       disabled={isLoading}
                       sx={{
-                        "&.Mui-selected": {},
+                        "& .Mui-selected": {
+                          color: "#ffffff !important",
+                        },
                       }}
                     />
                     {/* <Tab
@@ -810,7 +822,7 @@ const ViewFundingDashboard = () => {
                       onClick={handleButtonClick}
                     />
                   </TabPanel>
-                  <TabPanel
+                  {/* <TabPanel
                     sx={{ color: "#FFFFFF", padding: "12px" }}
                     value="3"
                   >
@@ -819,7 +831,7 @@ const ViewFundingDashboard = () => {
                       contract_length={contract_length}
                       catelog_income={catelog_income}
                     />
-                  </TabPanel>
+                  </TabPanel> */}
                   <TabPanel
                     sx={{ color: "#FFFFFF", padding: "12px" }}
                     value="4"
@@ -832,18 +844,20 @@ const ViewFundingDashboard = () => {
                       new_music_income={new_music_income}
                       set_new_music_income={set_new_music_income}
                       artist_id={artist?.spotify_id}
+                      openNewMusicForm={openNewMusicForm}
+                      closeNewMusicForm={closeNewMusicForm}
                     />
                   </TabPanel>
 
-                  <TabPanel
+                  {/* <TabPanel
                     sx={{ color: "#FFFFFF", padding: "12px" }}
                     value="5"
                   >
                     <SignStepper
                       contract_length={contract_length}
                     ></SignStepper>
-                  </TabPanel>
-                  <TabPanel
+                  </TabPanel> */}
+                  {/* <TabPanel
                     sx={{ color: "#FFFFFF", padding: "12px" }}
                     value="6"
                   >
@@ -851,7 +865,7 @@ const ViewFundingDashboard = () => {
                       artist_advance={artist_advance}
                       marketing_budget={marketing_budget}
                     ></PayStepper>
-                  </TabPanel>
+                  </TabPanel> */}
                 </Box>
                 <TabPanel
                   sx={{
@@ -864,7 +878,11 @@ const ViewFundingDashboard = () => {
                   }}
                   value="10"
                 >
-                  <InitiateContract contractName={"Contract Details"} />
+                  <InitiateContract
+                    contract_length={contract_length}
+                    artist_advance={artist_advance}
+                    marketing_budget={marketing_budget}
+                  />
                   {/* <Box className={classess.page__config__box__customPanel}>
                     <Box className={classess.contractContainer}>
                       <Typography

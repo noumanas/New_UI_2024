@@ -81,8 +81,8 @@
         }
 
         &__insights_title {
-            @include fontSize(24px);
-            font-weight: 700 !important;
+            @include customHeading(20px);
+
             &__hoveradd {
                 position: relative;
                 &:hover {

@@ -189,12 +189,7 @@
 
         &__socials {
           width: 100%;
-          @include flexProperties(
-            row,
-            flex-start,
-            flex-start,
-            $fullWidth: false
-          );
+          @include flexProperties(row, flex-start, flex-start, $fullWidth: false);
           gap: 5px;
           &__icons {
             width: 26px;
@@ -214,8 +209,8 @@
       &__tracks_info {
         width: 100%;
         display: flex;
-        padding: 20px 0px 0px 25px;
-        height: 102px;
+        padding: 20px 10px 20px 15px;
+        height: 110px;
         &__container {
           align-items: center;
           justify-content: center;
@@ -285,12 +280,7 @@
     width: 100%;
 
     &__box {
-      @include flexProperties(
-        column,
-        flex-start,
-        flex-start,
-        $fullWidth: false
-      );
+      @include flexProperties(column, flex-start, flex-start, $fullWidth: false);
       width: 100%;
       gap: 20px;
 
@@ -332,12 +322,7 @@
         }
 
         &__content {
-          @include flexProperties(
-            row,
-            space-between,
-            center,
-            $fullWidth: false
-          );
+          @include flexProperties(row, space-between, center, $fullWidth: false);
           flex-wrap: wrap;
           gap: 10px;
           margin-top: 40px;
@@ -514,10 +499,13 @@
   .page {
     height: 100% !important;
     .blankHeight {
-      height: 10px !important;
+      // height: 10px !important;
       button {
         display: none !important;
       }
+    }
+    .updateArtist {
+      font-size: 10px;
     }
   }
 }
@@ -570,9 +558,15 @@
         }
         &__rightBoxCss {
           // gap: 10px !important;
-          flex-wrap: wrap-reverse;
+          // flex-wrap: wrap-reverse;
+        }
+        &__fontSize {
+          font-size: 20px !important;
         }
       }
+    }
+    .updateArtist {
+      font-size: 10px;
     }
   }
 }
@@ -592,6 +586,26 @@
 @media only screen and (max-width: 1700px) {
   .page {
     flex-wrap: wrap;
+    &__artist {
+      &__box {
+        &__fontSize {
+          font-size: 32px !important;
+        }
+        .text2 {
+          display: none !important;
+        }
+        .adjustElements {
+          margin-top: -30px !important;
+        }
+        &__topdetails {
+          &__details {
+            &__artistname {
+              font-size: 20px !important;
+            }
+          }
+        }
+      }
+    }
   }
 }
 
@@ -613,12 +627,7 @@
       &__box {
         &__adetails {
           &__content {
-            @include flexProperties(
-              column,
-              flex-start,
-              flex-start,
-              $fullWidth: false
-            );
+            @include flexProperties(column, flex-start, flex-start, $fullWidth: false);
             gap: 20px;
           }
         }
@@ -640,8 +649,7 @@
   &__artistInfo {
     width: 953px;
     height: 320px;
-    background: transparent linear-gradient(137deg, #0078ac 0%, #870033f2 100%)
-      0% 0% no-repeat padding-box;
+    background: transparent linear-gradient(137deg, #0078ac 0%, #870033f2 100%) 0% 0% no-repeat padding-box;
     border-radius: 15px;
     align-items: center;
 
@@ -730,7 +738,7 @@
       &__search_input {
         width: 100%;
         color: white !important;
-        border: 1px solid #36a1ff !important;
+        border: 1px solid #4ffcb7 !important;
         background: transparent;
         outline: none;
         padding: 15px;

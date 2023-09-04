@@ -18,9 +18,7 @@
         }
 
         &__topheading {
-            color: #fff;
-            font-size: 20px;
-            font-weight: 700;
+            @include customHeading(20px);
         }
 
         &__conatiner {

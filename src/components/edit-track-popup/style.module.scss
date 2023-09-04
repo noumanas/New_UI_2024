@@ -20,10 +20,7 @@
 
         &__header {
             &__title {
-                @include fontSize(18px);
-                color: $base-text-color-secondary;
-                text-transform: capitalize;
-                letter-spacing: 0px;
+                @include customHeading(20px);
             }
         }
 
@@ -43,34 +40,37 @@
                     gap: 10px;
 
                     &__label {
-                        color: $base-text-color-secondary;
+                        @include customFontsSmallTags();
                     }
 
                     &__input {
                         width: 100%;
                         color: #c2c2c2 !important;
-                        // border: 1px solid #4ffcb7 !important;
+                        border: 1px solid #4ffcb7 !important;
                         background: #192233 !important;
                         outline: none;
                         padding: 15px;
                         font-size: 18px;
                         border-radius: 8px;
-                        border-style: none !important;
+                        // border-style: none !important;
                         &:focus {
                             outline: #4ffcb7 solid 2px !important;
                         }
                     }
                     &__input_date {
                         width: 100%;
-                        color: #c2c2c2 !important;
-                        // border: 1px solid #4ffcb7 !important;
+                        color: #ffffff !important;
+                        border: 1px solid #4ffcb7 !important;
                         background: #192233;
                         outline: none;
                         font-size: 18px;
                         border-radius: 8px;
-                        border-style: none !important;
+                        // border-style: none !important;
                         &:focus {
                             outline: #4ffcb7 solid 2px !important;
+                        }
+                        &::placeholder {
+                            color: #fff;
                         }
                     }
 

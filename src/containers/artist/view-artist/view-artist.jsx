@@ -9,7 +9,7 @@ import Divider from "@mui/material/Divider";
 import { countries } from "country-data";
 import Grid from "@mui/material/Grid";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
-
+import Chip from "@mui/material/Chip";
 import AddMyArtist from "../../../components/add-my-artist-popup/add-my-artist";
 import SimilarArtist from "../../../components/similar-artist/similar-artist";
 import ArtistTopTracks from "../../../components/artist-top-tracks/artist-top-tracks";
@@ -37,6 +37,7 @@ import TrendingUpRoundedIcon from "@mui/icons-material/TrendingUpRounded";
 import InventoryRoundedIcon from "@mui/icons-material/InventoryRounded";
 import { addCommasToNumber } from "../../../utils/helper";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
+import Tooltip from "@mui/material/Tooltip";
 
 import {
   setTotalTracks,
@@ -60,7 +61,7 @@ import tidalIcon from "../../../assets/social/social-icon7.png";
 import tiktokIcon from "../../../assets/social/social-icon8.png";
 import instagramIcon from "../../../assets/social/social-icon9.png";
 import twitterIcon from "../../../assets/social/social-icon10.png";
-
+import CircularProgress from "@mui/material/CircularProgress";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 
@@ -314,7 +315,6 @@ const ViewArtist = () => {
   }, [artist]); // eslint-disable-next-line
 
   useEffect(() => {
-    console.log("view ", queue);
     if (artist && queue !== 0) {
       const intervalId = setInterval(() => {
         axios
@@ -475,8 +475,22 @@ const ViewArtist = () => {
                     classess.page__artist__box__topdetails__details__artistname
                   }
                 >
-                  {artist?.name}
+                  <Tooltip
+                    title={artist?.name}
+                    placement="top"
+                    arrow
+                    enterDelay={100}
+                  >
+                    <span
+                      className={
+                        classess.page__artist__box__topdetails__details__artistname__name
+                      }
+                    >
+                      {artist?.name}
+                    </span>
+                  </Tooltip>
                 </Box>
+
                 <Box
                   variant="div"
                   component="div"
@@ -503,6 +517,17 @@ const ViewArtist = () => {
                         ?.name || "N/A"
                     : "N/A"}
                 </Box>
+                {isLoadedQueue ? (
+                  <span style={{ color: "#FFF" }}>
+                    {queue === 0 ? (
+                      <span></span>
+                    ) : (
+                      <Chip color="warning" label={`Pending ${queue}`} />
+                    )}
+                  </span>
+                ) : (
+                  <CircularProgress size={40} color="secondary" />
+                )}
               </Box>
             </Box>
 
@@ -550,11 +575,9 @@ const ViewArtist = () => {
               className={classess.page__artist__box__platforms}
               sx={{ height: "102px" }}
             >
-              <Typography
-                className={classess.page__artist__box__platforms__text}
-              >
+              <span className={classess.page__artist__box__platforms__text}>
                 PLATFORMS:
-              </Typography>
+              </span>
               <Box className={classess.page__artist__box__platforms__socials}>
                 {socialLinks?.map((item) => {
                   return (
@@ -585,15 +608,7 @@ const ViewArtist = () => {
 
             <Divider className={classess.page__artist__box__horizontalline} />
 
-            <Box
-              className={classess.page__artist__box__genre}
-              sx={
-                {
-                  // overflowX: "scroll",
-                  // height: "102px",
-                }
-              }
-            >
+            <Box className={classess.page__artist__box__genre}>
               <GenreGraph artist={artist} />
             </Box>
 
@@ -603,13 +618,13 @@ const ViewArtist = () => {
               <Box
                 className={classess.page__artist__box__tracks_info__container}
               >
-                <Typography
+                <span
                   className={
                     classess.page__artist__box__tracks_info__container__text
                   }
                 >
                   TOTAL TRACKS:
-                </Typography>
+                </span>
 
                 <Typography
                   className={
@@ -634,21 +649,21 @@ const ViewArtist = () => {
                     classess.page__artist__box__tracks_info__containerright__heading_contianer
                   }
                 >
-                  <Typography
+                  <span
                     className={
                       classess.page__artist__box__tracks_info__containerright__text
                     }
                   >
                     Last updated on{" "}
                     {moment(artist?.updatedAt).format("MMMM DD YYYY")}
-                  </Typography>
-                  <Typography
+                  </span>
+                  <span
                     className={
                       classess.page__artist__box__tracks_info__containerright__text
                     }
                   >
                     {moment(artist?.updatedAt).format("h:mm:ss A")}
-                  </Typography>
+                  </span>
                 </Box>
 
                 <Button
@@ -780,11 +795,7 @@ const ViewArtist = () => {
         {/* Mid Grid Starts From Here */}
 
         <Grid item xs={12} sm={12} lg={12} xl={3}>
-          <Box
-            component="div"
-            variant="div"
-            className={classess.page__artist__box3}
-          >
+          <Box component="div" variant="div">
             <RevenueGraph artist={artist} />
           </Box>
         </Grid>
@@ -799,7 +810,7 @@ const ViewArtist = () => {
           <Box
             varient="div"
             component="div"
-            className={classess.page__similar__box2}
+            // className={classess.page__similar__box2}
           >
             <SocialMediaGraph artist={artist} />
           </Box>
@@ -809,7 +820,7 @@ const ViewArtist = () => {
 
         {/* Third Grid Starts From Here */}
 
-        <Grid item xs={12} sm={12} lg={3} xl={4}>
+        <Grid item xs={12} sm={12} lg={12} xl={4}>
           <Box
             component="div"
             variant="div"

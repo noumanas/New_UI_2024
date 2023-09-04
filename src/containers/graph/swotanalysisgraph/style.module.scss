@@ -3,7 +3,10 @@
 
 .page {
     @include flexProperties(column, center, center, $fullWidth: true);
+    gap: 20px !important;
     &__banner {
+        @include flexProperties(column, center, center, $fullWidth: true);
+
         background: $secondary-bg-color-1;
         width: 100%;
         height: 517px;
@@ -12,11 +15,9 @@
         padding: 20px !important;
         &__topHeaeding {
             width: 100%;
-            color: #fff;
             margin-bottom: 20px !important;
             &__heading {
-                font-size: 20px !important;
-                font-family: "DM Sans";
+                @include customHeading(20px);
                 font-weight: 700 !important;
             }
         }

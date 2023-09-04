@@ -2,102 +2,178 @@
 @import "../../../styles/scss.scss";
 
 .page {
-    @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
-    gap: 20px;
+  @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
+  gap: 20px;
 
-    &__banner {
-        background: $secondary-bg-color-1;
-        width: 100%;
-        height: 370px;
-        max-height: 370px;
-        // width: calc(100%);
-        border-radius: 12px;
-        overflow: hidden;
-        // padding: 40px;
+  &__banner {
+    background: $secondary-bg-color-1;
+    width: 100%;
+    height: 370px;
+    max-height: 370px;
+    // width: calc(100%);
+    border-radius: 12px;
+    overflow: hidden;
+    // padding: 40px;
 
-        &__topHeading {
-            color: #fff;
-            font-weight: 700;
-            font-size: 20px;
+    &__topHeading {
+      @include customHeading(20px);
+    }
+
+    &__inner_container {
+      display: flex;
+      flex-direction: row;
+      &__chart {
+        display: flex;
+        width: 50%;
+        // background-color: #fff;
+      }
+      &__details {
+        width: 50%;
+        // background-color: greenyellow;
+
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        overflow: scroll;
+        &::-webkit-scrollbar {
+          display: none;
         }
-
-        &__inner_container {
+        &__box {
+          // height: 83px;
+          // width: 130px;
+          border-radius: 12px;
+          padding: 10px;
+          align-items: center;
+          justify-content: center;
+          background-color: rgba($color: #192233, $alpha: 0.7);
+          &__tophead {
             display: flex;
             flex-direction: row;
-            &__chart {
-                display: flex;
-                width: 50%;
-                // background-color: #fff;
+            align-items: center;
+            // justify-content: space-around;
+            &__icon {
+              height: 20px;
+              width: 20px;
+              margin-right: 10px !important;
             }
-            &__details {
-                width: 50%;
-                // background-color: greenyellow;
-
-                display: flex;
-                flex-wrap: wrap;
-                align-items: center;
-                justify-content: center;
-                gap: 10px;
-                overflow: scroll;
-                &::-webkit-scrollbar {
-                    display: none;
-                }
-                &__box {
-                    // height: 83px;
-                    // width: 130px;
-                    border-radius: 12px;
-                    padding: 10px;
-                    align-items: center;
-                    justify-content: center;
-                    background-color: rgba($color: #192233, $alpha: 0.7);
-                    &__tophead {
-                        display: flex;
-                        flex-direction: row;
-                        align-items: center;
-                        // justify-content: space-around;
-                        &__icon {
-                            height: 20px;
-                            width: 20px;
-                            margin-right: 10px !important;
-                        }
-                        &__icon_text {
-                            color: #fff;
-                            // font-weight:;
-                        }
-                    }
-
-                    &__mid_heading {
-                        color: #4ffcb7;
-                        font-weight: 700;
-                    }
-
-                    &__last_heading {
-                        color: #fff;
-                        font-size: 10px;
-                    }
-                }
+            &__icon_text {
+              color: #fff;
+              // font-weight:;
             }
+          }
+
+          &__mid_heading {
+            color: #4ffcb7;
+            font-weight: 700;
+          }
+
+          &__last_heading {
+            color: #fff;
+            font-size: 10px;
+          }
         }
-        &__conatiner {
-            @include flexProperties(column, center, flex-start, $fullWidth: true);
-            gap: 0px;
-            width: 100%;
-            height: 295px;
-
-            &__button_wrapper {
-                @include flexProperties(column, center, center, $fullWidth: true);
-                gap: 10px;
-                width: 100%;
-                @media (max-width: 1199px) {
-                    @include flexProperties(row, center, center, $fullWidth: true);
-                }
-                &__button {
-                    @include normalThemeButton(14px, 10px);
-                    @include fontSize(14px);
-                    flex-wrap: wrap;
-                    padding: 2px 15px !important;
-                }
-            }
-        }
+      }
     }
+    &__conatiner {
+      @include flexProperties(column, center, flex-start, $fullWidth: true);
+      gap: 0px;
+      width: 100%;
+      height: 295px;
+
+      &__button_wrapper {
+        @include flexProperties(column, center, center, $fullWidth: true);
+        gap: 10px;
+        width: 100%;
+        @media (max-width: 1199px) {
+          @include flexProperties(row, center, center, $fullWidth: true);
+        }
+        &__button {
+          @include normalThemeButton(14px, 10px);
+          @include fontSize(14px);
+          flex-wrap: wrap;
+          padding: 2px 15px !important;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1800px) {
+  .page {
+    &__banner {
+      &__inner_container {
+        &__details {
+          &__box {
+            width: 100px;
+            height: 100px;
+            &__tophead {
+              &__icon_text {
+                font-size: 12px !important;
+              }
+            }
+            &__mid_heading {
+              font-size: 14px !important;
+            }
+            &__last_heading {
+              font-size: 12px !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1700px) {
+  .page {
+    &__banner {
+      &__inner_container {
+        &__details {
+          gap: 10px !important;
+          &__box {
+            padding: 10px !important;
+            width: 90px;
+            height: 80px;
+            &__tophead__icon {
+              width: 15px !important;
+              height: 15px !important;
+            }
+            &__tophead {
+              &__icon_text {
+                font-size: 10px !important;
+              }
+            }
+            &__mid_heading {
+              font-size: 14px !important;
+            }
+            &__last_heading {
+              font-size: 10px !important;
+            }
+          }
+        }
+        &__chart {
+          .chartResp {
+            width: 200px !important;
+            height: 200px !important;
+          }
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 1500px) {
+  .page {
+    &__banner {
+      &__inner_container {
+        &__chart {
+          .chartResp {
+            width: 250px !important;
+            height: 250px !important;
+          }
+        }
+      }
+    }
+  }
 }

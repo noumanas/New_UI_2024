@@ -72,7 +72,8 @@
       }
 
       &__coptrights {
-        color: #dedede;
+        @include customParagraph(12px);
+        font-weight: 400 !important;
       }
     }
   }

@@ -26,19 +26,35 @@ const TransferPaymentList = ({ props, transefered_payments }) => {
                     maxWidth: "150px",
                   }}
                 >
-                  TRANSACTION ID
-                </TableCell>
-                <TableCell className={classess.table__col}>DATE</TableCell>
-                <TableCell className={classess.table__col}>MODE</TableCell>
-                <TableCell className={classess.table__col}>
-                  AMOUNT PAID
+                  <span className={classess.table__col__heading}>
+                    TRANSACTION ID
+                  </span>
                 </TableCell>
                 <TableCell className={classess.table__col}>
-                  PAID AGAINST
+                  <span className={classess.table__col__heading}>DATE</span>
                 </TableCell>
-                <TableCell className={classess.table__col}>STATUS</TableCell>
-                <TableCell className={classess.table__col}>COMMENTS</TableCell>
-                <TableCell className={classess.table__col}>RECEIPT</TableCell>
+                <TableCell className={classess.table__col}>
+                  <span className={classess.table__col__heading}>MODE</span>
+                </TableCell>
+                <TableCell className={classess.table__col}>
+                  <span className={classess.table__col__heading}>
+                    AMOUNT PAID
+                  </span>
+                </TableCell>
+                <TableCell className={classess.table__col}>
+                  <span className={classess.table__col__heading}>
+                    PAID AGAINST
+                  </span>
+                </TableCell>
+                <TableCell className={classess.table__col}>
+                  <span className={classess.table__col__heading}>STATUS</span>
+                </TableCell>
+                <TableCell className={classess.table__col}>
+                  <span className={classess.table__col__heading}>COMMENTS</span>
+                </TableCell>
+                <TableCell className={classess.table__col}>
+                  <span className={classess.table__col__heading}>RECEIPT</span>
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody className={classess.table__brow}>

@@ -21,7 +21,7 @@
   }
 
   &__textfield {
-    background-color: #6b7698;
+    background-color: #192233;
     border-radius: 12px;
     resize: none;
     width: 60vw;
@@ -251,6 +251,7 @@
           text-align: center;
         }
       }
+
       &__adetails {
         width: 100%;
         background: $secondary-bg-color-1;
@@ -262,16 +263,10 @@
           width: 100%;
 
           &__title {
-            color: $base-text-color-secondary;
-            font-size: 25px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: capitalize;
+            @include customHeading();
           }
           &__innertitle {
-            color: $base-text-color;
-            font-size: 12px;
-            text-transform: capitalize;
+            @include customFontsSmallTags();
           }
 
           &__amendbtn {

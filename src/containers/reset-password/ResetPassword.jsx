@@ -32,7 +32,7 @@ const ResetPassword = () => {
             <ul className={classess.page__login__info__list}>
               <li className={classess.page__login__info__list__item}>
                 <ArrowForwardIcon
-                  sx={{ fontSize: 18, fontWeight: 900, color: "#36A1FF" }}
+                  sx={{ fontSize: 18, fontWeight: 900, color: "#4FFCB7" }}
                 />
                 <span className={classess.page__login__info__list__item__text}>
                   Unlimited Worldwide Music Distribution
@@ -40,7 +40,7 @@ const ResetPassword = () => {
               </li>
               <li className={classess.page__login__info__list__item}>
                 <ArrowForwardIcon
-                  sx={{ fontSize: 18, fontWeight: 900, color: "#36A1FF" }}
+                  sx={{ fontSize: 18, fontWeight: 900, color: "#4FFCB7" }}
                 />
                 <span className={classess.page__login__info__list__item__text}>
                   Unlimited Releases to Social Platforms
@@ -48,7 +48,7 @@ const ResetPassword = () => {
               </li>
               <li className={classess.page__login__info__list__item}>
                 <ArrowForwardIcon
-                  sx={{ fontSize: 18, fontWeight: 900, color: "#36A1FF" }}
+                  sx={{ fontSize: 18, fontWeight: 900, color: "#4FFCB7" }}
                 />
                 <span className={classess.page__login__info__list__item__text}>
                   Comprehensive Sales Data

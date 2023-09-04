@@ -121,7 +121,7 @@ const viewFundingDashboardSelectUseStyles = makeStyles(() => ({
       backgroundColor: "transparent",
       width: 150,
       height: 30,
-      color: "#FFFFFF !important",
+      color: "#fff !important",
       "&::after": {
         content: "''",
         display: "block",
@@ -142,13 +142,12 @@ const viewFundingDashboardSelectUseStyles = makeStyles(() => ({
     },
 
     "& .MuiStep-root": {
-      backgroundColor: "#394052",
-      border: "1px solid #1976d2",
+      backgroundColor: "#222C41",
+      border: "1px solid #4FFCB7",
     },
     "& .MuiStep-root.Mui-completed": {
-      backgroundColor: "#1976d2",
-
-      border: "1px solid #1976d2",
+      backgroundColor: "#4FFCB7",
+      border: "1px solid #4FFCB7",
     },
     "& .MuiTabs-root": {
       padding: "10px",
@@ -168,7 +167,7 @@ const viewFundingDashboardSelectUseStyles = makeStyles(() => ({
       // minWidth: '160px !important'
     },
     "&  .css-1v7vp3m-MuiStep-root .MuiStepLabel-root .Mui-completed": {
-      color: "#ffffff !important",
+      color: "#000 !important",
     },
   },
 }));
