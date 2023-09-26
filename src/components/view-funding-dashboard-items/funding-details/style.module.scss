@@ -2,29 +2,6 @@
 @import "../../../styles/scss.scss";
 @import "../../../styles/colors.scss";
 
-.blankHeight {
-  height: 138px !important;
-}
-.rightBox {
-  display: flex;
-  flex-direction: column;
-  gap: 87px;
-  button {
-    background-color: #4ffcb7;
-    border-radius: 12px;
-    padding: 6px 15px;
-    color: #222c41;
-    box-shadow: 0px 5px 26px -4px rgba(0, 0, 0, 0.61);
-    -webkit-box-shadow: 0px 5px 26px -4px rgba(0, 0, 0, 0.61);
-    -moz-box-shadow: 0px 5px 26px -4px rgba(0, 0, 0, 0.61);
-    font-size: 14px;
-    font-weight: bold;
-    &:hover {
-      background-color: #4ffcb7;
-    }
-  }
-}
-
 .tabDisplay {
   display: block;
 }
@@ -35,50 +12,20 @@
 
 .page {
   @include flexProperties(row, center, flex-start, $fullWidth: true);
-  // gap: 20px;
   font-family: "DM Sans" !important;
-  // display: none !important;
-  // height: 200px !important;
-  // overflow: hidden !important;
-  background: $secondary-bg-color-1;
+
+  background: $base-container-backgroung-color;
   border-radius: 12px;
   &__artist {
     flex: 1;
     width: 100%;
 
     &__box {
-      // height: 674px;
-      // height: 100%;
-      // height: 43.5rem;
-      // height: 45.1rem;
       height: 100%;
-      // @include flexProperties(column, flex-start, center, $fullWidth: true);
-      // border-radius: 12px 0px 0px 12px;
       width: 100%;
-      // overflow: hidden;
       &__rightBox {
-        height: 100%;
-        background: $secondary-bg-color-1;
-        // border-radius: 0px !important;
+        height: calc(100% + 3px);
         width: 100%;
-        // border-left: 1px solid #5a7380;
-
-        .topHeading {
-          padding-left: 30px;
-          padding-top: 30px;
-          color: white;
-          font-weight: bold;
-          font-size: 34px;
-          border-bottom: 1px solid #5a7380;
-          padding-bottom: 36px;
-          height: 7.33rem !important;
-        }
-        .centerSide {
-          border-right: 1px solid #5a7380;
-          //   padding-left: 30px;
-          padding-top: 30px;
-          height: 100%;
-        }
       }
       &__editbtn {
         display: flex;
@@ -86,6 +33,7 @@
         justify-content: flex-end;
         width: 100%;
         z-index: 1;
+        padding: 15px 0px 0px 0px !important;
         &__icon {
           padding: 15px !important;
         }
@@ -99,25 +47,58 @@
 
       &__topdetails {
         display: flex;
-        flex-wrap: wrap;
-        padding-left: 20px;
+        // flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        padding: 0px 20px;
         width: 100%;
-        gap: 20px;
-        height: 88px;
+        height: 139px;
 
         &__image {
+          .onlineStatus {
+            position: relative;
+            display: inline-block;
+            .avatar {
+              width: 89px !important;
+              height: 89px !important;
+              border: 4px solid $base-button-background-color !important;
+              object-fit: cover;
+            }
+            .onlineCircle {
+              position: absolute;
+              bottom: 15px;
+              right: 0;
+              width: 16px;
+              height: 16px;
+              background-color: $base-button-background-color;
+              border-radius: 50%;
+            }
+          }
         }
 
         &__details {
           font-family: "DM Sans";
-          color: #ffffff;
-          align-items: center;
-          justify-content: center;
+          color: $base-heading-color;
+          // margin-top: 10px;
+
+          // width: 100%;
+
+          // justify-content: center;
 
           &__artistname {
-            font-size: 24px;
-            font-weight: 700;
-            text-align: left;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            &__name {
+              @include customHeading(1.2rem);
+              text-align: left;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: block;
+              width: 180px;
+            }
           }
           &__email {
             font-size: 14px;
@@ -132,45 +113,18 @@
       &__horizontalline {
         width: calc(100%) !important;
         height: 1px !important;
-        background-color: #5a7380;
+        background-color: $base-border-line-color;
       }
 
       &__listnership {
         width: 100%;
         display: flex;
         flex-direction: column;
-        color: #ffffff;
+        color: $base-heading-color;
         padding: 20px !important;
         height: 102px;
         &__topheading {
-          font-size: 12px !important;
-          color: #4ffcb7;
-          font-weight: 500 !important;
-          font-family: "DM Sans";
-        }
-        &__innerlyer {
-          // display: flex;
-          // flex-wrap: wrap;
-          // align-items: center;
-          // justify-content: space-between;
-          // gap: 10px;
-          &__text1 {
-            font-size: 12px !important;
-            color: #4ffcb7;
-          }
-          &__text2 {
-            font-size: 38px !important;
-            font-weight: 700;
-          }
-          &__trending {
-            display: flex;
-            flex-direction: row !important;
-            align-items: center;
-            justify-content: center;
-          }
-          &__text3 {
-            font-size: 12px !important;
-          }
+          // @include customFontsSmallTags();
         }
       }
 
@@ -180,91 +134,125 @@
         height: 102px;
 
         &__text {
-          font-size: 12px !important;
-          font-weight: 500 !important;
-          color: #4ffcb7;
-          margin-bottom: 20px !important;
-          font-family: "DM Sans";
+          // @include customFontsSmallTags();
+          // font-size: 12px !important;
+          // font-weight: 500 !important;
+          // color: $base-button-background-color;
+          // // margin-bottom: 10px !important;
+          // font-family: "DM Sans";
         }
 
         &__socials {
           width: 100%;
-          @include flexProperties(row, flex-start, flex-start, $fullWidth: false);
-          gap: 5px;
+          margin-top: 8px;
+          display: flex;
+          gap: 7px;
+          overflow-x: scroll;
+          &::-webkit-scrollbar {
+            display: none;
+          }
           &__icons {
             width: 26px;
-            height: auto;
+            height: 26px;
             // margin: auto;
             display: block;
           }
         }
+        &__verify {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
       }
 
       &__genre {
-        background: $secondary-bg-color-1;
         width: 100%;
-        height: 105px;
+        height: 93px;
       }
 
       &__tracks_info {
         width: 100%;
+        gap: 20px;
         display: flex;
-        padding: 20px 10px 20px 15px;
-        height: 110px;
+        justify-content: space-between;
+        padding: 20px;
+        height: 105px;
         &__container {
           align-items: center;
           justify-content: center;
           &__text {
-            color: #4ffcb7;
-            font-size: 12px !important;
-            font-weight: 500 !important;
+            // @include customFontsSmallTags();
           }
           &__text2 {
-            color: #fff;
+            color: $base-heading-color;
             font-size: 28px !important;
             font-weight: 700 !important;
             // text-align: center;
           }
         }
         &__containerright {
-          color: #ffffff;
-          padding-left: 20px;
-          align-items: center;
-          justify-content: center;
+          color: $base-heading-color;
 
           &__text {
-            font-size: 12px;
-            padding-bottom: 10px;
+            font-size: 12px !important;
+            padding-bottom: 2px;
           }
         }
       }
 
       &__buttons_container {
         padding: 20px !important;
-        margin-top: 20px;
+        // margin-top: 20px;
         button {
-          width: 100% !important;
-          border-radius: 12px !important;
+          // width: 100% !important;
+          // border-radius: 12px !important;
+          @include activeThemeBotton();
+          &:hover {
+            @include activeThemeBotton();
+          }
         }
+      }
+      &__buttons_containers {
+        padding: 15px 20px 20px 20px !important;
+
         &__fundingBtn {
-          color: #222c41 !important;
-          background-color: #498e72 !important;
-          margin-bottom: 6px !important;
+          @include activeThemeBotton();
+          opacity: 50%;
+          padding: 7px 10px !important;
+          img {
+            width: 15px;
+            margin-right: 6px;
+          }
         }
         &__editDash {
-          color: #fff !important;
-          background-color: #5a7380 !important;
+          @include deActiveThemeBotton();
+          // padding: 7px 10px !important;
           margin-top: 10px !important;
         }
+      }
+      &__albumList {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 25px;
+        padding: 20px;
       }
       &__endBox {
         // border-radius: 0px 12px 12px 0px !important;
         &__last {
           width: 100%;
-          height: calc(100% - 138px);
-          // border-top: 1px solid #5a7380;
-          // border-left: 1px solid #5a7380;
+          height: calc(100% - 136px);
+          // border-top: 1px solid $base-border-line-color;
+          // border-left: 1px solid $base-border-line-color;
         }
+      }
+      &__smallHeading {
+        @include customFontsSmallTags();
+        // white-space: nowrap;
+      }
+      &__fontSize {
+        @include customHeading(28px);
+        font-weight: bold !important;
       }
     }
   }
@@ -286,7 +274,7 @@
 
       &__adetails {
         width: 100%;
-        background: $secondary-bg-color-1;
+        background: $base-container-backgroung-color;
         border-radius: 12px;
         padding: 20px;
 
@@ -295,15 +283,15 @@
           width: 100%;
 
           &__title {
-            color: $base-text-color-secondary;
+            color: $base-heading-color;
             font-size: 24px;
             font-weight: 700;
             text-transform: capitalize;
           }
 
           &__btn {
-            background: $secondary-bg-color-3 !important;
-            color: $base-text-color !important;
+            background: $base-button-background-color !important;
+            color: $base-button-background-color !important;
             border-radius: 10px !important;
             font-size: 16px !important;
             cursor: pointer;
@@ -315,8 +303,8 @@
             font-family: "DM Sans" !important;
 
             &:hover {
-              background: #01a177 !important;
-              border-color: #01a177 !important;
+              background: $base-button-background-color !important;
+              border-color: $base-button-background-color !important;
             }
           }
         }
@@ -334,7 +322,7 @@
             width: 45%;
 
             &__title {
-              color: $base-text-color;
+              color: $base-button-background-color;
               font-size: 16px;
 
               &__image {
@@ -343,18 +331,13 @@
                 cursor: pointer;
               }
             }
-
-            &__value {
-              color: white;
-              font-size: 14px;
-            }
           }
         }
       }
 
       &__tracks {
         width: 100%;
-        background: $secondary-bg-color-1;
+        background: $base-container-backgroung-color;
         border-radius: 12px;
         padding: 20px;
 
@@ -363,15 +346,15 @@
           width: 100%;
 
           &__title {
-            color: $base-text-color;
+            color: $base-button-background-color;
             font-size: 16px;
             font-weight: bold;
             text-transform: uppercase;
           }
 
           &__btn {
-            background: $secondary-bg-color-3 !important;
-            color: $base-text-color !important;
+            background: $base-button-background-color !important;
+            color: $base-button-background-color !important;
             border-radius: 25px !important;
             font-size: 14px;
             cursor: pointer;
@@ -381,7 +364,7 @@
             font-family: "DM Sans" !important;
 
             &:hover {
-              background: #01a177 !important;
+              background: $base-button-background-color !important;
             }
           }
         }
@@ -395,16 +378,16 @@
     width: 100%;
 
     &__box {
-      background: $secondary-bg-color-1;
+      background: $base-container-backgroung-color;
       //   border-radius: 12px;
       height: 100%;
     }
   }
   .contract {
-    padding-left: 20px;
-    margin-top: 30px;
+    padding: 20px;
+    margin-top: 4px;
     position: relative;
-    z-index: 999;
+    z-index: 9999;
     .initiate {
       display: flex;
 
@@ -412,19 +395,19 @@
         border-radius: 12px 0px 0px 12px;
         padding: 5.5px 20px 5.5px 40px !important;
         font-size: 14px;
-        background-color: #4ffcb7;
+        background-color: $base-button-background-color;
         font-weight: bold;
-        color: #222c41;
-        border: 2px solid #4ffcb7;
+        color: $base-container-backgroung-color;
+        border: 2px solid $base-button-background-color;
       }
 
       .btn2 {
         border-radius: 0px 12px 12px 0px;
         padding: 8.3px 13px !important;
-        border-left: 2px solid #222c41;
+        border-left: 2px solid $base-container-backgroung-color;
         font-size: 20px;
         font-weight: 700 !important;
-        background-color: #4ffcb7;
+        background-color: $base-button-background-color;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -432,26 +415,26 @@
       }
       .transparentBtn {
         background-color: transparent;
-        color: #4ffcb7;
+        color: $base-button-background-color;
       }
       .transparentBtn2 {
-        border: 2px solid #4ffcb7;
+        border: 2px solid $base-button-background-color;
         border-left: none;
         background-color: transparent;
-        color: #4ffcb7;
+        color: $base-button-background-color;
       }
     }
     .contractDetails {
       position: absolute;
-      top: 60px;
+      top: 75px;
       bottom: 0px;
       z-index: 1;
       .mainContainer {
         width: 350px;
         height: 300px;
-        border: 2px solid #4ffcb7;
+        border: 2px solid $base-button-background-color;
         border-radius: 12px;
-        background-color: #192233;
+        background-color: $base-inner-container-background-color;
         padding: 15px 20px;
         display: flex;
         flex-direction: column;
@@ -464,12 +447,67 @@
           text-transform: capitalize;
           border-radius: 12px;
           justify-content: center;
-          background-color: #5a7380;
-          color: white;
+          background-color: $base-border-line-color;
+          color: $base-heading-color;
           cursor: pointer;
         }
       }
     }
+  }
+  .updateArtist {
+    background: transparent !important;
+    // background: $base-button-background-color !important;
+    border: 2px solid $base-button-background-color !important;
+    color: $base-button-background-color !important;
+    border-radius: 12px !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    cursor: pointer;
+    text-transform: capitalize !important;
+    width: 100%;
+    border: none;
+    white-space: nowrap;
+    height: 40px !important;
+  }
+  .blankHeight {
+    height: 139px !important;
+  }
+  .EditDataBox {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+
+    button {
+      @include activeThemeBotton();
+      padding: 7px 10px !important;
+      box-shadow: 0px 5px 26px -4px rgba(0, 0, 0, 0.61);
+      -webkit-box-shadow: 0px 5px 26px -4px rgba(0, 0, 0, 0.61);
+      -moz-box-shadow: 0px 5px 26px -4px rgba(0, 0, 0, 0.61);
+    }
+  }
+  .fundingDash {
+    height: 139px;
+    color: $base-heading-color;
+    display: flex;
+    justify-content: flex-start;
+    align-items: start;
+    font-size: 30px;
+    font-weight: bold;
+    text-transform: capitalize;
+    white-space: nowrap;
+    position: relative;
+    width: 100%;
+    div {
+      position: absolute;
+      top: 25px;
+      left: 20px;
+      z-index: 1;
+    }
+  }
+  .newTracksText {
+    color: $base-heading-color !important;
+    padding-top: 10px !important;
+    font-size: 10px !important;
   }
 }
 
@@ -482,19 +520,7 @@
     display: block;
   }
 }
-@media only screen and (max-width: 1250px) {
-  .page {
-    &__artist {
-      &__box {
-        &__topdetails {
-          // display: none !important;
-          padding-left: 0px !important;
-          gap: 10px;
-        }
-      }
-    }
-  }
-}
+
 @media only screen and (max-width: 1200px) {
   .page {
     height: 100% !important;
@@ -507,6 +533,10 @@
     .updateArtist {
       font-size: 10px;
     }
+  }
+  .page__artist__box__topdetails__details__artistname__name {
+    // white-space: nowrap !important;
+    width: 100% !important;
   }
 }
 @media only screen and (max-width: 1150px) {
@@ -523,25 +553,26 @@
         height: 100%;
         // border-radius: 12px 12px 0px 0px !important;
         &__topdetails {
-          padding-left: 10px !important;
+          // padding-left: 10px !important;
         }
         &__rightBox {
           border: none !important;
           // border-radius: 0px !important;
         }
         &__endBox {
+          width: 100%;
           // border-radius: 0px 0px 12px 12px !important;
           &__last {
             border-radius: 0px 0px 12px 12px !important;
             border-left: none !important;
-            height: calc(100% - 10px);
+            height: calc(100% - 139px) !important;
             padding-bottom: 20px;
           }
         }
         &__rightBoxCss {
           margin-left: 20px;
         }
-        .rightBox {
+        .EditDataBox {
           margin-left: 40px;
         }
       }
@@ -554,14 +585,16 @@
     &__artist {
       &__box {
         &__topdetails {
-          padding-left: 0px;
+          // padding-left: 0px;
         }
         &__rightBoxCss {
           // gap: 10px !important;
           // flex-wrap: wrap-reverse;
         }
         &__fontSize {
-          font-size: 20px !important;
+          @include customHeading(28px);
+
+          // font-size: 20px !important;
         }
       }
     }
@@ -583,20 +616,11 @@
     }
   }
 }
+
 @media only screen and (max-width: 1700px) {
   .page {
-    flex-wrap: wrap;
     &__artist {
       &__box {
-        &__fontSize {
-          font-size: 32px !important;
-        }
-        .text2 {
-          display: none !important;
-        }
-        .adjustElements {
-          margin-top: -30px !important;
-        }
         &__topdetails {
           &__details {
             &__artistname {
@@ -604,7 +628,15 @@
             }
           }
         }
+        &__fontSize {
+          @include customHeading(28px);
+
+          // font-size: 22px !important;
+        }
       }
+    }
+    .contract {
+      // margin-top: 5rem !important;
     }
   }
 }
@@ -636,161 +668,32 @@
   }
 }
 
-@media (min-width: 630px) and (max-width: 1199.98px) {
+@media only screen and (max-width: 1400px) {
   .page {
-    flex-direction: column;
-    align-items: center;
-  }
-}
-
-.page {
-  display: flex;
-
-  &__artistInfo {
-    width: 953px;
-    height: 320px;
-    background: transparent linear-gradient(137deg, #0078ac 0%, #870033f2 100%) 0% 0% no-repeat padding-box;
-    border-radius: 15px;
-    align-items: center;
-
-    &__imagleCircle {
-      height: 210px;
-      width: 210px;
-      border-radius: 50%;
-      background: linear-gradient(90deg, #36a1ff, #2f3443);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      &__inner_cirlcle {
-        height: 200px;
-        width: 200px;
-        border-radius: 50%;
-        background: linear-gradient(128deg, #016da7 56%, #870033f2 120%);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-    }
-
-    &__innerdetails {
-      display: flex;
-
-      align-items: center;
-    }
-
-    &__balance {
-      width: 346px;
-      height: 254px;
-      background-color: rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
-      margin-top: 34px;
-      display: flex;
-      justify-content: space-evenly;
-      flex-direction: column;
-      align-items: center;
-    }
-    &__inputfields {
-    }
-    &__sendTab {
-      &__inputfields {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 25px;
-      }
-    }
-    &__confirmTab {
-      display: flex;
-      justify-content: space-between;
-    }
-    &__offer {
-    }
-    &__Accept {
-    }
-    &__customizeTab {
-      margin-left: 30px;
-    }
-  }
-
-  &__rightsidetabs {
-    margin-left: 24px;
-    border-radius: 15px;
-    color: white;
-    &__searchTracks {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      margin-top: 45px;
-      margin-left: 37px;
-    }
-    &__customizeFunding {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      margin-top: 45px;
-      margin-left: 37px;
-    }
-    &__search_container {
-      width: 90%;
-      position: relative;
-      margin-top: 18px;
-
-      &__search_input {
-        width: 100%;
-        color: white !important;
-        border: 1px solid #4ffcb7 !important;
-        background: transparent;
-        outline: none;
-        padding: 15px;
-        font-size: 18px;
-        border-radius: 8px;
-      }
-      &__search_icon {
-        position: absolute;
-        right: 20px;
-        top: 13px;
+    &__artist {
+      &__box {
+        .onlineStatus {
+          .avatar {
+            width: 70px !important;
+            height: 70px !important;
+          }
+          .onlineCircle {
+            bottom: 8px;
+          }
+        }
+        .skeleton {
+          width: 70px !important;
+          height: 70px !important;
+        }
       }
     }
   }
-}
-
-.fundingDash {
-  height: 138px;
-  color: white;
-  display: flex;
-  justify-content: flex-start;
-  align-items: start;
-  font-size: 30px;
-  font-weight: bold;
-  text-transform: capitalize;
-  white-space: nowrap;
-  position: relative;
-  width: 100%;
-  div {
-    position: absolute;
-    top: 0;
-    left: 20px;
-    z-index: 1;
-    padding-left: 20px;
-    padding-top: 20px;
-  }
-}
-.fontSize {
-  font-size: 12px !important;
-  font-weight: 500 !important;
-  white-space: nowrap !important;
-}
-.numFont {
-}
-// @media only screen and (max-width: 1440px) {
-//   .fontSize {
-//     white-space: nowrap;
-//     font-size: 12px;
-//   }
-// }
-@media only screen and (max-width: 600px) {
-  .fundingDash {
-    font-size: 25px !important;
+  .page__artist__box__topdetails__details__artistname__name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    width: 100px;
   }
 }
 
@@ -803,7 +706,7 @@
           }
           &__innerlyer {
             &__text2 {
-              font-size: 30px !important;
+              font-size: 25px !important;
             }
           }
         }
@@ -811,7 +714,9 @@
           font-size: 10px !important;
         }
         &__fontSize {
-          font-size: 30px !important;
+          @include customHeading(28px);
+
+          // font-size: 25px !important;
         }
         &__albumList {
           gap: 10px !important;
@@ -820,14 +725,154 @@
     }
   }
   .adjustElements {
-    margin-top: -10px;
+    // margin-top: -10px;
   }
-  .rightBox {
+  .EditDataBox {
     button {
       padding: 5px 10px;
     }
   }
+  .contract {
+    // margin-top: 65px !important;
+  }
 }
 .adjustElements {
-  margin-top: -20px;
+  // margin-top: -20px;
+}
+
+@media only screen and (max-width: 600px) {
+  .page {
+    &__artist {
+      &__box {
+        &__topdetails {
+          &__details {
+            &__artistname {
+              font-size: 16px !important;
+            }
+            &__email {
+              font-size: 12px;
+            }
+          }
+        }
+        &__rightBoxCss {
+          gap: 10px !important;
+          flex-wrap: wrap-reverse;
+        }
+        .EditDataBox {
+          margin-left: 0px;
+        }
+        .blankHeight {
+          height: 0px !important;
+        }
+        .updateArtist {
+          width: 100%;
+          font-size: 10px;
+          white-space: nowrap;
+        }
+        &__tracks_info {
+          flex-wrap: wrap;
+          justify-content: space-between;
+          align-items: center;
+          // padding: 10px !important;
+          // margin: 0 !important;
+          height: 150px;
+          &__container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+          }
+          &__containerright {
+            // padding: 0;
+          }
+        }
+        .fundingDash {
+          font-size: 20px !important;
+          height: 90px;
+        }
+        .skeleton {
+          width: 50px !important;
+          height: 50px !important;
+        }
+
+        .onlineStatus {
+          .avatar {
+            width: 50px !important;
+            height: 50px !important;
+          }
+          .onlineCircle {
+            width: 15px;
+            height: 15px;
+            bottom: 5px;
+          }
+        }
+        &__endBox {
+          &__last {
+            height: calc(100%);
+          }
+        }
+      }
+    }
+    .contract {
+      .initiate {
+        .btn1 {
+          font-size: 10px;
+        }
+        .btn2 {
+        }
+        .transparentBtn {
+        }
+        .transparentBtn2 {
+        }
+      }
+      .contractDetails {
+        .mainContainer {
+          width: 100%;
+
+          .chipStyle {
+            font-size: 10px;
+            padding: 15px 10px;
+          }
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 1600px) {
+  .page {
+    &__artist {
+      &__box {
+        &__topdetails {
+          &__image {
+            .onlineStatus {
+              .avatar {
+                width: 70px !important;
+                height: 70px !important;
+              }
+              .onlineCircle {
+                bottom: 10px;
+                right: 0;
+                width: 16px;
+                height: 16px;
+              }
+            }
+          }
+        }
+      }
+      .skeleton {
+        width: 70px !important;
+        height: 70px !important;
+      }
+    }
+    .updateArtist {
+      font-size: 10px !important;
+    }
+  }
+  .page__artist__box__topdetails__details__artistname__name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    width: 150px;
+  }
 }

@@ -50,6 +50,7 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
+
 export default function TrackChartPopup() {
   const track = useSelector((state) => state.modal.data);
   const isOpen = useSelector((state) => state.modal.isOpen);
@@ -167,104 +168,117 @@ export default function TrackChartPopup() {
       const dataByMonth_youtube = {};
       const dataByMonth_tiktok = {};
 
-
-        //one year data convert into monthly streaming spotify 
-        for (const item of s_Date) {
-          const date = new Date(item.timestp);
-          const month = date.getMonth() + 1; // January is 0, so add 1 to get 1-based month number
-          const year = date.getFullYear();
-          const key = `${year}-${month}`;
-          if (!dataByMonth[key]) {
-            dataByMonth[key] = {
-              daily_diff: 0,
-              timestp: 0,
-              count:0,
-            };
-          }
-          dataByMonth[key].daily_diff += item.daily_diff;
-          dataByMonth[key].count++
-          dataByMonth[key].timestp = `${year}-${month}`;
+      //one year data convert into monthly streaming spotify
+      for (const item of s_Date) {
+        const date = new Date(item.date);
+        const month = date.getMonth() + 1; // January is 0, so add 1 to get 1-based month number
+        const year = date.getFullYear();
+        const key = `${year}-${month}`;
+        if (!dataByMonth[key]) {
+          dataByMonth[key] = {
+            streams_total: 0,
+            date: 0,
+            count: 0,
+          };
         }
-         //one year data convert into monthly Youtube views 
-         for (const item of y_Date) {
-          const date = new Date(item.timestp);
-          const month = date.getMonth() + 1; // January is 0, so add 1 to get 1-based month number
-          const year = date.getFullYear();
-          const key = `${year}-${month}`;
-          if (!dataByMonth_youtube[key]) {
-            dataByMonth_youtube[key] = {
-              diff: 0,
-              count: 0,
-              timestp: 0,
-            };
-          }
-          dataByMonth_youtube[key].diff += item.diff;
-          dataByMonth_youtube[key].count++;
-          dataByMonth_youtube[key].date = `${year}-${month}`;
+        dataByMonth[key].streams_total += item.streams_total;
+        dataByMonth[key].count++;
+        dataByMonth[key].date = `${year}-${month}`;
+      }
+      //one year data convert into monthly Youtube views
+      for (const item of y_Date) {
+        const date = new Date(item.date);
+        const month = date.getMonth() + 1; // January is 0, so add 1 to get 1-based month number
+        const year = date.getFullYear();
+        const key = `${year}-${month}`;
+        if (!dataByMonth_youtube[key]) {
+          dataByMonth_youtube[key] = {
+            video_views_total: 0,
+            count: 0,
+            date: 0,
+          };
         }
-         //one year data convert into monthly Tiktok views 
-        // for (const item of t_Date) {
-        //   const date = new Date(item.date);
-        //   const month = date.getMonth() + 1; // January is 0, so add 1 to get 1-based month number
-        //   const year = date.getFullYear();
-        //   const key = `${year}-${month}`;
-        //   if (!dataByMonth_tiktok[key]) {
-        //     dataByMonth_tiktok[key] = {
-        //       views_total: 0,
-        //       comments_total: 0,
-        //       count: 0,
-        //       date: 0,
-        //     };
-        //   }
-        //   dataByMonth_tiktok[key].views_total += item.views_total;
-        //   dataByMonth_tiktok[key].comments_total += item.comments_total;
-        //   dataByMonth_tiktok[key].count++;
-        //   dataByMonth_tiktok[key].date = `${year}-${month}`;
-        // }
-        //object convert to array for Spotify
-        const dataByMonthArray = Object.entries(dataByMonth).map(([key, value]) => ({
+        dataByMonth_youtube[key].video_views_total += item.video_views_total;
+        dataByMonth_youtube[key].count++;
+        dataByMonth_youtube[key].date = `${year}-${month}`;
+      }
+      //one year data convert into monthly Tiktok views
+      // for (const item of t_Date) {
+      //   const date = new Date(item.date);
+      //   const month = date.getMonth() + 1; // January is 0, so add 1 to get 1-based month number
+      //   const year = date.getFullYear();
+      //   const key = `${year}-${month}`;
+      //   if (!dataByMonth_tiktok[key]) {
+      //     dataByMonth_tiktok[key] = {
+      //       views_total: 0,
+      //       comments_total: 0,
+      //       count: 0,
+      //       date: 0,
+      //     };
+      //   }
+      //   dataByMonth_tiktok[key].views_total += item.views_total;
+      //   dataByMonth_tiktok[key].comments_total += item.comments_total;
+      //   dataByMonth_tiktok[key].count++;
+      //   dataByMonth_tiktok[key].date = `${year}-${month}`;
+      // }
+      //object convert to array for Spotify
+      const dataByMonthArray = Object.entries(dataByMonth).map(
+        ([key, value]) => ({
           month: key,
-          daily_diff: value.daily_diff,
+          streams_total: value.streams_total,
           count: value.count,
-        }));
-        const monthsArray = dataByMonthArray.map((data) => data.month);
-        const streamsTotalArray = dataByMonthArray.map((data) => data.daily_diff);
-          //object convert to for youtube
-        const dataByMonthYoutube = Object.entries(dataByMonth_youtube).map(([key, value]) => ({
-            month: key,
-            diff: value.diff,
-            count: value.count,
-        }));
-        const test = {
-          month: '2022-5',
-          video_views_total: 0,
-          video_comments_total: 0,
-          count:0,
-        }
-        const youtubeDates = dataByMonthYoutube.map((data) => data.month);
-        if(monthsArray <youtubeDates){
-          dataByMonthYoutube.splice(0, 0, test);
-        }
-        const totalYoutubeViews = dataByMonthYoutube.map((data) => data.diff);
-       
+        })
+      );
+      const monthsArray = dataByMonthArray.map((data) => data.month);
+      const streamsTotalArray = dataByMonthArray.map(
+        (data) => data.streams_total
+      );
+      //object convert to for youtube
+      const dataByMonthYoutube = Object.entries(dataByMonth_youtube).map(
+        ([key, value]) => ({
+          month: key,
+          video_views_total: value.video_views_total,
+          count: value.count,
+        })
+      );
 
-          //object convert to for tiktok
-        //   const dataByMonthTiktok = Object.entries(dataByMonth_tiktok).map(([key, value]) => ({
-        //     month: key,
-        //     views_total: value.views_total,
-        //     comments_total: value.comments_total,
-        //     count: value.count,
-        // }));
-        // const totalTiktokViews = dataByMonthTiktok.map((data) => data.views_total);
+      const youtubeDates = dataByMonthYoutube.map((data) => data.month);
+      // Find the months missing in dataByMonthYoutube
+      const monthsToAdd = Object.keys(dataByMonth).filter((month) => {
+        return !dataByMonthYoutube.some((data) => data.month === month);
+      });
+      monthsToAdd.forEach((month) => {
+        if (!youtubeDates.includes(month)) {
+          const dataFromDataByMonth = dataByMonth[month];
+          if (dataFromDataByMonth) {
+            dataByMonthYoutube.unshift(dataFromDataByMonth);
+          }
+        }
+      });
+      // if(monthsArray <youtubeDates){
+      //   dataByMonthYoutube.splice(0, 0, test);
+      // }
+      const totalYoutubeViews = dataByMonthYoutube.map(
+        (data) => data.video_views_total
+      );
+
+      //object convert to for tiktok
+      //   const dataByMonthTiktok = Object.entries(dataByMonth_tiktok).map(([key, value]) => ({
+      //     month: key,
+      //     views_total: value.views_total,
+      //     comments_total: value.comments_total,
+      //     count: value.count,
+      // }));
+      // const totalTiktokViews = dataByMonthTiktok.map((data) => data.views_total);
       for (let i = 0; i < s_Date.length; i++) {
         dates.push(s_Date[i].date);
-        spotify_data.push(s_Date[i].daily_diff || 0);
+        spotify_data.push(s_Date[i].streams_total || 0);
       }
       // for (let i = 0; i < t_Date.length; i++) {
       //   titok_data.push(t_Date[i].views_total || 0);
       // }
       for (let i = 0; i < y_Date.length; i++) {
-        youtube_data.push(y_Date[i].diff || 0);
+        youtube_data.push(y_Date[i].video_views_total || 0);
       }
 
       data = {
@@ -335,7 +349,7 @@ export default function TrackChartPopup() {
                 <Select
                   value={select}
                   onChange={handleChange}
-                  sx={{ color: "white", borderColor: "red" }}
+                  sx={{ color: "#000", marginTop: "20px" }}
                   input={<BootstrapInput />}
                 >
                   <MenuItem value={13}>Monthly</MenuItem>
@@ -373,7 +387,10 @@ export default function TrackChartPopup() {
                 <Stack
                   direction="row"
                   gap={5}
-                  sx={{ width: { xs: "auto", sm: "auto", lg: "auto" } }}
+                  sx={{
+                    marginTop: "20px",
+                    width: { xs: "auto", sm: "auto", lg: "auto" },
+                  }}
                 >
                   <Button
                     variant="contained"
@@ -381,7 +398,7 @@ export default function TrackChartPopup() {
                     className={classess.page__dialog__form__actions__cancel_btn}
                     onClick={() => dispatch(closeModal())}
                   >
-                    Cancel
+                    Close
                   </Button>
                 </Stack>
               </Box>

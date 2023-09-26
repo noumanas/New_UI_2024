@@ -24,10 +24,11 @@
                 width: 100%;
                 gap: 10px;
 
-                &__label {}
+                &__label {
+                }
 
                 &__input {
-                    background: hsla(0,0%,100%,.9)!important;
+                    background: hsla(0, 0%, 100%, 0.9) !important;
                     border-radius: 5px;
                     width: 100%;
                 }
@@ -46,10 +47,10 @@
                 margin-top: 20px;
 
                 &__btn {
-                    background: $secondary-bg-color-2  !important;
+                    // background: $secondary-bg-color-2 !important;
 
                     &:hover {
-                        background: #951057 !important;
+                        // background: #951057 !important;
                     }
                 }
             }

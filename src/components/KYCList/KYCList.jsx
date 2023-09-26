@@ -15,17 +15,24 @@ import axios from "axios";
 import { config as URLconfig } from "../../enviorment/enviorment";
 import AuthEnum from "../../enums/auth.enum";
 import { getItemToLocalStorage } from "../../services/storage";
-import { Container, Grid, IconButton } from "@mui/material";
+import { Avatar, Container, Grid, IconButton } from "@mui/material";
 import moment from "moment";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import CloudDownloadOutlinedIcon from "@mui/icons-material/CloudDownloadOutlined";
-import CheckIcon from "@mui/icons-material/Check";
+// import CheckIcon from "@mui/icons-material/Check";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import PdfImage from "../../assets/pdf-image.png";
 import Modal from "@mui/material/Modal";
 import CustomModal from "../custom-modal/CustomModal";
 import Tooltip from "@mui/material/Tooltip";
 import CreateIcon from "@mui/icons-material/Create";
+
+import EyeIcon from "../../assets/buttonsicons/EyeIcon.png";
+import DownloadIcon from "../../assets/buttonsicons/DownloadIcon.png";
+import EditIcon from "../../assets/buttonsicons/EditIcon.png";
+import CheckIcon from "../../assets/buttonsicons/CheckIcon.png";
+import CancelIcon from "../../assets/buttonsicons/CancelIcon.png";
+import AddNotesIcon from "../../assets/buttonsicons/AddNotesIcon.png";
 
 const KYCList = () => {
   const [list, setList] = useState([]);
@@ -174,7 +181,10 @@ const KYCList = () => {
             <Table stickyHeader={true} aria-label="sticky table">
               <TableHead className={classess.table__head}>
                 <TableRow>
-                  <TableCell className={classess.table__col}></TableCell>
+                  <TableCell
+                    className={classess.table__col}
+                    sx={{ width: 40, maxWidth: 40 }}
+                  ></TableCell>
                   <TableCell className={classess.table__col}>
                     <span className={classess.table__col__heading}>
                       ARTIST NAME
@@ -208,12 +218,15 @@ const KYCList = () => {
 
                       <TableRow key={index}>
                         <TableCell
-                          className={`${classess.table__row} ${classess.table__image_container}`}
+                          className={`${classess.table__row}`}
+                          sx={{
+                            width: 40,
+                            maxWidth: 40,
+                            borderTopLeftRadius: 12,
+                            borderBottomLeftRadius: 12,
+                          }}
                         >
-                          <img
-                            className={classess.table__row__image}
-                            src={row?.avatar}
-                          />
+                          <Avatar src={row?.avatar} alt="Artist Image" />
                         </TableCell>
 
                         <TableCell
@@ -225,8 +238,11 @@ const KYCList = () => {
                         </TableCell>
 
                         <TableCell className={classess.table__row}>
-                          <span className={classess.table__row__submitOnText}>
-                            {moment(row?.createdAt).format("MMMM DD YYYY")}
+                          <span
+                            className={classess.table__row__submitOnText}
+                            style={{ textDecoration: "underline" }}
+                          >
+                            {moment(row?.createdAt).format("MMM DD YYYY")}
                           </span>
                         </TableCell>
 
@@ -236,6 +252,7 @@ const KYCList = () => {
                               variant="outlined"
                               icon={
                                 <Circle
+                                  className={classess.table__row__submitOnText}
                                   sx={{
                                     fill:
                                       row?.status === "approved"
@@ -248,24 +265,25 @@ const KYCList = () => {
                                 />
                               }
                               label={row?.status}
-                              sx={{
-                                color: "#fff",
-                                borderColor: "transparent",
-                                textTransform: "capitalize",
-                              }}
+                              className={classess.table__row__submitOnText}
                             />
+                          </span>
+                        </TableCell>
+
+                        <TableCell className={classess.table__row}>
+                          <span className={classess.table__row__submitOnText}>
+                            {/* {row.user?.username} */}
+                            {"Approve By"}
                           </span>
                         </TableCell>
 
                         <TableCell
                           className={classess.table__row}
-                          sx={{ color: "#fff" }}
+                          sx={{
+                            borderTopRightRadius: 12,
+                            borderBottomRightRadius: 12,
+                          }}
                         >
-                          {/* {row.user?.username} */}
-                          {"Approve By"}
-                        </TableCell>
-
-                        <TableCell className={classess.table__row}>
                           {row?.status === "pending" && (
                             <Box
                               sx={{
@@ -282,18 +300,24 @@ const KYCList = () => {
                               >
                                 <IconButton
                                   style={{
-                                    backgroundColor: "#F831FF",
+                                    backgroundColor: "#4FFCB7",
                                     height: "30px",
                                     width: "30px",
                                   }}
                                   onClick={() => handleToggle(index)}
                                 >
-                                  <VisibilityIcon
+                                  <img
+                                    src={EyeIcon}
+                                    alt="Eye"
+                                    style={{ height: "12px", width: "15.96px" }}
+                                  />
+                                  {/* <VisibilityIcon
                                     style={{
                                       color: "#000",
-                                      fontSize: "20px",
+                                      height: "15px",
+                                      width: "15px",
                                     }}
-                                  />
+                                  /> */}
                                 </IconButton>
                               </Tooltip>
 
@@ -305,18 +329,23 @@ const KYCList = () => {
                               >
                                 <IconButton
                                   style={{
-                                    backgroundColor: "#4FB7FC",
+                                    backgroundColor: "#4FFCB7",
                                     height: "30px",
                                     width: "30px",
                                   }}
                                 >
-                                  <CloudDownloadOutlinedIcon
-                                    sx={{
-                                      backgroundColor: "#4FB7FC",
-                                      color: "#000000",
-                                      fontSize: "20px",
-                                    }}
+                                  <img
+                                    src={DownloadIcon}
+                                    alt="Eye"
+                                    style={{ height: "13.91px", width: "16px" }}
                                   />
+                                  {/* <CloudDownloadOutlinedIcon
+                                    style={{
+                                      color: "#000",
+                                      height: "15px",
+                                      width: "15px",
+                                    }}
+                                  /> */}
                                 </IconButton>
                               </Tooltip>
 
@@ -328,44 +357,26 @@ const KYCList = () => {
                               >
                                 <IconButton
                                   style={{
-                                    backgroundColor: "#FCB74F",
+                                    backgroundColor: "#4FFCB7",
                                     height: "30px",
                                     width: "30px",
                                   }}
                                 >
-                                  <CreateIcon
-                                    sx={{
-                                      backgroundColor: "#FCB74F",
-                                      color: "#000000",
-                                      fontSize: "20px",
+                                  <img
+                                    src={AddNotesIcon}
+                                    alt="Eye"
+                                    style={{
+                                      height: "15.99px",
+                                      width: "15.91px",
                                     }}
                                   />
-                                </IconButton>
-                              </Tooltip>
-
-                              <Tooltip
-                                title="Decline Request"
-                                placement="top"
-                                arrow
-                                enterDelay={100}
-                              >
-                                <IconButton
-                                  style={{
-                                    backgroundColor: "#ff0000",
-                                    height: "30px",
-                                    width: "30px",
-                                  }}
-                                  // onClick={() => rejectHandler(row?._id)}
-                                  // onClick={handleShowModal}
-                                  onClick={() => handleOpenCustomModal()}
-                                >
-                                  <CancelOutlinedIcon
-                                    sx={{
-                                      backgroundColor: "#ff0000",
+                                  {/* <CreateIcon
+                                    style={{
                                       color: "#000000",
-                                      fontSize: "20px",
+                                      height: "15px",
+                                      width: "15px",
                                     }}
-                                  />
+                                  /> */}
                                 </IconButton>
                               </Tooltip>
 
@@ -377,21 +388,62 @@ const KYCList = () => {
                               >
                                 <IconButton
                                   style={{
-                                    backgroundColor: "#1BB86A",
+                                    backgroundColor: "#4FFCB7",
                                     height: "30px",
                                     width: "30px",
                                   }}
                                   onClick={() => handleApproveCustomModal()}
                                   // onClick={() => approveHandler(row?._id)}
                                 >
-                                  <CheckIcon
-                                    sx={{
-                                      backgroundColor: "#1BB86A",
-                                      color: "#000",
-                                      cursor: "pointer",
-                                      fontSize: "20px",
+                                  <img
+                                    src={CheckIcon}
+                                    alt="Eye"
+                                    style={{
+                                      height: "13.89px",
+                                      width: "15.8px",
                                     }}
                                   />
+                                  {/* <CheckIcon
+                                    style={{
+                                      color: "#000000",
+                                      height: "15px",
+                                      width: "15px",
+                                    }}
+                                  /> */}
+                                </IconButton>
+                              </Tooltip>
+
+                              <Tooltip
+                                title="Decline Request"
+                                placement="top"
+                                arrow
+                                enterDelay={100}
+                              >
+                                <IconButton
+                                  style={{
+                                    backgroundColor: "#ec0303",
+                                    height: "30px",
+                                    width: "30px",
+                                  }}
+                                  // onClick={() => rejectHandler(row?._id)}
+                                  // onClick={handleShowModal}
+                                  onClick={() => handleOpenCustomModal()}
+                                >
+                                  <img
+                                    src={CancelIcon}
+                                    alt="Eye"
+                                    style={{
+                                      height: "9.92px",
+                                      width: "9.84px",
+                                    }}
+                                  />
+                                  {/* <CancelOutlinedIcon
+                                    style={{
+                                      color: "#000000",
+                                      height: "15px",
+                                      width: "15px",
+                                    }}
+                                  /> */}
                                 </IconButton>
                               </Tooltip>
                             </Box>

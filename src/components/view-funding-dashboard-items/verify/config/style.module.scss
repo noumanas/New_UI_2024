@@ -2,41 +2,70 @@
 @import "../../../../styles/colors.scss";
 
 .page {
+  position: relative;
   &__header {
-    @include flexProperties(row, space-between, center, $fullWidth: true);
+    // @include flexProperties(row, space-between, center, $fullWidth: true);
     margin-bottom: 10px;
-    position: relative;
-    &__seachBar {
-      position: absolute;
-      right: 0;
-      bottom: 40px;
+    position: absolute;
+    top: -5.6rem;
+    right: 0;
+    z-index: 999;
+    display: flex;
+    gap: 20px;
+    .saveBtn {
+      margin-top: 1px;
+      button {
+        padding: 21px 20px;
+      }
+
+      button {
+        @include activeThemeBotton();
+        // background-color: $base-button-background-color;
+        // color: $base-button-text-color;
+        // border-radius: 12px;
+        // font-size: 14px;
+        // font-weight: bold;
+        transition: all 0.3s ease-in-out;
+      }
     }
-
-    &__button {
-      border-radius: 10px !important;
-      background: $secondary-bg-color-3 !important;
-      padding: 7px 10px !important;
-      color: white !important;
-      width: 139px;
-      height: 40px;
-      text-transform: capitalize !important;
-      @include fontSize(16px);
-
-      &:hover {
-        background: #01a177 !important;
+    &__seachBar {
+      position: relative;
+      .searchIcon {
+        color: $base-button-background-color;
+        position: absolute;
+        top: 10px;
+        left: 8px;
+        z-index: 9999;
       }
     }
 
+    // &__button {
+    //   border-radius: 10px !important;
+    //   background: #4ffcb7 !important;
+    //   padding: 7px 10px !important;
+    //   color: white !important;
+    //   width: 139px;
+    //   height: 40px;
+    //   text-transform: capitalize !important;
+    //   @include fontSize(16px);
+
+    //   &:hover {
+    //     background: #4ffcb7 !important;
+    //   }
+    // }
+
     &__search {
-      border: 2px solid #5a7380;
-      background-color: #202632;
-      padding: 10px 30px;
+      border: 2px solid $base-border-line-color;
+      background-color: $base-input-background-color;
+      padding: 10px 0px 10px 35px;
       border-radius: 10px !important;
       outline: none !important;
-      color: $base-text-color;
-      border-radius: 0px;
+      color: $base-input-text-color;
+      font-size: 14px;
+
       &::placeholder {
-        color: white;
+        color: $base-heading-color;
+        font-size: 14px;
       }
 
       @include fontSize(16px);
@@ -67,13 +96,11 @@
 @media only screen and (max-width: 1400px) {
   .page {
     &__header {
-      &__seachBar {
-        left: 10px;
-        bottom: 0px;
-      }
+      left: 0;
+      top: 5px !important;
     }
   }
   .searchBarMob {
-    display: block !important;
+    display: block !important ;
   }
 }

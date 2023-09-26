@@ -47,9 +47,7 @@ const MyContracts = () => {
                 className={classess.page__details__box__tracks__header}
               >
                 <span
-                  className={
-                    classess.page__details__box__adetails__header__title
-                  }
+                  className={classess.page__details__box__tracks__header__title}
                 >
                   My Contracts
                 </span>
@@ -58,20 +56,17 @@ const MyContracts = () => {
                   varient="div"
                   component="div"
                   className={
-                    classess.page__details__box__adetails__header__search
+                    classess.page__details__box__tracks__header__search
                   }
                 >
                   <SearchIcon
-                    sx={{
-                      color: "#4FFCB7",
-                      // position: "absolute",
-                      top: "8px",
-                      // right: "-3px",
-                    }}
+                    className={
+                      classess.page__details__box__tracks__header__search__seaarch_icon
+                    }
                   />
                   <input
                     className={
-                      classess.page__details__box__adetails__header__search__input
+                      classess.page__details__box__tracks__header__search__input
                     }
                     placeholder="Search"
                     type="search"
@@ -81,7 +76,13 @@ const MyContracts = () => {
                 </Box>
               </Box>
 
-              <ArtistContractList />
+              <Box
+                varient="div"
+                component="div"
+                className={classess.page__details__box__tracks__main_content}
+              >
+                <ArtistContractList />
+              </Box>
             </Box>
           </Box>
         </Grid>

@@ -2,16 +2,15 @@
 @import "../../styles/colors.scss";
 
 .page {
-
     &__table {
-        background: $secondary-bg-color-1;
+        background: #222c41;
         padding: 20px;
     }
 
     &__box {
         @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
         gap: 40px;
-        background: $secondary-bg-color-1;
+        background: #222c41;
         padding: 20px;
 
         &__header {
@@ -24,7 +23,7 @@
 
             &__title {
                 @include fontSize(28px);
-                color: $base-text-color;
+                color: #4ffcb7;
                 text-transform: uppercase;
                 letter-spacing: 3px;
                 font-weight: bold;
@@ -50,7 +49,7 @@
                     gap: 20px;
 
                     &__key {
-                        color: $base-text-color;
+                        color: #4ffcb7;
                         @include fontSize(18px);
                         text-transform: uppercase;
                         letter-spacing: 3px;
@@ -86,7 +85,7 @@
                     &__li {
                         @include flexProperties(row, space-between, center, $fullWidth: true);
                         gap: 30px;
-                        border-bottom: 1px solid rgba(255, 255, 255, .2);
+                        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
                         padding: 20px;
                         cursor: pointer;
 
@@ -98,7 +97,7 @@
                             font-size: 12px;
                             text-transform: uppercase;
                             letter-spacing: 2px;
-                            color: $base-text-color;
+                            color: #4ffcb7;
                             font-weight: bold;
                         }
                     }
@@ -111,11 +110,8 @@
                 }
             }
         }
-
     }
-
 }
-
 
 @media only screen and (max-width: 470px) {
     .page {
@@ -191,7 +187,6 @@
         }
     }
 }
-
 
 @media only screen and (max-width: 321px) {
     .page {

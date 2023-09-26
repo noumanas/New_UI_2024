@@ -3,8 +3,8 @@
 
 .page {
   display: flex;
-  // background: $base-content-app-bg;
-  background-image: url("../../assets/BackgroundImage.png");
+  background: $base-content-app-bg;
+  // background-image: url("../../assets/BackgroundImage.png");
   min-height: 120vh;
   background-repeat: no-repeat;
   background-size: cover;
@@ -42,7 +42,7 @@
     margin-top: 20px;
     height: 80px;
     width: 100%;
-    color: $base-text-color;
+    color: #4ffcb7;
     text-align: center;
     padding-block: 10px;
     margin: 0;

@@ -49,6 +49,8 @@ import {
   Typography,
 } from "@mui/material";
 import { toast } from "react-toastify";
+import PencilIcon from "../../assets/buttonsicons/EditIcon.png";
+import DeleteIcon from "../../assets/buttonsicons/DeleteIcon.png";
 
 const NewMusic = ({
   // newMusicIncomeArtistKeeps,
@@ -66,7 +68,6 @@ const NewMusic = ({
   console.log(artist);
   const dispatch = useDispatch();
   const newMusicData = useSelector((state) => state.new_music.newMusic);
-  // const [openNewMusicForm, setOpenNewMusicForm] = useState(false);
 
   const [includeMusicActive, setIncludeMusicActive] = useState(false);
   const [month, setMonth] = useState("");
@@ -77,6 +78,7 @@ const NewMusic = ({
   const [editRecord, setEditRecord] = useState();
   const [delete_new_music_records, setdelete_new_music_records] = useState();
   const [open, setOpen] = useState(false);
+
   const initUIData = () => {
     dispatch(
       getNewMusicByID({
@@ -210,6 +212,7 @@ const NewMusic = ({
   };
 
   const handleEdit = (record) => {
+    setIsEditMode(true);
     setIsEdit(true);
     setEditRecord(record);
     setYear(record?.year);
@@ -224,6 +227,7 @@ const NewMusic = ({
   };
 
   const cancelForm = () => {
+    setIsEditMode(false);
     emptyFields();
     setIncludeMusicActive(false);
     closeNewMusicForm();
@@ -236,9 +240,10 @@ const NewMusic = ({
     setRadioValue("single");
   };
 
-  useEffect(() => {
-    initUIData();
-  }, []);
+  // useEffect(() => {
+  //   initUIData();
+  // }, []);
+
   const cellUseStyles = muiTableCellUseStyles();
   // const [isChecked, setIsChecked] = useState(false);
 
@@ -262,6 +267,17 @@ const NewMusic = ({
   const hideTracks = () => {
     Hidetracks();
   };
+  const [recoupmentRate, setRecoupmentRate] = useState("");
+
+  const handleRecoupmentRate = (event) => {
+    let inputValue = event.target.value;
+
+    // Ensure the input is within the range of 1 to 100
+    if (inputValue === "" || (inputValue >= 1 && inputValue <= 100)) {
+      setRecoupmentRate(inputValue);
+    }
+  };
+  const [isEditMode, setIsEditMode] = useState(false);
 
   return (
     <Box varient="div" component="div" className={classess.page}>
@@ -287,9 +303,17 @@ const NewMusic = ({
             <Button
               type="button"
               onClick={() => setIncludeMusicActive(true)}
-              className={
+              className={`${
                 classess.page__music_container__button_container__button
               }
+                ${
+                  includeMusicActive || openNewMusicForm
+                    ? classess.buttonDisabled
+                    : classess.buttonActive
+                }`}
+              // sx={{
+              //   backgroundColor: includeMusicActive ? "#498E72" : "##498E72",
+              // }}
               startIcon={<PiMusicNotesPlusBold />}
             >
               Add New Music
@@ -298,67 +322,6 @@ const NewMusic = ({
 
           {/* )} */}
         </Box>
-      </Box>
-      <Box pt={2}>
-        {/* Slider */}
-        {/* {newMusicData && newMusicData.length ? (
-          <Box
-            varient="div"
-            component="div"
-            className={
-              classess.page__music_container__button_container__slider_box
-            }
-          >
-            <span
-              className={classess.page__slider_container__slider_box__title}
-              style={{
-                color: " #4ffcb7 !important",
-              }}
-            >
-              RECOUPMENT RATE
-            </span>
-            <Box
-              varient="div"
-              component="div"
-              className={
-                classess.page__music_container__button_container__slider_box__slider
-              }
-            >
-              <CustomSliderWithStyles
-                defaultValue={80}
-                value={new_music_income}
-                aria-label="Default"
-                valueLabelDisplay="auto"
-                name="new_music_income"
-                onChange={(e) => set_new_music_income(e.target.value)}
-                onChangeCommitted={(e, v) => newMusicIncomeArtistKeeps(e, v)}
-                sx={{
-                  "& .MuiSlider-rail": {
-                    backgroundColor: "#192233", // Background color
-                  },
-
-                  "& .MuiSlider-thumb": {
-                    backgroundColor: "#ffff", // Thumb color
-                    width: "15px",
-                    height: "15px",
-                  },
-                  "& .MuiSlider-track": {
-                    borderColor: "#4ffcb7",
-                    height: "3px",
-                  },
-                }}
-              />
-              <span
-                component="div"
-                className={
-                  classess.page__music_container__button_container__slider_box__slider__text
-                }
-              >
-                {new_music_income} %
-              </span>
-            </Box>
-          </Box>
-        ) : null} */}
       </Box>
 
       {/* Form */}
@@ -378,15 +341,16 @@ const NewMusic = ({
               alignItems: "center",
               flexWrap: "wrap",
               mt: 1,
+              pb: 2,
             }}
           >
             <Box>
               <FormControl>
                 <Typography
                   sx={{
-                    color: "#4FFCB7",
-                    fontSize: "12px",
+                    pb: 2,
                   }}
+                  className={classess.smallHeading}
                 >
                   TYPE OF TRACK
                 </Typography>
@@ -410,9 +374,9 @@ const NewMusic = ({
                     control={
                       <Radio
                         sx={{
-                          color: "#4ffcb7",
                           "&.Mui-checked": { color: "#4ffcb7" },
                         }}
+                        className={classess.radioBtn}
                       />
                     }
                     label="Single"
@@ -422,9 +386,9 @@ const NewMusic = ({
                     control={
                       <Radio
                         sx={{
-                          color: "#4ffcb7",
                           "&.Mui-checked": { color: "#4ffcb7" },
                         }}
+                        className={classess.radioBtn}
                       />
                     }
                     label="EP"
@@ -434,9 +398,9 @@ const NewMusic = ({
                     control={
                       <Radio
                         sx={{
-                          color: "#4ffcb7",
                           "&.Mui-checked": { color: "#4ffcb7" },
                         }}
+                        className={classess.radioBtn}
                       />
                     }
                     label="Album"
@@ -471,9 +435,9 @@ const NewMusic = ({
                       <Box>
                         <Typography
                           sx={{
-                            color: "#4FFCB7",
-                            fontSize: "12px",
+                            pb: 2,
                           }}
+                          className={classess.smallHeading}
                         >
                           MONTH
                         </Typography>
@@ -490,7 +454,7 @@ const NewMusic = ({
                           }
                           required
                         >
-                          <option>Select Month</option>
+                          <option style={{ color: "red" }}>Select Month</option>
                           {monthsOptions.map((month, index) => (
                             <option value={index}>{month.key}</option>
                           ))}
@@ -499,9 +463,9 @@ const NewMusic = ({
                       <Box>
                         <Typography
                           sx={{
-                            color: "#4FFCB7",
-                            fontSize: "12px",
+                            pb: 2,
                           }}
+                          className={classess.smallHeading}
                         >
                           YEAR
                         </Typography>
@@ -521,10 +485,62 @@ const NewMusic = ({
                           requried
                         />
                       </Box>
+                      <Box
+                        sx={{
+                          position: "relative",
+                        }}
+                      >
+                        <Typography
+                          sx={{
+                            pb: 2,
+                          }}
+                          className={classess.smallHeading}
+                        >
+                          RECOUPMENT RATE
+                        </Typography>
+                        <input
+                          type="number"
+                          placeholder="80"
+                          value={recoupmentRate}
+                          onChange={handleRecoupmentRate}
+                          className={
+                            classess.page__new_music__main__form__form_fields__input
+                          }
+                          min="1"
+                          max="100"
+                          required
+                        />
+                        <Typography
+                          sx={{
+                            fontSize: "10px",
+                            position: "absolute",
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          {" "}
+                          Input should be 1 to 100
+                        </Typography>
+                        <Box
+                          sx={{
+                            position: "absolute",
+                            fontSize: "22px",
+                            // bottom: "3px",
+                            top: "35px",
+                            left: "38px",
+                            color: "#6d7480",
+                          }}
+                        >
+                          %
+                        </Box>
+                      </Box>
                     </Box>
                   </Box>
 
-                  <Box sx={{ mt: 2 }}>
+                  <Box
+                    sx={{
+                      mt: 3.8,
+                    }}
+                  >
                     <Box
                       varient="div"
                       component="div"
@@ -541,7 +557,7 @@ const NewMusic = ({
                         {isLoading && (
                           <CircularProgress size={25} color="inherit" />
                         )}
-                        Add
+                        {isEditMode ? "Update" : "Add"}
                       </Button>
                       <Button
                         type="button"
@@ -580,15 +596,8 @@ const NewMusic = ({
               component="div"
               className={classess.page__music_details__main_container}
             >
-              {console.log(newMusicData.length)}
               <TableContainer className={classess.table}>
-                <Table
-                  stickyHeader={true}
-                  aria-label="sticky table"
-                  sx={{
-                    backgroundColor: "#222C41",
-                  }}
-                >
+                <Table stickyHeader={true} aria-label="sticky table">
                   <TableHead>
                     <TableRow>
                       <TableCell
@@ -596,13 +605,7 @@ const NewMusic = ({
                         className={classess.table__col}
                       >
                         <Box sx={{ ml: 1.5 }}>
-                          <Checkbox
-                            sx={{
-                              svg: {
-                                color: "#4ffcb7",
-                              },
-                            }}
-                          />
+                          <Checkbox className={classess.table__col__checkBox} />
                         </Box>
                       </TableCell>
                       <TableCell className={classess.table__col}>
@@ -626,15 +629,14 @@ const NewMusic = ({
                   <TableBody>
                     {newMusicData.map((music) => (
                       <>
-                        {console.log(music)}
                         <Box sx={{ m: "1rem" }}></Box>
 
                         <TableRow
                           sx={{
                             "&:last-child td, &:last-child th": { border: 0 },
-                            height: "90px",
+                            height: "80px",
                           }}
-                          className={cellUseStyles.row}
+                          className={`${classess.table__row} ${cellUseStyles.row}`}
                         >
                           <TableCell
                             className={classess.table__row}
@@ -644,11 +646,7 @@ const NewMusic = ({
                             }}
                           >
                             <Checkbox
-                              sx={{
-                                svg: {
-                                  color: "#4ffcb7",
-                                },
-                              }}
+                              className={classess.table__row__checkBox}
                             />
                           </TableCell>
                           <TableCell className={classess.table__row}>
@@ -663,8 +661,12 @@ const NewMusic = ({
                                 <LazyLoadImage
                                   src={artist?.avatar}
                                   alt="artist img"
+                                  className={classess.table__row__avatar}
                                 />
-                                {/* <img src={artist?.avatar} alt="artist img" /> */}
+                                {/* <img
+                                  src={artist?.avatar}
+                                  alt="artist img"
+                                /> */}
                               </Box>
                               <Box>
                                 <Typography
@@ -705,24 +707,22 @@ const NewMusic = ({
                                   enterDelay={100}
                                 >
                                   <IconButton
-                                    sx={{
-                                      backgroundColor: "#4FFCB7",
-                                      width: "33px",
-                                      height: "33px",
-                                      fontSize: "20px",
-                                      color: "#222C41",
-                                      ":hover": {
-                                        color: "#222C41",
-                                        backgroundColor: "#4FFCB7",
-                                      },
-                                    }}
+                                    className={classess.actionEdit}
                                     // onClick={() => handleEdit(music)}
                                     onClick={() => {
                                       handleEdit(music);
                                       showTracks();
                                     }}
                                   >
-                                    <EditIcon sx={{ fontSize: "20px" }} />
+                                    <img
+                                      src={PencilIcon}
+                                      alt="Eye"
+                                      style={{
+                                        height: "16px",
+                                        width: "15.98px",
+                                      }}
+                                    />
+                                    {/* <EditIcon sx={{ fontSize: "20px" }} /> */}
                                   </IconButton>
                                 </Tooltip>
 
@@ -733,24 +733,20 @@ const NewMusic = ({
                                   enterDelay={100}
                                 >
                                   <IconButton
-                                    sx={{
-                                      backgroundColor: "#F95F5F",
-                                      width: "33px",
-                                      height: "33px",
-                                      color: "#222C41",
-                                      ":hover": {
-                                        color: "#222C41",
-                                        backgroundColor: "#F95F5F",
-                                      },
-                                    }}
+                                    className={classess.actionDelete}
                                     // onClick={() => handleOpenDeleteDialog(row)}
                                     onClick={() =>
                                       handleOpenDeleteDialog(music?._id)
                                     }
                                   >
-                                    <RiDeleteBin2Fill
-                                      sx={{ fontSize: "20px" }}
+                                    <img
+                                      src={DeleteIcon}
+                                      alt="Eye"
+                                      style={{ height: "16px", width: "16px" }}
                                     />
+                                    {/* <RiDeleteBin2Fill
+                                      sx={{ fontSize: "20px" }}
+                                    /> */}
                                   </IconButton>
                                 </Tooltip>
                               </Box>
@@ -759,125 +755,15 @@ const NewMusic = ({
                         </TableRow>
                       </>
                     ))}
-                    {/* <Box
-                        varient="div"
-                        component="div"
-                        className={
-                          classess.page__music_details__main_container__box
-                        }
-                      >
-                        {console.log(music)}
-                        <Box
-                          varient="div"
-                          component="div"
-                          className={
-                            classess.page__music_details__main_container__box__details
-                          }
-                        >
-                          <span
-                            className={
-                              classess.page__music_details__main_container__box__details__text
-                            }
-                          >
-                            {music?.year}
-                          </span>
-                          <span
-                            className={
-                              classess.page__music_details__main_container__box__details__text
-                            }
-                          >
-                            {music?.music}
-                          </span>
-                        </Box>
-                        <Box
-                          varient="div"
-                          component="div"
-                          className={
-                            classess.page__music_details__main_container__box__actions
-                          }
-                        >
-                          <IconButton
-                            aria-label="fingerprint"
-                            color="primary"
-                            style={{ backgroundColor: "#ffffff20" }}
-                            onClick={() => handleEdit(music)}
-                          >
-                            <EditIcon style={{ color: "#2F3443" }} />
-                          </IconButton>
-                          <IconButton
-                            aria-label="fingerprint"
-                            color="error"
-                            style={{ backgroundColor: "#F6400020" }}
-                            onClick={() => handleOpenDeleteDialog(music?._id)}
-                          >
-                            <CloseIcon style={{ color: "#F64000" }} />
-                          </IconButton>
-                        </Box>
-                      </Box> */}
                   </TableBody>
                 </Table>
               </TableContainer>
-              {/* {newMusicData.map((music) => (
-                <Box
-                  varient="div"
-                  component="div"
-                  className={classess.page__music_details__main_container__box}
-                >
-                  {console.log(music)}
-                  <Box
-                    varient="div"
-                    component="div"
-                    className={
-                      classess.page__music_details__main_container__box__details
-                    }
-                  >
-                    <span
-                      className={
-                        classess.page__music_details__main_container__box__details__text
-                      }
-                    >
-                      {music?.year}
-                    </span>
-                    <span
-                      className={
-                        classess.page__music_details__main_container__box__details__text
-                      }
-                    >
-                      {music?.music}
-                    </span>
-                  </Box>
-                  <Box
-                    varient="div"
-                    component="div"
-                    className={
-                      classess.page__music_details__main_container__box__actions
-                    }
-                  >
-                    <IconButton
-                      aria-label="fingerprint"
-                      color="primary"
-                      style={{ backgroundColor: "#ffffff20" }}
-                      onClick={() => handleEdit(music)}
-                    >
-                      <EditIcon style={{ color: "#2F3443" }} />
-                    </IconButton>
-                    <IconButton
-                      aria-label="fingerprint"
-                      color="error"
-                      style={{ backgroundColor: "#F6400020" }}
-                      onClick={() => handleOpenDeleteDialog(music?._id)}
-                    >
-                      <CloseIcon style={{ color: "#F64000" }} />
-                    </IconButton>
-                  </Box>
-                </Box>
-              ))} */}
             </Box>
           ) : null}
         </Box>
       )}
 
-      {!includeMusicActive && newMusicData?.length > 10 ? (
+      {!includeMusicActive && newMusicData?.length >= 1 ? (
         <TablePagination
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
@@ -890,296 +776,32 @@ const NewMusic = ({
           classes={{
             actions: "custom-pagination-actions",
             select: "custom-pagination-select",
+            // input: "custom-select-style",
+            displayedRows: "custom-select-style",
+            // menuItem: "custom-select-style",
+            // root: "custom-select-style",
+            // selectIcon: "custom-select-style",
+            selectLabel: "custom-select-style",
+            // selectRoot: "custom-select-style",
+            // spacer: "custom-select-style",
+            // toolbar: "custom-select-style",
           }}
           SelectProps={{
-            style: {
-              backgroundColor: "#4FFCB7",
-              color: "#222C41",
-              borderRadius: "12px",
-              fontSize: "14px",
+            // Leave the SelectProps empty; styles will be applied via the class
+            classes: {
+              select: "custom-select", // Apply the custom-select class to the Select component
             },
           }}
         />
       ) : null}
 
-      {/* {!includeMusicActive && (
-        <Box
-          varient="div"
-          component="div"
-          className={classess.page__music_details}
-        >
-          {newMusicData && newMusicData.length ? (
-            <Box
-              varient="div"
-              component="div"
-              className={classess.page__music_details__main_container}
-            >
-              {newMusicData.map((music) => (
-                <Box
-                  varient="div"
-                  component="div"
-                  className={classess.page__music_details__main_container__box}
-                >
-                  {console.log(music)}
-                  <Box
-                    varient="div"
-                    component="div"
-                    className={
-                      classess.page__music_details__main_container__box__details
-                    }
-                  >
-                    <span
-                      className={
-                        classess.page__music_details__main_container__box__details__text
-                      }
-                    >
-                      {music?.year}
-                    </span>
-                    <span
-                      className={
-                        classess.page__music_details__main_container__box__details__text
-                      }
-                    >
-                      {music?.music}
-                    </span>
-                  </Box>
-                  <Box
-                    varient="div"
-                    component="div"
-                    className={
-                      classess.page__music_details__main_container__box__actions
-                    }
-                  >
-                    <IconButton
-                      aria-label="fingerprint"
-                      color="primary"
-                      style={{ backgroundColor: "#ffffff20" }}
-                      onClick={() => handleEdit(music)}
-                    >
-                      <EditIcon style={{ color: "#2F3443" }} />
-                    </IconButton>
-                    <IconButton
-                      aria-label="fingerprint"
-                      color="error"
-                      style={{ backgroundColor: "#F6400020" }}
-                      onClick={() => handleOpenDeleteDialog(music?._id)}
-                    >
-                      <CloseIcon style={{ color: "#F64000" }} />
-                    </IconButton>
-                  </Box>
-                </Box>
-              ))}
-            </Box>
-          ) : null}
-        </Box>
-      )} */}
       <DeleteNewMusicRecordDialog
         onClose={handleCloseDeleteDialog}
         open={open}
         track={delete_new_music_records}
       />
-      {/* <Divider
-        sx={{
-          backgroundColor: "#5A7380",
-          width: "100%",
-          mt: 2,
-        }}
-      ></Divider> */}
     </Box>
   );
 };
 
 export default NewMusic;
-
-// <TableContainer className={classess.table}>
-// <Table
-//   stickyHeader={true}
-//   aria-label="sticky table"
-//   sx={{
-//     backgroundColor: "#222C41",
-//   }}
-// >
-//   <TableHead>
-//     <TableRow>
-//       <TableCell
-//         padding="checkbox"
-//         className={classess.table__col}
-//       ></TableCell>
-//       <TableCell
-//         className={classess.table__col}
-//         sx={{ maxWidth: 50 }}
-//       >
-//         {/* # */}
-//       </TableCell>
-//       <TableCell className={classess.table__col}>
-//         Track Title
-//       </TableCell>
-//       <TableCell className={classess.table__col}>
-//         Release Date
-//       </TableCell>
-//       <TableCell className={classess.table__col}>
-//         Track Type
-//       </TableCell>
-//     </TableRow>
-//   </TableHead>
-//   <TableBody>
-//     {/* search tracks for look via map */}
-//     {searchTracks.map((row, index) => {
-//       const isItemSelected = isSelected(row?.id);
-//       const labelId = `enhanced-table-checkbox-${index}`;
-//       return (
-//         <LazyLoadComponent>
-//           <>
-//             <Box sx={{ m: "1rem" }}></Box>
-
-//             <TableRow
-//               key={index}
-//               sx={{
-//                 "&:last-child td, &:last-child th": { border: 0 },
-//               }}
-//               className={cellUseStyles.row}
-//             >
-//               <TableCell
-//                 padding="checkbox"
-//                 sx={{
-//                   borderTopLeftRadius: "12px",
-//                   borderEndStartRadius: "12px",
-//                 }}
-//               >
-//                 <Checkbox
-//                   sx={{ color: "#4ffcb7" }}
-//                   checked={isItemSelected}
-//                   inputProps={{
-//                     "aria-labelledby": labelId,
-//                   }}
-//                   onClick={() => handleSingleSelect(row.id)}
-//                 />
-//               </TableCell>
-//               <TableCell
-//                 className={classess.table__row}
-//                 sx={{ width: "0px" }}
-//               >
-//                 <LazyLoadImage
-//                   src={row.image}
-//                   width={50}
-//                   height={50}
-//                   style={{ borderRadius: "100%" }}
-//                   placeholderSrc={PlaceHolderImage}
-//                 />
-//               </TableCell>
-
-//               <TableCell
-//                 className={classess.table__row}
-//                 sx={{
-//                   fontSize: "16px",
-//                   fontWeight: "bold",
-//                 }}
-//               >
-//                 {row.title &&
-//                   typeof row.title === "string" &&
-//                   row.title.split(" ").slice(0, 5).join(" ")}
-//               </TableCell>
-
-//               <TableCell className={classess.table__row}>
-//                 {row.release_date}
-//               </TableCell>
-//               <TableCell
-//                 className={classess.table__row}
-//                 sx={{
-//                   borderTopRightRadius: "12px",
-//                   borderEndEndRadius: "12px",
-//                 }}
-//               >
-//                 {row.track_type}
-//               </TableCell>
-//             </TableRow>
-//           </>
-//         </LazyLoadComponent>
-//       );
-//     })}
-
-//     {/* if artist tracks 0 in the search, then loop the all tracks */}
-//     {searchTracks.length < 1 &&
-//       sortedTracks
-//         .filter((record) => new Date(record.release_date) < end)
-//         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-//         .map((row, index) => {
-//           const isItemSelected = isSelected(row?.id);
-//           const labelId = `enhanced-table-checkbox-${index}`;
-//           return (
-//             <LazyLoadComponent>
-//               <>
-//                 <Box sx={{ m: "1rem" }}></Box>
-
-//                 <TableRow
-//                   key={index}
-//                   sx={{
-//                     "&:last-child td, &:last-child th": {
-//                       border: 0,
-//                     },
-//                   }}
-//                   className={cellUseStyles.row}
-//                 >
-//                   <TableCell
-//                     padding="checkbox"
-//                     sx={{
-//                       borderTopLeftRadius: "12px",
-//                       borderEndStartRadius: "12px",
-//                     }}
-//                   >
-//                     <Checkbox
-//                       sx={{ color: "#4ffcb7" }}
-//                       checked={isItemSelected}
-//                       inputProps={{
-//                         "aria-labelledby": labelId,
-//                       }}
-//                       onClick={() => handleSingleSelect(row.id)}
-//                     />
-//                   </TableCell>
-//                   <TableCell
-//                     className={classess.table__row}
-//                     sx={{ width: "0px" }}
-//                   >
-//                     <LazyLoadImage
-//                       src={row.image}
-//                       width={50}
-//                       height={50}
-//                       style={{ borderRadius: "100%" }}
-//                       placeholderSrc={PlaceHolderImage}
-//                     />
-//                   </TableCell>
-
-//                   <TableCell
-//                     className={classess.table__row}
-//                     sx={{
-//                       fontSize: "16px",
-//                       fontWeight: "bold",
-//                     }}
-//                   >
-//                     {row.title &&
-//                       typeof row.title === "string" &&
-//                       row.title.split(" ").slice(0, 4).join(" ")}
-//                   </TableCell>
-//                   {/* <TableCell className={classess.table__row}>
-//                     {row.title}
-//                   </TableCell> */}
-//                   <TableCell className={classess.table__row}>
-//                     {row.release_date}
-//                   </TableCell>
-//                   <TableCell
-//                     className={classess.table__row}
-//                     sx={{
-//                       borderTopRightRadius: "12px",
-//                       borderEndEndRadius: "12px",
-//                     }}
-//                   >
-//                     {row.track_type}
-//                   </TableCell>
-//                 </TableRow>
-//               </>
-//             </LazyLoadComponent>
-//           );
-//         })}
-//   </TableBody>
-// </Table>
-// </TableContainer>

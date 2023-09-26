@@ -15,7 +15,7 @@
             position: absolute;
             width: 8px;
             height: 8px;
-            background: $secondary-bg-color-2;
+            // background: $secondary-bg-color-2;
             border-radius: 50%;
             top: -4px;
             right: -4px;
@@ -27,16 +27,13 @@
         text-align: left;
 
         &__name {
-            color: $base-text-color-secondary;
-            @include fontSize(18px);
+            @include customHeading(18px);
             font-weight: 700 !important;
-            text-transform: capitalize;
             @include textEllipsis();
         }
 
         &__role {
-            @include fontSize(14px);
-            color: #4ffcb7;
+            @include customFontsSmallTags();
         }
     }
 
@@ -57,8 +54,8 @@
                 position: absolute;
                 height: 15px;
                 width: 15px;
-                color: $base-text-color;
-                background: $secondary-bg-color-2;
+                color: #4ffcb7;
+                // background: $secondary-bg-color-2;
                 border-radius: 50%;
                 font-size: 10px;
                 text-align: center;

@@ -2,124 +2,129 @@
 @import "../../../styles/colors.scss";
 
 .page {
-    padding: 20px;
-    color: #f6f6f6 !important;
+  // padding: 20px;
+  color: #f6f6f6 !important;
+  font-family: "DM Sans";
 
-    &__title_bar {
+  &__title_bar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    &__title {
+      @include fontSize(24px);
+      font-weight: 700 !important;
+    }
+
+    &__subtitle {
+      color: #c9c9c9 !important;
+    }
+  }
+
+  &__fieldsContainer {
+    background: #222c41;
+    border-radius: 8px;
+
+    &__image_container {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      gap: 40px;
+
+      &__avatar_container {
+        position: relative;
+
+        &__icon {
+          position: absolute;
+          top: 30px;
+          left: 30px;
+        }
+      }
+    }
+
+    &__title {
+      @include customHeading();
+    }
+
+    &__form {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      margin-top: 20px;
+      gap: 40px;
+      padding-bottom: 40px;
+
+      &__formfield {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        gap: 10px;
 
-        &__title {
-            @include fontSize(24px);
-            font-weight: 700 !important;
+        &__label {
+          @include flexProperties(row, flex-start, center, $fullWidth: true);
+          gap: 10px;
+          margin-left: 10px;
+          @include customFontsSmallTags();
+          &__image {
+            height: 18px;
+            width: 18px;
+          }
         }
 
-        &__subtitle {
-            color: #c9c9c9 !important;
+        &__input {
+          color: #979797 !important;
+          border: 2px solid #4ffcb7 !important;
+          background: #192233;
+          outline: none;
+          padding: 15px;
+          font-size: 18px;
+          border-radius: 8px;
+          width: 100%;
+
+          option {
+            background-color: #192233;
+          }
         }
+
+        &__phoneinput {
+          border: 1px solid #4ffcb7 !important;
+          border-radius: 8px;
+          padding: 15px;
+          color: #979797 !important;
+          background-color: #192233;
+
+          input {
+            color: #979797 !important;
+            background: #192233;
+            outline: none;
+            font-size: 18px;
+            border: none;
+          }
+
+          option {
+            background-color: #192233;
+            color: #c2c2c2;
+          }
+        }
+      }
+
+      &__action {
+        gap: 40px;
+        @include flexProperties(row, flex-end, center, $fullWidth: true);
+        width: 100%;
+
+        &__cancel_btn {
+          @include cancelDeactiveBtn(16px, 10px);
+          height: 40px;
+          padding: 5px 10px !important;
+        }
+
+        &__submit_btn {
+          @include activeThemeBotton(16px, 10px);
+          @include fontSize();
+          height: 40px;
+          padding: 5px 10px !important;
+        }
+      }
     }
-
-    &__fieldsContainer {
-        background: $secondary-bg-color-1;
-        border-radius: 8px;
-
-        &__image_container {
-            display: flex;
-            flex: 1;
-            align-items: center;
-            gap: 40px;
-
-            &__avatar_container {
-                position: relative;
-
-                &__icon {
-                    position: absolute;
-                    top: 55px;
-                    left: 55px;
-                }
-            }
-        }
-
-        &__form {
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-            margin-top: 20px;
-            gap: 40px;
-            padding-bottom: 40px;
-
-            &__formfield {
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-
-                &__label {
-                    @include flexProperties(row, flex-start, center, $fullWidth: true);
-                    gap: 10px;
-                    color: white;
-                    margin-left: 10px;
-                    &__image {
-                        height: 18px;
-                        width: 18px;
-                    }
-                }
-
-                &__input {
-                    color: #979797 !important;
-                    border: 2px solid #00cd98 !important;
-                    background: transparent;
-                    outline: none;
-                    padding: 15px;
-                    font-size: 18px;
-                    border-radius: 8px;
-                    width: 100%;
-
-                    option {
-                        background-color: $secondary-bg-color-1;
-                    }
-                }
-
-                &__phoneinput {
-                    border: 1px solid #4ffcb7 !important;
-                    border-radius: 8px;
-                    padding: 15px;
-                    color: #979797 !important;
-
-                    input {
-                        color: #979797 !important;
-                        background: transparent;
-                        outline: none;
-                        font-size: 18px;
-                        border: none;
-                    }
-
-                    option {
-                        background-color: $secondary-bg-color-1;
-                        color: #c2c2c2;
-                    }
-                }
-            }
-
-            &__action {
-                gap: 60px;
-                @include flexProperties(row, flex-end, center, $fullWidth: true);
-                width: 100%;
-
-                &__cancel_btn {
-                    @include normalThemeButton(16px, 10px);
-                    @include fontSize();
-                    height: 40px;
-                    padding: 5px 10px !important;
-                }
-
-                &__submit_btn {
-                    @include pinkThemeButton(16px, 10px);
-                    @include fontSize();
-                    height: 40px;
-                    padding: 5px 10px !important;
-                }
-            }
-        }
-    }
+  }
 }

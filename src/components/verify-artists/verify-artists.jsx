@@ -22,6 +22,8 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Checkbox from "@mui/material/Checkbox";
 import EditIcon from "@mui/icons-material/Edit";
+import Avatar from "@mui/material/Avatar";
+
 // import DeleteIcon from "@mui/icons-material/Clear";
 import axios from "axios";
 import Slider from "../view-funding-dashboard-items/verify/slider/slider";
@@ -40,7 +42,7 @@ import { abbreviateNumber } from "../../utils/helper";
 import { muiTableCellUseStyles } from "../../custom-mui-style/custom-mui-styles";
 // import { muiTableCellUseStylesforBorderRedius } from "../../custom-mui-style/custom-mui-styles";
 import { config as URLconfig } from "../../enviorment/enviorment";
-import { IconButton, Tooltip } from "@mui/material";
+import { IconButton, Skeleton, Tooltip } from "@mui/material";
 import { openModal } from "../../redux/slice/modal";
 import { toast } from "react-toastify";
 import { getItemToLocalStorage } from "../../services/storage";
@@ -49,6 +51,9 @@ import { RiDeleteBin2Fill } from "react-icons/ri";
 import Chip from "@mui/material/Chip";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
+import PencilIcon from "../../assets/buttonsicons/EditIcon.png";
+import DeleteIcon from "../../assets/buttonsicons/DeleteIcon.png";
+
 // const useStyles = makeStyles((theme) => ({
 //   root: {
 //     backgroundColor: "#192233",
@@ -63,6 +68,7 @@ export default function BasicTable({
   catelog_income,
   new_music_income,
   calcalute_tracks_estimate,
+  calcalute_Year_income_by_tracks,
   searchTracks,
 }) {
   const cellUseStyles = muiTableCellUseStyles();
@@ -191,6 +197,7 @@ export default function BasicTable({
             .filter((track) => track.is_selected === 1)
             .map((checkedtracks) => checkedtracks)
         : tracks;
+    const ids = selected_tracks.map((item) => item.id);
 
     const new_music = newMusicTracks.map((e) => getSingleTrack(e));
 
@@ -204,6 +211,10 @@ export default function BasicTable({
       selected_tracks: selected_tracks,
       new_music_tracks: new_music,
     };
+    const data_for_year = {
+      tracksId: ids,
+    };
+    calcalute_Year_income_by_tracks(data_for_year);
 
     calcalute_tracks_estimate(val);
   };
@@ -259,25 +270,19 @@ export default function BasicTable({
     borderRadius: "12px",
     boxShadow: 24,
   };
+  const status = useSelector((state) => state.artist.status);
 
   return (
     <>
-      <Paper
-        sx={{
-          width: "100%",
-          overflow: "hidden",
-          background: "#222C41",
-          boxShadow: "none",
-        }}
-      >
+      <Paper className={classess.paperTable}>
         {artist && Object.keys(artist).length ? (
           <TableContainer className={classess.table}>
             <Table
               stickyHeader={true}
               aria-label="sticky table"
-              sx={{
-                backgroundColor: "#222C41",
-              }}
+              // sx={{
+              //   backgroundColor: "red",
+              // }}
             >
               <TableHead
               // sx={{
@@ -288,11 +293,12 @@ export default function BasicTable({
                   <TableCell padding="checkbox" className={classess.table__col}>
                     <Checkbox
                       // disabled={isLoading}
-                      sx={{
-                        svg: {
-                          color: "#4ffcb7",
-                        },
-                      }}
+                      // sx={{
+                      //   svg: {
+                      //     color: "#4ffcb7",
+                      //   },
+                      // }}
+                      className={classess.table__col__checkBox}
                       indeterminate={
                         selected.length > 0 && selected.length < tracks.length
                       }
@@ -314,7 +320,7 @@ export default function BasicTable({
                   <TableCell
                     className={`${classess.table__col} ${classess.table__col__topTracks}`}
                   >
-                    Top Tracks
+                    title
                   </TableCell>
 
                   <TableCell className={classess.table__col}>
@@ -340,120 +346,155 @@ export default function BasicTable({
                   const isItemSelected = isSelected(row?.id);
                   const labelId = `enhanced-table-checkbox-${index}`;
                   return (
-                    <LazyLoadComponent>
-                      <>
-                        <Box sx={{ m: "1rem" }}></Box>
-                        <TableRow
-                          key={index}
+                    <>
+                      <Box sx={{ m: "1rem" }}></Box>
+                      <TableRow
+                        key={index}
+                        sx={{
+                          "&:last-child td, &:last-child th": { border: 0 },
+                        }}
+                        className={`${classess.table__row} ${cellUseStyles.row}`}
+                      >
+                        <TableCell
+                          padding="checkbox"
                           sx={{
-                            "&:last-child td, &:last-child th": { border: 0 },
+                            borderTopLeftRadius: "12px",
+                            borderEndStartRadius: "12px",
                           }}
-                          className={cellUseStyles.row}
                         >
-                          <TableCell
-                            padding="checkbox"
-                            sx={{
-                              borderTopLeftRadius: "12px",
-                              borderEndStartRadius: "12px",
+                          <Checkbox
+                            // sx={{
+                            //   svg: {
+                            //     color: "#4ffcb7",
+                            //   },
+                            // }}
+                            className={classess.table__row__checkBox}
+                            checked={isItemSelected}
+                            inputProps={{
+                              "aria-labelledby": labelId,
                             }}
-                          >
-                            <Checkbox
-                              sx={{
-                                svg: {
-                                  color: "#4ffcb7",
-                                },
-                              }}
-                              checked={isItemSelected}
-                              inputProps={{
-                                "aria-labelledby": labelId,
-                              }}
-                              onClick={() => handleSingleSelect(row.id)}
-                            />
-                          </TableCell>
-                          <TableCell
-                            className={classess.table__row}
-                            sx={{ maxWidth: "40px" }}
-                          >
-                            <LazyLoadImage
-                              src={row.image}
-                              width={50}
-                              height={50}
-                              style={{ borderRadius: "100%" }}
-                              placeholderSrc={PlaceHolderImage}
-                            />
-                          </TableCell>
+                            onClick={() => handleSingleSelect(row.id)}
+                          />
+                        </TableCell>
+                        <TableCell
+                          className={classess.table__row}
+                          sx={{
+                            maxWidth: "40px",
+                          }}
+                        >
+                          <div>
+                            {status === "succeeded" ? (
+                              <div className={classess}>
+                                <Avatar
+                                  src={row?.image}
+                                  alt={row?.image}
+                                  sx={{ width: "40px", height: "40px" }}
+                                  className={classess.avatar}
+                                />
+                                {/* Online status indicator */}
+                              </div>
+                            ) : (
+                              <Skeleton
+                                variant="circular"
+                                width={40}
+                                height={40}
+                                sx={{ backgroundColor: "gray" }}
+                                // className={classess.skeleton}
+                              />
+                            )}
+                          </div>
+                        </TableCell>
 
-                          <TableCell
-                            className={classess.table__row}
-                            sx={{
-                              fontSize: "16px",
-                              fontWeight: "bold",
-                            }}
+                        <TableCell
+                          className={classess.table__row}
+                          sx={{
+                            fontSize: "16px",
+                            fontWeight: "bold",
+                          }}
+                        >
+                          <Tooltip
+                            title={row?.title}
+                            key={index}
+                            placement="top"
+                            arrow
+                            enterDelay={100}
                           >
-                            {row.title &&
-                              typeof row.title === "string" &&
-                              row.title.split(" ").slice(0, 5).join(" ")}
-                          </TableCell>
-                          <TableCell className={classess.table__row}>
-                            <div
-                              style={{ display: "flex", cursor: "pointer" }}
-                              onClick={() =>
-                                dispatch(
-                                  openModal({
-                                    name: "track-chart",
-                                    data: row,
-                                  })
-                                )
-                              }
+                            <span
+                              style={{
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                display: "block",
+                                width: "200px",
+                              }}
                             >
-                              {row?.last_streams_growth && (
-                                <span
-                                  className={
-                                    row?.last_streams_growth?.growth_rate > 0
-                                      ? classess.table__row__green
-                                      : classess.table__row__red
-                                  }
+                              {row?.title}
+                            </span>
+                            {/* {row.title &&
+                                  typeof row.title === "string" &&
+                                  row.title.split(" ").slice(0, 5).join(" ")} */}
+                          </Tooltip>
+                        </TableCell>
+                        <TableCell className={classess.table__row}>
+                          <div
+                            style={{ display: "flex", cursor: "pointer" }}
+                            onClick={() =>
+                              dispatch(
+                                openModal({
+                                  name: "track-chart",
+                                  data: row,
+                                })
+                              )
+                            }
+                          >
+                            {row?.last_streams_growth && (
+                              <span
+                                className={
+                                  row?.last_streams_growth?.growth_rate > 0
+                                    ? classess.table__row__green
+                                    : classess.table__row__red
+                                }
+                              >
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyItems: "center",
+                                    gap: "5px",
+                                    fontSize: "16px",
+                                  }}
                                 >
-                                  <div
+                                  <span>
+                                    {row?.last_streams_growth?.growth_rate >
+                                    0 ? (
+                                      <TrendingUpIcon fontSize="16" />
+                                    ) : (
+                                      <TrendingDownIcon fontSize="16" />
+                                    )}
+                                  </span>
+                                  <span
                                     style={{
-                                      display: "flex",
-                                      alignItems: "center",
-                                      justifyItems: "center",
-                                      gap: "5px",
+                                      marginLeft: "2px",
                                       fontSize: "16px",
                                     }}
                                   >
-                                    <span>
-                                      {row?.last_streams_growth?.growth_rate >
-                                      0 ? (
-                                        <TrendingUpIcon fontSize="16" />
-                                      ) : (
-                                        <TrendingDownIcon fontSize="16" />
-                                      )}
-                                    </span>
-                                    <span
-                                      style={{
-                                        marginLeft: "2px",
-                                        fontSize: "16px",
-                                      }}
-                                    >
-                                      {row?.last_streams_growth?.growth_rate}%
-                                    </span>
-                                  </div>
-                                </span>
-                              )}
-                              <span
-                                style={{
-                                  marginLeft: "5px",
-                                  fontSize: "16px",
-                                }}
-                              >
-                                {abbreviateNumber(
-                                  row.last_streams_growth?.last_month
-                                )}
+                                    {row?.last_streams_growth?.growth_rate}%
+                                  </span>
+                                </div>
                               </span>
-                            </div>
-                            {/* <div
+                            )}
+                            <span
+                              style={{
+                                marginLeft: "5px",
+                                fontSize: "16px",
+                              }}
+                            >
+                              {abbreviateNumber(
+                                row.last_streams_growth?.last_month
+                              )}
+                            </span>
+                          </div>
+                          {/* <div
                             style={{ display: "flex", cursor: "pointer" }}
                             onClick={() =>
                               dispatch(
@@ -500,17 +541,14 @@ export default function BasicTable({
                               )}
                             </span>
                           </div> */}
-                          </TableCell>
-                          <TableCell className={classess.table__row}>
-                            <Slider
-                              onChangeHandler={onChangeHandler}
-                              row={row}
-                            />
-                          </TableCell>
-                          <TableCell className={classess.table__row}>
-                            <Box className={classess.table__row__genre}>
-                              {row.genres ? (
-                                row.genres
+                        </TableCell>
+                        <TableCell className={classess.table__row}>
+                          <Slider onChangeHandler={onChangeHandler} row={row} />
+                        </TableCell>
+                        <TableCell className={classess.table__row}>
+                          <Box className={classess.table__row__genre}>
+                            {row.genres
+                              ? row.genres
                                   .split(",")
                                   .slice(0, 2)
                                   .map((genre, index) => (
@@ -525,145 +563,125 @@ export default function BasicTable({
                                       />
                                     </React.Fragment>
                                   ))
-                              ) : (
+                              : ""}
+                            {row.genres && row.genres.split(",").length > 2 && (
+                              <React.Fragment>
                                 <Chip
-                                  label="N/A"
+                                  label={`+${row.genres.split(",").length - 2}`}
                                   size="small"
                                   className={classess.table__row__genre__chip}
+                                  onClick={() => {
+                                    const remaining = row.genres
+                                      .split(",")
+                                      .slice(2)
+                                      .map((genre) => genre.trim());
+                                    setRemainingGenres(remaining);
+                                    setModalOpen(true);
+                                  }}
+                                  style={{ cursor: "pointer" }}
                                 />
-                              )}
-                              {row.genres &&
-                                row.genres.split(",").length > 2 && (
-                                  <React.Fragment>
-                                    <Chip
-                                      label={`+${
-                                        row.genres.split(",").length - 2
-                                      }`}
-                                      size="small"
-                                      className={
-                                        classess.table__row__genre__chip
-                                      }
-                                      onClick={() => {
-                                        const remaining = row.genres
-                                          .split(",")
-                                          .slice(2)
-                                          .map((genre) => genre.trim());
-                                        setRemainingGenres(remaining);
-                                        setModalOpen(true);
-                                      }}
-                                      style={{ cursor: "pointer" }}
-                                    />
-                                  </React.Fragment>
-                                )}
-                              <Modal
-                                open={modalOpen}
-                                onClose={() => setModalOpen(false)}
-                                aria-labelledby="modal-modal-title"
-                                aria-describedby="modal-modal-description"
-                              >
-                                <Box sx={style} className={classess.modalCss}>
-                                  <Box className={classess.modalCss__heading}>
-                                    Genres{" "}
-                                  </Box>
-                                  <Box
-                                    sx={{
-                                      pt: 3,
-                                      pl: 3,
-                                      pr: 3,
-                                      pb: 1,
-                                      color: "white",
-                                      fontSize: "14px",
-                                      textAlign: "center",
-                                    }}
-                                  >
-                                    {remainingGenres.map((genre, index) => (
-                                      <Chip
-                                        key={index}
-                                        label={genre}
-                                        size="small"
-                                        sx={{
-                                          backgroundColor: "#5A7380",
-                                          color: "white",
-                                          fontSize: "12px",
-                                        }}
-                                        // className={
-                                        //   classess.table__row__genre__chip
-                                        // }
-                                        style={{ marginBottom: "5px" }}
-                                      />
-                                    ))}
-                                  </Box>
-                                  <Box
-                                    sx={{
-                                      display: "flex",
-                                      justifyContent: "center",
-                                      mt: 6,
-                                    }}
-                                  >
-                                    <Button
-                                      className={classess.modalCss__button}
-                                      onClick={() => setModalOpen(false)}
-                                    >
-                                      Close
-                                    </Button>
-                                  </Box>
+                              </React.Fragment>
+                            )}
+                            <Modal
+                              open={modalOpen}
+                              onClose={() => setModalOpen(false)}
+                              aria-labelledby="modal-modal-title"
+                              aria-describedby="modal-modal-description"
+                            >
+                              <Box sx={style} className={classess.modalCss}>
+                                <Box className={classess.modalCss__heading}>
+                                  Genres{" "}
                                 </Box>
-                              </Modal>
-                            </Box>
-                          </TableCell>
-                          <TableCell
-                            className={classess.table__row}
+                                <Box
+                                  sx={{
+                                    pt: 3,
+                                    pl: 3,
+                                    pr: 3,
+                                    pb: 1,
+                                    color: "white",
+                                    fontSize: "14px",
+                                    textAlign: "center",
+                                  }}
+                                >
+                                  {remainingGenres.map((genre, index) => (
+                                    <Chip
+                                      key={index}
+                                      label={genre}
+                                      size="small"
+                                      sx={{
+                                        backgroundColor: "#5A7380",
+                                        color: "white",
+                                        fontSize: "12px",
+                                      }}
+                                      // className={
+                                      //   classess.table__row__genre__chip
+                                      // }
+                                      style={{ marginBottom: "5px" }}
+                                    />
+                                  ))}
+                                </Box>
+                                <Box
+                                  sx={{
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    mt: 6,
+                                  }}
+                                >
+                                  <Button
+                                    className={classess.modalCss__button}
+                                    onClick={() => setModalOpen(false)}
+                                  >
+                                    Close
+                                  </Button>
+                                </Box>
+                              </Box>
+                            </Modal>
+                          </Box>
+                        </TableCell>
+                        <TableCell
+                          className={classess.table__row}
+                          sx={{
+                            borderTopRightRadius: "12px",
+                            borderEndEndRadius: "12px",
+                          }}
+                        >
+                          <Box
                             sx={{
-                              borderTopRightRadius: "12px",
-                              borderEndEndRadius: "12px",
+                              display: "flex",
+                              gap: "10px",
                             }}
                           >
-                            <Box
-                              sx={{
-                                display: "flex",
-                                gap: "10px",
-                              }}
+                            <IconButton
+                              className={classess.actionEdit}
+                              onClick={() =>
+                                dispatch(
+                                  openModal({
+                                    name: "edit-track",
+                                    data: row,
+                                  })
+                                )
+                              }
                             >
-                              <IconButton
-                                sx={{
-                                  backgroundColor: "#4FFCB7",
-                                  width: "33px",
-                                  height: "33px",
-                                  fontSize: "20px",
-                                  color: "#222C41",
-                                  ":hover": {
-                                    color: "#222C41",
-                                    backgroundColor: "#4FFCB7",
-                                  },
-                                }}
-                                onClick={() =>
-                                  dispatch(
-                                    openModal({
-                                      name: "edit-track",
-                                      data: row,
-                                    })
-                                  )
-                                }
-                              >
-                                <EditIcon sx={{ fontSize: "20px" }} />
-                              </IconButton>
-                              <IconButton
-                                sx={{
-                                  backgroundColor: "#F95F5F",
-                                  width: "33px",
-                                  height: "33px",
-                                  color: "#222C41",
-                                  ":hover": {
-                                    color: "#222C41",
-                                    backgroundColor: "#F95F5F",
-                                  },
-                                }}
-                                onClick={() => handleOpenDeleteDialog(row)}
-                              >
-                                <RiDeleteBin2Fill sx={{ fontSize: "20px" }} />
-                              </IconButton>
-                            </Box>
-                            {/* <Grid
+                              <img
+                                src={PencilIcon}
+                                alt="Eye"
+                                style={{ height: "16px", width: "15.98px" }}
+                              />
+                              {/* <EditIcon sx={{ fontSize: "20px" }} /> */}
+                            </IconButton>
+                            <IconButton
+                              className={classess.actionDelete}
+                              onClick={() => handleOpenDeleteDialog(row)}
+                            >
+                              <img
+                                src={DeleteIcon}
+                                alt="Eye"
+                                style={{ height: "16px", width: "16px" }}
+                              />
+                              {/* <RiDeleteBin2Fill sx={{ fontSize: "20px" }} /> */}
+                            </IconButton>
+                          </Box>
+                          {/* <Grid
                               container
                               rowSpacing={1}
                               columnSpacing={{ xs: 1, sm: 1, md: 3 }}
@@ -697,10 +715,9 @@ export default function BasicTable({
                                 </IconButton>
                               </Grid>
                             </Grid> */}
-                          </TableCell>
-                        </TableRow>
-                      </>
-                    </LazyLoadComponent>
+                        </TableCell>
+                      </TableRow>
+                    </>
                   );
                 })}
 
@@ -712,139 +729,165 @@ export default function BasicTable({
                       const isItemSelected = isSelected(row?.id);
                       const labelId = `enhanced-table-checkbox-${index}`;
                       return (
-                        <LazyLoadComponent>
-                          <>
-                            <Box sx={{ m: "1rem" }}></Box>
-                            <TableRow
-                              key={index}
+                        <>
+                          <Box sx={{ m: "1rem" }}></Box>
+                          <TableRow
+                            key={index}
+                            sx={{
+                              "&:last-child td, &:last-child th": {
+                                border: 0,
+                                maxHeight: "300px",
+                              },
+                            }}
+                            // className={cellUseStyles.row}
+                            className={`${classess.table__row} ${cellUseStyles.row}`}
+                          >
+                            <TableCell
+                              padding="checkbox"
                               sx={{
-                                "&:last-child td, &:last-child th": {
-                                  border: 0,
-                                  maxHeight: "300px",
-                                },
+                                borderTopLeftRadius: "12px",
+                                borderEndStartRadius: "12px",
+                                width: "50px",
                               }}
-                              className={cellUseStyles.row}
                             >
-                              <TableCell
-                                padding="checkbox"
-                                sx={{
-                                  borderTopLeftRadius: "12px",
-                                  borderEndStartRadius: "12px",
-                                  width: "50px",
+                              <Checkbox
+                                // sx={{
+                                //   svg: {
+                                //     color: "#4ffcb7",
+                                //   },
+                                // }}
+                                className={classess.table__row__checkBox}
+                                checked={isItemSelected}
+                                inputProps={{
+                                  "aria-labelledby": labelId,
                                 }}
-                              >
-                                <Checkbox
-                                  sx={{
-                                    svg: {
-                                      color: "#4ffcb7",
-                                    },
-                                  }}
-                                  checked={isItemSelected}
-                                  inputProps={{
-                                    "aria-labelledby": labelId,
-                                  }}
-                                  onClick={() => handleSingleSelect(row.id)}
-                                />
-                              </TableCell>
-                              <TableCell
-                                className={classess.table__row}
-                                sx={{ maxWidth: "40px" }}
-                              >
-                                <LazyLoadImage
-                                  src={row.image}
-                                  width={50}
-                                  height={50}
-                                  style={{ borderRadius: "100%" }}
-                                  placeholderSrc={PlaceHolderImage}
-                                />
-                              </TableCell>
+                                onClick={() => handleSingleSelect(row.id)}
+                              />
+                            </TableCell>
+                            <TableCell
+                              className={classess.table__row}
+                              sx={{ maxWidth: "50px" }}
+                            >
+                              <div>
+                                {status === "succeeded" ? (
+                                  <div className={classess}>
+                                    <Avatar
+                                      src={row?.image}
+                                      alt={row?.image}
+                                      sx={{ width: "45px", height: "45px" }}
+                                      className={classess.avatar}
+                                    />
+                                    {/* Online status indicator */}
+                                  </div>
+                                ) : (
+                                  <Skeleton
+                                    variant="circular"
+                                    width={45}
+                                    height={45}
+                                    sx={{ backgroundColor: "gray" }}
+                                    // className={classess.skeleton}
+                                  />
+                                )}
+                              </div>
+                            </TableCell>
 
-                              <TableCell
-                                className={classess.table__row}
-                                sx={{
-                                  fontSize: "16px",
-                                  fontWeight: "bold",
-                                }}
+                            <TableCell
+                              className={classess.table__row}
+                              sx={{
+                                fontSize: "16px",
+                                fontWeight: "bold",
+                              }}
+                            >
+                              <Tooltip
+                                title={row?.title}
+                                key={index}
+                                placement="top"
+                                arrow
+                                enterDelay={100}
                               >
-                                {row.title &&
-                                  typeof row.title === "string" &&
-                                  row.title.split(" ").slice(0, 5).join(" ")}
-                              </TableCell>
-                              <TableCell className={classess.table__row}>
-                                <div
-                                  style={{ display: "flex", cursor: "pointer" }}
-                                  onClick={() =>
-                                    dispatch(
-                                      openModal({
-                                        name: "track-chart",
-                                        data: row,
-                                      })
-                                    )
-                                  }
+                                <span
+                                  style={{
+                                    whiteSpace: "nowrap",
+                                    overflow: "hidden",
+                                    textOverflow: "ellipsis",
+                                    display: "block",
+                                    width: "200px",
+                                  }}
                                 >
-                                  {row?.last_streams_growth && (
-                                    <span
-                                      className={
-                                        row?.last_streams_growth?.growth_rate >
-                                        0
-                                          ? classess.table__row__green
-                                          : classess.table__row__red
-                                      }
+                                  {row?.title}
+                                </span>
+                              </Tooltip>
+                            </TableCell>
+                            <TableCell className={classess.table__row}>
+                              <div
+                                style={{ display: "flex", cursor: "pointer" }}
+                                onClick={() =>
+                                  dispatch(
+                                    openModal({
+                                      name: "track-chart",
+                                      data: row,
+                                    })
+                                  )
+                                }
+                              >
+                                {row?.last_streams_growth && (
+                                  <span
+                                    className={
+                                      row?.last_streams_growth?.growth_rate > 0
+                                        ? classess.table__row__green
+                                        : classess.table__row__red
+                                    }
+                                  >
+                                    <div
+                                      style={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyItems: "center",
+                                        gap: "5px",
+                                        fontSize: "16px",
+                                      }}
                                     >
-                                      <div
+                                      <span>
+                                        {row?.last_streams_growth?.growth_rate >
+                                        0 ? (
+                                          <TrendingUpIcon fontSize="16" />
+                                        ) : (
+                                          <TrendingDownIcon fontSize="16" />
+                                        )}
+                                      </span>
+                                      <span
                                         style={{
-                                          display: "flex",
-                                          alignItems: "center",
-                                          justifyItems: "center",
-                                          gap: "5px",
+                                          marginLeft: "2px",
                                           fontSize: "16px",
                                         }}
                                       >
-                                        <span>
-                                          {row?.last_streams_growth
-                                            ?.growth_rate > 0 ? (
-                                            <TrendingUpIcon fontSize="16" />
-                                          ) : (
-                                            <TrendingDownIcon fontSize="16" />
-                                          )}
-                                        </span>
-                                        <span
-                                          style={{
-                                            marginLeft: "2px",
-                                            fontSize: "16px",
-                                          }}
-                                        >
-                                          {
-                                            row?.last_streams_growth
-                                              ?.growth_rate
-                                          }
-                                          %
-                                        </span>
-                                      </div>
-                                    </span>
-                                  )}
-                                  <span
-                                    style={{
-                                      marginLeft: "5px",
-                                      fontSize: "16px",
-                                    }}
-                                  >
-                                    {abbreviateNumber(
-                                      row.last_streams_growth?.last_month
-                                    )}
+                                        {row?.last_streams_growth?.growth_rate}%
+                                      </span>
+                                    </div>
                                   </span>
-                                </div>
-                              </TableCell>
-                              <TableCell className={classess.table__row}>
-                                <Slider
-                                  onChangeHandler={onChangeHandler}
-                                  row={row}
-                                />
-                              </TableCell>
-                              <TableCell className={classess.table__row}>
-                                <Box className={classess.table__row__genre}>
-                                  {row.genres ? (
-                                    row.genres
+                                )}
+                                <span
+                                  style={{
+                                    marginLeft: "5px",
+                                    fontSize: "16px",
+                                  }}
+                                >
+                                  {abbreviateNumber(
+                                    row.last_streams_growth?.last_month
+                                  )}
+                                </span>
+                              </div>
+                            </TableCell>
+                            <TableCell className={classess.table__row}>
+                              <Slider
+                                onChangeHandler={onChangeHandler}
+                                row={row}
+                              />
+                            </TableCell>
+                            <TableCell className={classess.table__row}>
+                              <Box className={classess.table__row__genre}>
+                                {row.genres
+                                  ? row.genres
                                       .split(",")
                                       .slice(0, 2)
                                       .map((genre, index) => (
@@ -859,119 +902,106 @@ export default function BasicTable({
                                           />
                                         </React.Fragment>
                                       ))
-                                  ) : (
-                                    <Chip
-                                      label="N/A"
-                                      size="small"
-                                      className={
-                                        classess.table__row__genre__chip
-                                      }
-                                    />
+                                  : ""}
+                                {row.genres &&
+                                  row.genres.split(",").length > 2 && (
+                                    <React.Fragment>
+                                      <Tooltip
+                                        title="Remaining Genres"
+                                        placement="top"
+                                        arrow
+                                        enterDelay={100}
+                                      >
+                                        <Chip
+                                          label={`+${
+                                            row.genres.split(",").length - 2
+                                          }`}
+                                          size="small"
+                                          className={
+                                            classess.table__row__genre__chip
+                                          }
+                                          onClick={() => {
+                                            const remaining = row.genres
+                                              .split(",")
+                                              .slice(2)
+                                              .map((genre) => genre.trim());
+                                            setRemainingGenres(remaining);
+                                            setModalOpen(true);
+                                          }}
+                                          style={{ cursor: "pointer" }}
+                                        />
+                                      </Tooltip>
+                                    </React.Fragment>
                                   )}
-                                  {row.genres &&
-                                    row.genres.split(",").length > 2 && (
-                                      <React.Fragment>
-                                        <Tooltip
-                                          title="Remaining Genres"
-                                          placement="top"
-                                          arrow
-                                          enterDelay={100}
-                                        >
-                                          <Chip
-                                            label={`+${
-                                              row.genres.split(",").length - 2
-                                            }`}
-                                            size="small"
-                                            className={
-                                              classess.table__row__genre__chip
-                                            }
-                                            onClick={() => {
-                                              const remaining = row.genres
-                                                .split(",")
-                                                .slice(2)
-                                                .map((genre) => genre.trim());
-                                              setRemainingGenres(remaining);
-                                              setModalOpen(true);
-                                            }}
-                                            style={{ cursor: "pointer" }}
-                                          />
-                                        </Tooltip>
-                                      </React.Fragment>
-                                    )}
-                                </Box>
-                              </TableCell>
-                              <TableCell
-                                className={classess.table__row}
+                              </Box>
+                            </TableCell>
+                            <TableCell
+                              className={classess.table__row}
+                              sx={{
+                                borderTopRightRadius: "12px",
+                                borderEndEndRadius: "12px",
+                              }}
+                            >
+                              <Box
                                 sx={{
-                                  borderTopRightRadius: "12px",
-                                  borderEndEndRadius: "12px",
+                                  display: "flex",
+                                  gap: "10px",
                                 }}
                               >
-                                <Box
-                                  sx={{
-                                    display: "flex",
-                                    gap: "10px",
-                                  }}
+                                <Tooltip
+                                  title="Edit Track"
+                                  placement="top"
+                                  arrow
+                                  enterDelay={100}
                                 >
-                                  <Tooltip
-                                    title="Edit Track"
-                                    placement="top"
-                                    arrow
-                                    enterDelay={100}
+                                  <IconButton
+                                    className={classess.actionEdit}
+                                    onClick={() =>
+                                      dispatch(
+                                        openModal({
+                                          name: "edit-track",
+                                          data: row,
+                                        })
+                                      )
+                                    }
                                   >
-                                    <IconButton
-                                      sx={{
-                                        backgroundColor: "#4FFCB7",
-                                        width: "33px",
-                                        height: "33px",
-                                        fontSize: "20px",
-                                        color: "#222C41",
-                                        ":hover": {
-                                          color: "#222C41",
-                                          backgroundColor: "#4FFCB7",
-                                        },
+                                    <img
+                                      src={PencilIcon}
+                                      alt="Eye"
+                                      style={{
+                                        height: "16px",
+                                        width: "15.98px",
                                       }}
-                                      onClick={() =>
-                                        dispatch(
-                                          openModal({
-                                            name: "edit-track",
-                                            data: row,
-                                          })
-                                        )
-                                      }
-                                    >
-                                      <EditIcon sx={{ fontSize: "20px" }} />
-                                    </IconButton>
-                                  </Tooltip>
+                                    />
+                                    {/* <EditIcon
+                                      sx={{ fontSize: "20px" }}
+                                      className={classess.pencilIcon}
+                                    /> */}
+                                  </IconButton>
+                                </Tooltip>
 
-                                  <Tooltip
-                                    title="Delete Track"
-                                    placement="top"
-                                    arrow
-                                    enterDelay={100}
+                                <Tooltip
+                                  title="Delete Track"
+                                  placement="top"
+                                  arrow
+                                  enterDelay={100}
+                                >
+                                  <IconButton
+                                    className={classess.actionDelete}
+                                    onClick={() => handleOpenDeleteDialog(row)}
                                   >
-                                    <IconButton
-                                      sx={{
-                                        backgroundColor: "#F95F5F",
-                                        width: "33px",
-                                        height: "33px",
-                                        color: "#222C41",
-                                        ":hover": {
-                                          color: "#222C41",
-                                          backgroundColor: "#F95F5F",
-                                        },
-                                      }}
-                                      onClick={() =>
-                                        handleOpenDeleteDialog(row)
-                                      }
-                                    >
-                                      <RiDeleteBin2Fill
-                                        sx={{ fontSize: "20px" }}
-                                      />
-                                    </IconButton>
-                                  </Tooltip>
-                                </Box>
-                                {/* <Grid
+                                    <img
+                                      src={DeleteIcon}
+                                      alt="Eye"
+                                      style={{ height: "16px", width: "16px" }}
+                                    />
+                                    {/* <RiDeleteBin2Fill
+                                      sx={{ fontSize: "20px" }}
+                                    /> */}
+                                  </IconButton>
+                                </Tooltip>
+                              </Box>
+                              {/* <Grid
                                   container
                                   rowSpacing={1}
                                   columnSpacing={{ xs: 1, sm: 1, md: 1 }}
@@ -1019,10 +1049,9 @@ export default function BasicTable({
                                     </IconButton>
                                   </Grid>
                                 </Grid> */}
-                              </TableCell>
-                            </TableRow>
-                          </>
-                        </LazyLoadComponent>
+                            </TableCell>
+                          </TableRow>
+                        </>
                       );
                     })}
               </TableBody>
@@ -1055,13 +1084,20 @@ export default function BasicTable({
             classes={{
               actions: "custom-pagination-actions",
               select: "custom-pagination-select",
+              // input: "custom-select-style",
+              displayedRows: "custom-select-style",
+              // menuItem: "custom-select-style",
+              // root: "custom-select-style",
+              // selectIcon: "custom-select-style",
+              selectLabel: "custom-select-style",
+              // selectRoot: "custom-select-style",
+              // spacer: "custom-select-style",
+              // toolbar: "custom-select-style",
             }}
             SelectProps={{
-              style: {
-                backgroundColor: "#4FFCB7",
-                color: "#222C41",
-                borderRadius: "12px",
-                fontSize: "14px",
+              // Leave the SelectProps empty; styles will be applied via the class
+              classes: {
+                select: "custom-select", // Apply the custom-select class to the Select component
               },
             }}
           />

@@ -1,52 +1,80 @@
 @import "../../../../styles/scss.scss";
 @import "../../../../styles/colors.scss";
-
+.paperTable {
+  width: 100%;
+  background-color: $base-container-backgroung-color !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+}
 .table {
-  //   background: $secondary-bg-color-1 !important;
-  background: #222c41 !important;
+  //   background: $base-container-backgroung-color !important;
+  background: $base-container-backgroung-color !important;
 
   &__col {
-    color: #4ffcb7 !important;
-    background: #222c41 !important;
+    color: $base-button-background-color !important;
+    background: $base-container-backgroung-color !important;
     text-align: left !important;
     white-space: nowrap;
-    border-bottom: 1px solid #5a7380 !important;
+    border-bottom: 1px solid $base-border-line-color !important;
     text-transform: uppercase;
     font-size: 12px !important;
+    &__checkBox {
+      svg {
+        color: $base-button-background-color;
+      }
+    }
   }
 
   &__row {
-    color: #d6d6d6 !important;
+    color: $base-heading-color !important;
+    border: none !important;
+    outline: none !important;
+    background-color: $base-inner-container-background-color !important;
     text-align: left !important;
     max-width: 100% !important;
+    &__checkBox {
+      svg {
+        color: $base-button-background-color;
+      }
+    }
   }
 }
 
 .page {
+  position: relative;
+
   &__header {
-    @include flexProperties(row, space-between, center, $fullWidth: true);
-    margin-bottom: 10px;
-    position: relative;
+    // @include flexProperties(row, space-between, center, $fullWidth: true);
+    // margin-bottom: 7px;
+    position: absolute;
+    right: 0;
+    // bottom: 40px;
+    top: -6.8rem;
 
     &__seachBar {
-      position: absolute;
-      right: 0;
-      bottom: 40px;
+      position: relative;
+
+      .searchIcon {
+        color: $base-button-background-color;
+        position: absolute;
+        top: 10px;
+        left: 8px;
+        z-index: 9999;
+      }
     }
 
     &__search {
-      border: 2px solid #5a7380;
-      background-color: #202632;
-      padding: 10px 30px;
+      border: 2px solid $base-border-line-color;
+      background-color: $base-input-background-color;
+      padding: 11px 20px 11px 35px;
       border-radius: 10px !important;
       outline: none !important;
-      color: $base-text-color;
-      border-radius: 0px;
+      color: $base-input-text-color;
+      font-size: 14px;
       &::placeholder {
-        color: white;
+        color: $base-heading-color;
+        font-size: 14px;
       }
-
-      @include fontSize(16px);
     }
 
     &__heading {
@@ -57,7 +85,7 @@
       min-width: 300px;
 
       &__btn {
-        @include normalThemeButton(16px, 10px);
+        @include activeThemeBotton(16px, 10px);
         @include fontSize();
         padding: 10px !important;
         height: 40px;
@@ -65,7 +93,7 @@
       }
 
       &__btn_pink {
-        @include pinkThemeButton(16px, 10px);
+        @include activeThemeBotton(16px, 10px);
         @include fontSize();
         padding: 10px !important;
         height: 40px;
@@ -79,35 +107,35 @@
     margin-top: 20px;
   }
 
-  &__btn {
-    @include pinkThemeButton(16px, 10px);
-    @include fontSize();
-    background-color: transparent !important;
-    border: 1px solid #951057 !important;
-    width: auto;
-    height: 40px;
-    text-transform: capitalize !important;
+  // &__btn {
+  //   @include activeThemeBotton(16px, 10px);
+  //   @include fontSize();
+  //   background-color: transparent !important;
+  //   border: 1px solid #951057 !important;
+  //   width: auto;
+  //   height: 40px;
+  //   text-transform: capitalize !important;
 
-    &:hover {
-      background: #951057 !important;
-      &__button {
-        border-radius: 25px !important;
-        background: $secondary-bg-color-3 !important;
-        padding: 7px 30px !important;
-        color: white !important;
-        @include fontSize(12px);
-      }
+  //   &:hover {
+  //     background: #951057 !important;
+  //     &__button {
+  //       border-radius: 25px !important;
+  //       background: $base-button-background-color !important;
+  //       padding: 7px 30px !important;
+  //       color: $base-heading-color !important;
+  //       @include fontSize(12px);
+  //     }
 
-      &__search {
-        background: transparent;
-        border: 2px solid #a9a9a9;
-        outline: none;
-        padding: 10px;
-        color: $base-text-color;
-        border-radius: 5px;
-      }
-    }
-  }
+  //     &__search {
+  //       background: transparent;
+  //       border: 2px solid #a9a9a9;
+  //       outline: none;
+  //       padding: 10px;
+  //       color: $base-button-background-color;
+  //       border-radius: 5px;
+  //     }
+  //   }
+  // }
 }
 .searchBarMob {
   height: 40px !important;
@@ -130,16 +158,16 @@
   }
 }
 
-@media only screen and (max-width: 1400px) {
+@media only screen and (max-width: 1300px) {
   .page {
     &__header {
+      left: 3px;
+      top: 0rem;
       &__seachBar {
-        left: 10px;
-        bottom: 0px;
       }
     }
-  }
-  .searchBarMob {
-    display: block !important;
+    .searchBarMob {
+      display: block;
+    }
   }
 }

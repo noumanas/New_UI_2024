@@ -51,7 +51,7 @@ const PayStepper = ({ artist_advance, marketing_budget }) => {
     }
     console.log("activeStep", activeStep);
     if (activeStep === 2) {
-      toast.error("Please Select Email");
+      console.log("Please Select Email");
     }
     if (list.length > 0) {
       childRef.current.onSubmit();
@@ -150,7 +150,7 @@ const PayStepper = ({ artist_advance, marketing_budget }) => {
               className={classess.page__stepper_btn_wrapper__steps}
               sx={{
                 "& .MuiStepLabel-root .Mui-completed": {
-                  color: "#1976d2", // circle color (COMPLETED)
+                  color: "#000", // circle color (COMPLETED)
                 },
                 "& .MuiStepLabel-label.Mui-completed.MuiStepLabel-alternativeLabel":
                   {
@@ -176,7 +176,7 @@ const PayStepper = ({ artist_advance, marketing_budget }) => {
       {activeStep === steps.length ? (
         <React.Fragment>
           {loader ? (
-            <ContractSuccess content="Payment Information submitted for review successfully!" />
+            <ContractSuccess content="Payment Information Submitted for review successfully!" />
           ) : (
             <Box
               sx={{
@@ -189,44 +189,30 @@ const PayStepper = ({ artist_advance, marketing_budget }) => {
               <CircularProgress size={40} color="secondary" />
             </Box>
           )}
-
-          {/* <Typography sx={{ mt: 2, mb: 1 }}>
-          All steps completed - you&apos;re finished
-        </Typography> */}
-          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-            <Box sx={{ flex: "1 1 auto" }} />
-            {/* <Button onClick={handleReset}>Reset</Button> */}
-            {/* <Button onClick={() => navigate('/blig/home')} variant="contained" className={classess.page__back_btn}>Return Home</Button>
-          <Button variant="contained" className={classess.page__download_btn}>Download a copy</Button> */}
-            <Button
-              className={classess.page__button_cancel}
-              onClick={() => navigate("/blig/home")}
-              variant="contained"
-              // sx={{
-              //   fontSize: "16px",
-              //   fontWeight: "normal",
-              //   marginRight: "20px",
-              //   backgroundColor: "#00cd99",
-              //   textTransform: "capitalize",
-              //   borderRadius: "12px",
-              //   minWidth: 100,
-              // }}
-            >
-              Return Home
-            </Button>
-            <Button
-              variant="contained"
-              sx={{
-                fontSize: "16px",
-                fontWeight: "normal",
-                textTransform: "none",
-                borderRadius: "12px",
-                minWidth: 100,
-                width: "249px",
-              }}
-            >
-              Download a copy
-            </Button>
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "flex-end",
+              pt: 2,
+            }}
+          >
+            <Box>
+              <Button
+                className={classess.page__review_contract}
+                onClick={() => navigate("/blig/contracts")}
+                variant="contained"
+              >
+                Review Contract
+              </Button>
+              {/* <Button
+                variant="contained"
+                className={classess.page__download_copy}
+              >
+                Download a copy
+              </Button> */}
+            </Box>
           </Box>
         </React.Fragment>
       ) : (
@@ -255,64 +241,46 @@ const PayStepper = ({ artist_advance, marketing_budget }) => {
           <Box
             sx={{
               display: "flex",
-              flexDirection: "row",
-              pt: 2,
-              mb: 2,
-              pl: 2,
-              pr: 2,
               justifyContent: "flex-end",
+              width: "100%",
             }}
           >
-            <Button
-              // color="primary"
-              disabled={activeStep === 0}
-              onClick={handleBack}
+            <Box
               sx={{
-                mr: 1,
-                textTransform: "capitalize",
-                borderRadius: 2,
-                minWidth: 100,
-                background: "#f15f3a",
-              }}
-              variant="contained"
-              // className={classess.page__button_cancel}
-              sx={{
-                mr: 1,
-                textTransform: "capitalize",
-                borderRadius: 2,
-                minWidth: 100,
-                backgroundColor: "transparent",
-                border: "1px solid #E12020",
-                color: "#E12020 !important",
-                padding: "0px 20px !important",
-                fontWeight: "bold",
+                display: "flex",
+                pt: 2,
+                mb: 2,
+                pl: 2,
+                pr: 2,
+                width: "25%",
               }}
             >
-              Back
-            </Button>
+              <Button
+                disabled={activeStep === 0}
+                onClick={handleBack}
+                className={classess.page__backBtn}
+                sx={{
+                  mr: 1,
+                }}
+              >
+                Back
+              </Button>
 
-            {/* {isStepOptional(activeStep) && (
+              {/* {isStepOptional(activeStep) && (
             <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
               Skip
             </Button>
           )} */}
-            <Button
-              onClick={handleNext}
-              // variant="contained"
-              // className={classess.page__button_save}
-              sx={{
-                textTransform: "capitalize",
-                borderRadius: 2,
-                minWidth: 100,
-                backgroundColor: " #4ffcb7 !important",
-                color: "#222c41 !important",
-                fontWeight: "bold",
-              }}
-            >
-              {activeStep === steps.length - 3 ? "Save" : null}
-              {activeStep === steps.length - 1 ? "Save for Preview" : null}
-              {activeStep === steps.length - 2 ? "Save & Continue" : null}
-            </Button>
+              <Button
+                onClick={handleNext}
+                // variant="contained"
+                className={classess.page__saveBtn}
+              >
+                {activeStep === steps.length - 3 ? "Save" : null}
+                {activeStep === steps.length - 1 ? "Save" : null}
+                {activeStep === steps.length - 2 ? "Save" : null}
+              </Button>
+            </Box>
           </Box>
         </React.Fragment>
       )}

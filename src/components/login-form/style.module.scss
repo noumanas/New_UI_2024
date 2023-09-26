@@ -2,19 +2,28 @@
 @import "../../styles/colors.scss";
 
 .page {
-  width: 50%;
-  // padding-right: 60px;
-  padding: 30px 60px;
+  width: 100%;
   background: rgba(0, 3, 54, 0.1);
+  backdrop-filter: blur(10px);
   border-radius: 12px;
   font-family: "DM Sans";
-  // padding: 10px 10px; // Make sure this color has an opacity of less than 1
-
-  backdrop-filter: blur(10px);
-
+  padding: 30px;
+  .customForm {
+    width: 100%;
+    // overflow: hidden;
+  }
   &__logo {
-    @include flexProperties(center, center, $fullWidth: true);
+    @include flexProperties(row, center, center, $fullWidth: true);
     margin-bottom: 20px !important;
+    &__img {
+      height: 90px !important;
+      // width: 83px !important;
+    }
+    &__text {
+      font-size: 59px !important;
+      text-transform: uppercase;
+      font-family: "NewTitle";
+    }
   }
 
   &__horizontalLine {
@@ -36,19 +45,26 @@
         width: 100%;
         gap: 10px;
 
+        // background-color: red !important;
+
         &__label {
           @include customFontsSmallTags();
         }
 
         &__input {
-          width: 100%;
+          // width: calc((100% - 1.8%));
           color: #000 !important;
-          border: 1px solid #4ffcb7 !important;
+          border-style: none;
           background: #ffffff !important;
           outline: none;
-          padding: 15px;
-          font-size: 12px;
-          border-radius: 8px;
+          padding: 12px 15px;
+          font-size: 14px;
+          border-radius: 12px;
+          // border: 2px solid #ffffff;
+
+          // &:focus {
+          //   border: 2px solid #4ffcb7 !important;
+          // }
         }
       }
 
@@ -63,21 +79,16 @@
 
       &__action {
         @include flexProperties(row, center, center, $fullWidth: true);
-        flex-wrap: nowrap;
-        gap: 20px;
-        width: 105% !important;
+        width: calc(100%);
         margin-top: 20px;
 
         &__btn {
           @include activeThemeBotton(16px, 10px);
-          &:hover {
-            background-color: #4ffcb7 !important;
-            color: #000000 !important;
-          }
+          width: 100%;
         }
 
         &__register_btn {
-          @include pinkThemeButton(16px, 10px);
+          @include activeThemeBotton(16px, 10px);
           @include fontSize(16px);
         }
       }
@@ -88,8 +99,10 @@
         &__spantwo {
           text-decoration: none;
           padding-left: 10px;
+          text-decoration: underline;
+
           &:hover {
-            text-decoration: underline;
+            cursor: pointer;
           }
         }
       }

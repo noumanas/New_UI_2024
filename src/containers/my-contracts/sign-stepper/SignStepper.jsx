@@ -80,6 +80,7 @@ const SignStepper = (props) => {
       artist_representative_name: info?.artist_representative_name,
       artist_email: info?.artist_email,
       artist_phone: info?.artist_phone,
+      artist_image: info?.artist_image,
       artist_representative_email: info?.artist_representative_email,
       advance: info?.advance,
       advance_amount: info?.advance_amount,
@@ -243,33 +244,44 @@ const SignStepper = (props) => {
           >
             Contract Submitted for Review Successfully!
           </Typography>
-          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-            <Box sx={{ flex: "1 1 auto" }} />
-            <Button
-              variant="contained"
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "flex-end",
+              pt: 2,
+            }}
+          >
+            <Box
               sx={{
-                marginRight: "20px",
-                backgroundColor: "#00cd99",
-                textTransform: "capitalize",
-                borderRadius: 2,
-                minWidth: 100,
+                display: "flex",
+                flexDirection: "row",
+                gap: "20px",
+                // width: "30%",
               }}
-              onClick={() => navigate("/blig/home")}
             >
-              Return Home
-            </Button>
-            <Button
-              onClick={() => convertHtmlToDoc(contract)}
-              variant="contained"
-              className={classess.page__download_btn}
-              // sx={{
-              //   textTransform: "capitalize",
-              //   borderRadius: 2,
-              //   minWidth: 100,
-              // }}
-            >
-              Download a Copy
-            </Button>
+              <Button
+                onClick={() => convertHtmlToDoc(contract)}
+                variant="contained"
+                className={classess.page__download_btn}
+                // sx={{
+                //   textTransform: "capitalize",
+                //   borderRadius: 2,
+                //   minWidth: 100,
+                // }}
+              >
+                Download a Copy
+              </Button>
+              <Button
+                variant="contained"
+                // onClick={() => navigate("/blig/home")}
+                onClick={props.nextGo}
+                className={classess.page__nextBtn}
+              >
+                Next
+              </Button>
+            </Box>
           </Box>
         </React.Fragment>
       ) : (
@@ -297,59 +309,44 @@ const SignStepper = (props) => {
           {activeStep === 2 ? (
             <ContractSubmitPreview ref={childRef} contract={contract} />
           ) : null}
-
           <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              pt: 2,
-              mb: 2,
-              pl: 2,
-              pr: 2,
-              justifyContent: "flex-end",
-            }}
+            sx={{ display: "flex", justifyContent: "flex-end", width: "100%" }}
           >
-            <Button
-              // color="primary"
-              disabled={activeStep === 0}
-              onClick={handleBack}
+            <Box
               sx={{
-                mr: 1,
-                textTransform: "capitalize",
-                borderRadius: 2,
-                minWidth: 100,
-                backgroundColor: "transparent",
-                border: "1px solid #E12020",
-                color: "#E12020 !important",
-                padding: "0px 20px !important",
-                fontWeight: "bold",
+                display: "flex",
+                pt: 2,
+                mb: 2,
+                pl: 2,
+                pr: 2,
+                width: "25%",
               }}
-              // variant="contained"
             >
-              Back
-            </Button>
+              <Button
+                // color="primary"
+                disabled={activeStep === 0}
+                onClick={handleBack}
+                className={classess.backBtn}
+                // variant="contained"
+              >
+                Back
+              </Button>
 
-            {/* {isStepOptional(activeStep) && (
+              {/* {isStepOptional(activeStep) && (
             <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
               Skip
             </Button>
           )} */}
 
-            <Button
-              onClick={handleNext}
-              // variant="contained"
-              disabled={false}
-              sx={{
-                textTransform: "capitalize",
-                borderRadius: 2,
-                minWidth: 100,
-                backgroundColor: " #4ffcb7 !important",
-                color: "#222c41 !important",
-                fontWeight: "bold",
-              }}
-            >
-              {activeStep === steps.length - 0 ? "Save & Continue" : "Save"}
-            </Button>
+              <Button
+                onClick={handleNext}
+                // variant="contained"
+                disabled={false}
+                className={classess.saveBtn}
+              >
+                {activeStep === steps.length - 0 ? "Save & Continue" : "Save"}
+              </Button>
+            </Box>
           </Box>
         </React.Fragment>
       )}

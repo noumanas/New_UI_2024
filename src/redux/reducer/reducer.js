@@ -8,6 +8,7 @@ import trackReducer from "../slice/track";
 import userReducer from "../slice/user";
 import newMusicReducer from "../slice/new-music";
 import similarArtistReducer from "../slice/similar-artist";
+import yearlyincomeArtistReducer from "../slice/income";
 import artistYoutubeStreamingReducer from "../slice/artist-youtube-streaming";
 
 const rootReducer = combineReducers({
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   new_music: newMusicReducer,
   similar_artist: similarArtistReducer,
   artist_youtube_streaming: artistYoutubeStreamingReducer,
+  yearlyincome : yearlyincomeArtistReducer,
 });
 
 export default rootReducer;

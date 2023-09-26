@@ -16,6 +16,7 @@ import Container from "@mui/material/Container";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import { useParams } from "react-router-dom";
+
 export default function MakeaPaymentModal({ payment }) {
   const { id } = useParams();
   const isOpen = useSelector((state) => state.modal.isOpen);

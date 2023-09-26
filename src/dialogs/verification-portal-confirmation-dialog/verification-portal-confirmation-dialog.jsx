@@ -33,7 +33,7 @@ const VerificationPortalConfirmationDialog = ({ onClose, open, artist }) => {
       className={classess.dialog}
     >
       <DialogTitle className={classess.dialog__title}>
-        Delete Conformation
+        Delete Confirmation
       </DialogTitle>
       <DialogContent dividers className={classess.dialog__content}>
         <DialogContentText

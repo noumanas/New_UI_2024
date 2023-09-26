@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import MyArtistCard from "../../components/my-artist-card/my-artist-card";
 import MyArtistList from "../../components/my-artist-list/my-artist-list";
 
@@ -17,10 +16,13 @@ const MyArtistViewContainer = ({ selectedView }) => {
   useEffect(() => {
     handleResize();
     window.addEventListener("resize", handleResize);
-    return (_) => {
+
+    // Include selectedView in the dependency array
+    // to react to changes in this prop.
+    return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [selectedView]); // Include selectedView in the dependency array
 
   return (
     <>

@@ -26,6 +26,9 @@ import FileDownload from "js-file-download";
 import SendContractDialog from "../../../../dialogs/send-contract/send-contract";
 import AuthEnum from "../../../../enums/auth.enum";
 import { AiOutlineFilePdf } from "react-icons/ai";
+import InputLabel from "@mui/material/InputLabel";
+import NativeSelect from "@mui/material/NativeSelect";
+
 const SendConfig = ({ customize_funding }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploading, setUploading] = useState(false);
@@ -40,6 +43,7 @@ const SendConfig = ({ customize_funding }) => {
   const authUser = useSelector((state) => state.auth.user);
   const [base64, setbase64] = useState("");
   const dispatch = useDispatch();
+  const [uploadBtn, setUploadBtn] = useState(false);
   const handleReportDelete = (id) => {
     dispatch(deleteReport(id));
   };
@@ -51,6 +55,7 @@ const SendConfig = ({ customize_funding }) => {
       setSelectedFile(e.target.files[0]);
     }
   };
+
   const sendContract = async (data) => {
     const { name, email, file, sender_name, sender_email } = data;
     try {
@@ -168,171 +173,149 @@ const SendConfig = ({ customize_funding }) => {
         convertHtmlToDoc={convertHtmlToDoc}
       />
 
-      <Box varient='div' component='div' className={classess.page}>
-        <Box varient='div' component='div' className={classess.page__caption}>
-          <Typography varient='p'>
-            Provide your distributor name and upload their reports.
-          </Typography>
-          <Typography varient='p' sx={{ marginTop: "25px" }}>
-            Acceptable File Formats:
-          </Typography>
-          <Typography varient='p'>Microsoft Excel (.CSV, .TSV)</Typography>
+      <Box varient="div" component="div" className={classess.page}>
+        <Box varient="div" component="div" className={classess.page__caption}>
+          <span>SELECT DISTRIBUTOR</span>
         </Box>
 
         <Box
-          varient='div'
+          varient="div"
           mb={2}
-          component='div'
+          component="div"
           className={classess.page__header}
         >
-          <FormControl sx={{ minWidth: 250 }} size='small'>
-            <Select
+          <FormControl variant="standard" sx={{ minWidth: 250 }} size="small">
+            {/* <InputLabel
+              variant="standard"
+              htmlFor="uncontrolled-native"
+              sx={{
+                color: "#4ffcb7",
+              }}
+            >
+              SELECT DISTRIBUTOR
+            </InputLabel> */}
+            <NativeSelect
               value={distributor}
               onChange={(e) => setDistributor(e.target.value)}
               displayEmpty
               inputProps={{ "aria-label": "Without label" }}
+              defaultValue={10}
               sx={{
-                border: "1px solid #00CD98",
-                color: "#858997 !important",
-                fill: "#858997 !important",
+                borderBottom: "1px solid #FFFFFF",
+                // color: "black !important",
+                fontWeight: 700,
+                // fill: "#FFFFFF !important",
+                // backgroundColor: "#222C41 !important",
+                borderRadius: "0px",
+                fontSize: "25px",
               }}
+              className={classess.selectDropDown}
             >
-              <MenuItem
-                value=''
-                style={{
-                  backgroundColor: "#2F3443",
-                  color: "#fff",
-                }}
-              >
-                <em>Select a Distributor</em>
-              </MenuItem>
+              <option value="10" style={{ color: "#000" }}>
+                Please Select
+              </option>
+              <option value="OneRPM" style={{ color: "#000" }}>
+                OneRPM - Details
+              </option>
 
-              <MenuItem
-                value='OneRPM'
-                style={{
-                  backgroundColor: "#2F3443",
-                  color: "#fff",
-                }}
-              >
-                <em>OneRPM - Details</em>
-              </MenuItem>
+              <option value="TuneCore" style={{ color: "#000" }}>
+                TuneCore - Details
+              </option>
 
-              <MenuItem
-                value='TuneCore'
-                style={{
-                  backgroundColor: "#2F3443",
-                  color: "#fff",
-                }}
-              >
-                <em>TuneCore - Details</em>
-              </MenuItem>
+              <option style={{ color: "#000" }} value="Distrokid">
+                Distrokid - Details
+              </option>
 
-              <MenuItem
-                value='Distrokid'
-                style={{
-                  backgroundColor: "#2F3443",
-                  color: "#fff",
-                }}
-              >
-                <em>Distrokid - Details</em>
-              </MenuItem>
+              <option value="CreateMusic - Details" style={{ color: "#000" }}>
+                CreateMusic - Details
+              </option>
 
-              <MenuItem
-                value='CreateMusic - Details'
-                style={{
-                  backgroundColor: "#2F3443",
-                  color: "#fff",
-                }}
-              >
-                <em>CreateMusic - Details</em>
-              </MenuItem>
+              <option value="Empire - Details" style={{ color: "#000" }}>
+                Empire - Details
+              </option>
 
-              <MenuItem
-                value='Empire - Details'
-                style={{
-                  backgroundColor: "#2F3443",
-                  color: "#fff",
-                }}
-              >
-                <em>Empire - Details</em>
-              </MenuItem>
+              <option value="Ascap Writer - Details" style={{ color: "#000" }}>
+                Ascap Writer - Details
+              </option>
 
-              <MenuItem
-                value='Ascap Writer - Details'
-                style={{
-                  backgroundColor: "#2F3443",
-                  color: "#fff",
-                }}
-              >
-                <em>Ascap Writer - Details</em>
-              </MenuItem>
-
-              <MenuItem
+              <option
                 disabled
-                value='CreateMusic - Summary'
-                style={{
-                  backgroundColor: "#2F3443",
-                  color: "#fff",
-                }}
+                value="CreateMusic - Summary"
+                style={{ color: "#999999" }}
               >
-                <em>CreateMusic - Summary</em>
-              </MenuItem>
+                CreateMusic - Summary
+              </option>
 
-              <MenuItem
+              <option
                 disabled
-                value='Empire - Summary'
-                style={{
-                  backgroundColor: "#2F3443",
-                  color: "#fff",
-                }}
+                value="Empire - Summary"
+                style={{ color: "#999999" }}
               >
-                <em>Empire - Summary</em>
-              </MenuItem>
+                Empire - Summary
+              </option>
 
-              <MenuItem
+              <option
                 disabled
-                value='Ascap Writer - Summary'
-                style={{
-                  backgroundColor: "#2F3443",
-                  color: "#fff",
-                }}
+                value="Ascap Writer - Summary"
+                style={{ color: "#999999" }}
               >
-                <em>Ascap Writer - Summary</em>
-              </MenuItem>
-            </Select>
+                Ascap Writer - Summary
+              </option>
+            </NativeSelect>
           </FormControl>
 
           {!selectedFile && (
             <Stack
-              direction='row'
+              direction="row"
               gap={2}
               className={classess.page__header__btn_container}
             >
-              <Button
-                onChange={onFileSelection}
-                variant='contained'
-                component='label'
-                className={classess.page__header__upload_btn}
-                onClick={() => setSelectedFile(null)}
-                startIcon={<AiOutlineFilePdf />}
-              >
-                Upload file
-                <input
-                  hidden
-                  accept='.csv, .tsv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel'
-                  type='file'
-                />
-              </Button>
+              {distributor === "" || distributor === "10" ? (
+                <Button
+                  variant="contained"
+                  component="label"
+                  className={classess.page__header__upload_btn_disable}
+                  disabled
+                  startIcon={<AiOutlineFilePdf />}
+                >
+                  Upload
+                  <input
+                    hidden
+                    accept=".csv, .tsv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                    type="file"
+                  />
+                </Button>
+              ) : (
+                <Button
+                  onChange={onFileSelection}
+                  variant="contained"
+                  component="label"
+                  className={classess.page__header__upload_btn}
+                  onClick={() => setSelectedFile(null)}
+                  startIcon={<AiOutlineFilePdf />}
+                >
+                  Upload
+                  <input
+                    hidden
+                    accept=".csv, .tsv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                    type="file"
+                  />
+                </Button>
+              )}
             </Stack>
           )}
+
+          <span>Microsoft Excel (.CSV, .TSV)</span>
         </Box>
 
         {selectedFile && (
           <Box
             sx={{
               width: "100%",
-              border: "1px solid #00cd98",
+              border: "1px solid #4FFCB7",
               padding: "10px",
+              borderRadius: "12px",
+              backgroundColor: "#192233",
             }}
           >
             <Box mb={3} mt={2}>
@@ -340,14 +323,14 @@ const SendConfig = ({ customize_funding }) => {
             </Box>
 
             <Stack
-              direction='row'
+              direction="row"
               gap={2}
               marginBottom={1}
               className={classess.page__header__btn_container}
             >
               {!uploading && (
                 <Button
-                  size='small'
+                  size="small"
                   onClick={() => setSelectedFile(null)}
                   className={classess.page__header__btn_pink}
                 >
@@ -358,9 +341,9 @@ const SendConfig = ({ customize_funding }) => {
               {!uploading && (
                 <Button
                   onClick={(e) => onSubmit(e)}
-                  size='small'
-                  variant='contained'
-                  color='success'
+                  size="small"
+                  variant="contained"
+                  color="success"
                   className={classess.page__header__btn_normal}
                 >
                   Upload
@@ -370,7 +353,7 @@ const SendConfig = ({ customize_funding }) => {
 
             {uploading && (
               <Stack
-                direction='row'
+                direction="row"
                 gap={2}
                 marginBottom={1}
                 className={classess.page__header__btn_container}
@@ -381,14 +364,10 @@ const SendConfig = ({ customize_funding }) => {
           </Box>
         )}
 
-        <Box varient='div' component='div' className={classess.page__content}>
-          <Typography varient='p' className={classess.page__content__heading}>
+        <Box varient="div" component="div" className={classess.page__content}>
+          <span varient="p" className={classess.page__content__heading}>
             Upload History
-          </Typography>
-          <Typography
-            varient='p'
-            className={classess.page__content__sub_heading}
-          ></Typography>
+          </span>
         </Box>
 
         {reports.map((report) => (
@@ -396,15 +375,24 @@ const SendConfig = ({ customize_funding }) => {
             sx={{
               width: "100%",
               color: "#FFF",
-              backgroundColor: "inherit",
-              border: "1px solid #00cd98",
+              backgroundColor: "#192233",
+              marginBottom: "10px",
+              borderRadius: "12px !important",
+              // border: "1px solid #4FFCB7",
             }}
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon sx={{ color: "#FFF" }} />}
-              aria-controls='panel1a-content'
-              id='panel1a-header'
+              aria-controls="panel1a-content"
+              id="panel1a-header"
               key={report._id}
+              sx={{
+                backgroundColor: "#192233",
+                borderRadius: "12px",
+                color: "#fff",
+                // border: "1px solid #4FFCB7",
+                overflow: "hidden",
+              }}
             >
               <Typography>#{report._id}</Typography>
             </AccordionSummary>
@@ -438,7 +426,7 @@ const SendConfig = ({ customize_funding }) => {
                 <br />
                 <span>
                   <a
-                    style={{ color: "#01a177", textDecoration: "none" }}
+                    style={{ color: "#4FFCB7", textDecoration: "none" }}
                     href={report.file_url}
                   >
                     Download
@@ -482,7 +470,8 @@ const SendConfig = ({ customize_funding }) => {
               <Box mt={2}>
                 <Button
                   onClick={() => handleReportDelete(report._id)}
-                  color='error'
+                  color="error"
+                  sx={{ border: "1px solid #ff0000" }}
                 >
                   Delete
                 </Button>

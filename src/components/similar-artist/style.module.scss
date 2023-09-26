@@ -1,13 +1,13 @@
 @import "../../styles/scss.scss";
 @import "../../styles/colors.scss";
 
-.abc {
-  // display: none !important;
-  width: 100%;
-  display: flex !important;
-  flex-direction: column;
-  gap: 20px !important;
-}
+// .abc {
+//   // display: none !important;
+//   width: 100%;
+//   display: flex !important;
+//   flex-direction: column;
+//   gap: 20px !important;
+// }
 
 .modalbox {
   font-family: "DM Sans";
@@ -15,7 +15,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #222c41;
+  background-color: $base-container-backgroung-color;
   border-radius: 10px;
   box-shadow: 2px 2px 4px #000000;
   padding: 20px;
@@ -40,7 +40,7 @@
 
   &__artistboxx {
     padding: 20px;
-    background-color: $secondary-bg-color-2;
+    // background-color: $secondary-bg-color-2;
     border-radius: 10px;
     min-width: 400px;
 
@@ -53,23 +53,50 @@
 }
 
 .page {
-  height: 100%;
+  @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
+  width: 100%;
+  height: 675px !important;
+  max-height: 675px !important;
 
   &__header {
-    height: 100%;
+    // height: 100%;
     // border-bottom: 1px solid rgba(255, 255, 255, .2);
+    padding: 20px 0px 0px 10px;
 
     &__title {
       @include customHeading(24px);
-      padding: 20px 0px 0px 20px;
     }
   }
 
   &__list {
     overflow: auto;
-    min-height: 40rem;
-    max-height: 40rem;
-    padding: 5px;
+    width: 100%;
+    height: 675px !important;
+    max-height: 675px !important;
+    // padding: 0px 20px 0px 20px;
+
+    &__list_continer {
+      // display: none !important;
+      width: 100%;
+      display: flex !important;
+      flex-direction: column;
+      gap: 20px !important;
+      &__list_items {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 20px !important;
+        background-color: $base-inner-container-background-color !important;
+        border-radius: 10px !important;
+        padding: 10px !important;
+        margin: 0px 10px 0px 10px;
+
+        &__img_details {
+          @include flexProperties(row, center, center, $fullWidth: true);
+        }
+      }
+    }
+
     &::-webkit-scrollbar {
       display: none;
     }
@@ -83,16 +110,16 @@
       }
 
       &__controls {
-        width: 80px;
-        height: 80px;
-        border: 2px solid $secondary-bg-color-3;
+        width: 50px !important;
+        height: 50px !important;
+        border: 2px solid #4ffcb7;
         position: absolute;
         display: none;
         background-color: rgba(0, 0, 0, 0.582);
         backdrop-filter: blur(10px);
         border-radius: 50%;
         z-index: 2;
-        top: 10px;
+        // top: 10px;
         text-align: center;
         font-size: 0.7rem;
 
@@ -101,7 +128,7 @@
           justify-content: center;
           align-items: center;
           display: flex;
-          // border-bottom: 2px solid $secondary-bg-color-3;
+          // border-bottom: 2px solid #4ffcb7;
         }
         &__add {
           height: 100%;
@@ -121,9 +148,9 @@
 
       &__li {
         @include flexProperties(row, center, center, $fullWidth: true);
-        gap: 30px;
+        // gap: 30px;
         // border-bottom: 1px solid rgba(255, 255, 255, .2);
-        padding: 20px;
+        // padding: 20px;
         cursor: pointer;
 
         &:last-child {
@@ -136,17 +163,15 @@
         }
 
         &__content {
-          // @include flexProperties(column, $fullWidth: false);
           width: 100%;
           display: flex;
           flex-direction: column;
-          gap: 2px;
+          margin-left: 10px !important;
 
           &__name {
+            width: 100% !important;
             @include customHeading(16px);
-            margin-top: 17px;
-            // text-align: center;
-            @include textEllipsis();
+            @include textEllipsisLineClamp(1);
           }
           &__listners {
             @include customFontsSmallTags();
@@ -154,7 +179,7 @@
 
           &__email {
             font-size: 12px;
-            color: $base-text-color;
+            color: #4ffcb7;
             @include textEllipsis();
           }
         }

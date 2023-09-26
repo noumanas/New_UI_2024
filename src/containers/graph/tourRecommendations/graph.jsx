@@ -12,10 +12,11 @@ import YoutubeIcon from "../../../assets/social/social-icon2.png";
 import TiktokIcon from "../../../assets/social/social-icon8.png";
 import DeezeerIcon from "../../../assets/social/social-icon4.png";
 import { addCommasToNumber } from "../../../utils/helper";
-
+import Skeleton from "@mui/material/Skeleton";
 const Graph = () => {
   const [data, setData] = useState(null);
   const [allsourcesdata, setallsourcesdata] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const artist = useSelector((state) => state.artist.artist);
 
@@ -150,7 +151,7 @@ const Graph = () => {
       combinedArray.push(countryData);
     }
     setallsourcesdata(combinedArray);
-
+    setIsLoading(false);
     let total_current_listner_US = 0;
     let total_current_listner_RU = 0;
     let total_current_listner_FR = 0;
@@ -300,122 +301,191 @@ const Graph = () => {
         mt={2}
         p={3}
       >
-        <Box sx={{ marginBottom: "20px" }}>
-          <span className={classess.page__banner__topheading}>
-            Top Countries
-          </span>
-        </Box>
+        <span className={classess.page__banner__topheading}>Top Countries</span>
+        {isLoading ? (
+          Array.from({ length: 3 }).map((_, index) => (
+            <Box className={classess.page__main_content}>
+              <Box className={classess.page__main_content__rounded_image}>
+                <Skeleton variant="circular" width={40} height={40} />
+              </Box>
 
-        {allsourcesdata &&
-          allsourcesdata.length &&
-          allsourcesdata
-            .sort((a, b) => b.total_listeners - a.total_listeners)
-            .map((el) => (
-              <Box className={classess.page__main_content}>
-                <Box className={classess.page__main_content__rounded_image}>
-                  <Avatar
-                    style={{
-                      objectFit: "contain",
-                    }}
-                    src={`/flag/${el.country_code}.png`}
-                    width={60}
-                    height={60}
-                  />
-                </Box>
-
+              <Box
+                className={
+                  classess.page__main_content__platform_content_container
+                }
+              >
                 <Box
                   className={
-                    classess.page__main_content__platform_content_container
+                    classess.page__main_content__platform_content_container__platform_streaming_container
                   }
                 >
-                  <Typography
+                  <Box
                     className={
-                      classess.page__main_content__platform_content_container__top_heading
+                      classess.page__main_content__platform_content_container__platform_streaming_container__logo_stream
                     }
                   >
-                    {el?.country_code}
-                  </Typography>
+                    <Skeleton variant="text" fontSize="1rem" />
+                  </Box>
 
                   <Box
                     className={
-                      classess.page__main_content__platform_content_container__platform_streaming_container
+                      classess.page__main_content__platform_content_container__platform_streaming_container__logo_stream
                     }
                   >
-                    <Box
-                      className={
-                        classess.page__main_content__platform_content_container__platform_streaming_container__logo_stream
-                      }
-                    >
-                      <Avatar
-                        src={SpotifyIcon}
-                        sx={{
-                          height: "20px",
-                          width: "20px",
-                          marginRight: "10px",
-                        }}
-                      ></Avatar>
-                      <Typography>
-                        {addCommasToNumber(el.total_listeners)}
-                      </Typography>
-                    </Box>
+                    <Skeleton variant="text" fontSize="1rem" />
+                  </Box>
 
-                    <Box
-                      className={
-                        classess.page__main_content__platform_content_container__platform_streaming_container__logo_stream
-                      }
-                    >
-                      <Avatar
-                        src={YoutubeIcon}
-                        sx={{
-                          height: "20px",
-                          width: "20px",
-                          marginRight: "10px",
-                        }}
-                      ></Avatar>
-                      <Typography>
-                        {addCommasToNumber(el.total_views)}
-                      </Typography>
-                    </Box>
-
-                    <Box
-                      className={
-                        classess.page__main_content__platform_content_container__platform_streaming_container__logo_stream
-                      }
-                    >
-                      <Avatar
-                        src={TiktokIcon}
-                        sx={{
-                          height: "20px",
-                          width: "20px",
-                          marginRight: "10px",
-                        }}
-                      ></Avatar>
-                      <Typography>
-                        {addCommasToNumber(el.followers_total)}
-                      </Typography>
-                    </Box>
-
-                    <Box
-                      className={
-                        classess.page__main_content__platform_content_container__platform_streaming_container__logo_stream
-                      }
-                    >
-                      <Avatar
-                        src={DeezeerIcon}
-                        sx={{
-                          height: "20px",
-                          width: "20px",
-                          marginRight: "10px",
-                        }}
-                      ></Avatar>
-                      <Typography>
-                        {addCommasToNumber(el.soundcloud_followers)}
-                      </Typography>
-                    </Box>
+                  <Box
+                    className={
+                      classess.page__main_content__platform_content_container__platform_streaming_container__logo_stream
+                    }
+                  >
+                    <Skeleton variant="text" fontSize="1rem" />
+                  </Box>
+                  <Box
+                    className={
+                      classess.page__main_content__platform_content_container__platform_streaming_container__logo_stream
+                    }
+                  >
+                    <Skeleton variant="text" fontSize="1rem" />
                   </Box>
                 </Box>
               </Box>
-            ))}
+            </Box>
+          ))
+        ) : (
+          <Box className={classess.page__container}>
+            {allsourcesdata &&
+              allsourcesdata.length &&
+              allsourcesdata
+                .sort((a, b) => b.total_listeners - a.total_listeners)
+                .map((el) => (
+                  <Box className={classess.page__main_content}>
+                    <Box className={classess.page__main_content__rounded_image}>
+                      <Box sx={{ fontSize: 40 }}>
+                        {countries[el.country_code].emoji}
+                      </Box>
+                    </Box>
+
+                    <Box
+                      className={
+                        classess.page__main_content__platform_content_container
+                      }
+                    >
+                      <span
+                        className={
+                          classess.page__main_content__platform_content_container__top_heading
+                        }
+                      >
+                        {countries[el.country_code].name}
+                      </span>
+
+                      <Box
+                        className={
+                          classess.page__main_content__platform_content_container__platform_streaming_container
+                        }
+                      >
+                        {el.total_listeners > 0 ? (
+                          <Box
+                            className={
+                              classess.page__main_content__platform_content_container__platform_streaming_container__logo_stream
+                            }
+                          >
+                            <Avatar
+                              src={SpotifyIcon}
+                              sx={{
+                                height: "20px",
+                                width: "20px",
+                                marginRight: "10px",
+                              }}
+                            />
+                            <span
+                              className={
+                                classess.page__main_content__platform_content_container__platform_streaming_container__text
+                              }
+                            >
+                              {addCommasToNumber(el.total_listeners)}
+                            </span>
+                          </Box>
+                        ) : null}
+
+                        {el.total_views > 0 ? (
+                          <Box
+                            className={
+                              classess.page__main_content__platform_content_container__platform_streaming_container__logo_stream
+                            }
+                          >
+                            <Avatar
+                              src={YoutubeIcon}
+                              sx={{
+                                height: "20px",
+                                width: "20px",
+                                marginRight: "10px",
+                              }}
+                            ></Avatar>
+                            <span
+                              className={
+                                classess.page__main_content__platform_content_container__platform_streaming_container__text
+                              }
+                            >
+                              {addCommasToNumber(el.total_views)}
+                            </span>
+                          </Box>
+                        ) : null}
+
+                        {el.followers_total > 0 ? (
+                          <Box
+                            className={
+                              classess.page__main_content__platform_content_container__platform_streaming_container__logo_stream
+                            }
+                          >
+                            <Avatar
+                              src={TiktokIcon}
+                              sx={{
+                                height: "20px",
+                                width: "20px",
+                                marginRight: "10px",
+                              }}
+                            ></Avatar>
+                            <span
+                              className={
+                                classess.page__main_content__platform_content_container__platform_streaming_container__text
+                              }
+                            >
+                              {addCommasToNumber(el.followers_total)}
+                            </span>
+                          </Box>
+                        ) : null}
+
+                        {el.soundcloud_followers > 0 ? (
+                          <Box
+                            className={
+                              classess.page__main_content__platform_content_container__platform_streaming_container__logo_stream
+                            }
+                          >
+                            <Avatar
+                              src={DeezeerIcon}
+                              sx={{
+                                height: "20px",
+                                width: "20px",
+                                marginRight: "10px",
+                              }}
+                            ></Avatar>
+                            <span
+                              className={
+                                classess.page__main_content__platform_content_container__platform_streaming_container__text
+                              }
+                            >
+                              {addCommasToNumber(el.soundcloud_followers)}
+                            </span>
+                          </Box>
+                        ) : null}
+                      </Box>
+                    </Box>
+                  </Box>
+                ))}
+          </Box>
+        )}
       </Box>
     </Box>
   );

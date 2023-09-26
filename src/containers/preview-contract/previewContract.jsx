@@ -14,6 +14,7 @@ import AuthEnum from "../../enums/auth.enum";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import ContractHistory from "../../components/ContractHistory/ContractHistory";
 import PostAddIcon from "@mui/icons-material/PostAdd";
+import Avatar from "@mui/material/Avatar";
 
 const PreviewContract = () => {
   const { id } = useParams();
@@ -155,6 +156,24 @@ const PreviewContract = () => {
     }
   };
 
+  useEffect(() => {
+    let isApiSubscribed = true;
+    axios.get(`${URLconfig.BASE_URL}/contracts/${id}`).then((res) => {
+      if (isApiSubscribed) {
+        setContract(res.data.data);
+        setNotes(
+          res.data.data.notes.sort((a, b) =>
+            new Date(a.createdAt) > new Date(b.createdAt) ? 1 : -1
+          )
+        );
+      }
+    });
+
+    return () => {
+      isApiSubscribed = false;
+    };
+  }, [id]);
+
   return (
     <Container maxWidth="xxl">
       <Grid container spacing={2} className={classess.page}>
@@ -174,20 +193,36 @@ const PreviewContract = () => {
             <Box
               varient="div"
               component="div"
-              className={classess.page__details__box__tracks}
+              className={classess.page__details__box__adetails}
             >
               <Box
                 varient="div"
                 component="div"
-                className={classess.page__details__box__tracks__header}
+                className={classess.page__details__box__adetails__header}
               >
-                <span
+                <Box
+                  varient="div"
+                  component="div"
                   className={
-                    classess.page__details__box__adetails__header__title
+                    classess.page__details__box__adetails__header__img_title_container
                   }
                 >
-                  {contract?.artist_name}
-                </span>
+                  <Avatar
+                    className={
+                      classess.page__details__box__adetails__header__img_title_container__image
+                    }
+                    src={contract?.artist.avatar}
+                    alt={contract?.name}
+                  />
+                  <span
+                    className={
+                      classess.page__details__box__adetails__header__img_title_container__title
+                    }
+                  >
+                    {contract?.artist_name}
+                  </span>
+                </Box>
+
                 <Button
                   sx={{ color: "#000" }}
                   variant="outlined"

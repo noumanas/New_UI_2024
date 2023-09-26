@@ -2,11 +2,10 @@
 @import "../../styles/colors.scss";
 
 .page {
-
     &__box {
         @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
         gap: 40px;
-        background: $secondary-bg-color-1;
+        background: #222c41;
         padding: 20px;
         border-radius: 10px;
 
@@ -19,10 +18,7 @@
             }
 
             &__title {
-                @include fontSize(22px);
-                color: $base-text-color;
-                text-transform: capitalize;
-                letter-spacing: 0px;
+                @include customHeading();
             }
         }
 
@@ -45,11 +41,7 @@
                     gap: 20px;
 
                     &__key {
-                        color: $base-text-color;
-                        @include fontSize(18px);
-                        text-transform: capitalize;
-                        letter-spacing: 0px;
-                        font-weight: 700;
+                        @include customHeading();
                     }
 
                     &__value {
@@ -81,7 +73,7 @@
                     &__li {
                         @include flexProperties(row, space-between, center, $fullWidth: true);
                         gap: 30px;
-                        border-bottom: 1px solid rgba(255, 255, 255, .2);
+                        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
                         padding: 20px;
                         cursor: pointer;
 
@@ -93,7 +85,7 @@
                             font-size: 16px;
                             text-transform: capitalize;
                             letter-spacing: 2px;
-                            color: $base-text-color;
+                            color: #4ffcb7;
                             font-weight: normal;
                         }
                     }
@@ -106,11 +98,8 @@
                 }
             }
         }
-
     }
-
 }
-
 
 @media only screen and (max-width: 470px) {
     .page {
@@ -186,7 +175,6 @@
         }
     }
 }
-
 
 @media only screen and (max-width: 321px) {
     .page {

@@ -115,28 +115,14 @@ const RevenueGraph = ({ artist }) => {
               src={icon}
               className={classess.page__banner__conatiner__icon}
             />
-            <Typography
-              sx={{
-                marginLeft: "10px",
-                color: "#fff",
-                fontSize: "16px",
-                fontWeight: "500",
-              }}
-            >
+            <span className={classess.page__banner__conatiner__label}>
               {name}
-            </Typography>
+            </span>
           </Box>
 
-          <Typography
-            sx={{
-              marginLeft: "10px",
-              color: "#fff",
-              fontSize: "16px",
-              fontWeight: "500",
-            }}
-          >
+          <span className={classess.page__banner__conatiner__label}>
             {abbreviateNumber(streams)}
-          </Typography>
+          </span>
         </Box>
         <Box>
           <ProgressBar

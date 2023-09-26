@@ -27,7 +27,7 @@ const DeleteNewMusicRecordDialog = ({ onClose, open, track }) => {
           // color: "",
         },
       }}
-      maxWidth='xs'
+      maxWidth="xs"
       open={open}
       className={classess.dialog}
     >
@@ -37,7 +37,7 @@ const DeleteNewMusicRecordDialog = ({ onClose, open, track }) => {
       <DialogContent dividers className={classess.dialog__content}>
         <DialogContentText
           className={classess.dialog__content__text}
-          id='alert-dialog-description'
+          id="alert-dialog-description"
         >
           This is to confirm you that, you want to delete the New Music Record
           from this Artist

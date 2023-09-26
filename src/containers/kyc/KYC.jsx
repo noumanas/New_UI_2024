@@ -29,12 +29,12 @@ const KYC = () => {
             <Box
               varient="div"
               component="div"
-              className={classess.page__details__box__tracks}
+              className={classess.page__details__box__adetails}
             >
               <Box
                 varient="div"
                 component="div"
-                className={classess.page__details__box__tracks__header}
+                className={classess.page__details__box__adetails__header}
               >
                 <Box>
                   <span
@@ -50,9 +50,13 @@ const KYC = () => {
                     classess.page__details__box__adetails__header__textinput_container
                   }
                 >
-                  <IconButton>
-                    <SearchIcon sx={{ color: "#4FFCB7" }} />
-                  </IconButton>
+                  {/* <IconButton> */}
+                  <SearchIcon
+                    className={
+                      classess.page__details__box__adetails__header__textinput_container__icon_color
+                    }
+                  />
+                  {/* </IconButton> */}
 
                   <input
                     className={
@@ -62,7 +66,13 @@ const KYC = () => {
                   />
                 </Box>
               </Box>
-              <KYCList />
+              <Box
+                varient="div"
+                component="div"
+                className={classess.page__details__box__tracks__main_content}
+              >
+                <KYCList />
+              </Box>
             </Box>
           </Box>
         </Grid>

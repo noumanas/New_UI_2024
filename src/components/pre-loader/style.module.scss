@@ -12,39 +12,43 @@ $ball-color: #fff;
     overflow-y: hidden;
     z-index: 9999px;
 
-    &__loader {
-        position: relative;
-        width: 75px;
-        height: 100px;
+    // &__loader {
+    //     position: relative;
+    //     width: 75px;
+    //     height: 100px;
 
-        &__bar {
-            position: absolute;
-            bottom: 0;
-            width: 10px;
-            height: 50%;
-            background: $bar-color;
-            transform-origin: center bottom;
-            box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+    //     &__bar {
+    //         position: absolute;
+    //         bottom: 0;
+    //         width: 10px;
+    //         height: 50%;
+    //         background: $bar-color;
+    //         transform-origin: center bottom;
+    //         box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
 
-            @for $i from 1 through 5 {
-                &:nth-child(#{$i}) {
-                    left: ($i - 1) * 15px;
-                    transform: scale(1, $i * 0.2);
-                    animation: barUp#{$i} 4s infinite;
-                }
-            }
-        }
+    //         @for $i from 1 through 5 {
+    //             &:nth-child(#{$i}) {
+    //                 left: ($i - 1) * 15px;
+    //                 transform: scale(1, $i * 0.2);
+    //                 animation: barUp#{$i} 4s infinite;
+    //             }
+    //         }
+    //     }
 
-        &__ball {
-            position: absolute;
-            bottom: 10px;
-            left: 0;
-            width: 10px;
-            height: 10px;
-            background: $ball-color;
-            border-radius: 50%;
-            animation: ball 4s infinite;
-        }
+    //     &__ball {
+    //         position: absolute;
+    //         bottom: 10px;
+    //         left: 0;
+    //         width: 10px;
+    //         height: 10px;
+    //         background: $ball-color;
+    //         border-radius: 50%;
+    //         animation: ball 4s infinite;
+    //     }
+    // }
+
+    &__center_img {
+        height: 200px !important;
     }
 }
 

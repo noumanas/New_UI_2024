@@ -2,49 +2,27 @@
 @import "../../styles/colors.scss";
 
 .page {
-  // margin-top: 20px;
-
+  @include flexProperties(column, space-between, center, $fullWidth: true);
+  width: 100%;
   &__list {
-    // overflow-y: scroll;
-    max-width: 100%;
+    width: 100%;
     &__ul {
-      // height: 415px;
-      // overflow: auto;
-      // list-style: none;
-      // padding: 0;
-      // margin: 0;
-
       &__li {
-        // @include flexProperties(row, space-between, center, $fullWidth: true);
-        // gap: 30px;
-        // border-bottom: 1px solid rgba(255, 255, 255, .2);
-        // padding: 20px;
-        // cursor: pointer;
-
-        // &:last-child {
-        //     border-bottom: none;
-        // }
-
         &__name {
-          font-size: 16px;
-          line-height: 25px;
-          text-transform: capitalize;
-          letter-spacing: 0px;
-          color: $base-text-color-secondary;
-          font-weight: 700;
-          @include textEllipsisLineClamp(2);
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
-          max-width: 100px;
-        }
-        &__tracktype {
-          font-size: 15px;
+          display: block;
+          width: 100px;
+          font-size: 16px;
           line-height: 25px;
+          @include customHeading(16px);
+        }
+
+        &__tracktype {
+          line-height: 25px;
+          @include customParagraph(16px);
           text-transform: capitalize;
-          letter-spacing: 0px;
-          color: $base-text-color-secondary;
-          font-weight: normal;
         }
       }
     }
@@ -57,9 +35,9 @@
   }
 }
 .table {
-  background: #222c41 !important;
-  min-height: 41rem;
-  max-height: 41rem;
+  background: $base-container-backgroung-color !important;
+  height: 600px !important;
+  max-height: 600px !important;
   &::-webkit-scrollbar {
     display: none;
   }
@@ -71,12 +49,10 @@
   }
 
   &__col {
-    color: #4ffcb7 !important;
-    background: #222c41 !important;
+    background: $base-container-backgroung-color !important;
     text-align: left !important;
     width: 50px !important;
     border-bottom: 1px solid #474d5e;
-    font-weight: normal !important;
     @include textEllipsis();
     &__heading {
       @include customFontsSmallTags();
@@ -99,10 +75,7 @@
   &__row {
     color: #d6d6d6 !important;
     border-bottom: 0px !important;
-    background-color: #192233;
-    padding-left: 20px !important;
-    // text-align: center !important;
-    max-width: 500px;
+    background-color: $base-table-row-background-color;
     &__green {
       color: green;
     }

@@ -28,17 +28,17 @@ const DeleteConformationDialog = ({ onClose, open, artist }) => {
           // color: "",
         },
       }}
-      maxWidth='xs'
+      maxWidth="xs"
       open={open}
       className={classess.dialog}
     >
       <DialogTitle className={classess.dialog__title}>
-        Delete Conformation
+        Delete Confirmation
       </DialogTitle>
       <DialogContent dividers className={classess.dialog__content}>
         <DialogContentText
           className={classess.dialog__content__text}
-          id='alert-dialog-description'
+          id="alert-dialog-description"
         >
           This is to confirm you that, you want to delete the artist named{" "}
           {artist.name}. Are you sure you want to delete this artist?
@@ -52,7 +52,7 @@ const DeleteConformationDialog = ({ onClose, open, artist }) => {
           Yes, I approve
         </Button>
         <Button
-          variant='outlined'
+          variant="outlined"
           autoFocus
           onClick={handleCancel}
           className={classess.dialog__actions__noButton}

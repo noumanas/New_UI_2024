@@ -1,25 +1,35 @@
 @import "../../styles/scss.scss";
 @import "../../styles/colors.scss";
 .table {
-  //   background: $secondary-bg-color-1 !important;
-  background: #222c41 !important;
+  //   background: $base-container-backgroung-color !important;
+  background: $base-container-backgroung-color !important;
 
   &__col {
-    color: #4ffcb7 !important;
-    background: #222c41 !important;
+    @include customFontsSmallTags();
+    background: $base-container-backgroung-color !important;
     text-align: left !important;
     white-space: nowrap;
-    border-bottom: 1px solid #5a7380 !important;
-    text-transform: uppercase;
-    font-size: 12px !important;
+    border-bottom: 1px solid $base-border-line-color !important;
+    &__checkBox {
+      svg {
+        color: $base-button-background-color;
+      }
+    }
   }
 
   &__row {
-    color: #d6d6d6 !important;
+    color: $base-heading-color !important;
+    border: none !important;
+    outline: none !important;
+    background-color: $base-inner-container-background-color !important;
     text-align: left !important;
     max-width: 100% !important;
-    text-transform: capitalize;
-    img {
+    &__checkBox {
+      svg {
+        color: $base-button-background-color;
+      }
+    }
+    &__avatar {
       width: 45px;
       height: 45px;
       border-radius: 50%;
@@ -28,11 +38,13 @@
 }
 .page {
   margin-top: 20px;
+  font-family: "DM Sans" !important;
 
   &__new_music {
     display: flex;
     flex-direction: row-reverse;
     justify-content: center;
+
     // flex-wrap: wrap;
     // align-items: center;
     gap: 20px;
@@ -43,12 +55,7 @@
       gap: 20px;
 
       &__form {
-        @include flexProperties(
-          column,
-          flex-start,
-          flex-start,
-          $fullWidth: true
-        );
+        @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
         gap: 30px;
 
         &__form_fields {
@@ -56,14 +63,15 @@
           gap: 20px;
 
           &__input {
-            border-bottom: 1px solid white;
+            border-bottom: 1px solid $base-heading-color;
             border-top: none !important;
             border-left: none;
             border-right: none;
+            font-family: "DM Sans" !important;
             outline: none !important;
             background: transparent;
             padding: 5px 0px;
-            color: $tablecell-color;
+            color: $base-heading-color !important;
             @include fontSize(20px);
             background-color: transparent;
             width: 110px;
@@ -75,7 +83,7 @@
             }
 
             &:focus {
-              // outline: $secondary-bg-color-3 solid 2px !important;
+              // outline: $base-button-background-color solid 2px !important;
             }
             &::-webkit-inner-spin-button {
               -webkit-appearance: none;
@@ -84,7 +92,7 @@
           }
 
           &__select {
-            border-bottom: 1px solid white;
+            border-bottom: 1px solid $base-heading-color;
             border-top: none !important;
             border-left: none;
             border-right: none;
@@ -93,23 +101,23 @@
             padding: 5px 0px;
             width: 160px;
             @include fontSize(20px);
-            background-color: transparent;
             color: #6d7480;
             font-weight: bold !important;
             option {
-              background-color: $secondary-bg-color-1;
-              font-size: 1px !important;
+              background-color: $base-heading-color;
+              font-size: 18px !important;
+              color: #000 !important;
             }
 
             &:focus {
-              // outline: $secondary-bg-color-3 solid 2px !important;
+              // outline: $base-button-background-color solid 2px !important;
             }
           }
         }
 
         &__button {
-          background-color: #4ffcb7 !important;
-          color: #222c41 !important;
+          background-color: $base-button-background-color !important;
+          color: $base-container-backgroung-color !important;
           border-radius: 12px !important;
           font-size: 14px !important;
           gap: 1px;
@@ -118,12 +126,12 @@
           padding: 7px 16px !important;
 
           &:hover {
-            background: #01a177 !important;
+            background: $base-button-background-color !important;
           }
         }
         &__button2 {
           background-color: #f95f5f !important;
-          color: #222c41 !important;
+          color: $base-container-backgroung-color !important;
           border-radius: 12px !important;
           font-size: 14px !important;
           gap: 1px;
@@ -149,8 +157,8 @@
 
       &__button {
         width: 100% !important;
-        color: #222c41 !important;
-        background-color: #4ffcb7 !important;
+        color: $base-container-backgroung-color !important;
+        // background-color: #498E72 !important;
         border-radius: 12px !important;
         white-space: nowrap !important;
         padding: 8px 50px !important;
@@ -159,17 +167,12 @@
       }
 
       &__slider_box {
-        @include flexProperties(
-          column,
-          flex-start,
-          flex-start,
-          $fullWidth: true
-        );
+        @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
         width: 100%;
 
         &__title {
           @include fontSize(18px);
-          color: #4ffcb7 !important;
+          color: $base-button-background-color !important;
         }
 
         &__slider {
@@ -178,7 +181,7 @@
           width: 100%;
 
           &__text {
-            color: $base-text-color;
+            color: $base-button-background-color;
             @include fontSize(14px);
             width: 100px;
           }
@@ -201,7 +204,7 @@
         &__details {
           @include flexProperties(row, center, center, $fullWidth: true);
           gap: 5px;
-          border: 2px solid $secondary-bg-color-3;
+          border: 2px solid $base-button-background-color;
           padding: 8px 30px;
           border-radius: 8px;
           min-width: 200px;
@@ -222,18 +225,37 @@
       }
     }
   }
+  .actionEdit {
+    background-color: $base-button-background-color !important;
+    width: 33px;
+    height: 33px;
+    color: $base-container-backgroung-color;
+    &:hover {
+      background-color: $base-button-background-color;
+    }
+  }
+  .actionDelete {
+    background-color: #f95f5f !important;
+    width: 33px;
+    height: 33px;
+    color: $base-container-backgroung-color !important;
+    &:hover {
+      background-color: #f95f5f;
+    }
+  }
+  .smallHeading {
+    @include customFontsSmallTags();
+  }
+  .radioBtn {
+    color: $base-button-background-color;
+  }
 }
 
 @media only screen and (max-width: 467px) {
   .page {
     &__music_container {
       &__button_container {
-        @include flexProperties(
-          column,
-          flex-start,
-          flex-start,
-          $fullWidth: true
-        );
+        @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
 
         &__button {
           width: 100%;
@@ -251,12 +273,7 @@
           width: 100%;
 
           &__form_fields {
-            @include flexProperties(
-              column,
-              flex-start,
-              flex-start,
-              $fullWidth: true
-            );
+            @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
             width: 100%;
 
             &__input {
@@ -287,5 +304,17 @@
     &__new_music {
       flex-wrap: wrap;
     }
+  }
+}
+.buttonDisabled {
+  background-color: #498e72 !important;
+  &:hover {
+    background-color: #498e72;
+  }
+}
+.buttonActive {
+  background-color: $base-button-background-color !important;
+  &:hover {
+    background-color: $base-button-background-color !important;
   }
 }

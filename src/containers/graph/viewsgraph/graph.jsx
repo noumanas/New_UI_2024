@@ -127,9 +127,9 @@ const ViewGraph = ({ artist }) => {
           className={classess.page__banner__conatiner}
           sx={{ alignItems: "flex-start" }}
         >
-          <Box component="div" variant="div" sx={{ color: "#fff" }}>
-            Artist Total Streams/Platform
-          </Box>
+          <span className={classess.page__banner__conatiner__heading}>
+            Artist Total Streams/Platforms
+          </span>
 
           <Grid sx={{ width: "100%", padding: "20px" }}>
             <LinearProgressWithLabel variant="determinate" value={progress} />

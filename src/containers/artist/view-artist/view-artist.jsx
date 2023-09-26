@@ -19,6 +19,8 @@ import RevenueGraph from "../../graph/revenuegraph/graph";
 import SwotGraph from "../../graph/swotanalysisgraph/graph";
 import GenreGraph from "../../graph/streamGraph/graph";
 import SocialMediaGraph from "../../graph/socialMediaGraph/graph";
+import { useQuery } from "@tanstack/react-query";
+import LoadingButton from "@mui/lab/LoadingButton";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -50,6 +52,7 @@ import {
   setSelectedTracks,
   setTotalFunding,
   setTracks,
+  emptySingularArtist,
 } from "../../../redux/slice/artist";
 
 import appleMusicIcon from "../../../assets/social/social-icon1.png";
@@ -62,9 +65,10 @@ import tiktokIcon from "../../../assets/social/social-icon8.png";
 import instagramIcon from "../../../assets/social/social-icon9.png";
 import twitterIcon from "../../../assets/social/social-icon10.png";
 import CircularProgress from "@mui/material/CircularProgress";
+import LinearProgress from "@mui/material/LinearProgress";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
-
+import GreenPencil from "../../../assets/buttonsicons/pencil2.png";
 const ViewArtist = () => {
   const dispatch = useDispatch();
   const dispatchRef = useRef(dispatch);
@@ -90,9 +94,23 @@ const ViewArtist = () => {
   const [loading, setLoading] = React.useState(false);
   const storedToken = getItemToLocalStorage("accessToken");
   const [socialLinks, setSocialLinks] = useState([]);
+  const [progress, setProgress] = React.useState(0);
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setProgress((oldProgress) => {
+        if (oldProgress === 100) {
+          return 0;
+        }
+        const diff = Math.random() * 10;
+        return Math.min(oldProgress + diff, 100);
+      });
+    }, 500);
 
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
   useEffect(() => {
-    console.log("totalTracks", totalTracks);
     if (artist?.spotify_id !== undefined) {
       const fetchTracks = async (spotify_id) => {
         axios
@@ -129,6 +147,7 @@ const ViewArtist = () => {
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [collaborators, setCollaborator] = useState([]);
 
   const openInNewTab = (url) => {
     window.open(url, "_blank", "noopener,noreferrer");
@@ -251,7 +270,7 @@ const ViewArtist = () => {
         },
       })
       .then((res) => {
-        toast.success("add Succussfully");
+        toast.success("Spotlight Added");
       })
       .catch((error) => {
         toast.error(error.response.data.message);
@@ -351,7 +370,14 @@ const ViewArtist = () => {
     textAlign: "center",
     color: theme.palette.text.secondary,
   }));
+  const getEmail = (email, name) => {
+    if (email) {
+      return email;
+    }
 
+    const newName = name ? name.replace(/\s+/, "") : "Unknown";
+    return `${newName}@blacklionapp.xyz`;
+  };
   return (
     <Container maxWidth="xxl" className={styles.root}>
       <Grid
@@ -377,90 +403,33 @@ const ViewArtist = () => {
             component="div"
             className={classess.page__artist__box}
           >
-            <Box
-              className={`${classess.page__artist__box__editbtn} ${
-                hovered ? classess.hovered : ""
-              }`}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-            >
-              <Box className={classess.page__artist__box__editbtn__icon}>
-                <IconButton
-                  size="small"
-                  className={classess.page__artist__box__editbtn__icon__btnICon}
-                  style={{
-                    backgroundColor: hovered ? "#4FFCB7" : "#4FFCB7",
-                    width: hovered ? "100px" : "30px", // Adjust the width as needed
-                    height: hovered ? "30" : "30px",
-                    borderRadius: hovered ? "12px" : "50%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: "10px",
-                    transition: "all 0.3s ease",
-                  }}
-                >
-                  <CreateIcon
-                    style={{
-                      color: hovered ? "#000" : "#000",
-                      width: hovered ? "15px" : "15px",
-                      height: "15px",
-                    }}
-                  />
-                  {hovered && <span>Edit</span>}
-                </IconButton>
-              </Box>
-            </Box>
-
             <Box className={classess.page__artist__box__topdetails}>
               <Box className={classess.page__artist__box__topdetails__image}>
-                <div>
+                <Box>
                   {status === "succeeded" ? (
-                    <div
-                      style={{
-                        position: "relative",
-                        display: "inline-block",
-                      }}
-                    >
-                      <Box className={classess.wrapper}>
-                        <Box className={classess.controls}>
-                          <Box
-                            className={classess.add}
-                            onClick={() => artist_add_to_spotlight()}
-                          >
-                            <PersonAddAltIcon sx={{ fontSize: 15 }} />
-                            &nbsp;Add
-                          </Box>
-                        </Box>
-                        <Avatar
-                          src={artist?.avatar}
-                          alt={artist?.name}
-                          className={
-                            classess.page__artist__box__topdetails__image
-                          }
-                          sx={{
-                            height: 85,
-                            width: 85,
-                            borderWidth: "4px",
-                            borderColor: "#4FFCB7",
-                            borderStyle: "solid",
-                            objectFit: "cover",
-                          }}
-                        />
-                      </Box>
-
-                      {/* Online status indicator */}
-                      <div className={classess.onlineInd} />
-                    </div>
+                    <Box>
+                      <Avatar
+                        src={artist?.avatar}
+                        alt={artist?.name}
+                        className={
+                          classess.page__artist__box__topdetails__image
+                        }
+                        sx={{
+                          border: "4px solid #4FFCB7",
+                        }}
+                      />
+                      <Box className={classess.onlineInd} />
+                    </Box>
                   ) : (
                     <Skeleton
                       variant="circular"
-                      width={85}
-                      height={85}
+                      width={89}
+                      height={89}
                       sx={{ bgcolor: "grey.700" }}
+                      className={classess.skeleton}
                     />
                   )}
-                </div>
+                </Box>
               </Box>
 
               <Box
@@ -475,20 +444,38 @@ const ViewArtist = () => {
                     classess.page__artist__box__topdetails__details__artistname
                   }
                 >
-                  <Tooltip
-                    title={artist?.name}
-                    placement="top"
-                    arrow
-                    enterDelay={100}
-                  >
-                    <span
-                      className={
-                        classess.page__artist__box__topdetails__details__artistname__name
-                      }
+                  <Box>
+                    <Tooltip
+                      title={artist?.name}
+                      placement="top"
+                      arrow
+                      enterDelay={100}
                     >
-                      {artist?.name}
-                    </span>
-                  </Tooltip>
+                      <span
+                        className={
+                          classess.page__artist__box__topdetails__details__artistname__name
+                        }
+                      >
+                        {artist?.name}
+                      </span>
+                    </Tooltip>
+                  </Box>
+                  <Box
+                    sx={{ mt: 0.5, cursor: "pointer" }}
+                    onClick={() => {
+                      dispatch(emptySingularArtist());
+                      navigate(`/blig/edit-artist/${id}`);
+                    }}
+                  >
+                    {/* <CreateIcon
+                      style={{
+                        color: "#4ffcb7",
+                        fontSize: "18px",
+                        cursor: "pointer",
+                      }}
+                    /> */}
+                    <img src={GreenPencil} alt="pencil icon" />
+                  </Box>
                 </Box>
 
                 <Box
@@ -498,7 +485,12 @@ const ViewArtist = () => {
                     classess.page__artist__box__topdetails__details__email
                   }
                 >
-                  {artist?.email}
+                  {getEmail(artist?.email, artist?.name)}
+                  {/* {artist?.email ? artist.email : "N/A"} */}
+                  {/* {artist?.email
+                    ? artist.email
+                    : artist.name.replace(/\s+/g, "").toLowerCase() +
+                      "@spotify.com"} */}
                 </Box>
                 <Box
                   variant="div"
@@ -507,15 +499,27 @@ const ViewArtist = () => {
                     classess.page__artist__box__topdetails__details__country
                   }
                 >
-                  {artist?.chartmetric?.code2
-                    ? countries[artist?.chartmetric?.code2.toUpperCase()]
-                        ?.emoji || ""
-                    : ""}
-                  {"   "}
-                  {artist?.chartmetric?.code2
-                    ? countries[artist?.chartmetric?.code2.toUpperCase()]
-                        ?.name || "N/A"
-                    : "N/A"}
+                  <span
+                    className={
+                      classess.page__artist__box__topdetails__details__country__flag
+                    }
+                  >
+                    {artist?.chartmetric?.code2
+                      ? countries[artist?.chartmetric?.code2.toUpperCase()]
+                          ?.emoji || "N/A"
+                      : ""}
+                  </span>
+
+                  <span
+                    className={
+                      classess.page__artist__box__topdetails__details__country__name
+                    }
+                  >
+                    {artist?.chartmetric?.code2
+                      ? countries[artist?.chartmetric?.code2.toUpperCase()]
+                          ?.name || "N/A"
+                      : "N/A"}
+                  </span>
                 </Box>
                 {isLoadedQueue ? (
                   <span style={{ color: "#FFF" }}>
@@ -526,7 +530,8 @@ const ViewArtist = () => {
                     )}
                   </span>
                 ) : (
-                  <CircularProgress size={40} color="secondary" />
+                  // <CircularProgress size={40} color="secondary" />
+                  <LinearProgress variant="determinate" value={progress} />
                 )}
               </Box>
             </Box>
@@ -581,26 +586,35 @@ const ViewArtist = () => {
               <Box className={classess.page__artist__box__platforms__socials}>
                 {socialLinks?.map((item) => {
                   return (
-                    <img
-                      style={{ cursor: "pointer" }}
-                      key={item.id}
-                      src={
-                        (item.source === "deezer" && deezerIcon) ||
-                        (item.source === "spotify" && spotifyIcon) ||
-                        (item.source === "amazon" && amazonMusicIcon) ||
-                        (item.source === "tidal" && tidalIcon) ||
-                        (item.source === "tiktok" && tiktokIcon) ||
-                        (item.source === "apple_music" && appleMusicIcon) ||
-                        (item.source === "twitter" && twitterIcon) ||
-                        (item.source === "instagram" && instagramIcon) ||
-                        (item.source === "youtube" && youtubeIcon)
-                      }
-                      className={
-                        classess.page__artist__box__platforms__socials__icons
-                      }
-                      alt={`${item.source}`}
-                      onClick={() => openInNewTab(`${item.url}`)}
-                    />
+                    <>
+                      <Tooltip
+                        title={item?.source}
+                        placement="top"
+                        arrow
+                        enterDelay={100}
+                      >
+                        <img
+                          style={{ cursor: "pointer" }}
+                          key={item.id}
+                          src={
+                            (item.source === "deezer" && deezerIcon) ||
+                            (item.source === "spotify" && spotifyIcon) ||
+                            (item.source === "amazon" && amazonMusicIcon) ||
+                            (item.source === "tidal" && tidalIcon) ||
+                            (item.source === "tiktok" && tiktokIcon) ||
+                            (item.source === "apple_music" && appleMusicIcon) ||
+                            (item.source === "twitter" && twitterIcon) ||
+                            (item.source === "instagram" && instagramIcon) ||
+                            (item.source === "youtube" && youtubeIcon)
+                          }
+                          className={
+                            classess.page__artist__box__platforms__socials__icons
+                          }
+                          alt={`${item.source}`}
+                          onClick={() => openInNewTab(`${item.url}`)}
+                        />
+                      </Tooltip>
+                    </>
                   );
                 })}
               </Box>
@@ -615,77 +629,49 @@ const ViewArtist = () => {
             <Divider className={classess.page__artist__box__horizontalline} />
 
             <Box className={classess.page__artist__box__tracks_info}>
-              <Box
-                className={classess.page__artist__box__tracks_info__container}
-              >
-                <span
-                  className={
-                    classess.page__artist__box__tracks_info__container__text
-                  }
-                >
-                  TOTAL TRACKS:
-                </span>
-
-                <Typography
-                  className={
-                    classess.page__artist__box__tracks_info__container__text2
-                  }
-                >
-                  <span
-                    className={classess.page__funding__artist__details__pointer}
-                  >
-                    {totalTracks}
-                  </span>
-                </Typography>
-              </Box>
-
-              <Box
-                className={
-                  classess.page__artist__box__tracks_info__containerright
-                }
-              >
+              <Box className={classess.page__artist__box__tracks_info__left}>
                 <Box
                   className={
-                    classess.page__artist__box__tracks_info__containerright__heading_contianer
+                    classess.page__artist__box__tracks_info__left__text1
                   }
                 >
-                  <span
-                    className={
-                      classess.page__artist__box__tracks_info__containerright__text
-                    }
-                  >
-                    Last updated on{" "}
-                    {moment(artist?.updatedAt).format("MMMM DD YYYY")}
-                  </span>
-                  <span
-                    className={
-                      classess.page__artist__box__tracks_info__containerright__text
-                    }
-                  >
-                    {moment(artist?.updatedAt).format("h:mm:ss A")}
-                  </span>
+                  Total Tracks:
+                </Box>
+                <Box
+                  className={
+                    classess.page__artist__box__tracks_info__left__text2
+                  }
+                >
+                  {totalTracks}
+                </Box>
+              </Box>
+              <Box className={classess.page__artist__box__tracks_info__right}>
+                <Box
+                  className={
+                    classess.page__artist__box__tracks_info__right__top_details
+                  }
+                >
+                  Last updated on{" "}
+                  {moment(artist?.updatedAt).format("MMM DD YY")}
+                  {" at "}
+                  {moment(artist?.updatedAt).format("hh:mm")}
                 </Box>
 
-                <Button
-                  variant="outlined"
-                  style={{
-                    width: "100%",
-                    color: "#4FFCB7",
-                    borderColor: "#4FFCB7",
-                    borderRadius: "12px",
-                    fontSize: "10px",
-                  }}
-                  startIcon={
-                    <SyncRoundedIcon
-                      sx={{
-                        bgcolor: "#222C41",
-                        color: "#4FFCB7",
-                      }}
-                    />
-                  }
-                >
-                  Update Artists Stats
-                </Button>
+                <Box>
+                  <Button
+                    variant="outlined"
+                    autoFocus
+                    onClick={UpdateArtistStatAndChartmetrics}
+                    className={
+                      classess.page__artist__box__tracks_info__right__update_botton
+                    }
+                    loading={loading}
+                    disabled={loading}
+                    startIcon={<SyncRoundedIcon />}
+                  >
+                    Update Stats
+                  </Button>
+                </Box>
               </Box>
             </Box>
 
@@ -694,28 +680,18 @@ const ViewArtist = () => {
             <Box className={classess.page__artist__box__buttons_container}>
               <Button
                 className={
-                  classess.page__artist__box__buttons_container__bottons
+                  classess.page__artist__box__buttons_container__view_funding_dashbord
                 }
                 sx={{
-                  width: "100%",
-                  color: "#222c41",
-                  borderColor: "#4FFCB7",
-                  borderRadius: "12px",
-                  backgroundColor: "#4FFCB7",
-                  marginBottom: "10px",
-                  "&:hover": {
-                    backgroundColor: "#4FFCB7",
-                    color: "#222c41",
-                  },
+                  opacity: isLoadedQueue && queue === 0 ? "1" : "0.3",
                 }}
                 disabled={isLoadedQueue && queue === 0 ? false : true}
                 onClick={() => navigate(`/blig/view-funding-dashboard/${id}`)}
                 startIcon={
                   <TrendingUpRoundedIcon
-                    sx={{
-                      bgcolor: "#4FFCB7",
-                      color: "#222C41",
-                    }}
+                    className={
+                      classess.page__artist__box__buttons_container__view_funding_dashbord__inner_icon
+                    }
                   />
                 }
               >
@@ -723,19 +699,14 @@ const ViewArtist = () => {
               </Button>
 
               <Button
-                style={{
-                  width: "100%",
-                  color: "#fff",
-                  // borderColor: "#4FFCB7",
-                  borderRadius: "12px",
-                  backgroundColor: "#5A7380",
-                }}
+                className={
+                  classess.page__artist__box__buttons_container__edit_dashbord_btn
+                }
                 startIcon={
                   <InventoryRoundedIcon
-                    sx={{
-                      bgcolor: "#5A7380",
-                      color: "#fff",
-                    }}
+                    className={
+                      classess.page__artist__box__buttons_container__edit_dashbord_btn__inner_icon
+                    }
                   />
                 }
               >
@@ -746,27 +717,19 @@ const ViewArtist = () => {
         </Grid>
 
         <Grid item xs={12} sm={12} lg={6} xl={6}>
-          <Box
-            varient="div"
-            component="div"
-            className={classess.page__details__box}
-          >
+          <Box varient="div" component="div" className={classess.page__details}>
             <Box
               varient="div"
               component="div"
-              className={classess.page__details__box__tracks}
+              className={classess.page__details__box}
             >
               <Box
                 varient="div"
                 component="div"
-                className={classess.page__details__box__tracks__header}
+                className={classess.page__details__box__header}
               >
-                <span
-                  className={
-                    classess.page__details__box__adetails__header__title
-                  }
-                >
-                  Top Tracks
+                <span className={classess.page__details__box__header__title}>
+                  top tracks
                 </span>
               </Box>
               <ArtistTopTracks
@@ -785,9 +748,10 @@ const ViewArtist = () => {
           <Box
             varient="div"
             component="div"
-            className={`${classess.page__similar__box} ${classess.tabHide} `}
+            // className={`${classess.page__similar__box} ${classess.tabHide} `}
+            className={classess.page__similar__box}
           >
-            <SimilarArtist similarArtist={similarArtist} />
+            <SimilarArtist similarArtist={similarArtist} loader={loader} />
           </Box>
         </Grid>
         {/* Top Grid Ends Here */}
@@ -821,16 +785,16 @@ const ViewArtist = () => {
         {/* Third Grid Starts From Here */}
 
         <Grid item xs={12} sm={12} lg={12} xl={4}>
-          <Box
+          {/* <Box
             component="div"
             variant="div"
             className={classess.page__artist__box3}
           >
             <SwotGraph artist={artist} />
-          </Box>
+          </Box> */}
         </Grid>
 
-        <Grid item xs={12} sm={12} lg={12} xl={8}>
+        <Grid item xs={12} sm={12} lg={12} xl={12}>
           <Box>
             {artist && (
               <RecommendCollaborations

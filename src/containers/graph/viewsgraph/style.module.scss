@@ -10,8 +10,7 @@
         width: calc(100% - 250px);
 
         &__heading {
-            font-weight: bold;
-            color: $base-text-color;
+            @include customHeading(24px);
         }
 
         &__icon {
@@ -21,7 +20,7 @@
     }
 
     &__banner {
-        background: $secondary-bg-color-1;
+        background: #222c41;
         width: calc(100%);
         // min-height: 10.8rem;
         border-radius: 12px;
@@ -35,8 +34,10 @@
             &__bg {
                 width: 100%;
                 height: 100px;
-                background: $profile-gradient-color !important;
+                // background: $profile-gradient-color !important;
                 overflow: hidden;
+            }
+            &__heading {
             }
         }
     }

@@ -20,20 +20,14 @@ const SearchAutcomplete = ({ list, search, onInput, handleSearchItem }) => {
       >
         <input
           name="search"
-          placeholder="Search to select artist"
+          placeholder="Search by artist name
+          "
           type="text"
           value={search}
           onInput={onInput}
           autoComplete="off"
           className={classess.container__search_box__search_input}
         />
-        {/* <Box className={classess.container__search_box__search_icon}>
-          <SearchIcon
-            sx={{
-              color: "black",
-            }}
-          />
-        </Box> */}
       </Box>
       {list && list.length ? (
         <ul className={classess.container__list}>
@@ -46,7 +40,13 @@ const SearchAutcomplete = ({ list, search, onInput, handleSearchItem }) => {
                 onClick={() => handleSearchItem(item)}
               >
                 <Avatar alt={item.name} src={item.image} />
-                {item.name}
+                <span
+                  className={
+                    classess.container__list__list_item__contains__title
+                  }
+                >
+                  {item.name}
+                </span>
               </Box>
             </li>
           ))}

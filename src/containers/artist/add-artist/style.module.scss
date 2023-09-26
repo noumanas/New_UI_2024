@@ -2,16 +2,14 @@
 @import "../../../styles/colors.scss";
 
 .page {
-  padding: 0px;
-  color: #f6f6f6 !important;
+  @include flexProperties(column, center, center, $fullWidth: true);
+  width: 100% !important;
   font-family: "DM Sans";
-  width: calc(100%);
 
   &__searchbanner {
     display: flex;
     width: 100% !important;
-    // background-image: url("../../../assets//searchBg.png");
-    background-image: linear-gradient(to right, #175668, #175668, #19c39e, #e4f1ee, #e4f1ee);
+    background-image: $base-search-artist-gredient;
     align-items: center;
     flex-direction: row;
     justify-content: center;
@@ -21,18 +19,12 @@
     max-height: 118px !important;
 
     &__text {
-      @include customHeading();
+      @include customHeading(28px);
       width: 40%;
-      // color: #ffffff;
-      // font-size: 28px !important;
-      // font-weight: 700 !important;
-      // white-space: nowrap;
-      // overflow: hidden;
-      // text-overflow: ellipsis;
     }
 
     &__searcharea {
-      width: 50%;
+      width: 45%;
       &__search {
         width: 100%;
         padding: 10px;
@@ -52,15 +44,10 @@
       border-style: none;
       margin-left: 10px;
       &__searchbtn {
-        width: 141px;
+        width: 141px !important;
         height: 40px;
-        // margin-left: -110px !important;
-        background-color: #4ffcb7 !important;
-        border-style: none;
-        border-radius: 12px !important;
-        color: #000000 !important;
-        font-weight: 700 !important;
-        filter: drop-shadow(5px 5px 10px #000);
+        @include activeThemeBotton(14px, 12px);
+        filter: drop-shadow(3px 3px 6px #1a1a1a50);
       }
     }
 
@@ -72,7 +59,7 @@
 
         &__title {
           @include fontSize(20px);
-          color: $base-text-color !important;
+          color: #4ffcb7 !important;
           letter-spacing: 0.1rem !important;
         }
 
@@ -85,18 +72,18 @@
           gap: 20px;
 
           &__title {
-            color: $base-text-color;
+            color: #4ffcb7;
             @include fontSize(40px);
             // font-weight: bold;
           }
 
           &__text {
-            color: $base-text-color;
+            color: #4ffcb7;
           }
 
           &__button {
             background: #1a1a1a !important;
-            color: $base-text-color !important;
+            color: #4ffcb7 !important;
             @include disabledCss();
           }
         }
@@ -120,7 +107,7 @@
   }
 
   &__fieldsContainer {
-    background: #222c41;
+    background: $base-container-backgroung-color;
     border-radius: 12px;
 
     &__form {
@@ -138,10 +125,8 @@
 
         &__label {
           @include flexProperties(row, flex-start, center, $fullWidth: true);
-          gap: 10px;
-          color: white;
+          @include customFontsSmallTags();
           margin-left: 10px;
-
           &__image {
             height: 18px;
             width: 18px;
@@ -149,17 +134,16 @@
         }
 
         &__input {
-          color: #979797 !important;
+          color: $base-input-text-color !important;
           border: 1px none !important;
-          background: #192233;
+          background: $base-input-background-color;
           outline: none;
           padding: 15px;
           font-size: 18px;
           border-radius: 8px;
           width: 100%;
-
           option {
-            background-color: #192233;
+            background-color: $base-inner-container-background-color;
           }
         }
 
@@ -167,51 +151,30 @@
           border: 1px none !important;
           border-radius: 8px;
           padding: 15px;
-          color: #979797 !important;
-          background: #192233;
+          color: $base-input-text-color !important;
+          background: $base-input-background-color;
 
           input {
-            color: #979797 !important;
-            background: #192233;
+            color: $base-input-text-color !important;
+            background: $base-input-background-color;
             outline: none;
             font-size: 18px;
             border: none;
           }
 
           option {
-            background-color: #192233;
-            color: #c2c2c2;
+            background-color: $base-input-background-color;
+            color: $base-input-text-color;
           }
         }
       }
 
       &__cancel_btn {
-        @include deActiveThemeBotton(16px, 12px);
-        border: 1px solid #4ffcb7 !important;
+        @include cancelDeactiveBtn(16px, 12px);
       }
 
       &__submit_btn {
         @include activeThemeBotton(16px, 12px);
-      }
-
-      &__choose_file {
-        background-color: #dedede !important;
-        background: #dedede !important;
-        padding: 10px;
-        width: 100%;
-        color: #2f3443 !important;
-        border-radius: 8px;
-
-        &:hover {
-          background-color: #c0bcbc !important;
-          background: #c0bcbc !important;
-        }
-      }
-
-      &__upload {
-        padding: 10px;
-        width: 100%;
-        border-radius: 8px;
       }
     }
   }

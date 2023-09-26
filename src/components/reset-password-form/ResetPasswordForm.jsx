@@ -148,7 +148,7 @@ const ResetPasswordForm = () => {
             </FormControl>
           </Box>
           <Divider
-            sx={{ background: "#286397", mt: 4, mb: 2, width: "100%" }}
+            sx={{ background: "#4FFCB7", mt: 4, mb: 2, width: "100%" }}
           />
           <Box
             varient="div"

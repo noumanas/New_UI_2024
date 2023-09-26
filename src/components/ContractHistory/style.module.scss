@@ -2,9 +2,110 @@
 @import "../../styles/colors.scss";
 
 .page {
-  margin-top: 20px;
-  overflow: hidden;
+  @include flexProperties(column, center, center, $fullWidth: true);
   width: 100%;
+  padding-top: 20px !important;
+  &__table {
+    background: $base-container-backgroung-color !important;
+    overflow: scroll;
+    overflow-x: hidden !important;
+    border-collapse: separate !important;
+    border-spacing: 4px !important;
+    min-height: 39.1rem;
+    max-height: 39.1rem;
+    width: 100% !important;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    &__head {
+      background-color: $base-container-backgroung-color !important;
+      position: sticky;
+      z-index: 9999 !important;
+    }
+
+    &__brow {
+      background-color: $base-container-backgroung-color !important;
+      width: 100% !important;
+      tr {
+        &:nth-child(even) {
+          background-color: $base-inner-container-background-color !important;
+        }
+
+        &:nth-child(odd) {
+          background-color: $base-inner-container-background-color !important;
+        }
+      }
+    }
+
+    &__col1 {
+      background: $base-container-backgroung-color !important;
+      text-align: left !important;
+      width: 50px !important;
+      border-bottom: 1px solid $base-border-line-color;
+      @include textEllipsis();
+      &__heading {
+        @include customFontsSmallTags();
+      }
+    }
+
+    &__col {
+      background: $base-container-backgroung-color !important;
+      text-align: left !important;
+      width: 50px !important;
+      border-bottom: 1px solid $base-border-line-color;
+      @include textEllipsis();
+      &__heading {
+        @include customFontsSmallTags();
+      }
+    }
+
+    &__row {
+      border-bottom: 0px !important;
+      background-color: $base-inner-container-background-color !important;
+      @include textEllipsis(1);
+      &__filename {
+        @include customParagraph(16px);
+        @include textEllipsis(200px);
+      }
+
+      &__date {
+        @include customParagraph(16px);
+        text-decoration: underline;
+      }
+
+      &__rep_name {
+        @include customParagraph(16px);
+        text-decoration: underline;
+      }
+
+      &__version {
+        @include customParagraph(16px);
+      }
+
+      &__action2 {
+        justify-content: center;
+        display: flex;
+      }
+    }
+
+    &__notes_row {
+      background-color: $base-container-backgroung-color;
+      text-align: left !important;
+      max-width: 500px;
+      padding-top: 12px !important;
+      padding-bottom: 12px !important;
+      padding-right: 60px !important;
+      padding-top: 40px !important;
+      border-bottom: 3px solid $base-container-backgroung-color !important;
+    }
+  }
+
+  &__loader {
+    @include flexProperties(column, center, center, $fullWidth: true);
+    width: 100%;
+    height: 100%;
+  }
 
   &__notes {
     flex: 1;
@@ -12,19 +113,25 @@
 
     &__notebox {
       width: 100%;
-      background: #192233;
+      background: $base-inner-container-background-color;
       border-radius: 12px;
       padding: 20px;
-
       &__chips {
         display: flex;
         justify-content: space-between;
-        font-weight: 600;
+        &__label_chip {
+          background-color: $base-button-background-color;
+          max-width: 120px !important;
+          @include customHeading(12px);
+        }
+        &__moment_chip {
+          background-color: $base-button-background-color;
+          @include customHeading(12px);
+        }
       }
 
       &__notetext {
-        font-size: 14px;
-        color: #fff;
+        @include customParagraph(14px);
       }
     }
 
@@ -41,7 +148,7 @@
 
       &__adetails {
         width: 100%;
-        background: $secondary-bg-color-1;
+        background: $base-container-backgroung-color;
         border-radius: 12px;
         padding: 20px;
 
@@ -51,7 +158,7 @@
           margin-bottom: 20px;
 
           &__title {
-            color: $base-text-color;
+            color: #4ffcb7;
             font-size: 30px;
             font-weight: 500;
             letter-spacing: 1px;
@@ -59,7 +166,7 @@
           }
 
           &__Editbtn {
-            background-color: #1976d2 !important;
+            background-color: #4ffcb7 !important;
             border-radius: 50% !important;
             width: 50px;
             height: 50px;
@@ -71,7 +178,7 @@
 
       &__tracks {
         width: 100%;
-        background: $secondary-bg-color-1;
+        background: $base-container-backgroung-color;
         border-radius: 12px;
         padding: 20px;
 
@@ -80,15 +187,15 @@
           width: 100%;
 
           &__title {
-            color: $base-text-color;
+            color: #4ffcb7;
             font-size: 16px;
             font-weight: bold;
             text-transform: uppercase;
           }
 
           &__btn {
-            background: $secondary-bg-color-3 !important;
-            color: $base-text-color !important;
+            background: #4ffcb7 !important;
+            color: #4ffcb7 !important;
             border-radius: 25px !important;
             font-size: 14px;
             cursor: pointer;
@@ -97,220 +204,15 @@
             padding: 5px 20px !important;
 
             &:hover {
-              background: #01a177 !important;
+              background: #4ffcb7 !important;
             }
           }
         }
       }
     }
   }
-
-  &__list {
-    // overflow-y: scroll;
-    min-height: 39.1rem;
-    max-height: 39.1rem;
-    width: 100% !important;
-    // max-width: 100%;
-    &__ul {
-      // height: 415px;
-      // overflow: auto;
-      // list-style: none;
-      // padding: 0;
-      // margin: 0;
-
-      &__li {
-        // @include flexProperties(row, space-between, center, $fullWidth: true);
-        // gap: 30px;
-        // border-bottom: 1px solid rgba(255, 255, 255, .2);
-        // padding: 20px;
-        // cursor: pointer;
-
-        // &:last-child {
-        //     border-bottom: none;
-        // }
-
-        &__name {
-          font-size: 15px;
-          line-height: 25px;
-          text-transform: capitalize;
-          letter-spacing: 0px;
-          color: $base-text-color;
-          font-weight: normal;
-          @include textEllipsisLineClamp(2);
-        }
-        &__tracktype {
-          font-size: 15px;
-          line-height: 25px;
-          text-transform: capitalize;
-          letter-spacing: 0px;
-          color: $base-text-color;
-          font-weight: normal;
-        }
-      }
-    }
-
-    &__loader {
-      @include flexProperties(column, center, center, $fullWidth: true);
-      width: 100%;
-      height: 100%;
-    }
-  }
 }
 
-.table {
-  background: #222c41 !important;
-  overflow: scroll;
-  overflow-x: hidden !important;
-  width: 100%;
-  min-height: 37.3rem;
-  max-height: 37.3rem;
-  border-collapse: separate !important;
-  border-spacing: 4px !important;
-
-  &__head {
-    position: sticky;
-    z-index: 1;
-    &:first-child {
-      width: 5%;
-    }
-  }
-
-  &__brow {
-    overflow: hidden !important;
-  }
-
-  &__col1 {
-    width: 100% !important;
-    color: white !important;
-    background: #2f3443 !important;
-    text-align: left !important;
-    width: auto !important;
-    text-transform: uppercase;
-    border-bottom: 1px solid #474d5e;
-  }
-
-  &__col {
-    background: #222c41 !important;
-    text-align: left !important;
-    width: auto !important;
-    border-bottom: 1px solid #2f3443 !important;
-    &__heading {
-      @include customFontsSmallTags();
-    }
-    &:first-child {
-      width: 30px !important;
-    }
-    // font-weight: bold !important;
-  }
-
-  &__row {
-    color: #fff !important;
-    background-color: #192233;
-    // text-align: center !important;
-    // max-width: 500px;
-    // padding-top: 12px !important;
-    // padding-bottom: 12px !important;
-    // padding-right: 60px !important;
-    border-bottom: 3px solid #192233 !important;
-    &__date {
-      text-decoration: underline;
-    }
-
-    &__action2 {
-      justify-content: center;
-      display: flex;
-      &__btn {
-        width: 30px !important;
-        min-width: 30px !important;
-        height: 30px !important;
-        min-height: 30px !important;
-        padding: 15px !important;
-        background-color: #4fb7fc !important;
-        color: #000;
-        margin-right: 10px !important;
-        border-radius: 15px !important;
-      }
-      &__btn1 {
-        width: 30px !important;
-        min-width: 30px !important;
-        height: 30px !important;
-        min-height: 30px !important;
-        padding: 15px !important;
-        background-color: #d9d9d9 !important;
-        color: #000;
-        margin-right: 10px !important;
-        border-radius: 15px !important;
-      }
-      &__btn2 {
-        width: 30px !important;
-        min-width: 30px !important;
-        height: 30px !important;
-        min-height: 30px !important;
-        padding: 15px !important;
-        background-color: #4ffcb7 !important;
-        color: #000;
-        margin-right: 10px !important;
-        border-radius: 15px !important;
-      }
-    }
-
-    &__green {
-      color: green;
-    }
-
-    &__red {
-      color: red;
-    }
-
-    &__icon {
-      cursor: pointer;
-    }
-
-    &__filename {
-      font-size: 16px;
-      white-space: nowrap; // Prevents text from wrapping to a new line
-      overflow: hidden; // Hides any overflow beyond the container
-      text-overflow: ellipsis; // Adds ellipsis when text overflows
-      max-width: 15rem;
-    }
-
-    &__artistname {
-      // font-weight: bold;
-      font-size: 16px;
-      img {
-        transform: translateY(5px);
-        margin-right: 5px;
-      }
-    }
-    &__href {
-      text-decoration: none;
-    }
-    &__href:hover {
-      color: palevioletred;
-    }
-
-    &__name {
-      width: 15rem;
-      max-width: 15rem;
-    }
-    &__sosi {
-      // width: 10%;
-      font-size: 12px;
-    }
-  }
-
-  &__notes_row {
-    color: #fff !important;
-    background-color: #222c41;
-    // text-align: center !important;
-    // max-width: 500px;
-    // padding-top: 12px !important;
-    // padding-bottom: 12px !important;
-    // padding-right: 60px !important;
-    padding-top: 40px !important;
-    border-bottom: 3px solid #222c41 !important;
-  }
-}
 .notebox.note {
   overflow: visible !important;
 }
@@ -319,7 +221,7 @@
   content: "";
   width: 120%;
   height: 15px;
-  background-color: #222c41;
+  background-color: $base-container-backgroung-color;
   position: absolute;
   top: -15px;
   left: -30px;
@@ -331,12 +233,15 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #222c41;
+  background-color: $base-container-backgroung-color;
   border-radius: 12px;
   box-shadow: 2px 2px 4px #192233;
   padding: 20px;
   color: #ffffff;
   border: none;
+  &__top_heading {
+    @include customHeading(20px);
+  }
 
   &__closebutton {
     text-align: right;
@@ -353,26 +258,33 @@
     color: #fff !important;
     margin-top: 20px !important;
     margin-bottom: 15px !important;
-
-    // &:focus {
-    // outline: none !important;
-    // }
+    &:focus {
+      outline: none !important;
+    }
+    &:active {
+      outline: none !important;
+    }
   }
 
   &__button {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     align-items: center;
+    &__container {
+      display: flex;
+      flex-direction: row;
+      width: 20% !important;
+    }
 
     &__urev {
-      margin-right: 5px !important;
-      border-radius: 12px !important;
-      padding: 15px 20px !important;
+      @include activeThemeBotton();
+      font-size: 14px !important;
+      margin-right: 20px !important;
     }
 
     &__cmnt {
-      border-radius: 12px !important;
-      padding: 15px 20px !important;
+      @include activeThemeBotton();
+      font-size: 14px !important;
     }
   }
 }

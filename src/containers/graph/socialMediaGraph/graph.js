@@ -103,65 +103,85 @@ const SocialMediaGraph = (artist) => {
   };
 
   async function getdrawdata(spotify_id) {
+
     const repsonse = await axios.get(
       `${URLconfig.BASE_URL}/artist-stats/${spotify_id}`
     );
     if (repsonse.status === 200) {
-      setSpotify_followers(repsonse.data.data.stats[0].data.followers_total);
-      setInstagram_followers(repsonse.data.data.stats[4].data.followers_total);
-      setInstagram_views_total(repsonse.data.data.stats[4].data.views_total);
-      setInstagram_likes_total(repsonse.data.data.stats[4].data.likes_total);
-      setInstagram_comments_total(
-        repsonse.data.data.stats[4].data.comments_total
+      // if(repsonse.data?.data?.stats.length ==0){
+      //   const repsonse = await axios.post(
+      //     `${URLconfig.BASE_URL}/songstats/stats/${spotify_id}`
+      //   );
+      // }
+      // else{
+        setSpotify_followers(repsonse?.data?.data?.stats[0]?.data?.followers_total);
+        setInstagram_followers(repsonse?.data?.data?.stats[4]?.data?.followers_total);
+        setInstagram_views_total(repsonse?.data?.data?.stats[4]?.data?.views_total);
+        setInstagram_likes_total(repsonse?.data?.data?.stats[4]?.data?.likes_total);
+        setInstagram_comments_total(
+          repsonse?.data?.data?.stats[4]?.data?.comments_total
+        );
+        setInstagram_video_reach_total(
+          repsonse?.data?.data?.stats[4]?.data?.video_reach_total
+        );
+        setInstagram_videos_total(repsonse?.data?.data?.stats[4]?.data?.videos_total);
+        setyoutube_video_comments_total(
+          repsonse?.data?.data?.stats[6]?.data?.video_comments_total
+        );
+        setyoutube_subscribers_total(
+          repsonse?.data?.data?.stats[6]?.data?.subscribers_total
+        );
+        setyoutube_video_views_total(
+          repsonse?.data?.data?.stats[6]?.data?.video_views_total
+        );
+        setyoutube_video_likes_total(
+          repsonse?.data?.data?.stats[6]?.data?.video_likes_total
+        );
+        setyoutube_shorts_total(repsonse?.data?.data?.stats[6]?.data?.shorts_total);
+        setyoutube_video_reach_total(
+          repsonse?.data?.data?.stats[6]?.data?.video_reach_total
+        );
+        set_spotify_monthly_listeners_current(
+          repsonse?.data?.data?.stats[0]?.data?.monthly_listeners_current
+        );
+        set_spotify_popularity_current(
+          repsonse?.data?.data?.stats[0]?.data?.popularity_current
+        );
+        set_spotify_daily_listeners_current(
+          repsonse?.data?.data?.stats[0]?.data?.daily_listeners_current
+        );
+        // settiktok_comments_total(repsonse?.data?.data?.stats[5]?.data?.comments_total);
+        settiktok_followers_total(
+          repsonse?.data?.data?.stats[5]?.data?.followers_total
+        );
+        settiktok_likes_total(repsonse?.data?.data?.stats[5]?.data?.likes_total);
+        // settiktok_profile_likes_total(repsonse?.data?.data?.stats[5]?.data?.profile_likes_total);
+        // settiktok_profile_videos_total(repsonse?.data?.data?.stats[5]?.data?.profile_videos_total);
+        settiktok_shares_total(repsonse?.data?.data?.stats[5]?.data?.shares_total);
+        // settiktok_video_reach_total(repsonse?.data?.data?.stats[5]?.data?.video_reach_total);
+        settiktok_videos_total(repsonse?.data?.data?.stats[5]?.data?.videos_total);
+        settiktok_views_total(repsonse?.data?.data?.stats[5]?.data?.views_total);
+      
+    }else{
+      const repsonse = await axios.post(
+        `${URLconfig.BASE_URL}/songstats/stats/${spotify_id}`
       );
-      setInstagram_video_reach_total(
-        repsonse.data.data.stats[4].data.video_reach_total
-      );
-      setInstagram_videos_total(repsonse.data.data.stats[4].data.videos_total);
-      setyoutube_video_comments_total(
-        repsonse.data.data.stats[6].data.video_comments_total
-      );
-      setyoutube_subscribers_total(
-        repsonse.data.data.stats[6].data.subscribers_total
-      );
-      setyoutube_video_views_total(
-        repsonse.data.data.stats[6].data.video_views_total
-      );
-      setyoutube_video_likes_total(
-        repsonse.data.data.stats[6].data.video_likes_total
-      );
-      setyoutube_shorts_total(repsonse.data.data.stats[6].data.shorts_total);
-      setyoutube_video_reach_total(
-        repsonse.data.data.stats[6].data.video_reach_total
-      );
-      set_spotify_monthly_listeners_current(
-        repsonse.data.data.stats[0].data.monthly_listeners_current
-      );
-      set_spotify_popularity_current(
-        repsonse.data.data.stats[0].data.popularity_current
-      );
-      set_spotify_daily_listeners_current(
-        repsonse.data.data.stats[0].data.daily_listeners_current
-      );
-      // settiktok_comments_total(repsonse.data.data.stats[5].data.comments_total);
-      settiktok_followers_total(
-        repsonse.data.data.stats[5].data.followers_total
-      );
-      settiktok_likes_total(repsonse.data.data.stats[5].data.likes_total);
-      // settiktok_profile_likes_total(repsonse.data.data.stats[5].data.profile_likes_total);
-      // settiktok_profile_videos_total(repsonse.data.data.stats[5].data.profile_videos_total);
-      settiktok_shares_total(repsonse.data.data.stats[5].data.shares_total);
-      // settiktok_video_reach_total(repsonse.data.data.stats[5].data.video_reach_total);
-      settiktok_videos_total(repsonse.data.data.stats[5].data.videos_total);
-      settiktok_views_total(repsonse.data.data.stats[5].data.views_total);
     }
   }
 
   useEffect(() => {
-    if (artist) {
-      getdrawdata(artist.artist?.spotify_id);
+    if(artist) {
+      let isSubscribed = true;
+      if(isSubscribed) {
+        getdrawdata(artist.artist?.spotify_id);
+      }
+
+      return () => {
+        return isSubscribed
+      }
+
     }
-  }, [artist]);
+  }, [artist.artist]);
 
   const handleSpotify = () => {
     setSpotify(true);

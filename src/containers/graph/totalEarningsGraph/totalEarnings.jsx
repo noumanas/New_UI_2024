@@ -112,10 +112,10 @@ const TotalEarnings = ({ data }) => {
                 >
                   <defs>
                     <linearGradient id="Monthly" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#01a177" stopOpacity={0.8} />
+                      <stop offset="5%" stopColor="#4FFCB7" stopOpacity={0.8} />
                       <stop
                         offset="95%"
-                        stopColor="#01a17775"
+                        stopColor="#4FFCB775"
                         stopOpacity={0}
                       />
                     </linearGradient>
@@ -174,12 +174,8 @@ const TotalEarnings = ({ data }) => {
                 >
                   <defs>
                     <linearGradient id="Yearly" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#01a177" stopOpacity={0.8} />
-                      <stop
-                        offset="95%"
-                        stopColor="#01a17775"
-                        stopOpacity={0}
-                      />
+                      <stop offset="5%" stopColor="#4FFCB7" stopOpacity={0.8} />
+                      <stop offset="95%" stopColor="#4FFCB7" stopOpacity={0} />
                     </linearGradient>
                   </defs>
                   <CartesianGrid strokeDasharray="0 1" />

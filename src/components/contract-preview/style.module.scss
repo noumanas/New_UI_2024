@@ -74,7 +74,7 @@
                     width: 100%;
 
                     option {
-                        background-color: $secondary-bg-color-1;
+                        background-color: #222c41;
                     }
 
                     &::placeholder {
@@ -104,7 +104,7 @@
                 }
 
                 &__phoneinput {
-                    border: 1px solid #00cd98 !important;
+                    border: 1px solid #4ffcb7 !important;
                     border-radius: 8px;
                     padding: 15px;
                     color: #979797 !important;
@@ -118,7 +118,7 @@
                     }
 
                     option {
-                        background-color: $secondary-bg-color-1;
+                        background-color: #222c41;
                         color: #c2c2c2;
                     }
                 }
@@ -130,14 +130,14 @@
                 width: 100%;
 
                 &__cancel_btn {
-                    @include normalThemeButton(16px, 10px);
+                    @include activeThemeBotton(16px, 10px);
                     @include fontSize();
                     height: 40px;
                     padding: 5px 10px !important;
                 }
 
                 &__submit_btn {
-                    @include pinkThemeButton(16px, 10px);
+                    @include activeThemeBotton(16px, 10px);
                     @include fontSize();
                     height: 40px;
                     padding: 5px 10px !important;
@@ -166,7 +166,7 @@
 
             &__adetails {
                 width: 100%;
-                background: $secondary-bg-color-1;
+                background: #222c41;
                 border-radius: 12px;
                 padding: 20px;
 
@@ -175,7 +175,7 @@
                     width: 100%;
 
                     &__title {
-                        color: $base-text-color;
+                        color: #4ffcb7;
                         font-size: 18px !important;
                         font-weight: 500;
                         letter-spacing: 1px;
@@ -184,8 +184,8 @@
                     }
 
                     &__btn {
-                        background: $contract-btn !important;
-                        color: $base-text-color !important;
+                        background: #4ffcb7 !important;
+                        color: #4ffcb7 !important;
                         border-radius: 10px !important;
                         font-size: 16px !important;
                         cursor: pointer;
@@ -196,8 +196,8 @@
                         padding: 5px 20px !important;
 
                         &:hover {
-                            background: $contract-btn !important;
-                            border-color: $contract-btn !important;
+                            background: #4ffcb7 !important;
+                            border-color: #4ffcb7 !important;
                         }
                     }
                 }
@@ -215,7 +215,7 @@
                         width: 45%;
 
                         &__title {
-                            color: $base-text-color;
+                            color: #4ffcb7;
                             font-size: 16px;
 
                             &__image {
@@ -255,15 +255,15 @@
                     width: 100%;
 
                     &__title {
-                        color: $base-text-color;
+                        color: #4ffcb7;
                         font-size: 16px;
                         font-weight: bold;
                         text-transform: uppercase;
                     }
 
                     &__btn {
-                        background: $secondary-bg-color-3 !important;
-                        color: $base-text-color !important;
+                        background: #4ffcb7 !important;
+                        color: #4ffcb7 !important;
                         border-radius: 25px !important;
                         font-size: 14px;
                         cursor: pointer;
@@ -272,7 +272,7 @@
                         padding: 5px 20px !important;
 
                         &:hover {
-                            background: #01a177 !important;
+                            background: #4ffcb7 !important;
                         }
                     }
                 }

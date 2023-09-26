@@ -15,39 +15,32 @@
   font-family: "DM Sans" !important;
 
   &__artist {
-    flex: 1;
+    // flex: 1;
+
     width: 100%;
 
     &__box {
-      background: $secondary-bg-color-1;
+      background: $base-container-backgroung-color;
       border-radius: 12px;
       width: 100%;
-      min-height: 45.1rem;
-      max-height: 45.1rem;
-
-      &__editbtn {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        width: 100%;
-        z-index: 1;
-        &__icon {
-          padding: 15px !important;
-        }
-      }
+      height: 675px !important;
+      max-height: 675px !important;
 
       &__topdetails {
-        display: flex;
-        flex-wrap: wrap;
-        padding-left: 20px;
-        width: 100%;
+        @include flexProperties(row, center, center, $fullWidth: true);
+        width: 100% !important;
+        height: 20.4% !important;
+        // flex-wrap: nowrap;
+        padding: 0px 20px 0px 20px;
         gap: 20px;
-        height: 105px !important;
-        margin-top: -25px;
 
         &__image {
-          height: 85px;
-          width: 85px;
+          height: 89px !important;
+          width: 89px !important;
+          object-fit: cover;
+          border-radius: 50%;
+          position: relative;
+
           .onlineInd {
             position: absolute;
             bottom: 15px;
@@ -57,40 +50,38 @@
             background-color: #4ffcb7;
             border-radius: 50%;
           }
-          &:hover .onlineInd {
-            display: none;
-          }
         }
 
         &__details {
-          font-family: "DM Sans";
-          color: #ffffff;
           align-items: center;
           justify-content: center;
+          width: 100%;
+          // padding-right: 20px;
 
           &__artistname {
-            // @include textEllipsis(170px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
 
             &__name {
               @include customHeading(1.2rem);
+              @include textEllipsis(180px);
               text-align: left;
             }
           }
           &__email {
-            font-size: 14px;
+            @include customParagraph(14px);
             text-decoration: underline;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
           }
           &__country {
-            // margin-top: 10px;
-            font-size: 14px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            align-items: center;
             &__flag {
-              margin-left: 10px !important;
+              @include customParagraph(14px);
+              margin-left: 5px !important;
+            }
+            &__name {
+              @include customParagraph(14px);
             }
           }
         }
@@ -105,32 +96,27 @@
       &__horizontalline {
         width: calc(100%) !important;
         height: 1px !important;
-        background-color: #5a7380;
+        background-color: $base-border-line-color;
+        position: relative;
       }
 
       &__listnership {
+        @include flexProperties(column, center, flex-start, $fullWidth: true);
         width: 100%;
-        display: flex;
-        flex-direction: column;
-        color: #ffffff;
+        min-height: 15.41% !important;
+        max-height: 15.41% !important;
         padding: 20px !important;
+
         &__topheading {
           @include customFontsSmallTags();
         }
         &__innerlyer {
           display: flex;
-          // flex-wrap: wrap;
           align-items: center;
           justify-content: space-between;
           gap: 10px;
-
-          &__text1 {
-            font-size: 12px !important;
-            color: #4ffcb7;
-          }
           &__text2 {
-            font-size: 38px !important;
-            font-weight: 700;
+            @include customHeading(38px);
           }
           &__trending {
             display: flex;
@@ -145,7 +131,10 @@
       }
 
       &__platforms {
+        @include flexProperties(column, center, flex-start, $fullWidth: true);
         width: 100%;
+        min-height: 15.26% !important;
+        max-height: 15.26% !important ;
         padding: 20px;
         overflow-x: scroll;
         &::-webkit-scrollbar {
@@ -157,11 +146,12 @@
 
         &__socials {
           width: 100%;
-          @include flexProperties(row, flex-start, flex-start, $fullWidth: false);
-          margin-top: 10px !important;
+          display: flex;
+          gap: 7px;
+          margin-top: 8px !important;
           &__icons {
             width: 26px;
-            height: auto;
+            height: 26px;
             // margin: auto;
             display: block;
           }
@@ -169,59 +159,75 @@
       }
 
       &__genre {
-        background: $secondary-bg-color-1;
+        @include flexProperties(column, center, flex-start, $fullWidth: true);
         width: 100%;
-        height: 102px;
+        min-height: 13.78% !important;
+        max-height: 13.78% !important;
+        background: $base-container-backgroung-color;
       }
 
       &__tracks_info {
+        @include flexProperties(row, space-between, center, $fullWidth: true);
         width: 100%;
+        min-height: 15.56% !important;
+        max-height: 15.56% !important;
         padding: 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        // padding: 20px 10px;
-        gap: 10px;
-        flex-wrap: wrap;
-        &__container {
-          align-items: center;
-          justify-content: center;
-          width: 20%;
-          &__text {
+        gap: 10px !important;
+        &__left {
+          width: 30% !important;
+          &__text1 {
             @include customFontsSmallTags();
           }
           &__text2 {
-            color: #fff;
-            font-size: 28px !important;
-            font-weight: 700 !important;
-            // text-align: center;
+            @include customHeading(28px);
           }
         }
-        &__containerright {
-          color: #ffffff;
-          align-items: center;
-          justify-content: center;
-          flex-wrap: nowrap;
-          width: 70%;
-          &__heading_contianer {
-            margin-bottom: 10px !important;
+        &__right {
+          // @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
+          // width: 70% !important;
+          &__top_details {
+            gap: 5px !important;
+            overflow: hidden;
+            @include customParagraph(12px);
           }
-          &__text {
-            font-size: 12px;
-            // padding-bottom: 10px;
+          &__update_botton {
+            display: flex;
+            width: 100%;
+            background: "transparent" !important;
+            // background: $base-button-background-color !important;
+            border: 2px solid $base-button-background-color !important;
+            color: $base-button-background-color !important;
+            border-radius: 12px !important;
+            font-size: 12px !important;
+            font-weight: 700 !important;
+            cursor: pointer;
+            text-transform: capitalize !important;
+            border: none;
+            white-space: nowrap;
+            height: 40px !important;
           }
         }
       }
 
       &__buttons_container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 10px;
-        &__bottons {
-          &:hover {
-            background-color: "#4FFCB7";
+        @include flexProperties(column, center, center, $fullWidth: true);
+        width: 100% !important;
+        min-height: 17.78% !important;
+        max-height: 17.78% !important;
+        padding: 0px 20px 0px 20px;
+        &__view_funding_dashbord {
+          @include activeThemeBotton();
+          height: 40px !important;
+          margin-bottom: 10px !important;
+          &__inner_icon {
+            color: $base-button-text-color;
+          }
+        }
+        &__edit_dashbord_btn {
+          height: 40px !important;
+
+          @include deActiveThemeBotton();
+          &__inner_icon {
           }
         }
       }
@@ -236,121 +242,32 @@
 
   &__details {
     flex: 1;
-    width: 100%;
+    width: 100% !important;
 
     &__box {
-      @include flexProperties(column, flex-start, flex-start, $fullWidth: false);
-      width: 100%;
-      gap: 20px;
+      @include flexProperties(
+        column,
+        flex-start,
+        flex-start,
+        $fullWidth: false
+      );
+      width: 100% !important;
+      height: 675px !important;
+      max-height: 675px !important;
+      background-color: $base-container-backgroung-color !important;
       border-radius: 12px !important;
+      padding: 20px !important;
 
-      &__adetails {
-        width: 100%;
-        background: $secondary-bg-color-1;
-        padding: 20px;
-        border-radius: 12px !important;
-
-        &__header {
-          @include flexProperties(row, space-between, center, $fullWidth: true);
-          width: 100%;
-
-          &__title {
-            @include customHeading(24px);
-            text-transform: capitalize;
-          }
-
-          &__btn {
-            background: $secondary-bg-color-3 !important;
-            color: $base-text-color !important;
-            border-radius: 12px !important;
-            font-size: 16px !important;
-            cursor: pointer;
-            text-transform: capitalize !important;
-            width: 139px;
-            height: 40px;
-            border: none;
-            padding: 5px 20px !important;
-            font-family: "DM Sans" !important;
-
-            &:hover {
-              background: #01a177 !important;
-              border-color: #01a177 !important;
-            }
-          }
+      &__header {
+        @include flexProperties(
+          column,
+          flex-start,
+          flex-start,
+          $fullWidth: false
+        );
+        &__title {
+          @include customHeading(24px);
         }
-
-        &__content {
-          @include flexProperties(row, space-between, center, $fullWidth: false);
-          flex-wrap: wrap;
-          gap: 10px;
-          margin-top: 40px;
-
-          &__box {
-            @include flexProperties(row, flex-start, center, $fullWidth: false);
-            flex-wrap: wrap;
-            gap: 10px;
-            width: 45%;
-
-            &__title {
-              color: $base-text-color;
-              font-size: 16px;
-
-              &__image {
-                height: 20px;
-                width: 20px;
-                cursor: pointer;
-              }
-            }
-
-            &__value {
-              color: white;
-              font-size: 14px;
-            }
-          }
-        }
-      }
-
-      &__tracks {
-        width: 100%;
-        background: $secondary-bg-color-1;
-        border-radius: 12px;
-        padding: 20px;
-        min-height: 45.1rem;
-        max-height: 45.1rem;
-
-        &__header {
-          @include flexProperties(row, space-between, center, $fullWidth: true);
-          width: 100%;
-
-          &__title {
-            color: $base-text-color;
-            font-size: 16px;
-            font-weight: bold;
-            text-transform: uppercase;
-          }
-
-          &__btn {
-            background: $secondary-bg-color-3 !important;
-            color: $base-text-color !important;
-            border-radius: 12px !important;
-            font-size: 14px;
-            cursor: pointer;
-            text-transform: uppercase;
-            border: none;
-            padding: 5px 20px !important;
-            font-family: "DM Sans" !important;
-
-            &:hover {
-              background: #01a177 !important;
-            }
-          }
-        }
-      }
-
-      &__social_insights {
-        height: 340px !important;
-        width: 340px !important;
-        border-radius: 12px !important;
       }
     }
   }
@@ -361,17 +278,9 @@
     width: 100%;
 
     &__box {
-      background: $secondary-bg-color-1;
+      background: $base-container-backgroung-color;
       border-radius: 12px !important;
-      min-height: 45.1rem;
-      max-height: 45.1rem;
       overflow: hidden;
-    }
-    &__box2 {
-      background: $secondary-bg-color-1;
-      border-radius: 12px !important;
-      height: 340px;
-      max-height: 340px;
     }
   }
 }
@@ -431,6 +340,9 @@
         }
       }
     }
+  }
+  .page__artist__box__topdetails__details__artistname__name {
+    width: 100% !important;
   }
 }
 
@@ -576,6 +488,7 @@
 
 .wrapper {
   display: block;
+  position: relative;
   &:hover {
     .controls {
       display: block !important;
@@ -585,7 +498,7 @@
   .controls {
     width: 85px;
     height: 85px;
-    border: 2px solid $secondary-bg-color-3;
+    border: 2px solid #4ffcb7;
     position: absolute;
     display: none !important;
     background-color: rgba(0, 0, 0, 0.582);
@@ -608,5 +521,47 @@
       color: #fff;
       cursor: pointer;
     }
+  }
+}
+
+// @media only screen and (max-width: 1400px) {
+//   .page__artist__box__topdetails__image {
+//     width: 70px !important;
+//     height: 70px !important;
+//   }
+//   .skeleton {
+//     width: 70px !important;
+//     height: 70px !important;
+//   }
+//   .onlineInd {
+//     bottom: 10px !important;
+//   }
+//   .page__artist__box__topdetails__details__artistname__name {
+//     white-space: nowrap;
+//     overflow: hidden;
+//     text-overflow: ellipsis;
+//     display: block;
+//     width: 100px;
+//   }
+// }
+
+@media only screen and (max-width: 1600px) {
+  .page__artist__box__topdetails__image {
+    width: 70px !important;
+    height: 70px !important;
+  }
+  .skeleton {
+    width: 70px !important;
+    height: 70px !important;
+  }
+  .onlineInd {
+    bottom: 10px !important;
+  }
+  .page__artist__box__topdetails__details__artistname__name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    width: 110px;
   }
 }

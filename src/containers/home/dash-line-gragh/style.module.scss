@@ -1,0 +1,31 @@
+@import "../../../styles/colors.scss";
+@import "../../../styles/scss.scss";
+
+.page {
+  @include flexProperties(column, center, center, $fullWidth: true);
+  &__chart_main_container {
+    @include flexProperties(row, center, center, $fullWidth: true);
+    width: 100% !important;
+    background-color: $base-inner-container-background-color;
+    padding: 20px !important;
+    border-radius: 12px !important;
+    min-height: 38.55rem;
+    max-height: 38.55rem;
+    &__side_text {
+      @include customHeading(18px);
+      transform: rotate(270deg);
+      flex-wrap: nowrap;
+      width: 40px !important;
+    }
+    &__chart {
+      // @include flexProperties(column, center, center, $fullWidth: true);
+      width: 100% !important;
+      &__buttom_text_container {
+        @include flexProperties(column, center, center, $fullWidth: true);
+        &__text {
+          @include customHeading(18px);
+        }
+      }
+    }
+  }
+}

@@ -7,14 +7,12 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 import { useState } from "react";
 import PayStepper from "../pay-stepper/PayStepper";
 
-
 const NewContract = () => {
-
-  const [isPay, setIsPay] = useState(false)
+  const [isPay, setIsPay] = useState(false);
 
   const handlePay = () => {
-    setIsPay(true)
-  }
+    setIsPay(true);
+  };
 
   return (
     <Container maxWidth="xxl">
@@ -57,7 +55,7 @@ const NewContract = () => {
                         classess.page__details__box__tracks__header__btn_group__btn
                       }
                       // sx={
-                      //   collaboration && { backgroundColor: "#1976d2 !important" }
+                      //   collaboration && { backgroundColor: "#4FFCB7 !important" }
                       // }
                       // onClick={handleCollaboration}
                     >
@@ -67,7 +65,7 @@ const NewContract = () => {
                       className={
                         classess.page__details__box__tracks__header__btn_group__btn
                       }
-                      // sx={financial && { backgroundColor: "#1976d2 !important" }}
+                      // sx={financial && { backgroundColor: "#4FFCB7 !important" }}
                       // onClick={handleFinancial}
                     >
                       New Music
@@ -77,7 +75,7 @@ const NewContract = () => {
                         classess.page__details__box__tracks__header__btn_group__btn
                       }
                       // sx={
-                      //   recommendations && { backgroundColor: "#1976d2 !important" }
+                      //   recommendations && { backgroundColor: "#4FFCB7 !important" }
                       // }
                       // onClick={handleRecommendation}
                     >
@@ -88,7 +86,7 @@ const NewContract = () => {
                         classess.page__details__box__tracks__header__btn_group__btn
                       }
                       // sx={
-                      //   recommendations && { backgroundColor: "#1976d2 !important" }
+                      //   recommendations && { backgroundColor: "#4FFCB7 !important" }
                       // }
                       // onClick={handleRecommendation}
                     >
@@ -98,16 +96,13 @@ const NewContract = () => {
                       className={
                         classess.page__details__box__tracks__header__btn_group__btn
                       }
-                      sx={
-                        isPay && { backgroundColor: "#1976d2 !important" }
-                      }
+                      sx={isPay && { backgroundColor: "#4FFCB7 !important" }}
                       onClick={handlePay}
                     >
                       Pay
                     </Button>
                   </ButtonGroup>
                 </Grid>
-
               </Box>
               <Box varient="div" component="div" mt={5}>
                 {isPay && <PayStepper />}
@@ -116,9 +111,6 @@ const NewContract = () => {
           </Box>
         </Grid>
       </Grid>
-
-      
-
     </Container>
   );
 };

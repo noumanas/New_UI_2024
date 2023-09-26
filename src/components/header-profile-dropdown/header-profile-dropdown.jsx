@@ -35,10 +35,13 @@ const HeaderProfileDropDown = () => {
         className={classess.pageContainer}
       >
         <Tooltip title={`${user?.firstName} ${user?.lastName} Profile`}>
-          <IconButton onClick={() => {
+          <IconButton
+            onClick={() => {
               navigate("/blig/profile");
               handleCloseUserMenu();
-            }}sx={{ p: 0, gap: 2 }}>
+            }}
+            sx={{ p: 0, gap: 2 }}
+          >
             {user?.profilePicture ? (
               <Avatar
                 sx={{
@@ -56,7 +59,6 @@ const HeaderProfileDropDown = () => {
                   width: "40px",
                   height: "40px",
                 }}
-                
                 alt={`${user?.firstName} ${user?.lastName}`}
                 src={homeBannerIcon}
               />

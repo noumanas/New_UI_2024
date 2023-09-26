@@ -2,29 +2,28 @@
 @import "../../styles/colors.scss";
 
 .dialog {
-
     // &__title {}
 
     &__content {
         &__text {
-            color: $base-text-color !important;
-            align-items: 'center';
+            color: #4ffcb7 !important;
+            align-items: "center";
         }
-       text-align: center
+        text-align: center;
     }
 
     &__actions {
         &__noButton {
-            @include normalThemeButton(16px, 5px);
+            @include activeThemeBotton(16px, 5px);
             width: 80px !important;
         }
 
         &__yesButton {
-            @include pinkThemeButton(16px, 5px);
+            @include activeThemeBotton(16px, 5px);
             width: 120px !important;
         }
         &__updates {
-            @include normalThemeButton(16px, 5px);
+            @include activeThemeBotton(16px, 5px);
             width: 240px !important;
             margin-top: 20px;
         }

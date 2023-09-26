@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { forgotpassword } from "../../redux/slice/auth";
 import { config } from "../../enviorment/enviorment";
 import { useNavigate } from "react-router-dom";
+import BlacklionLogo from "../../assets/logo/BlacklionLogo.png";
 
 const ForgotPasswordForm = () => {
   const dispatch = useDispatch();
@@ -37,7 +38,11 @@ const ForgotPasswordForm = () => {
   return (
     <Box varient="div" component="div" className={classess.page}>
       <Box varient="div" component="div" className={classess.page__logo}>
-        <img src={logo} alt="logo" className={classess.page__logo__img} />
+        <img
+          src={BlacklionLogo}
+          alt="logo"
+          className={classess.page__logo__img}
+        />
         <h1 className={classess.page__logo__text}>Forget Password</h1>
       </Box>
       <Box varient="div" component="div" className={classess.page__form}>

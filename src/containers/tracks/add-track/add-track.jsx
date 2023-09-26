@@ -1,30 +1,29 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import Box from '@mui/material/Box';
+import React, { useState } from "react";
+import axios from "axios";
+import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import Modal from '@mui/material/Modal';
-import Button from '@mui/material/Button';
+import Modal from "@mui/material/Modal";
+import Button from "@mui/material/Button";
 import classess from "./style.module.scss";
-import Typography from '@mui/material/Typography';
-import CircularProgress from '@mui/material/CircularProgress';
+import Typography from "@mui/material/Typography";
+import CircularProgress from "@mui/material/CircularProgress";
 import { config as URLconfig } from "../../../enviorment/enviorment";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   width: 1224,
-  bgcolor: '#2F3443',
-  border: '2px solid #286397',
+  bgcolor: "#2F3443",
+  border: "2px solid #4FFCB7",
   boxShadow: 24,
   p: 4,
-  color: '#ffffff'
+  color: "#ffffff",
 };
 
 export default function AddTracks({ open, handleClose, spotifyId }) {
-
   const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = (event) => {
@@ -38,7 +37,7 @@ export default function AddTracks({ open, handleClose, spotifyId }) {
       deezer_reach_total,
       tiktok_views_total,
       youtube_video_views_total,
-      stream_income_share
+      stream_income_share,
     } = event.target;
 
     const request = {
@@ -50,10 +49,11 @@ export default function AddTracks({ open, handleClose, spotifyId }) {
       deezer_reach_total: deezer_reach_total.value,
       tiktok_views_total: tiktok_views_total.value,
       youtube_video_views_total: youtube_video_views_total.value,
-      stream_income_share: stream_income_share.value
-    }
+      stream_income_share: stream_income_share.value,
+    };
 
-    axios.post(`${URLconfig.BASE_URL}/artist-tracks`, request)
+    axios
+      .post(`${URLconfig.BASE_URL}/artist-tracks`, request)
       .then(() => {
         setIsLoading(false);
         title.value = "";
@@ -66,7 +66,8 @@ export default function AddTracks({ open, handleClose, spotifyId }) {
         stream_income_share.value = "";
         toast.success("New Track Added Successfully");
         handleClose(true);
-      }).catch((error) => {
+      })
+      .catch((error) => {
         setIsLoading(false);
         title.value = "";
         isrc.value = "";
@@ -79,9 +80,8 @@ export default function AddTracks({ open, handleClose, spotifyId }) {
         console.log(`Error: ${error}`);
         handleClose(true);
         toast.error(error);
-      })
-
-  }
+      });
+  };
 
   return (
     <div>
@@ -114,7 +114,8 @@ export default function AddTracks({ open, handleClose, spotifyId }) {
                 }}
               >
                 <Box
-                  varient="div" component="div"
+                  varient="div"
+                  component="div"
                   className={classess.page__fieldsContainer__form__formfield}
                   sx={{ width: "100%" }}
                 >
@@ -136,7 +137,8 @@ export default function AddTracks({ open, handleClose, spotifyId }) {
                   />
                 </Box>
                 <Box
-                  varient="div" component="div"
+                  varient="div"
+                  component="div"
                   className={classess.page__fieldsContainer__form__formfield}
                   sx={{ width: "100%" }}
                 >
@@ -165,7 +167,8 @@ export default function AddTracks({ open, handleClose, spotifyId }) {
                 }}
               >
                 <Box
-                  varient="div" component="div"
+                  varient="div"
+                  component="div"
                   className={classess.page__fieldsContainer__form__formfield}
                   sx={{ width: "100%" }}
                 >
@@ -186,7 +189,8 @@ export default function AddTracks({ open, handleClose, spotifyId }) {
                   />
                 </Box>
                 <Box
-                  varient="div" component="div"
+                  varient="div"
+                  component="div"
                   className={classess.page__fieldsContainer__form__formfield}
                   sx={{ width: "100%" }}
                 >
@@ -203,7 +207,7 @@ export default function AddTracks({ open, handleClose, spotifyId }) {
                     }
                     name="spotify_streams_total"
                     placeholder="Spotify Streams Total"
-                    type="text"                    
+                    type="text"
                   />
                 </Box>
               </Stack>
@@ -215,7 +219,8 @@ export default function AddTracks({ open, handleClose, spotifyId }) {
                 }}
               >
                 <Box
-                  varient="div" component="div"
+                  varient="div"
+                  component="div"
                   className={classess.page__fieldsContainer__form__formfield}
                   sx={{ width: "100%" }}
                 >
@@ -231,11 +236,12 @@ export default function AddTracks({ open, handleClose, spotifyId }) {
                       classess.page__fieldsContainer__form__formfield__input
                     }
                     name="deezer_reach_total"
-                    placeholder="Deezer Reach Total"                    
+                    placeholder="Deezer Reach Total"
                   />
                 </Box>
                 <Box
-                  varient="div" component="div"
+                  varient="div"
+                  component="div"
                   className={classess.page__fieldsContainer__form__formfield}
                   sx={{ width: "100%" }}
                 >
@@ -252,7 +258,7 @@ export default function AddTracks({ open, handleClose, spotifyId }) {
                     }
                     name="tiktok_views_total"
                     placeholder="TikTok Views Total"
-                    type="text"                    
+                    type="text"
                   />
                 </Box>
               </Stack>
@@ -264,7 +270,8 @@ export default function AddTracks({ open, handleClose, spotifyId }) {
                 }}
               >
                 <Box
-                  varient="div" component="div"
+                  varient="div"
+                  component="div"
                   className={classess.page__fieldsContainer__form__formfield}
                   sx={{ width: "100%" }}
                 >
@@ -280,11 +287,12 @@ export default function AddTracks({ open, handleClose, spotifyId }) {
                       classess.page__fieldsContainer__form__formfield__input
                     }
                     name="youtube_video_views_total"
-                    placeholder="Youtube Views Total"                    
+                    placeholder="Youtube Views Total"
                   />
                 </Box>
                 <Box
-                  varient="div" component="div"
+                  varient="div"
+                  component="div"
                   className={classess.page__fieldsContainer__form__formfield}
                   sx={{ width: "100%" }}
                 >
@@ -313,7 +321,9 @@ export default function AddTracks({ open, handleClose, spotifyId }) {
                   variant="contained"
                   type="button"
                   sx={{ width: { xs: "100%", sm: "100%", lg: "20%" } }}
-                  className={classess.page__fieldsContainer__form__action__cancel}
+                  className={
+                    classess.page__fieldsContainer__form__action__cancel
+                  }
                   onClick={() => handleClose(false)}
                   disabled={isLoading}
                 >
@@ -323,10 +333,12 @@ export default function AddTracks({ open, handleClose, spotifyId }) {
                   variant="contained"
                   type="submit"
                   sx={{ width: { xs: "100%", sm: "100%", lg: "20%" } }}
-                  className={classess.page__fieldsContainer__form__action__submit}
+                  className={
+                    classess.page__fieldsContainer__form__action__submit
+                  }
                   disabled={isLoading}
                 >
-                  {isLoading && (<CircularProgress size={25} color="inherit" />)}
+                  {isLoading && <CircularProgress size={25} color="inherit" />}
                   Save
                 </Button>
               </Box>

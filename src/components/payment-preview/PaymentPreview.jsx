@@ -1,20 +1,37 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
 import classess from "./style.module.scss";
-import Button from '@mui/material/Button';
-import { Box, Grid,} from '@mui/material';
-import PdfImage from '../../assets/pdf-image.png'
-import ArtistFrontImage from '../../assets/frontId.png'
-import ArtistBackImage from '../../assets/backId.png'
+import Button from "@mui/material/Button";
+import { Box, Grid } from "@mui/material";
+import PdfImage from "../../assets/pdf-image.png";
+import ArtistFrontImage from "../../assets/frontId.png";
+import ArtistBackImage from "../../assets/backId.png";
 
 const PaymentPreview = (props) => {
+  const [frontImage, setfrontImage] = useState("");
+  const [backImage, setbackImage] = useState("");
 
-    const handleDownload = (file) => {
-      const downloadLink = document.createElement('a');
-      downloadLink.href = URL.createObjectURL(file);
-      downloadLink.download = file.name;
-      downloadLink.click();
-      URL.revokeObjectURL(downloadLink.href);
-    };
+  const handleDownload = (file) => {
+    const downloadLink = document.createElement("a");
+    downloadLink.href = URL.createObjectURL(file);
+    downloadLink.download = file.name;
+    downloadLink.click();
+    URL.revokeObjectURL(downloadLink.href);
+  };
+  const frontImageview = (file) => {
+    const downloadLink = document.createElement("a");
+    downloadLink.href = URL.createObjectURL(file);
+    setfrontImage(downloadLink.href);
+  };
+  const backImageview = (file) => {
+    const downloadLink = document.createElement("a");
+    downloadLink.href = URL.createObjectURL(file);
+    setbackImage(downloadLink.href);
+  };
+
+  useEffect(() => {
+    frontImageview(props.formData.artist_photo_id_front);
+    backImageview(props.formData.artist_photo_id_back);
+  }, []);
   return (
     <Grid container spacing={2} className={classess.page}>
       <Grid item sm={12} lg={12} xl={12} className={classess.page__details}>
@@ -46,7 +63,7 @@ const PaymentPreview = (props) => {
                     varient="div"
                     component="div"
                     className={classess.page__fieldsContainer__form__formfield}
-                    sx={{ width: "100%", height: '100%'}}
+                    sx={{ width: "100%", height: "100%" }}
                   >
                     <label
                       className={
@@ -85,7 +102,7 @@ const PaymentPreview = (props) => {
                       required
                       disabled={true}
                     />
-                    
+
                     <label
                       className={
                         classess.page__fieldsContainer__form__formfield__label
@@ -131,13 +148,20 @@ const PaymentPreview = (props) => {
                     >
                       Bank Address
                     </label>
-                    <p className={
+                    <p
+                      className={
                         classess.page__fieldsContainer__form__formfield__input
                       }
-                      style={{margin: '0px'}}
-                      >
-                        {props.formData.bank_address+' '+props.formData.city+' '+props.formData.zip+' '+ props.formData.country }
-                      </p>
+                      style={{ margin: "0px" }}
+                    >
+                      {props.formData.bank_address +
+                        " " +
+                        props.formData.city +
+                        " " +
+                        props.formData.zip +
+                        " " +
+                        props.formData.country}
+                    </p>
 
                     {/* <input
                       className={
@@ -151,12 +175,12 @@ const PaymentPreview = (props) => {
                     /> */}
                   </Box>
                 </Grid>
-                <Grid item md={3} xs={12} sx={{display: 'flex'}}>
+                <Grid item md={3} xs={12} sx={{ display: "flex" }}>
                   <Box
                     varient="div"
                     component="div"
                     className={classess.page__fieldsContainer__form__formfield}
-                    sx={{ width: "100%", gap: '70px' }}
+                    sx={{ width: "100%", gap: "70px" }}
                   >
                     <label
                       className={
@@ -168,26 +192,35 @@ const PaymentPreview = (props) => {
                     <Box
                       varient="div"
                       component="div"
-                      className={classess.page__fieldsContainer__form__formfield__imagebox}
-                      sx={{ width: "100%", }}
-                    >
-                    <img
-                      src={PdfImage}
                       className={
-                        classess.page__fieldsContainer__form__formfield__image
+                        classess.page__fieldsContainer__form__formfield__imagebox
                       }
-                      
-                    />
+                      sx={{ width: "100%" }}
+                    >
+                      <img
+                        src={PdfImage}
+                        className={
+                          classess.page__fieldsContainer__form__formfield__image
+                        }
+                      />
                     </Box>
-                      <Button variant="contained" onClick={()=>handleDownload(props.formData.w8_ben_file)} className={classess.page__fieldsContainer__form__formfield__download_btn}>Download</Button>
+                    <Button
+                      variant="contained"
+                      onClick={() => handleDownload(props.formData.w8_ben_file)}
+                      className={
+                        classess.page__fieldsContainer__form__formfield__download_btn
+                      }
+                    >
+                      Download
+                    </Button>
                   </Box>
                 </Grid>
-                <Grid item md={3} xs={12} sx={{display: 'flex'}}>
-                <Box
+                <Grid item md={3} xs={12} sx={{ display: "flex" }}>
+                  <Box
                     varient="div"
                     component="div"
                     className={classess.page__fieldsContainer__form__formfield}
-                    sx={{ width: "100%", gap: '70px' }}
+                    sx={{ width: "100%", gap: "70px" }}
                   >
                     <label
                       className={
@@ -199,26 +232,38 @@ const PaymentPreview = (props) => {
                     <Box
                       varient="div"
                       component="div"
-                      className={classess.page__fieldsContainer__form__formfield__imagebox}
-                      sx={{ width: "100%", }}
-                    >
-                    <img
-                      src={ArtistFrontImage}
                       className={
-                        classess.page__fieldsContainer__form__formfield__image
+                        classess.page__fieldsContainer__form__formfield__imagebox
                       }
-                      style={{width: '100px'}}
-                    />
+                      sx={{ width: "100%" }}
+                    >
+                      <img
+                        src={frontImage}
+                        className={
+                          classess.page__fieldsContainer__form__formfield__image
+                        }
+                        style={{ width: "100px" }}
+                      />
                     </Box>
-                      <Button variant="contained" onClick={()=>handleDownload(props.formData.artist_photo_id_front)} className={classess.page__fieldsContainer__form__formfield__download_btn}>Download</Button>
+                    <Button
+                      variant="contained"
+                      onClick={() =>
+                        handleDownload(props.formData.artist_photo_id_front)
+                      }
+                      className={
+                        classess.page__fieldsContainer__form__formfield__download_btn
+                      }
+                    >
+                      Download
+                    </Button>
                   </Box>
                 </Grid>
-                <Grid item md={3} xs={12} sx={{display: 'flex'}}>
-                <Box
+                <Grid item md={3} xs={12} sx={{ display: "flex" }}>
+                  <Box
                     varient="div"
                     component="div"
                     className={classess.page__fieldsContainer__form__formfield}
-                    sx={{ width: "100%", gap: '70px' }}
+                    sx={{ width: "100%", gap: "70px" }}
                   >
                     <label
                       className={
@@ -230,18 +275,30 @@ const PaymentPreview = (props) => {
                     <Box
                       varient="div"
                       component="div"
-                      className={classess.page__fieldsContainer__form__formfield__imagebox}
-                      sx={{ width: "100%", }}
-                    >
-                    <img
-                      src={ArtistBackImage}
                       className={
-                        classess.page__fieldsContainer__form__formfield__image
+                        classess.page__fieldsContainer__form__formfield__imagebox
                       }
-                      style={{width: '100px'}}
-                    />
+                      sx={{ width: "100%" }}
+                    >
+                      <img
+                        src={backImage}
+                        className={
+                          classess.page__fieldsContainer__form__formfield__image
+                        }
+                        style={{ width: "100px" }}
+                      />
                     </Box>
-                      <Button variant="contained" onClick={()=>handleDownload(props.formData.artist_photo_id_back)} className={classess.page__fieldsContainer__form__formfield__download_btn}>Download</Button>
+                    <Button
+                      variant="contained"
+                      onClick={() =>
+                        handleDownload(props.formData.artist_photo_id_back)
+                      }
+                      className={
+                        classess.page__fieldsContainer__form__formfield__download_btn
+                      }
+                    >
+                      Download
+                    </Button>
                   </Box>
                 </Grid>
               </Grid>
@@ -250,7 +307,7 @@ const PaymentPreview = (props) => {
         </Box>
       </Grid>
     </Grid>
-  )
-}
+  );
+};
 
-export default PaymentPreview
+export default PaymentPreview;

@@ -88,7 +88,7 @@ const PaymentSubmit = forwardRef(
                 artist_representative_name: props.formData?.created_by,
               }
             );
-            toast.success("Email sent successfully.");
+            toast.success("Email sent Successfully.");
           } catch (error) {
             toast.error("Something wrong");
           }
@@ -131,7 +131,7 @@ const PaymentSubmit = forwardRef(
                     classess.page__details__box__adetails__header__title
                   }
                 >
-                  Please enter email address
+                  Please Enter Email Address
                 </span>
               </Box>
               <form action="" className={classess.page__fieldsContainer__form}>
@@ -175,10 +175,14 @@ const PaymentSubmit = forwardRef(
                                   }}
                                 />
                               </Grid>
-                              <Grid item md={1} sx={{ position: "relative" }}>
-                                <span
-                                  sx={{ position: "absolute", top: "10px" }}
-                                >
+                              <Grid
+                                item
+                                md={1}
+                                sx={{
+                                  position: "relative",
+                                }}
+                              >
+                                <span>
                                   <CancelIcon
                                     email={el.email}
                                     onClick={handleRemoveEmail}
@@ -241,8 +245,12 @@ const PaymentSubmit = forwardRef(
                               sx={{
                                 backgroundColor: "#192233",
                                 borderRadius: "10px",
-                                height: 46,
                                 border: "2px solid #4ffcb7",
+                                height: "40px",
+                                padding: "0",
+                                svg: {
+                                  fill: "#4ffcb7 !important",
+                                },
                               }}
                             >
                               {data.map((item) => (
@@ -255,7 +263,13 @@ const PaymentSubmit = forwardRef(
                                 >
                                   <Checkbox
                                     checked={personName.indexOf(item.name) > -1}
-                                    sx={{ color: "#fff", marginRight: "5px" }}
+                                    sx={{
+                                      color: "#4ffcb7",
+                                      marginRight: "5px",
+                                      svg: {
+                                        color: "#4ffcb7",
+                                      },
+                                    }}
                                   />
                                   <ListItemText
                                     primary={item.name}

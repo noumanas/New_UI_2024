@@ -17,11 +17,12 @@ import MakeaPaymentModal from "../../dialogs/make-payment/make-payment";
 import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "../../redux/slice/modal";
 import TransferPaymentlist from "../../components/ArtistPaymentList/transfer-payment-list/TransferPaymentlist";
+import { Avatar } from "@mui/material";
 
 const PaymentPreview = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-
+  const user = useSelector((state) => state.auth.user);
   const [contract, setContract] = useState(null);
   const [open, setOpen] = useState(false);
   const [note, setNote] = useState("");
@@ -81,31 +82,58 @@ const PaymentPreview = () => {
                 component="div"
                 className={classess.page__details__box__tracks__header}
               >
-                <span
+                <Box
+                  varient="div"
+                  component="div"
                   className={
-                    classess.page__details__box__adetails__header__title
+                    classess.page__details__box__tracks__header__img_title_container
                   }
                 >
-                  {payment?.artist_name}
-                </span>
-                <span>
-                  <Button
-                    variant="contained"
+                  <Box
+                    varient="div"
+                    component="div"
                     className={
-                      classess.page__details__box__adetails__header__amendbtn
-                    }
-                    onClick={() =>
-                      dispatch(
-                        openModal({
-                          name: "MakePayment",
-                          data: "",
-                        })
-                      )
+                      classess.page__details__box__tracks__header__img_title_container__img_container
                     }
                   >
-                    Make Payment
-                  </Button>
-                </span>
+                    <Avatar
+                      src={payment?.artist?.avatar}
+                      alt={payment?.name}
+                      className={classess.table__row__artist_image}
+                    />
+                  </Box>
+
+                  <Box varient="div" component="div">
+                    <span
+                      className={
+                        classess.page__details__box__tracks__header__img_title_container__title
+                      }
+                    >
+                      {payment?.artist_name}
+                    </span>
+                  </Box>
+                </Box>
+
+                <Box varient="div" component="div">
+                  {user.role === "admin" && (
+                    <Button
+                      variant="contained"
+                      className={
+                        classess.page__details__box__tracks__header__amendbtn
+                      }
+                      onClick={() =>
+                        dispatch(
+                          openModal({
+                            name: "MakePayment",
+                            data: "",
+                          })
+                        )
+                      }
+                    >
+                      Make Payment
+                    </Button>
+                  )}
+                </Box>
               </Box>
 
               <Box
@@ -120,14 +148,14 @@ const PaymentPreview = () => {
                 >
                   <span
                     className={
-                      classess.page__details__box__adetails__header__innertitle
+                      classess.page__details__box__details__innerbox__top_heading
                     }
                   >
                     VALUATION
                   </span>
                   <span
                     className={
-                      classess.page__details__box__adetails__header__title
+                      classess.page__details__box__details__innerbox__heading
                     }
                   >
                     $ {internationalNumberFormat.format(payment?.valuation)}
@@ -140,14 +168,14 @@ const PaymentPreview = () => {
                 >
                   <span
                     className={
-                      classess.page__details__box__adetails__header__innertitle
+                      classess.page__details__box__details__innerbox__top_heading
                     }
                   >
                     TRACKS{" "}
                   </span>
                   <span
                     className={
-                      classess.page__details__box__adetails__header__title
+                      classess.page__details__box__details__innerbox__heading
                     }
                   >
                     {payment?.Selected_tracks?.length}
@@ -160,14 +188,14 @@ const PaymentPreview = () => {
                 >
                   <span
                     className={
-                      classess.page__details__box__adetails__header__innertitle
+                      classess.page__details__box__details__innerbox__top_heading
                     }
                   >
                     ARTIST ADVANCE
                   </span>
                   <span
                     className={
-                      classess.page__details__box__adetails__header__title
+                      classess.page__details__box__details__innerbox__heading
                     }
                   >
                     ${" "}
@@ -183,14 +211,14 @@ const PaymentPreview = () => {
                 >
                   <span
                     className={
-                      classess.page__details__box__adetails__header__innertitle
+                      classess.page__details__box__details__innerbox__top_heading
                     }
                   >
                     MARKETING
                   </span>
                   <span
                     className={
-                      classess.page__details__box__adetails__header__title
+                      classess.page__details__box__details__innerbox__heading
                     }
                   >
                     ${" "}

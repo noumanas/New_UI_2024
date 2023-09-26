@@ -14,6 +14,7 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import moment from "moment";
 import SearchIcon from "@mui/icons-material/Search";
+import { IconButton } from "@mui/material";
 
 const MyPayments = () => {
   const [notes, setNotes] = useState([]);
@@ -56,12 +57,12 @@ const MyPayments = () => {
             <Box
               varient="div"
               component="div"
-              className={classess.page__details__box__tracks}
+              className={classess.page__details__box__adetails}
             >
               <Box
                 varient="div"
                 component="div"
-                className={classess.page__details__box__tracks__header}
+                className={classess.page__details__box__adetails__header}
               >
                 <span
                   className={
@@ -75,20 +76,17 @@ const MyPayments = () => {
                   varient="div"
                   component="div"
                   className={
-                    classess.page__details__box__tracks__header__search
+                    classess.page__details__box__adetails__header__search
                   }
                 >
                   <SearchIcon
-                    sx={{
-                      color: "#4FFCB7",
-                      // position: "absolute",
-                      top: "8px",
-                      // right: "-3px",
-                    }}
+                    className={
+                      classess.page__details__box__adetails__header__search__seaarch_icon
+                    }
                   />
                   <input
                     className={
-                      classess.page__details__box__tracks__header__search__input
+                      classess.page__details__box__adetails__header__search__input
                     }
                     placeholder="Search"
                     type="search"
@@ -98,10 +96,16 @@ const MyPayments = () => {
                 </Box>
               </Box>
 
-              <ArtistPaymentList
-                handleNotes={handleNotesOpen}
-                setNotesComments={setNotesComments}
-              />
+              <Box
+                varient="div"
+                component="div"
+                className={classess.page__details__box__tracks__main_content}
+              >
+                <ArtistPaymentList
+                  handleNotes={handleNotesOpen}
+                  setNotesComments={setNotesComments}
+                />
+              </Box>
             </Box>
           </Box>
         </Grid>
@@ -121,28 +125,33 @@ const MyPayments = () => {
                 <Box
                   varient="div"
                   component="div"
-                  className={classess.page__notes__box__adetails__header}
+                  className={
+                    classess.page__notes__box__tracks__adetails__header
+                  }
                 >
                   <span
                     className={
-                      classess.page__notes__box__adetails__header__title
+                      classess.page__notes__box__tracks__adetails__header__title
                     }
                   >
                     Notes
                   </span>
                   <span>
-                    <Button
+                    <IconButton
                       variant="contained"
-                      className={
-                        classess.page__notes__box__adetails__header__Editbtn
-                      }
                       onClick={() => setOpenPanel(!openPanel)}
+                      className={
+                        classess.page__notes__box__tracks__adetails__header__editbtn
+                      }
                     >
                       <EditIcon
                         fontSize="small"
-                        sx={{ fontSize: "15px", color: "#000" }}
+                        sx={{ fontSize: "15px" }}
+                        className={
+                          classess.page__notes__box__tracks__adetails__header__editbtn__inner_btn
+                        }
                       />
-                    </Button>
+                    </IconButton>
                   </span>
                 </Box>
                 {notescomments.map((data) => {
@@ -152,7 +161,9 @@ const MyPayments = () => {
                         <Box className={classess.page__notes__notebox__chips}>
                           <span>
                             <Chip
-                              sx={{ background: "#4FFCB7" }}
+                              className={
+                                classess.page__notes__notebox__chips__chip_container
+                              }
                               avatar={
                                 <Avatar
                                   alt="avatar"
@@ -167,7 +178,9 @@ const MyPayments = () => {
                           </span>
                           <span>
                             <Chip
-                              sx={{ background: "#4FFCB7" }}
+                              className={
+                                classess.page__notes__notebox__chips__chip_container
+                              }
                               label={moment(`${data?.createdAt}`).fromNow()}
                               variant="filled"
                             />

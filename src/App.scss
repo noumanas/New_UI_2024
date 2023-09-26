@@ -1,3 +1,11 @@
+@import "./styles/colors.scss";
+@import "./styles/scss.scss";
+@font-face {
+  font-family: "NewTitle";
+  src: local("NewTitle-Bold"),
+    url("../src/fonts/NewTitle-Bold.ttf") format("truetype");
+}
+
 .App {
   text-align: center;
 }
@@ -6,39 +14,61 @@
 }
 
 .MuiToolbar-root.MuiTablePagination-toolbar {
-  border-top: 1px solid #5a7380;
+  border-top: 1px solid $base-border-line-color;
   padding-top: 10px;
   margin-top: 10px;
-  background: #222c41 !important;
+  background: $base-container-backgroung-color !important;
 }
 
-.custom-pagination-actions .MuiIconButton-root:last-child svg {
+.custom-pagination-actions .MuiIconButton-root:last-child svg,
+.custom-pagination-actions
+  .MuiButtonBase-root.MuiIconButton-root:first-child
+  svg {
   color: #222c41;
   background-color: #4ffcb7;
   border-radius: 50%;
-  padding: 4px;
-  width: 35px;
-  height: 35px;
+  padding: 4px !important;
+  width: 35px !important;
+  height: 35px !important;
 }
-
-.custom-pagination-actions .MuiIconButton-root:first-child svg {
+.custom-pagination-actions .MuiButtonBase-root.Mui-disabled:first-child svg,
+.custom-pagination-actions .MuiButtonBase-root.Mui-disabled:last-child svg {
   color: #222c41;
   background-color: #5a7380;
   border-radius: 50%;
-  padding: 4px;
-  width: 35px;
-  height: 35px;
+  padding: 4px !important;
+  width: 35px !important;
+  height: 35px !important;
 }
+// .custom-pagination-actions .MuiIconButton-root:first-child svg {
+//   color: #222c41;
+//   background-color: #5a7380;
+//   border-radius: 50%;
+//   padding: 4px;
+//   width: 35px;
+//   height: 35px;
+// }
 .custom-pagination-actions .MuiTablePagination-select.MuiSelect-root {
   background-color: green !important;
 }
+.custom-select-style {
+  color: $base-heading-color !important;
+}
+.custom-select {
+  background-color: $base-button-background-color !important;
+  color: $base-container-backgroung-color !important;
+  border-radius: 12px !important;
+  font-size: 14px !important;
+  /* Add any other styles you want to apply */
+}
 .MuiSelect-icon .MuiTablePagination-selectIcon {
-  color: blue !important;
-  background-color: red !important;
+  color: #4ffcb7 !important;
+  // background-color: red !important;
 }
 .MuiSvgIcon-root.MuiSelect-icon {
   color: #222c41 !important;
 }
+
 .apexcharts-text.apexcharts-yaxis-label,
 .apexcharts-text.apexcharts-xaxis-label {
   color: white !important;
@@ -93,5 +123,48 @@ input[type="number"] {
 .ck {
   background-color: #222c41;
 }
-.MuiBox-root {
+.MuiList-root-MuiMenu-list {
+  background-color: #192233 !important;
 }
+.MuiList-root.MuiMenu-list {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+.MuiInputBase-input.MuiOutlinedInput-input.Mui-disabled.MuiInputBase-inputAdornedEnd {
+  -webkit-text-fill-color: rgba(140, 140, 140, 0.7) !important;
+}
+@media only screen and (max-width: 600px), (max-width: 320px) {
+  .MuiTabs-flexContainer.MuiTabs-flexContainer {
+    overflow-x: scroll;
+    width: 100%;
+    padding-bottom: 10px;
+  }
+}
+@media only screen and (max-width: 320px) {
+  .MuiTabs-flexContainer.MuiTabs-flexContainer {
+    width: 200px;
+  }
+}
+
+// ? view funcond dashboard tablist
+.custom-root .Mui-selected {
+  background-color: transparent !important;
+  color: $base-heading-color !important;
+  &::after {
+    content: "";
+    display: block;
+    height: 5px;
+    border-radius: 2px;
+    background-color: $base-button-background-color;
+    bottom: 0px;
+    position: absolute;
+    width: 90%;
+    transition: all 0.9s ease-in-out;
+  }
+}
+.custom-root .MuiTabs-indicator {
+  background-color: transparent !important;
+}
+// .custom-root .MuiStepLabel-label.Mui-disabled {
+//   color: #000000 !important;
+// }

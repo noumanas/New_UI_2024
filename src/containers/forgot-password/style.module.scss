@@ -1,15 +1,33 @@
 @import "../../styles/colors.scss";
 @import "../../styles/scss.scss";
-
+.loginContant {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "DM Sans";
+}
 .page {
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../assets/login_bg.png);
     background-position: center;
     background-size: cover;
     min-height: 100vh;
+    width: 100%;
+    font-family: "DM Sans";
+
+    //   display: flex !important;
+    //   justify-content: center !important;
+    //   align-items: center !important;
 
     &__login {
-        @include flexProperties(row, space-between, flex-start, $fullWidth: true);
-        gap: 40px;
+        // width: 50%;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        // gap: 40px;
+        // margin-left: 25%;
 
         &__info {
             @include flexProperties(column, flex-end, flex-start, $fullWidth: true);
@@ -19,7 +37,7 @@
                 font-size: 46px;
 
                 &__highlighted {
-                    background: $secondary-bg-color-2;
+                    // background: $secondary-bg-color-2;
                 }
             }
 
@@ -50,22 +68,45 @@
                 min-height: calc(100vh - 240px);
                 background-color: rgba(0, 0, 0, 0.5) !important;
                 border-radius: 8px;
-                border: 2px solid #286397;
+                border: 2px solid #4ffcb7;
             }
 
             &__coptrights {
-                color: #DEDEDE;
+                @include customParagraph(12px);
+                font-weight: 400 !important;
             }
         }
+    }
+
+    &__contact {
+        height: 52px;
+        width: 60%;
+        background: rgba(0, 3, 54, 0.1);
+
+        border-radius: 12px;
+        backdrop-filter: blur(10px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        // border: solid;
+        // border-width: 1px;
+        // border-color: #4FFCB7;
+        border-radius: 12px;
+        margin-top: 50px;
+    }
+    &__contactText {
+        width: 60%;
     }
 }
 
 @media only screen and (max-width: 991px) {
     .page {
+        font-family: "DM Sans";
+
         &__login {
             &__info {
                 display: none;
-            }   
+            }
         }
     }
 }

@@ -19,15 +19,10 @@ const MyArtist = () => {
   return (
     <Container maxWidth="xxl">
       <Grid container spacing={2} className={classess.page}>
-        <Grid
-          item
-          sm={12}
-          md={12}
-          lg={12}
-          xl={9}
-          className={classess.page__banner}
-        >
-          <AddArtist />
+        <Grid item sm={12} md={12} lg={12} xl={9}>
+          <Box className={classess.page__banner}>
+            <AddArtist />
+          </Box>
         </Grid>
 
         <Grid item sm={12} md={12} lg={12} xl={9}>

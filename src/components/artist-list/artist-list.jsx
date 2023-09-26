@@ -53,7 +53,7 @@ const ArtistList = () => {
       return email;
     }
     const newName = name?.replace(/\s+/, "");
-    return `${newName}@spotify.com`;
+    return `${newName}@blacklionapp.xyz`;
   };
 
   const handleSearch = (event) => {
@@ -273,7 +273,7 @@ const ArtistList = () => {
             component="div"
             sx={{ color: "#d6d6d6" }}
           >
-            No Artist Found.
+            No Artist Added.
           </Typography>
         </Box>
       ) : artistList &&

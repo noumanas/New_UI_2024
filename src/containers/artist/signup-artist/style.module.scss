@@ -19,7 +19,7 @@
                 font-size: 46px;
 
                 &__highlighted {
-                    background: $secondary-bg-color-2;
+                    // background: $secondary-bg-color-2;
                 }
             }
 
@@ -50,11 +50,11 @@
                 min-height: calc(100vh - 240px);
                 background-color: rgba(0, 0, 0, 0.5) !important;
                 border-radius: 8px;
-                border: 2px solid #286397;
+                border: 2px solid #4ffcb7;
             }
 
             &__coptrights {
-                color: #DEDEDE;
+                color: #dedede;
             }
         }
     }
@@ -65,7 +65,7 @@
         &__login {
             &__info {
                 display: none;
-            }   
+            }
         }
     }
 }

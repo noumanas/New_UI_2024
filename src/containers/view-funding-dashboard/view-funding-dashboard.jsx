@@ -13,6 +13,8 @@ import {
   getArtistById,
   getReports,
   setIsLoading,
+  setLicenceType,
+  setMultiple,
   setNewMusicTracks,
   setSelectedTrackCount,
   setSelectedTracks,
@@ -54,6 +56,8 @@ import { toast } from "react-toastify";
 import SignStepper from "../../containers/my-contracts/sign-stepper/SignStepper";
 import PayStepper from "../../containers/my-contracts/pay-stepper/PayStepper";
 import { SignalWifiStatusbarConnectedNoInternet4Sharp } from "@mui/icons-material";
+import { getNewMusicByID } from "../../redux/slice/new-music";
+import { getYearlyIncomeArtistByID } from "../../redux/slice/income";
 const ViewFundingDashboard = () => {
   const dispatch = useDispatch();
   const dispatchRef = useRef(dispatch);
@@ -64,6 +68,8 @@ const ViewFundingDashboard = () => {
   );
   const artist = useSelector((state) => state.artist.artist);
   const totalFunding = useSelector((state) => state.artist.totalFunding);
+  const newMusicData = useSelector((state) => state.new_music.newMusic);
+
   const [masterEst, setMasterEst] = useState([]);
   const isLoading = useSelector((state) => state.artist.isLoading);
   const selected = useSelector((state) => state.artist.selectedTracks);
@@ -88,6 +94,14 @@ const ViewFundingDashboard = () => {
   const internationalNumberFormat = new Intl.NumberFormat("en-US");
   const [monthlyIncome, setMonthlyIncome] = useState(0);
   const [historicTracks, sethistoricTracks] = useState([]);
+  const licenseType = useSelector((state) => state.artist.licenseType);
+  const multiple = useSelector((state) => state.artist.multiple);
+  const [RECOUPMENTPERIOD, setRECOUPMENTPERIOD] = useState(0);
+  const [RECOUPMENTPERIOD_IN_ENG, setRECOUPMENTPERIOD_IN_ENG] = useState("");
+  const [SingleCount, setSingleCount] = useState(0);
+  const [EpCount, setEpCount] = useState(0);
+  const [AlbumCount, setAlbumCount] = useState(0);
+  const [EstimatedYearlyEarnings, setEstimatedYearlyEarnings] = useState(0);
 
   const d = new Date();
   d.setDate(d.getDate() - 1);
@@ -102,17 +116,22 @@ const ViewFundingDashboard = () => {
 
   useEffect(() => {
     if (id) {
-      dispatchRef.current(
+      dispatch(
         getArtistById({
           id,
         })
       );
     }
-  }, [id, dispatchRef]);
+  }, [id]);
 
   useEffect(() => {
-    dispatchRef.current(getArtist());
-  }, [dispatchRef]);
+    // dispatch(getArtist());
+    dispatch(setLicenceType("license"));
+    dispatch(setMultiple(30));
+    dispatch(setTotalFunding(0));
+    dispatch(setTotalTracks(0));
+    dispatch(setTracks([]));
+  }, []);
 
   useEffect(() => {
     dispatchRef.current(setTotalFunding(0));
@@ -126,24 +145,45 @@ const ViewFundingDashboard = () => {
       .then(async (res) => {
         const artistTracks = await res.data.data;
         sethistoricTracks(artistTracks);
-        calcalute_Monthly_estimate(artistTracks);
-      })
-      .catch((error) => {
-        console.log("Error Of GetTracks " + error);
+        // calcalute_Monthly_estimate(artistTracks);
       });
   };
 
+  let fetchNewMusic = (artist_id) => {
+    dispatch(
+      getNewMusicByID({
+        id: artist_id,
+      })
+    );
+  };
+
   useEffect(() => {
-    console.log("totalTracks", totalTracks);
+    if (newMusicData) {
+      const epCount = newMusicData.filter((item) => item.music === "ep").length;
+      const singleCount = newMusicData.filter(
+        (item) => item.music === "single"
+      ).length;
+      const albumeCount = newMusicData.filter(
+        (item) => item.music === "album"
+      ).length;
+      setSingleCount(singleCount);
+      setEpCount(epCount);
+      setAlbumCount(albumeCount);
+    }
+  }, [newMusicData]);
+
+  useEffect(() => {
     if (artist?.spotify_id !== undefined) {
-      calcalute_Monthly_estimate();
+      // calcalute_Monthly_estimate();
+      fetchNewMusic(artist.spotify_id);
+
       const fetchTracks = async (spotify_id) => {
         axios
           .get(`${URLconfig.BASE_URL}/artist-tracks/${spotify_id}`)
           .then(async (res) => {
             const artistTracks = await res.data;
             if (artistTracks?.data.length === 0) {
-              dispatchRef.current(setIsLoading(false));
+              dispatch(setIsLoading(false));
             } else {
               let selected_tracks = artistTracks?.data
                 .filter((track) => track.is_selected === 1)
@@ -153,16 +193,12 @@ const ViewFundingDashboard = () => {
                 .filter((track) => track.is_selected === 2)
                 .map((el) => el._id);
 
-              dispatchRef.current(
-                setSelectedTrackCount(selected_tracks.length)
-              );
-              dispatchRef.current(setSelectedTracks(selected_tracks));
-              dispatchRef.current(setNewMusicTracks(new_music_selected_tracks));
+              dispatch(setSelectedTrackCount(selected_tracks.length));
+              dispatch(setSelectedTracks(selected_tracks));
+              dispatch(setNewMusicTracks(new_music_selected_tracks));
 
-              dispatchRef.current(
-                setTracks([...artistTracks.data.map(mapTracks)])
-              );
-              dispatchRef.current(setTotalTracks(artistTracks.data.length));
+              dispatch(setTracks([...artistTracks.data.map(mapTracks)]));
+              dispatch(setTotalTracks(artistTracks.data.length));
             }
           })
           .catch((error) => {
@@ -170,24 +206,25 @@ const ViewFundingDashboard = () => {
           });
       };
 
-      dispatchRef.current(getReports(artist.spotify_id));
+      dispatch(getReports(artist.spotify_id));
       fetchTracks(artist?.spotify_id);
     }
-  }, [artist, dispatchRef]);
+  }, [artist]);
+
   //calculate the Monthly Income
-  async function calcalute_Monthly_estimate() {
-    axios
-      .get(
-        `${URLconfig.BASE_URL}/artist-funding/${artist?.spotify_id}/MonthlyCalculation`
-      )
-      .then((res) => {
-        console.log("mon:", res.data.data);
-        setMonthlyIncome(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
+  // async function calcalute_Monthly_estimate() {
+  //   axios
+  //     .post(
+  //       `${URLconfig.BASE_URL}/artist-funding/${artist?.spotify_id}/MonthlyCalculation`
+  //     )
+  //     .then((res) => {
+  //       console.log("mon:", res.data.data);
+  //       setMonthlyIncome(res.data.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }
 
   useEffect(() => {
     if (artist?.spotify_id !== undefined) {
@@ -202,6 +239,13 @@ const ViewFundingDashboard = () => {
           set_catelog_income(artist_funding_data.catelog_income);
           set_artist_advance(artist_funding_data?.artist_advance);
           set_marketing_budget(artist_funding_data?.marketing_budget);
+          const id = artist?.spotify_id;
+          const data = await dispatch(getYearlyIncomeArtistByID({ id }));
+          const totalIncome = data.payload.data.reduce(
+            (acc, current) => acc + current.income,
+            0
+          );
+          setEstimatedYearlyEarnings(totalIncome);
         }
       };
       dispatchRef.current(setIsLoading(true));
@@ -224,7 +268,6 @@ const ViewFundingDashboard = () => {
 
   const onChangeHandler = () => {
     dispatch(setIsLoading(true));
-
     const selected_tracks =
       selected.length > 0
         ? selected.map((e) => getSingleTrack(e))
@@ -274,15 +317,18 @@ const ViewFundingDashboard = () => {
           options
         );
 
-        let funding = data?.multiple
-          ? parseInt(response.data?.data?.funding) * parseInt(data?.multiple)
-          : response.data?.data?.funding;
+        let x =
+          isNaN(parseInt(multiple)) === true ? multiple : parseInt(multiple);
+
+        let funding =
+          licenseType === "license"
+            ? response.data?.data?.funding
+            : parseInt(response.data?.data?.funding) * x;
 
         dispatch(setTotalFunding(funding));
 
-        let new_music_income = data?.multiple
-          ? 0
-          : response.data.data?.new_music_income;
+        let new_music_income =
+          licenseType === "license" ? response.data.data?.new_music_income : 0;
 
         setNewMusicEst(new_music_income);
 
@@ -295,7 +341,48 @@ const ViewFundingDashboard = () => {
       }
     }
   };
+  const calcalute_Year_income_by_tracks = async (data) => {
+    try {
+      const controller = new AbortController();
 
+      // data["selected_tracks"] = data.selected_tracks || [];
+      // data["new_music_tracks"] = data.new_music_tracks || [];
+
+      let options = {
+        signal: controller.signal,
+      };
+
+      const response = await axios.post(
+        `${URLconfig.BASE_URL}/artist-funding/${artist?.spotify_id}/MonthlyCalculation`,
+        data
+      );
+      const startDate = "2022-9";
+      const endDate = "2023-8";
+
+      const totalIncomeInRange = sumIncomeWithinRange(
+        response.data.data,
+        startDate,
+        endDate
+      );
+      setMonthlyIncome(response.data.data);
+      // setEstimatedYearlyEarnings(totalIncomeInRange);
+
+      controller.abort();
+    } catch (error) {
+      console.log("Error Of Customize Funding " + error);
+    }
+  };
+  function sumIncomeWithinRange(data, startDate, endDate) {
+    let totalIncome = 0;
+
+    for (const key in data) {
+      if (key >= startDate && key <= endDate) {
+        totalIncome += data[key].income;
+      }
+    }
+
+    return totalIncome;
+  }
   const calcalute_customize_funding_estimate = null;
 
   const downloadPDF = async () => {
@@ -381,7 +468,7 @@ const ViewFundingDashboard = () => {
 
       if (response.status === 200) {
         onChangeHandler();
-        calcalute_Monthly_estimate();
+        // calcalute_Monthly_estimate();
       }
 
       window.scroll({
@@ -577,59 +664,88 @@ const ViewFundingDashboard = () => {
   };
   const openConfirmConfigTab2 = () => {
     setValue("2");
+    setBorderColor("black");
+    const windowHeight = window.innerHeight;
+    window.scrollTo({
+      top: windowHeight,
+      left: 0,
+      behavior: "smooth",
+    });
   };
+
   // const [activeTab, setActiveTab] = useState(1);
   const [contractOpen, setContractOpen] = useState(false);
+  // const [openTab, setOpenTab] = useState(false);
   const openConfirmConfigTab3 = () => {
     setValue("10");
     setContractOpen(true);
+    // setOpenTab(true);
+    const windowHeight = window.innerHeight;
+    window.scrollTo({
+      top: windowHeight,
+      left: 0,
+      behavior: "smooth",
+    });
   };
   const [borderColor, setBorderColor] = useState("black");
   const [borderRadius, setBorderRadius] = useState("0");
-
+  const [isContentVisible, setContentVisibility] = useState(false);
+  const [showTextValues, setShowTextValues] = useState(false);
+  const [artAdvance, setArtAdvance] = useState("");
+  const [marketBudget, setMarketBudget] = useState("");
+  // let saveBorder = localStorage.getItem("borderColor") || "black";
+  // let saveRadius = localStorage.getItem("saveRadius") || "12px";
+  // let saveContract = localStorage.getItem("saveContract") || false;
+  // console.log(saveBorder);
   const handleButtonClick = () => {
     setBorderColor(borderColor === "black" ? "#4FFCB7" : "black");
     setBorderRadius("12px");
-    setContentVisibility(!isContentVisible);
+    setShowTextValues(true);
+    setContentVisibility(true);
+    // saveBorder = saveBorder === "black" ? "#4FFCB7" : "black";
+    // saveRadius = borderRadius ? "12px" : "0";
+    // saveContract = isContentVisible ? false : true;
+    // localStorage.setItem("borderColor", saveBorder);
+    // localStorage.setItem("saveRadius", saveRadius);
+    // localStorage.setItem("saveContract", saveContract);
+
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+
+    // localStorage.setItem("artistadvance", artAdvance);
+    // localStorage.setItem("setMarketBudget", marketBudget);
+    // localStorage.setItem("setShowTextValues", showTextValues);
+    // localStorage.setItem("BorderColor", borderColor);
   };
+  // useEffect(() => {
+  //   const savedValue = localStorage.getItem("artistadvance");
+  //   const setMarket = localStorage.getItem("setMarketBudget");
 
-  const [isContentVisible, setContentVisibility] = useState(false);
-  // const [containerHeight1, setContainerHeight1] = useState(85);
-  // const [containerHeight2, setContainerHeight2] = useState(85);
-  // const [containerHeight3, setContainerHeight3] = useState(85);
-
-  // const toggleHeight1 = () => {
-  //   if (containerHeight1 === 85) {
-  //     setContainerHeight1(300);
-  //     setContainerHeight2(85);
-  //     setContainerHeight3(85);
-  //   } else {
-  //     setContainerHeight1(85);
+  //   if (savedValue !== null) {
+  //     setArtAdvance(savedValue);
   //   }
-  // };
-  // const toggleHeight2 = () => {
-  //   if (containerHeight2 === 85) {
-  //     setContainerHeight2(300);
-  //     setContainerHeight1(85);
-  //     setContainerHeight3(85);
-  //   } else {
-  //     setContainerHeight2(85);
+  //   if (setMarket !== null) {
+  //     setMarketBudget(setMarket);
   //   }
-  // };
-  // const toggleHeight3 = () => {
-  //   if (containerHeight3 === 85) {
-  //     setContainerHeight3(300);
-  //     setContainerHeight1(85);
-  //     setContainerHeight2(85);
-  //   } else {
-  //     setContainerHeight3(85);
-  //   }
-  // };
+  // }, []);
+  const artAdvInter = internationalNumberFormat.format(artAdvance);
+  const markBudInter = internationalNumberFormat.format(marketBudget);
 
   return (
-    <Container maxWidth="xxl" className={styles.root}>
+    // <Container maxWidth="xxl" className={styles.root}>
+    <Container maxWidth="xxl" className={`${styles.root} custom-root`}>
       <Grid container item className={classess.page}>
-        <Grid item md={12} lg={12} xl={10} className={classess.page__config}>
+        <Grid
+          item
+          md={12}
+          lg={12}
+          xl={10}
+          sm={12}
+          className={classess.page__config}
+        >
           <Box
             varient="div"
             component="div"
@@ -686,6 +802,15 @@ const ViewFundingDashboard = () => {
               borderRadius={borderRadius}
               isContentVisible={isContentVisible}
               contractPanel={openConfirmConfigTab3}
+              artist_advance={artist_advance}
+              marketing_budget={marketing_budget}
+              showTextValues={showTextValues}
+              RECOUPMENTPERIOD={RECOUPMENTPERIOD}
+              RECOUPMENTPERIOD_IN_ENG={RECOUPMENTPERIOD_IN_ENG}
+              SingleCount={SingleCount}
+              EpCount={EpCount}
+              AlbumCount={AlbumCount}
+              EstimatedYearlyEarnings={EstimatedYearlyEarnings}
             />
 
             <Container maxWidth="xxl">
@@ -698,10 +823,12 @@ const ViewFundingDashboard = () => {
                       ? classess.page__config__box__tabs__border
                       : ""
                   }`}
+                  sx={{ overflow: "hidden" }}
                 >
                   <TabList
                     onChange={handleChange}
                     aria-label="lab API tabs example"
+                    className={classess.tabList}
                   >
                     <Tab
                       className={classess.page__config__box__tabs__tab}
@@ -709,9 +836,7 @@ const ViewFundingDashboard = () => {
                       value="1"
                       disabled={isLoading}
                       sx={{
-                        "& .Mui-selected": {
-                          color: "#ffffff !important",
-                        },
+                        "& .Mui-selected": {},
                       }}
                     />
                     <Tab
@@ -720,9 +845,7 @@ const ViewFundingDashboard = () => {
                       value="4"
                       disabled={isLoading}
                       sx={{
-                        "& .Mui-selected": {
-                          color: "#ffffff !important",
-                        },
+                        "& .Mui-selected": {},
                       }}
                       onClick={() => setOpenNewMusicForm(false)}
                     />
@@ -732,20 +855,18 @@ const ViewFundingDashboard = () => {
                       value="2"
                       disabled={isLoading}
                       sx={{
-                        "& .Mui-selected": {
-                          color: "#ffffff !important",
-                        },
+                        "& .Mui-selected": {},
                       }}
                     />
-                    {/* <Tab
+                    <Tab
                       className={classess.page__config__box__tabs__tab}
-                      label="Send"
+                      label="Upload"
                       value="3"
                       disabled={isLoading}
                       sx={{
                         "&.Mui-selected": {},
                       }}
-                    /> */}
+                    />
                     {/* <Tab
                       className={classess.page__config__box__tabs__tab}
                       label="Sign"
@@ -772,12 +893,12 @@ const ViewFundingDashboard = () => {
                   className={classess.page__config__box__panel}
                 >
                   <TabPanel
-                    sx={{
-                      color: "#FFFFFF",
-                      padding: "12px",
-                      backgroundColor: "#222C41",
-                      borderRadius: "0px 0px 12px 12px",
-                    }}
+                    // sx={{
+                    //   color: "#FFFFFF",
+                    //   padding: "12px",
+                    //   backgroundColor: "#222C41",
+                    //   borderRadius: "0px 0px 12px 12px",
+                    // }}
                     value="1"
                   >
                     <VerifyConfig
@@ -787,10 +908,14 @@ const ViewFundingDashboard = () => {
                       catelog_income={catelog_income}
                       new_music_income={new_music_income}
                       calcalute_tracks_estimate={calcalute_tracks_estimate}
+                      calcalute_Year_income_by_tracks={
+                        calcalute_Year_income_by_tracks
+                      }
+                      artist={artist}
                     />
                   </TabPanel>
                   <TabPanel
-                    sx={{ color: "#FFFFFF", padding: "12px" }}
+                    // sx={{ color: "#FFFFFF", padding: "12px" }}
                     value="2"
                   >
                     <CustomizedConfig
@@ -820,10 +945,18 @@ const ViewFundingDashboard = () => {
                       marketing_budget={marketing_budget}
                       internationalNumberFormat={internationalNumberFormat}
                       onClick={handleButtonClick}
+                      artAdvance={artAdvance}
+                      setArtAdvance={setArtAdvance}
+                      marketBudget={marketBudget}
+                      setMarketBudget={setMarketBudget}
+                      downloadPDF={downloadPDF}
+                      isPending={pdf.isPending}
+                      setRECOUPMENTPERIOD={setRECOUPMENTPERIOD}
+                      setRECOUPMENTPERIOD_IN_ENG={setRECOUPMENTPERIOD_IN_ENG}
                     />
                   </TabPanel>
-                  {/* <TabPanel
-                    sx={{ color: "#FFFFFF", padding: "12px" }}
+                  <TabPanel
+                    // sx={{ color: "#FFFFFF", padding: "12px" }}
                     value="3"
                   >
                     <SendConfig
@@ -831,9 +964,9 @@ const ViewFundingDashboard = () => {
                       contract_length={contract_length}
                       catelog_income={catelog_income}
                     />
-                  </TabPanel> */}
+                  </TabPanel>
                   <TabPanel
-                    sx={{ color: "#FFFFFF", padding: "12px" }}
+                    // sx={{ color: "#FFFFFF", padding: "12px" }}
                     value="4"
                   >
                     <ConfirmConfig
@@ -869,9 +1002,9 @@ const ViewFundingDashboard = () => {
                 </Box>
                 <TabPanel
                   sx={{
-                    color: "#FFFFFF",
+                    // color: "#FFFFFF",
                     mt: 2,
-                    borderRadius: "12px",
+                    // borderRadius: "12px",
                     "&.MuiTabPanel-root": {
                       padding: "0px",
                     },

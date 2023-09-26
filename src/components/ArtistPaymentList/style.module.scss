@@ -2,76 +2,64 @@
 @import "../../styles/colors.scss";
 
 .page {
-  margin-top: 20px;
+  // margin-top: 20px;
+  @include flexProperties(column, flex-start, center, $fullWidth: true);
+  width: 100% !important;
+  height: 100% !important;
 
   &__list {
-    overflow-y: scroll;
-    &::-webkit-scrollbar {
-      display: none;
-    }
-    &__ul {
-      &__li {
-        &__name {
-          font-size: 15px;
-          text-transform: capitalize;
-          letter-spacing: 0px;
-          color: $base-text-color;
-          font-weight: normal;
-          @include textEllipsisLineClamp(2);
-        }
-        &__tracktype {
-          font-size: 15px;
-          line-height: 25px;
-          text-transform: capitalize;
-          letter-spacing: 0px;
-          color: $base-text-color;
-          font-weight: normal;
-        }
-      }
-    }
-
-    &__loader {
-      @include flexProperties(column, center, center, $fullWidth: true);
-      width: 100%;
-      height: 100%;
-    }
+    width: 100% !important;
+    height: 100% !important;
   }
 }
 
 .table {
-  background: #222c41 !important;
-  overflow: scroll;
+  height: 100% !important;
   width: 100% !important;
-  min-height: 38.5rem;
-  max-height: 38.5rem;
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  background: $base-container-backgroung-color !important;
+
   &__head {
+    background-color: $base-container-backgroung-color !important;
     position: sticky;
-    z-index: 999;
+    z-index: 9999 !important;
   }
 
   &__brow {
+    &__comment_row_container {
+      width: 100% !important;
+      &__input {
+        background-color: $base-input-background-color;
+        border-radius: 12px;
+        padding: 10px;
+        border: none !important;
+        border-bottom: 1px none $base-input-background-color !important;
+        @include customParagraph(16px);
+        padding: 20px !important;
+      }
+      &__button {
+        @include activeThemeBotton(16px, 12px);
+        // padding: 15px 10px !important;
+      }
+    }
   }
 
   &__col {
-    background: #222c41 !important;
+    background: $base-container-backgroung-color !important;
     text-align: left !important;
-    border-bottom: 1px solid #474d5e;
+    width: 50px !important;
+    border-bottom: 1px solid $base-border-line-color;
     @include textEllipsis();
+
     &__heading {
       @include customFontsSmallTags();
     }
 
     &__last {
-      color: white !important;
-      background: #2f3443 !important;
+      background: $base-inner-container-background-color !important;
       text-align: center !important;
     }
     &__lastdays {
-      color: rgb(145, 144, 144) !important;
-      background: #2f3443 !important;
+      background: $base-inner-container-background-color !important;
       text-align: center !important;
       font-size: 9px;
     }
@@ -79,45 +67,29 @@
 
   &__row {
     border-bottom: 0px !important;
-    background-color: #192233;
-    height: 53px !important ;
+    background-color: $base-inner-container-background-color !important;
     @include textEllipsis();
-    color: #fff;
-    &__artist_image {
-      width: 50px !important;
-      height: 50px !important;
-    }
-
-    &__href {
-      font-size: 24px;
-      font-family: "DM Sans";
-      font-weight: 700;
-      text-decoration: none;
-    }
-    &__href:hover {
-      color: #4ffcb7;
-    }
-
-    &__placement {
-      @include flexProperties(row, flex-start, center, $fullWidth: false);
-    }
-    &__green {
-      color: green;
-    }
-
-    &__red {
-      color: red;
-    }
 
     &__name {
-      display: flex;
-      width: 200px;
-      justify-content: flex-start;
-      align-items: center;
+      @include customHeading(24px);
+      &__href {
+        @include customHeading(24px);
+        text-decoration: none;
+      }
     }
-    &__sosi {
-      // width: 10%;
-      font-size: 12px;
+
+    &__last_payment {
+      @include customParagraph(14px);
+    }
+
+    &__created {
+      @include customParagraph(14px);
+      text-decoration: underline;
+    }
+
+    &__created_by {
+      @include customParagraph(14px);
+      text-decoration: underline;
     }
 
     &__action {
@@ -126,29 +98,27 @@
       }
     }
 
-    &__button {
-      @include activeThemeBotton(16px, 12px);
-      padding: 15px 10px !important;
-    }
     &__button:hover {
       background: #4ffcb7 !important;
       color: #000 !important;
+    }
+
+    &__artist_image {
+      height: 40px !important;
+      width: 40px !important;
     }
   }
 
   &__label {
     @include flexProperties(row, flex-start, center, $fullWidth: true);
     gap: 10px;
-    color: white;
-    margin-bottom: 10px;
-    font-size: 1rem;
-    font-family: "DM Sans";
+    @include customFontsSmallTags(12px);
   }
 
   &__input {
-    color: #fff !important;
-    border: 1px solid #192233 !important;
-    background: #192233;
+    color: $base-input-text-color !important;
+    border: 1px solid $base-input-background-color !important;
+    background: $base-input-background-color;
     outline: none;
     padding: 15px;
     font-size: 18px;
@@ -157,36 +127,27 @@
   }
 
   &__bank_info_wrapper {
-    background-color: #192233;
+    background-color: $base-input-background-color;
     padding: 15px;
     border-radius: 8px;
     margin-top: 8px;
-    height: 200px;
+    height: 300px;
     overflow-y: auto;
-    max-height: 200px;
 
     &__name {
-      font-size: 1rem;
-      font-family: "DM Sans";
-      color: #fff;
+      @include customFontsSmallTags(12px);
     }
     &__label {
-      gap: 0;
-      font-size: 1rem;
-      font-family: "DM Sans";
-      color: #fff;
-      font-weight: 500;
+      @include customParagraph(16px);
     }
     &__input {
-      background: #192233;
-      color: #fff;
-      font-size: 0.875rem;
+      @include customParagraph(16px);
+      background-color: $base-input-background-color;
       border: none;
-      margin-bottom: 7px;
     }
     &__image {
-      width: 30%;
-      height: auto;
+      width: 150px;
+      height: 190px;
       &__downloadbtn {
         @include activeThemeBotton(16px 10px);
       }
@@ -194,7 +155,7 @@
     &__box {
       display: flex;
       flex-direction: column;
-      justify-content: space-evenly;
+      justify-content: space-between;
       align-items: center;
       height: 100%;
     }

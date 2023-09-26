@@ -1,5 +1,6 @@
 import Slider from "@mui/material/Slider";
 import { makeStyles, withStyles } from "@mui/styles";
+// import '../styles/'
 
 const muiTableCellUseStyles = makeStyles({
   row: {
@@ -13,17 +14,17 @@ const muiTableCellUseStyles = makeStyles({
 const muiTableCellUseStylesforBorderRedius = makeStyles({
   row: {
     "&  .MuiTableCell-root": {
-      borderBottom: "none",
-      borderRadius: "12px 12px 12px 12px ",
+      // borderBottom: "none",
+      // borderRadius: "12px 12px 12px 12px ",
     },
   },
 });
 
 const FabStyles = makeStyles({
   addButton: {
-    backgroundColor: "#00CD98 !important",
+    backgroundColor: "#4FFCB7 !important",
     "&:hover": {
-      backgroundColor: "#00CD98 !important",
+      backgroundColor: "#4FFCB7 !important",
     },
   },
 });
@@ -117,28 +118,28 @@ const viewArtistUseStyles = makeStyles(() => ({
 
 const viewFundingDashboardSelectUseStyles = makeStyles(() => ({
   root: {
-    "& .Mui-selected": {
-      backgroundColor: "transparent",
-      width: 150,
-      height: 30,
-      color: "#fff !important",
-      "&::after": {
-        content: "''",
-        display: "block",
-        height: "5px",
-        borderRadius: "2px",
-        background: "#4ffcb7",
-        bottom: "0px",
-        position: "absolute",
-        width: "100%",
-        transition: "all 0.9s ease-in-out !important",
-      },
-    },
-    "& .MuiTabs-indicator": {
-      backgroundColor: "transparent",
-    },
+    // "& .Mui-selected": {
+    //   backgroundColor: "transparent",
+    //   width: 150,
+    //   height: 30,
+    //   color: "#fff !important",
+    //   "&::after": {
+    //     content: "''",
+    //     display: "block",
+    //     height: "5px",
+    //     borderRadius: "2px",
+    //     background: "#4ffcb7",
+    //     bottom: "0px",
+    //     position: "absolute",
+    //     width: "90%",
+    //     transition: "all 0.9s ease-in-out !important",
+    //   },
+    // },
+    // "& .MuiTabs-indicator": {
+    //   backgroundColor: "transparent",
+    // },
     "& .MuiStepLabel-label.Mui-disabled": {
-      color: "#8e929d",
+      color: "#9196a0",
     },
 
     "& .MuiStep-root": {

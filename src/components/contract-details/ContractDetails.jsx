@@ -47,7 +47,7 @@ const ContractDetails = forwardRef(
     const [zipCode, setZipCode] = useState("");
     const [zipCodeError, setZipCodeError] = useState("");
     const [country, setCountry] = useState("");
-
+    const [artistImage, setArtistImage] = useState("");
     const handleAddressSelect = async () => {
       let addressObj = await googleAutoCompleteSvc.getFullAddress(autoComplete);
       address1Ref.current.value = addressObj.address1;
@@ -65,6 +65,7 @@ const ContractDetails = forwardRef(
       setCountry(props.backDataSending.country);
       setArtistPhone(props.backDataSending.artist_phone);
       setArtistEmail(props.backDataSending.artist_email);
+      setArtistImage(props.backDataSending.avatar);
       async function loadGoogleMaps() {
         // initialize the Google Place Autocomplete widget and bind it to an input element.
         // eslint-disable-next-line
@@ -198,7 +199,7 @@ const ContractDetails = forwardRef(
               formdata.append("country", country);
               formdata.append("Selected_tracks", props.selected_tracts);
               formdata.append("contract_length", props.contract_length);
-
+              formdata.append("artist_image", artistImage);
               // const res = await fetch(`${URLConfig.BASE_URL}/contracts`, {
               //   method: "POST",
               //   body: formdata,
@@ -223,6 +224,7 @@ const ContractDetails = forwardRef(
                 country: formdata.get("country"),
                 Selected_tracks: formdata.get("Selected_tracks"),
                 contract_length: formdata.get("contract_length"),
+                artist_image: formdata.get("artist_image"),
               };
               props.setContractData(payload);
               // const data = await res.json();
@@ -279,6 +281,7 @@ const ContractDetails = forwardRef(
                 artist_representative_name: artistRepresentativeName,
                 artist_email: artistEmail,
                 artist_phone: artistphone,
+                artist_image: artistImage,
                 artist_representative_email: artistRepresentativeEmail,
                 advance,
                 advance_amount: advanceAmount,
@@ -296,6 +299,7 @@ const ContractDetails = forwardRef(
                 artist_representative_name: artistRepresentativeName,
                 artist_email: artistEmail,
                 artist_phone: artistphone,
+                artist_image: artistImage,
                 artist_representative_email: artistRepresentativeEmail,
                 advance,
                 advance_amount: advanceAmount,
@@ -337,6 +341,7 @@ const ContractDetails = forwardRef(
       setCity(props.backDataSending.city);
       setZipCode(props.backDataSending.zip_code);
       setCountry(props.backDataSending.country);
+      setArtistImage(props.backDataSending.avatar);
     }, [artist, user]);
 
     return (

@@ -22,6 +22,8 @@ const initialState = {
   showSelectedTracksFunding: false,
   reload: false,
   reports: [],
+  licenseType: "license",
+  multiple: 30,
 };
 
 // export const addReport = createAsyncThunk("artist/getArtist", (_, thunkAPI) => {
@@ -199,6 +201,19 @@ export const deleteArtist = createAsyncThunk(
     return response;
   }
 );
+export const removeArtist = createAsyncThunk(
+  "artist/removeArtist",
+  ({ id,uid }, thunkAPI) => {
+    const response = thunkHandler(
+      clients.default.client({
+        method: "DELETE",
+        url: `/artists/${id}/remove-associate/${uid}`,
+      }),
+      thunkAPI
+    );
+    return response;
+  }
+);
 
 export const artistSlice = createSlice({
   name: "artist",
@@ -245,6 +260,12 @@ export const artistSlice = createSlice({
     },
     setReload: (state, action) => {
       state.reload = action.payload;
+    },
+    setMultiple: (state, action) => {
+      state.multiple = action.payload;
+    },
+    setLicenceType: (state, action) => {
+      state.licenseType = action.payload;
     },
   },
   extraReducers: {
@@ -343,6 +364,17 @@ export const artistSlice = createSlice({
       state.status = "failed";
       toast.error(action.payload.data.message);
     },
+    [removeArtist.pending]: (state) => {
+      state.status = "loading";
+    },
+    [removeArtist.fulfilled]: (state, action) => {
+      state.status = "succeeded";
+      toast.success("Artist Remove Successfully");
+    },
+    [removeArtist.rejected]: (state, action) => {
+      state.status = "failed";
+      toast.error(action.payload.data.message);
+    },
     [getReports.pending]: (state) => {
       state.status = "loading";
     },
@@ -375,6 +407,8 @@ export const {
   setSearchResultTracks,
   makeEmptySearchResultTracks,
   setNewMusicTracks,
+  setMultiple,
+  setLicenceType,
 } = artistSlice.actions;
 
 export default artistSlice.reducer;

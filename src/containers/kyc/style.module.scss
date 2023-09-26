@@ -2,185 +2,120 @@
 @import "../../styles/colors.scss";
 
 .page {
-    @include flexProperties(row, flex-start, flex-start, $fullWidth: true);
-    gap: 0px;
+  @include flexProperties(row, flex-start, flex-start, $fullWidth: true);
+  gap: 0px;
 
-    &__loader {
-        @include flexProperties(column, center, center, $fullWidth: true);
+  &__loader {
+    @include flexProperties(column, center, center, $fullWidth: true);
+    width: 100%;
+    height: 100%;
+  }
+
+  &__details {
+    flex: 1;
+    width: 100%;
+
+    &__box {
+      @include flexProperties(column, flex-start, flex-start, $fullWidth: false);
+      width: 100%;
+      gap: 20px;
+
+      &__adetails {
         width: 100%;
-        height: 100%;
-    }
+        background: $base-container-backgroung-color;
+        border-radius: 12px;
+        padding: 20px;
 
-    &__details {
-        flex: 1;
-        width: 100%;
+        &__header {
+          @include flexProperties(row, space-between, center, $fullWidth: true);
+          width: 100%;
 
-        &__box {
-            @include flexProperties(column, flex-start, flex-start, $fullWidth: false);
-            width: 100%;
-            gap: 20px;
-
-            &__adetails {
-                width: 100%;
-                background: $secondary-bg-color-1;
-                border-radius: 12px;
-                padding: 20px;
-
-                &__header {
-                    @include flexProperties(row, space-between, center, $fullWidth: true);
-                    width: 100%;
-
-                    &__title {
-                        @include customHeading();
-                    }
-                    &__textinput_container {
-                        width: 255px;
-                        height: 41px;
-                        background-color: #192233;
-                        display: flex;
-                        flex-direction: row;
-                        align-items: center;
-                        justify-content: space-between;
-                        border-radius: 12px;
-                        &__input {
-                            width: 100%;
-                            height: 100%;
-                            background-color: transparent;
-                            border-style: none;
-                            font-size: 14px !important;
-                            color: #fff;
-                            &:focus {
-                                border-style: none !important;
-                                outline: none !important;
-                            }
-                            &:active {
-                                border-style: none !important;
-                                outline: none !important;
-                            }
-
-                            &::placeholder {
-                                color: #a7a7a7;
-                            }
-                        }
-                    }
-                }
-
-                &__content {
-                    @include flexProperties(row, space-between, center, $fullWidth: false);
-                    flex-wrap: wrap;
-                    gap: 10px;
-                    margin-top: 40px;
-
-                    &__box {
-                        @include flexProperties(row, flex-start, center, $fullWidth: false);
-                        flex-wrap: wrap;
-                        gap: 10px;
-                        width: 45%;
-
-                        &__title {
-                            color: $base-text-color;
-                            font-size: 16px;
-
-                            &__image {
-                                height: 20px;
-                                width: 20px;
-                                cursor: pointer;
-                            }
-                        }
-
-                        &__value {
-                            color: white;
-                            font-size: 14px;
-                        }
-                    }
-                }
-            }
-
-            &__tracks {
-                width: 100%;
-                background: $secondary-bg-color-1;
-                border-radius: 12px;
-                padding: 20px;
-
-                &__header {
-                    @include flexProperties(row, space-between, center, $fullWidth: true);
-                    width: 100%;
-
-                    &__title {
-                        color: $base-text-color;
-                        font-size: 16px;
-                        font-weight: bold;
-                        text-transform: uppercase;
-                    }
-
-                    &__btn {
-                        background: $secondary-bg-color-3 !important;
-                        color: $base-text-color !important;
-                        border-radius: 25px !important;
-                        font-size: 14px;
-                        cursor: pointer;
-                        text-transform: uppercase;
-                        border: none;
-                        padding: 5px 20px !important;
-
-                        &:hover {
-                            background: #01a177 !important;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    &__similar {
-        flex: 1;
-        height: 100%;
-        width: 100%;
-
-        &__box {
-            background: $secondary-bg-color-1;
+          &__title {
+            @include customHeading(24px);
+          }
+          &__textinput_container {
+            width: 255px;
+            height: 41px;
+            background-color: $base-input-background-color;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
             border-radius: 12px;
-            height: 100%;
-        }
-    }
-}
+            &__input {
+              width: 100%;
+              height: 100%;
+              background-color: transparent;
+              border-style: none;
+              font-size: 14px !important;
+              color: $base-input-text-color;
+              &__icon_color {
+                color: $base-icon-colors !important;
+              }
+              &:focus {
+                border-style: none !important;
+                outline: none !important;
+              }
+              &:active {
+                border-style: none !important;
+                outline: none !important;
+              }
 
-@media only screen and (max-width: 1700px) {
-    .page {
-        flex-wrap: wrap;
-    }
-}
-
-@media only screen and (max-width: 684px) {
-    .page {
-        &__artist {
-            flex: 1;
-
-            &__box {
-                min-height: 500px;
+              &::placeholder {
+                color: $base-input-text-color;
+                opacity: 0.3;
+              }
             }
+          }
         }
-    }
-}
 
-@media only screen and (max-width: 434px) {
+        &__main_content {
+          @include flexProperties(column, center, center, $fullWidth: false);
+          width: 100% !important;
+          height: 95% !important;
+          overflow: scroll;
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 1700px) {
     .page {
-        &__details {
-            &__box {
-                &__adetails {
-                    &__content {
-                        @include flexProperties(column, flex-start, flex-start, $fullWidth: false);
-                        gap: 20px;
-                    }
-                }
+      flex-wrap: wrap;
+    }
+  }
+
+  @media only screen and (max-width: 684px) {
+    .page {
+      &__artist {
+        flex: 1;
+
+        &__box {
+          min-height: 500px;
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 434px) {
+    .page {
+      &__details {
+        &__box {
+          &__adetails {
+            &__content {
+              @include flexProperties(column, flex-start, flex-start, $fullWidth: false);
+              gap: 20px;
             }
+          }
         }
+      }
     }
-}
+  }
 
-@media (min-width: 630px) and (max-width: 1199.98px) {
+  @media (min-width: 630px) and (max-width: 1199.98px) {
     .page {
-        flex-direction: column;
-        align-items: center;
+      flex-direction: column;
+      align-items: center;
     }
+  }
 }

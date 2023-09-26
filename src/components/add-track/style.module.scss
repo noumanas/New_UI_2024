@@ -11,7 +11,7 @@
         height: 100%;
         overflow: auto;
         width: 100%;
-        background-color: $secondary-bg-color-1;
+        background-color: #222c41;
         border-radius: 12px;
         box-shadow: 2px 2px 4px #000000;
         padding: 20px;
@@ -20,7 +20,7 @@
         &__header {
             &__title {
                 @include fontSize(18px);
-                color: $base-text-color;
+                color: #4ffcb7;
                 text-transform: capitalize;
                 letter-spacing: 0px;
             }
@@ -42,20 +42,20 @@
                     gap: 10px;
 
                     &__label {
-                        color: $base-text-color;
+                        color: #4ffcb7;
                     }
 
                     &__input {
                         width: 100%;
                         color: #c2c2c2 !important;
-                        border: 1px solid $secondary-bg-color-3 !important;
+                        border: 1px solid #4ffcb7 !important;
                         background: transparent;
                         outline: none;
                         padding: 15px;
                         font-size: 18px;
                         border-radius: 8px;
                         &:focus {
-                            outline: $secondary-bg-color-3 solid 1px !important;
+                            outline: #4ffcb7 solid 1px !important;
                         }
                         &::-webkit-inner-spin-button {
                             -webkit-appearance: none;
@@ -66,23 +66,23 @@
                     &__input_date {
                         width: 100%;
                         color: #c2c2c2 !important;
-                        border: 1px solid $secondary-bg-color-3 !important;
+                        border: 1px solid #4ffcb7 !important;
                         background: transparent;
                         outline: none;
                         font-size: 18px;
                         border-radius: 8px;
                         &:hover {
-                            outline: $secondary-bg-color-3 solid 1px !important;
+                            outline: #4ffcb7 solid 1px !important;
                         }
                         &:focus {
-                            outline: $secondary-bg-color-3 solid 1px !important;
+                            outline: #4ffcb7 solid 1px !important;
                         }
                     }
 
                     &__select {
                         width: 100%;
                         color: #c2c2c2;
-                        border: 1px solid $secondary-bg-color-3 !important;
+                        border: 1px solid #4ffcb7 !important;
                         background: transparent;
                         outline: none;
                         padding: 15px;
@@ -97,14 +97,14 @@
                 width: 100%;
 
                 &__cancel_btn {
-                    @include normalThemeButton(16px, 10px);
+                    @include activeThemeBotton(16px, 10px);
                     @include fontSize();
                     height: 40px;
                 }
 
                 &__submit_btn {
                     gap: 20px;
-                    @include pinkThemeButton(16px, 10px);
+                    @include activeThemeBotton(16px, 10px);
                     @include fontSize();
                     height: 40px;
                 }

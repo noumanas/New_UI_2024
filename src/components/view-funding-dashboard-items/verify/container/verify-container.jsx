@@ -36,7 +36,7 @@ const VerifyContainer = ({ artist }) => {
         },
       },
     },
-    colors: ["#006DCC", "#FF0000", "#00CD98", "#00C7F2"],
+    colors: ["#006DCC", "#FF0000", "#4FFCB7", "#00C7F2"],
     legend: { position: "none" },
     hAxis: {
       textPosition: "none",
@@ -54,9 +54,8 @@ const VerifyContainer = ({ artist }) => {
     var deezer = 0;
 
     // Create the data table.
-    const response = await fetch(
-      `${URLconfig.BASE_URL}/artist-tracks/${artist?.spotify_id}`
-    );
+    const response = await fetch();
+    // `${URLconfig.BASE_URL}/artist-tracks/${artist?.spotify_id}`
     const datalocal = await response.json();
 
     for (let i = 0; i < datalocal.data.length; i++) {
@@ -116,7 +115,7 @@ const VerifyContainer = ({ artist }) => {
       );
     }
     setIsLoading(false);
-    toast.success("Saved Successfully");
+    toast.success("Saved SSuccessfully");
   };
 
   useEffect(() => {

@@ -2,15 +2,31 @@
 @import "../../styles/colors.scss";
 
 .page {
-    padding: 30px 60px;
+    width: 50%;
+    padding: 60px 100px 60px 60px;
+    background: rgba(0, 3, 54, 0.1);
+    border-radius: 12px;
+    font-family: "DM Sans";
+    backdrop-filter: blur(10px);
 
     &__logo {
-        @include flexProperties(row, space-between, center, $fullWidth: true);
-        gap: 30px;
-
-        &__text {
-            font-weight: bold;
+        @include flexProperties(center, center, $fullWidth: true);
+        margin-bottom: 20px !important;
+        &__img {
+            height: 90px !important;
         }
+        &__text {
+            margin-left: 30px !important;
+            @include customHeading();
+        }
+    }
+
+    &__horizontalLine {
+        width: 100%;
+        background-color: #707070;
+        height: 2px;
+        opacity: 0.5;
+        margin-bottom: 20px;
     }
 
     &__form {
@@ -25,17 +41,17 @@
                 gap: 10px;
 
                 &__label {
-                    color: $base-text-color;
+                    @include customFontsSmallTags();
                 }
 
                 &__input {
                     width: 100%;
-                    color: #c2c2c2 !important;
-                    border: 1px solid #00CD98 !important;
-                    background: transparent !important;
+                    color: #000 !important;
+                    border: 1px solid #4ffcb7 !important;
+                    background: #ffffff !important;
                     outline: none;
                     padding: 15px;
-                    font-size: 18px;
+                    font-size: 12px;
                     border-radius: 8px;
                 }
             }
@@ -43,22 +59,41 @@
             &__form_action {
                 @include flexProperties(row, space-between, center, $fullWidth: true);
                 width: 100%;
+                &__forgotPasswordText {
+                    color: red;
+                    text-decoration: underline;
+                }
             }
 
             &__action {
-                @include flexProperties(row, space-between, center, $fullWidth: true);
-                flex-wrap: wrap;
+                @include flexProperties(row, center, center, $fullWidth: true);
+                flex-wrap: nowrap;
                 gap: 20px;
-                width: 100%;
+                width: 105% !important;
                 margin-top: 20px;
 
                 &__btn {
-                    @include normalThemeButton(16px, 10px);
-                    @include fontSize(16px);
-                    width: 50%;
-
+                    @include activeThemeBotton(16px, 10px);
                     &:hover {
-                        background: #01a177 !important;
+                        background-color: #4ffcb7 !important;
+                        color: #000000 !important;
+                    }
+                }
+
+                &__register_btn {
+                    @include activeThemeBotton(16px, 10px);
+                    @include fontSize(16px);
+                }
+            }
+
+            &__dnthaveaccount {
+                @include customParagraph(12px);
+                font-weight: 400 !important;
+                &__spantwo {
+                    text-decoration: none;
+                    padding-left: 10px;
+                    &:hover {
+                        text-decoration: underline;
                     }
                 }
             }
@@ -66,16 +101,14 @@
     }
 
     &__social_media {
-        @include flexProperties(row, space-between, center, $fullWidth: true);
-        gap: 30px;
         margin-top: 20px;
-        flex-wrap: wrap;
 
         &__button {
             padding: 5px;
             height: 100%;
             background: "#FFFFFF";
-            min-width: 100px;
+            width: 100%;
+            cursor: pointer;
 
             &__img {
                 height: 20px;
@@ -98,17 +131,37 @@
 
 @media only screen and (max-width: 375px) {
     .page {
-        padding: 10px;
+        padding: 20px;
+        &__logo {
+            &__text {
+                font-size: 22px !important;
+            }
+        }
     }
 }
 
 @media only screen and (max-width: 365px) {
     .page {
-        padding: 8px;
-
+        padding: 20px;
         &__logo {
             &__text {
-                font-size: 24px !important;
+                font-size: 18px !important;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 326px) {
+    .page {
+        padding: 20px;
+        &__logo {
+            gap: 10px;
+            margin-bottom: 10px;
+            &__img {
+                height: 80px;
+            }
+            &__text {
+                font-size: 16px !important;
             }
         }
     }

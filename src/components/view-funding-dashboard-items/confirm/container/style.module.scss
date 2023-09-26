@@ -12,7 +12,7 @@
 
         &__heading {
             @include fontSize(22px);
-            color: $base-text-color !important;
+            color: #4ffcb7 !important;
         }
     }
 
@@ -21,16 +21,15 @@
         gap: 10px;
         margin-top: 10px;
 
-           &__heading {
+        &__heading {
             @include fontSize(22px);
-            color: $base-text-color !important;
+            color: #4ffcb7 !important;
         }
 
         &__para {
             @include fontSize(14px);
-            color: $base-text-color !important;
+            color: #4ffcb7 !important;
             font-style: italic;
         }
-
     }
 }

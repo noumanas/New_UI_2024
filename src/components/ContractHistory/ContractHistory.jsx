@@ -9,11 +9,11 @@ import TableRow from "@mui/material/TableRow";
 import Box from "@mui/material/Box";
 import { Toolbar, Typography } from "@mui/material";
 import { IconButton } from "@mui/material";
-import CheckIcon from "@mui/icons-material/Check";
+// import CheckIcon from "@mui/icons-material/Check";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import Stack from "@mui/material/Stack";
-import DownloadIcon from "@mui/icons-material/Download";
+// import DownloadIcon from "@mui/icons-material/Download";
 import InsertDriveFileOutlinedIcon from "@mui/icons-material/InsertDriveFileOutlined";
 import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined";
 import docicon from "../../assets/msword.png";
@@ -39,6 +39,10 @@ import TextField from "@mui/material/TextField";
 import FileUploadOutlinedIcon from "@mui/icons-material/FileUploadOutlined";
 import CloudDownloadOutlinedIcon from "@mui/icons-material/CloudDownloadOutlined";
 import Tooltip from "@mui/material/Tooltip";
+import DownloadIcon from "../../assets/buttonsicons/DownloadIcon.png";
+import CheckIcon from "../../assets/buttonsicons/CheckIcon.png";
+import AddNotesIcon from "../../assets/buttonsicons/AddNotesIcon.png";
+import { useDispatch, useSelector } from "react-redux";
 
 const ContractHistory = ({ props, open, onvaluechange }) => {
   const { id } = useParams();
@@ -50,7 +54,7 @@ const ContractHistory = ({ props, open, onvaluechange }) => {
   const [close, setClose] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [documentData, SetdocumentData] = useState([]);
-
+  const user = useSelector((state) => state.auth.user);
   useEffect(() => {
     let isApiSubscribed = true;
     axios.get(`${URLconfig.BASE_URL}/contracts/${id}`).then((res) => {
@@ -73,6 +77,7 @@ const ContractHistory = ({ props, open, onvaluechange }) => {
     onvaluechange(false);
     setNote("");
   };
+
   const downloadFile = (contractFile) => {
     const link = document.createElement("a");
     link.href = contractFile;
@@ -236,363 +241,435 @@ const ContractHistory = ({ props, open, onvaluechange }) => {
 
   return (
     <Box container spacing={2} className={classess.page}>
-      <Box component="div" varient="div" className={classess.page__list}>
-        <TableContainer className={classess.table}>
-          <Table stickyHeader={true} aria-label="sticky table">
-            <TableHead className={classess.table__head}>
-              <TableRow>
-                <TableCell className={classess.table__col}></TableCell>
-                <TableCell className={classess.table__col}>
-                  <span className={classess.table__col__heading}>TITLE</span>
-                </TableCell>
-                <TableCell className={classess.table__col}>
-                  <span className={classess.table__col__heading}>DATE</span>
-                </TableCell>
-                <TableCell className={classess.table__col}>
-                  <span className={classess.table__col__heading}>
-                    UPLOADED BY
-                  </span>
-                </TableCell>
-                <TableCell className={classess.table__col}>
-                  <span className={classess.table__col__heading}>VERSION</span>
-                </TableCell>
-                <TableCell className={classess.table__col}></TableCell>
-              </TableRow>
-            </TableHead>
+      <TableContainer className={classess.page__table}>
+        <Table stickyHeader={true} aria-label="sticky table">
+          <TableHead className={classess.page__table__head}>
+            <TableRow>
+              <TableCell className={classess.page__table__col}></TableCell>
+              <TableCell className={classess.page__table__col}>
+                <span className={classess.page__table__col__heading}>
+                  TITLE
+                </span>
+              </TableCell>
+              <TableCell className={classess.page__table__col}>
+                <span className={classess.page__table__col__heading}>DATE</span>
+              </TableCell>
+              <TableCell className={classess.page__table__col}>
+                <span className={classess.page__table__col__heading}>
+                  UPLOADED BY
+                </span>
+              </TableCell>
+              <TableCell className={classess.page__table__col}>
+                <span className={classess.page__table__col__heading}>
+                  VERSION
+                </span>
+              </TableCell>
+              <TableCell className={classess.page__table__col}></TableCell>
+            </TableRow>
+          </TableHead>
 
-            <TableBody className={classess.table__brow}>
-              <TableRow>
-                <TableCell
-                  className={classess.table__row}
-                  sx={{
-                    borderTopLeftRadius: "12px",
-                    borderBottomLeftRadius: "12px",
-                  }}
-                >
-                  <span className={classess.table__row__artistname}>
-                    <img src={docicon} alt="doc" width="30" />
-                  </span>
-                </TableCell>
+          <TableBody className={classess.page__table__brow}>
+            <TableRow>
+              <TableCell
+                className={classess.page__table__row}
+                sx={{
+                  borderTopLeftRadius: "12px",
+                  borderBottomLeftRadius: "12px",
+                }}
+              >
+                <span className={classess.page__table__row__artistname}>
+                  <img src={docicon} alt="doc" width="30" />
+                </span>
+              </TableCell>
 
-                <TableCell className={classess.table__row}>
-                  <Box className={classess.table__row__filename}>
-                    {"Contract_agreement " + contact?.artist_name}
-                  </Box>
-                </TableCell>
+              <TableCell className={classess.page__table__row}>
+                <Box className={classess.page__table__row__filename}>
+                  {"Contract_agreement " + contact?.artist_name}
+                </Box>
+              </TableCell>
 
-                <TableCell className={classess.table__row}>
-                  <span className={classess.table__row__date}>
-                    {moment(contact.createdAt).format("MMM-DD-YYYY")}
-                  </span>
-                </TableCell>
+              <TableCell className={classess.page__table__row}>
+                <span className={classess.page__table__row__date}>
+                  {moment(contact.createdAt).format("MMM-DD-YYYY")}
+                </span>
+              </TableCell>
 
-                <TableCell className={classess.table__row}>
-                  <span className={classess.table__row__status}>
-                    {contact?.artist_representative_name}
-                  </span>
-                </TableCell>
+              <TableCell className={classess.page__table__row}>
+                <span className={classess.page__table__row__rep_name}>
+                  {contact?.artist_representative_name}
+                </span>
+              </TableCell>
 
-                <TableCell className={classess.table__row}>
-                  <span className={classess.table__row__action}>{"1.0"}</span>
-                </TableCell>
+              <TableCell className={classess.page__table__row}>
+                <span className={classess.page__table__row__version}>
+                  {"1.0"}
+                </span>
+              </TableCell>
 
-                <TableCell
-                  className={classess.table__row}
-                  sx={{
-                    borderTopRightRadius: "12px",
-                    borderBottomRightRadius: "12px",
-                  }}
-                >
-                  <span className={classess.table__row__action2}>
-                    <Stack direction="row">
-                      <Tooltip
-                        title="Download Contract File"
-                        placement="top"
-                        arrow
-                        enterDelay={100}
+              <TableCell
+                className={classess.page__table__row}
+                sx={{
+                  borderTopRightRadius: "12px",
+                  borderBottomRightRadius: "12px",
+                }}
+              >
+                <span className={classess.page__table__row__action2}>
+                  <Stack direction="row" spacing={1}>
+                    <Tooltip
+                      title="Download Contract File"
+                      placement="top"
+                      arrow
+                      enterDelay={100}
+                    >
+                      <IconButton
+                        style={{
+                          backgroundColor: "#4FFCB7",
+                          height: "30px",
+                          width: "30px",
+                        }}
+                        onClick={() => download_first_contract(contact)}
                       >
-                        <Button
-                          className={classess.table__row__action2__btn}
-                          variant=""
-                        >
-                          <CloudDownloadOutlinedIcon
+                        <img
+                          src={DownloadIcon}
+                          alt="Eye"
+                          style={{ height: "12px", width: "16px" }}
+                        />
+                        {/* <CloudDownloadOutlinedIcon
                             fontSize="small"
-                            onClick={() => download_first_contract(contact)}
-                            style={{ color: "#000" }}
-                          />
-                        </Button>
-                      </Tooltip>
+                            style={{
+                              color: "#000",
+                              height: "15px",
+                              width: "15px",
+                            }}
+                          /> */}
+                      </IconButton>
+                    </Tooltip>
 
-                      <Tooltip
-                        title="Add Revisions First"
-                        placement="top"
-                        arrow
-                        enterDelay={100}
+                    <Tooltip
+                      title="Add Revisions First"
+                      placement="top"
+                      arrow
+                      enterDelay={100}
+                    >
+                      <IconButton
+                        variant=""
+                        onClick={() => setOpenPanel(!openPanel)}
+                        style={{
+                          backgroundColor: "#4FFCB7",
+                          height: "30px",
+                          width: "30px",
+                          opacity: "0.1",
+                        }}
                       >
-                        <Button
-                          className={classess.table__row__action2__btn1}
-                          variant=""
-                          onClick={() => setOpenPanel(!openPanel)}
-                        >
-                          <InsertDriveFileOutlinedIcon
+                        <img
+                          src={AddNotesIcon}
+                          alt="Eye"
+                          style={{ height: "14px", width: "16px" }}
+                        />
+                        {/* <InsertDriveFileOutlinedIcon
                             fontSize="small"
-                            style={{ color: "#000" }}
-                          />
-                        </Button>
+                            style={{
+                              color: "#000",
+                              height: "15px",
+                              width: "15px",
+                            }}
+                          /> */}
+                        </IconButton>
                       </Tooltip>
-
-                      <Tooltip
-                        title="Contract Approve"
-                        placement="top"
-                        arrow
-                        enterDelay={100}
-                      >
-                        <Button
-                          className={classess.table__row__action2__btn2}
-                          variant=""
-                          onClick={() => eventHandler(id)}
+                      {user.role === "admin" && (
+                        <Tooltip
+                          title="Contract Approve"
+                          placement="top"
+                          arrow
+                          enterDelay={100}
                         >
-                          <CheckOutlinedIcon
+                          <IconButton
+                            variant=""
+                            onClick={() => eventHandler(id)}
+                            style={{
+                              backgroundColor: "#4FFCB7",
+                              height: "30px",
+                              width: "30px",
+                            }}
+                          >
+                            <img
+                              src={CheckIcon}
+                              alt="Eye"
+                              style={{ height: "12px", width: "16px" }}
+                            />
+                            {/* <CheckOutlinedIcon
                             fontSize="small"
-                            style={{ color: "#000" }}
-                          />
-                        </Button>
-                      </Tooltip>
+                            style={{
+                              color: "#000000",
+                              height: "15px",
+                              width: "15px",
+                            }}
+                          /> */}
+                          </IconButton>
+                        </Tooltip>
+                      )}
                     </Stack>
                   </span>
                 </TableCell>
               </TableRow>
-            </TableBody>
+          </TableBody>
 
-            {notes.map((data, key) => {
-              return (
+          {notes.map((data, key) => {
+            return (
+              <>
                 <>
-                  <>
-                    <Box sx={{ m: "1rem" }}></Box>
-                  </>
-                  <TableBody className={classess.table__brow}>
-                    <TableRow>
-                      <TableCell
-                        className={classess.table__row}
-                        sx={{
-                          borderTopLeftRadius: "12px",
-                          borderBottomLeftRadius: "12px",
-                        }}
-                      >
-                        <span className={classess.table__row__artistname}>
-                          <img src={docicon} alt="doc" width="30" />
-                        </span>
-                      </TableCell>
+                  <Box sx={{ m: "1rem" }}></Box>
+                </>
+                <TableBody className={classess.page__table__brow}>
+                  <TableRow>
+                    <TableCell
+                      className={classess.page__table__row}
+                      sx={{
+                        borderTopLeftRadius: "12px",
+                        borderBottomLeftRadius: "12px",
+                      }}
+                    >
+                      <span className={classess.page__table__row__artistname}>
+                        <img src={docicon} alt="doc" width="30" />
+                      </span>
+                    </TableCell>
 
-                      <TableCell className={classess.table__row}>
-                        <Box className={classess.table__row__filename}>
-                          {data.fileKey}
-                        </Box>
-                      </TableCell>
+                    <TableCell className={classess.page__table__row}>
+                      <Box className={classess.page__table__row__filename}>
+                        {data.fileKey}
+                      </Box>
+                    </TableCell>
 
-                      <TableCell className={classess.table__row}>
-                        <span className={classess.table__row__date}>
-                          {moment(data.createdAt).format("MMM-DD-YYYY")}
-                        </span>
-                      </TableCell>
+                    <TableCell className={classess.page__table__row}>
+                      <span className={classess.page__table__row__date}>
+                        {moment(data.createdAt).format("MMM-DD-YYYY")}
+                      </span>
+                    </TableCell>
 
-                      <TableCell className={classess.table__row}>
-                        <span className={classess.table__row__status}>
-                          {data.user?.firstName + " " + data.user?.lastName}
-                        </span>
-                      </TableCell>
+                    <TableCell className={classess.page__table__row}>
+                      <span className={classess.page__table__row__rep_name}>
+                        {data.user?.firstName + " " + data.user?.lastName}
+                      </span>
+                    </TableCell>
 
-                      <TableCell className={classess.table__row}>
-                        <span className={classess.table__row__action}>
-                          {"1." + (key + 1)}
-                        </span>
-                      </TableCell>
+                    <TableCell className={classess.page__table__row}>
+                      <span className={classess.page__table__row__version}>
+                        {"1." + (key + 1)}
+                      </span>
+                    </TableCell>
 
-                      <TableCell
-                        className={classess.table__row}
-                        sx={{
-                          borderTopRightRadius: "12px",
-                          borderBottomRightRadius: "12px",
-                        }}
-                      >
-                        <span className={classess.table__row__action2}>
-                          <Stack direction="row">
-                            <Tooltip
-                              title="Download Contract File"
-                              placement="top"
-                              arrow
-                              enterDelay={100}
-                            >
-                              <Button
-                                className={classess.table__row__action2__btn}
-                                variant=""
-                              >
-                                <CloudDownloadOutlinedIcon
-                                  fontSize="small"
-                                  onClick={() =>
-                                    download_first_contract(contact)
-                                  }
-                                  style={{ color: "#000" }}
-                                />
-                              </Button>
-                            </Tooltip>
-
-                            <Tooltip
-                              title="Open Comment Panel"
-                              placement="top"
-                              arrow
-                              enterDelay={100}
-                            >
-                              <Button
-                                className={classess.table__row__action2__btn}
-                                variant=""
-                                onClick={() => handleToggle(key)}
-                              >
-                                <InsertDriveFileOutlinedIcon
-                                  fontSize="small"
-                                  style={{ color: "#000" }}
-                                />
-                              </Button>
-                            </Tooltip>
-
-                            <Tooltip
-                              title="Contract Approve"
-                              placement="top"
-                              arrow
-                              enterDelay={100}
-                            >
-                              <Button
-                                className={classess.table__row__action2__btn2}
-                                variant=""
-                                onClick={() => eventHandler(id)}
-                              >
-                                <CheckOutlinedIcon
-                                  fontSize="small"
-                                  style={{ color: "#000" }}
-                                />
-                              </Button>
-                            </Tooltip>
-                          </Stack>
-                        </span>
-                      </TableCell>
-                    </TableRow>
-
-                    {toggleTab === key && (
-                      <TableRow>
-                        <TableCell
-                          colSpan={6}
-                          className={classess.table__notes_row}
-                        >
-                          <Grid
-                            container
-                            mb={2}
-                            key={data._id}
-                            sx={{
-                              position: "relative",
-                            }}
+                    <TableCell
+                      className={classess.page__table__row}
+                      sx={{
+                        borderTopRightRadius: "12px",
+                        borderBottomRightRadius: "12px",
+                      }}
+                    >
+                      <span className={classess.page__table__row__action2}>
+                        <Stack direction="row" spacing={1}>
+                          <Tooltip
+                            title="Download Contract File"
+                            placement="top"
+                            arrow
+                            enterDelay={100}
                           >
-                            <Grid
-                              sm
-                              className={`${classess.page__notes__notebox} ${classess.note}`}
-                              sx={{
-                                borderTop: "1px solid #222c41",
-                                overflow: "visible",
+                            <IconButton
+                              variant=""
+                              style={{
+                                backgroundColor: "#4FFCB7",
+                                height: "30px",
+                                width: "30px",
+                              }}
+                              onClick={() => download_first_contract(contact)}
+                            >
+                              <img
+                                src={DownloadIcon}
+                                alt="Eye"
+                                style={{ height: "12px", width: "16px" }}
+                              />
+                              {/* <CloudDownloadOutlinedIcon
+                                  fontSize="small"
+                                  style={{
+                                    color: "#000000",
+                                    height: "15px",
+                                    width: "15px",
+                                  }}
+                                /> */}
+                            </IconButton>
+                          </Tooltip>
+
+                          <Tooltip
+                            title="Open Comment Panel"
+                            placement="top"
+                            arrow
+                            enterDelay={100}
+                          >
+                            <IconButton
+                              variant=""
+                              onClick={() => handleToggle(key)}
+                              style={{
+                                backgroundColor: "#4FFCB7",
+                                height: "30px",
+                                width: "30px",
                               }}
                             >
-                              <Box
-                                className={classess.page__notes__notebox__chips}
-                              >
-                                <span>
-                                  <Chip
-                                    label="Note"
-                                    variant="filled"
-                                    sx={{
-                                      backgroundColor: "#4FFCB7",
-                                      width: "120px",
-                                    }}
-                                  />
-                                </span>
-                                <span>
-                                  <Chip
-                                    sx={{
-                                      background: "#fff",
-                                      backgroundColor: "#4FFCB7",
-                                    }}
-                                    label={
-                                      <Moment fromNow ago>
-                                        {data.createdAt}
-                                      </Moment>
-                                    }
-                                    variant="filled"
-                                  />
-                                </span>
-                              </Box>
-                              <Box
-                                className={
-                                  classess.page__notes__notebox__notetext
-                                }
-                              >
-                                <p>{data.note}</p>
-                              </Box>
-                            </Grid>
-                          </Grid>
-                        </TableCell>
-                      </TableRow>
-                    )}
-                  </TableBody>
-                </>
-              );
-            })}
-          </Table>
-        </TableContainer>
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-          keepMounted
-        >
-          <Box className={classess.modalbox}>
-            <Grid container>
-              <Grid item sm={11}>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                  Please add your notes:{" "}
-                  {selectedFile && (
-                    <span>Selected file: {selectedFile.name}</span>
-                  )}
-                </Typography>
-              </Grid>
-              <Grid item sm={1}>
-                <Box
-                  varient="div"
-                  component="div"
-                  className={classess.modalbox__closebutton}
-                >
-                  <img src={closebutton} alt="close" onClick={handleClose} />
-                </Box>
-              </Grid>
-            </Grid>
+                              <img
+                                src={AddNotesIcon}
+                                alt="Eye"
+                                style={{ height: "14px", width: "16px" }}
+                              />
+                              {/* <InsertDriveFileOutlinedIcon
+                                  fontSize="small"
+                                  style={{
+                                    color: "#000000",
+                                    height: "15px",
+                                    width: "15px",
+                                  }}
+                                /> */}
+                            </IconButton>
+                          </Tooltip>
 
-            <TextField
-              multiline="true"
-              rows="5"
-              className={classess.modalbox__textfield}
-              value={note}
-              onChange={(e) => setNote(e.target.value)}
-            />
-            <Box className={classess.modalbox__button}>
-              <Button
+                          <Tooltip
+                            title="Contract Approve"
+                            placement="top"
+                            arrow
+                            enterDelay={100}
+                          >
+                            <IconButton
+                              variant=""
+                              onClick={() => eventHandler(id)}
+                              style={{
+                                backgroundColor: "#4FFCB7",
+                                height: "30px",
+                                width: "30px",
+                              }}
+                            >
+                              <img
+                                src={CheckIcon}
+                                alt="Eye"
+                                style={{ height: "12px", width: "16px" }}
+                              />
+                              {/* <CheckOutlinedIcon
+                                  fontSize="small"
+                                  style={{
+                                    color: "#000000",
+                                    height: "15px",
+                                    width: "15px",
+                                  }}
+                                /> */}
+                            </IconButton>
+                          </Tooltip>
+                        </Stack>
+                      </span>
+                    </TableCell>
+                  </TableRow>
+
+                  {toggleTab === key && (
+                    <TableRow>
+                      <TableCell
+                        colSpan={6}
+                        className={classess.page__table__notes_row}
+                      >
+                        <Grid
+                          container
+                          mb={2}
+                          key={data._id}
+                          sx={{
+                            position: "relative",
+                          }}
+                        >
+                          <Grid
+                            sm
+                            className={`${classess.page__notes__notebox} ${classess.note}`}
+                          >
+                            <Box
+                              className={classess.page__notes__notebox__chips}
+                            >
+                              <span>
+                                <Chip
+                                  label="Note"
+                                  variant="filled"
+                                  className={
+                                    classess.page__notes__notebox__chips__label_chip
+                                  }
+                                />
+                              </span>
+                              <span>
+                                <Chip
+                                  className={
+                                    classess.page__notes__notebox__chips__moment_chip
+                                  }
+                                  label={
+                                    <Moment fromNow ago>
+                                      {data.createdAt}
+                                    </Moment>
+                                  }
+                                  variant="filled"
+                                />
+                              </span>
+                            </Box>
+                            <Box
+                              className={
+                                classess.page__notes__notebox__notetext
+                              }
+                            >
+                              <p>{data.note}</p>
+                            </Box>
+                          </Grid>
+                        </Grid>
+                      </TableCell>
+                    </TableRow>
+                  )}
+                </TableBody>
+              </>
+            );
+          })}
+        </Table>
+      </TableContainer>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        keepMounted
+      >
+        <Box className={classess.modalbox}>
+          <Grid container>
+            <Grid item sm={11}>
+              <span className={classess.modalbox__top_heading}>
+                Please add your notes:{" "}
+                {selectedFile && (
+                  <span>Selected file: {selectedFile.name}</span>
+                )}
+              </span>
+            </Grid>
+            <Grid item sm={1}>
+              <Box
+                varient="div"
+                component="div"
+                className={classess.modalbox__closebutton}
+              >
+                <img src={closebutton} alt="close" onClick={handleClose} />
+              </Box>
+            </Grid>
+          </Grid>
+
+          <TextField
+            multiline="true"
+            rows="5"
+            className={classess.modalbox__textfield}
+            value={note}
+            onChange={(e) => setNote(e.target.value)}
+          />
+          <Box className={classess.modalbox__button}>
+            <Box className={classess.modalbox__button__container}>
+              <IconButton
                 variant="contained"
                 className={classess.modalbox__button__urev}
-                style={{
-                  backgroundColor: "#4FFCB7",
-                  color: "#000",
-                  height: "32px",
-                }}
                 component="label"
               >
-                {" "}
-                <FileUploadOutlinedIcon />
+                {/* {" "}
+                  <FileUploadOutlinedIcon /> */}
                 Upload File
                 <input
                   type="file"
@@ -600,24 +677,19 @@ const ContractHistory = ({ props, open, onvaluechange }) => {
                   hidden
                   onChange={(e) => setSelectedFile(e.target.files[0])}
                 />
-              </Button>
+              </IconButton>
 
-              <Button
+              <IconButton
                 className={classess.modalbox__button__cmnt}
                 variant="contained"
                 onClick={() => noteHandler(id)}
-                style={{
-                  backgroundColor: "#4FFCB7",
-                  color: "#000",
-                  height: "32px",
-                }}
               >
                 Add Comments
-              </Button>
+              </IconButton>
             </Box>
           </Box>
-        </Modal>
-      </Box>
+        </Box>
+      </Modal>
     </Box>
   );
 };

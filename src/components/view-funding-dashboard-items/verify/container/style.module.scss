@@ -13,7 +13,7 @@
 
         &__heading {
             @include fontSize(22px);
-            color: $base-text-color !important;
+            color: #4ffcb7 !important;
         }
     }
 
@@ -22,23 +22,21 @@
         gap: 10px;
         margin-top: 10px;
 
-
-
         &__heading {
             @include fontSize(20px);
-            color: $base-text-color !important;
+            color: #4ffcb7 !important;
         }
-        
+
         &__total {
             @include fontSize(25px);
             text-align: center;
             margin-bottom: 0px !important;
-            margin-top: 20px !important
+            margin-top: 20px !important;
         }
 
         &__para {
             @include fontSize(14px);
-            color: $base-text-color !important;
+            color: #4ffcb7 !important;
             // font-style: italic;
         }
 
@@ -50,13 +48,13 @@
             &__button {
                 width: 50% !important;
                 text-transform: capitalize !important;
-                @include normalThemeButton(16px, 10px);
+                @include activeThemeBotton(16px, 10px);
             }
 
             &__button_pink {
                 width: 50% !important;
                 text-transform: capitalize !important;
-                @include pinkThemeButton(16px, 10px);
+                @include activeThemeBotton(16px, 10px);
             }
         }
     }
@@ -85,7 +83,7 @@
                         @include fontSize(10px);
                         @include textEllipsis(100%);
                         text-decoration: none;
-                        color: $secondary-bg-color-3;
+                        color: #4ffcb7;
                     }
                 }
             }
@@ -343,7 +341,7 @@
                             @include fontSize(10px);
                             @include textEllipsis(100%);
                             text-decoration: none;
-                            color: $secondary-bg-color-3;
+                            color: #4ffcb7;
                         }
                     }
                 }
@@ -368,7 +366,6 @@
         }
     }
 }
-
 
 @media only screen and (max-width: 1454px) and (min-width: 1200px) {
     .page {

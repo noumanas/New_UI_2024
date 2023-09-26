@@ -4,6 +4,7 @@ import HeaderProfileDropDown from "../header-profile-dropdown/header-profile-dro
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { useSelector } from "react-redux";
+import Tooltip from "@mui/material/Tooltip";
 
 const HeaderMenu = () => {
   const user = useSelector((state) => state.auth.user);
@@ -34,20 +35,30 @@ const HeaderMenu = () => {
             user.meta_data.name
           ) : (
             <>
-              {user?.firstName || "N/A"}
+              <Tooltip
+                title={user?.firstName}
+                placement="top"
+                arrow
+                enterDelay={100}
+              >
+                <span>{user?.firstName || "N/A"}</span>
+              </Tooltip>
+
               {/* {user?.lastName || "N/A"} */}
             </>
           )}
         </Typography>
-        <Typography className={classess.page__user__role}>
+        <span className={classess.page__user__role}>
           {user?.role === "admin"
             ? "Administrator"
             : user?.role === "user"
             ? "A&R"
-            : user?.role === "team"
+            : user?.role === "legal"
             ? "Legal"
+            : user?.role === "finance"
+            ? "finance"
             : "Artist"}
-        </Typography>
+        </span>
       </Box>
     </Box>
   );

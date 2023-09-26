@@ -31,6 +31,7 @@ import axios from "axios";
 import NewMusic from "../../../new-music/new-music";
 import SearchIcon from "@mui/icons-material/Search";
 import { getItemToLocalStorage } from "../../../../services/storage";
+import { Tooltip } from "@mui/material";
 
 const ConfirmConfig = ({
   included_music,
@@ -208,6 +209,7 @@ const ConfirmConfig = ({
   const Hidetracks = () => {
     setIsPaperVisible(false);
   };
+
   return (
     <Box varient="div" component="div" className={classess.page}>
       <Box varient="div" component="div" className={classess.page__header}>
@@ -216,23 +218,15 @@ const ConfirmConfig = ({
           component="div"
           className={classess.page__header__seachBar}
         >
-          <SearchIcon
-            sx={{
-              color: "#4FFCB7",
-              position: "absolute",
-              top: "10px",
-              left: "8px",
-            }}
-          />
+          <SearchIcon className={classess.searchIcon} />
           <input
             className={classess.page__header__search}
-            placeholder="Search..."
+            placeholder="Search"
             type="search"
             onInput={(e) => handleSearch(e)}
             required
           />
         </Box>
-        <Box className={classess.searchBarMob}></Box>
         {/* <Box varient="div" component="div" sx={{ position: "relative" }}>
           <input
             className={classess.page__header__search}
@@ -251,6 +245,7 @@ const ConfirmConfig = ({
           />
         </Box> */}
       </Box>
+      <Box className={classess.searchBarMob}></Box>
 
       <NewMusic
         newMusicIncomeArtistKeeps={newMusicIncomeArtistKeeps}
@@ -265,37 +260,17 @@ const ConfirmConfig = ({
       />
 
       {isPaperVisible && (
-        <Paper
-          sx={{
-            width: "100%",
-            overflow: "hidden",
-            background: "#0A1230",
-            marginTop: "50px",
-            boxShadow: "none",
-          }}
-        >
+        <Paper className={classess.paperTable}>
           {artist && Object.keys(artist).length ? (
             <TableContainer className={classess.table}>
-              <Table
-                stickyHeader={true}
-                aria-label="sticky table"
-                sx={{
-                  backgroundColor: "#222C41",
-                }}
-              >
+              <Table stickyHeader={true} aria-label="sticky table">
                 <TableHead>
                   <TableRow>
                     <TableCell
                       padding="checkbox"
                       className={classess.table__col}
                     >
-                      <Checkbox
-                        sx={{
-                          svg: {
-                            color: "#4ffcb7",
-                          },
-                        }}
-                      />
+                      <Checkbox className={classess.table__col__checkBox} />
                     </TableCell>
                     <TableCell
                       className={classess.table__col}
@@ -329,7 +304,7 @@ const ConfirmConfig = ({
                             sx={{
                               "&:last-child td, &:last-child th": { border: 0 },
                             }}
-                            className={cellUseStyles.row}
+                            className={`${classess.table__row} ${cellUseStyles.row}`}
                           >
                             <TableCell
                               padding="checkbox"
@@ -339,11 +314,7 @@ const ConfirmConfig = ({
                               }}
                             >
                               <Checkbox
-                                sx={{
-                                  svg: {
-                                    color: "#4ffcb7",
-                                  },
-                                }}
+                                className={classess.table__col__checkBox}
                                 checked={isItemSelected}
                                 inputProps={{
                                   "aria-labelledby": labelId,
@@ -417,7 +388,7 @@ const ConfirmConfig = ({
                                     border: 0,
                                   },
                                 }}
-                                className={cellUseStyles.row}
+                                className={`${classess.table__row} ${cellUseStyles.row}`}
                               >
                                 <TableCell
                                   padding="checkbox"
@@ -427,11 +398,7 @@ const ConfirmConfig = ({
                                   }}
                                 >
                                   <Checkbox
-                                    sx={{
-                                      svg: {
-                                        color: "#4ffcb7",
-                                      },
-                                    }}
+                                    className={classess.table__col__checkBox}
                                     checked={isItemSelected}
                                     inputProps={{
                                       "aria-labelledby": labelId,
@@ -457,11 +424,30 @@ const ConfirmConfig = ({
                                   sx={{
                                     fontSize: "16px",
                                     fontWeight: "bold",
+                                    textTransform: "capitalize",
                                   }}
                                 >
-                                  {row.title &&
+                                  <Tooltip
+                                    title={row?.title}
+                                    placement="top"
+                                    arrow
+                                    enterDelay={100}
+                                  >
+                                    <span
+                                      style={{
+                                        whiteSpace: "nowrap",
+                                        overflow: "hidden",
+                                        textOverflow: "ellipsis",
+                                        display: "block",
+                                        width: "100px",
+                                      }}
+                                    >
+                                      {row?.title}
+                                    </span>
+                                  </Tooltip>
+                                  {/* {row.title &&
                                     typeof row.title === "string" &&
-                                    row.title.split(" ").slice(0, 4).join(" ")}
+                                    row.title.split(" ").slice(0, 4).join(" ")} */}
                                 </TableCell>
                                 {/* <TableCell className={classess.table__row}>
                                 {row.title}
@@ -504,7 +490,7 @@ const ConfirmConfig = ({
             <TablePagination
               rowsPerPageOptions={[10, 25, 100]}
               component="div"
-              sx={{ color: "#d6d6d6", backgroundColor: "#222c41 !important" }}
+              sx={{ color: "#d6d6d6" }}
               count={sortedTracks.length}
               rowsPerPage={rowsPerPage}
               page={page}
@@ -513,13 +499,20 @@ const ConfirmConfig = ({
               classes={{
                 actions: "custom-pagination-actions",
                 select: "custom-pagination-select",
+                // input: "custom-select-style",
+                displayedRows: "custom-select-style",
+                // menuItem: "custom-select-style",
+                // root: "custom-select-style",
+                // selectIcon: "custom-select-style",
+                selectLabel: "custom-select-style",
+                // selectRoot: "custom-select-style",
+                // spacer: "custom-select-style",
+                // toolbar: "custom-select-style",
               }}
               SelectProps={{
-                style: {
-                  backgroundColor: "#4FFCB7",
-                  color: "#222C41",
-                  borderRadius: "12px",
-                  fontSize: "14px",
+                // Leave the SelectProps empty; styles will be applied via the class
+                classes: {
+                  select: "custom-select", // Apply the custom-select class to the Select component
                 },
               }}
             />

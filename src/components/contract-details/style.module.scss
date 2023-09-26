@@ -18,7 +18,7 @@
   }
 
   &__fieldsContainer {
-    background: #2f3443;
+    // background: #2f3443;
     border-radius: 8px;
 
     &__image_container {
@@ -62,7 +62,7 @@
 
         &__dollar {
           position: absolute;
-          background: #1976d2;
+          background: #4ffcb7;
           display: flex;
           bottom: 0;
           width: 40px;
@@ -94,7 +94,7 @@
           }
 
           option {
-            background-color: $secondary-bg-color-1;
+            background-color: #222c41;
           }
 
           &::placeholder {
@@ -122,9 +122,12 @@
           border-radius: 12px !important;
           padding: 15px;
           height: 50px;
-          background-color: #4ffcb7 !important;
-          color: #222c41 !important;
+          background-color: $base-button-background-color !important;
+          color: $base-button-text-color !important;
           font-weight: bold !important;
+          &:hover {
+            background-color: $base-button-background-color !important;
+          }
 
           &__upload {
             margin-top: 5px;
@@ -133,7 +136,7 @@
         }
 
         &__phoneinput {
-          border: 1px solid #00cd98 !important;
+          border: 1px solid #4ffcb7 !important;
           border-radius: 8px;
           padding: 15px;
           color: #979797 !important;
@@ -147,7 +150,7 @@
           }
 
           option {
-            background-color: $secondary-bg-color-1;
+            background-color: #222c41;
             color: #c2c2c2;
           }
         }
@@ -159,14 +162,14 @@
         width: 100%;
 
         &__cancel_btn {
-          @include normalThemeButton(16px, 10px);
+          @include activeThemeBotton(16px, 10px);
           @include fontSize();
           height: 40px;
           padding: 5px 10px !important;
         }
 
         &__submit_btn {
-          @include pinkThemeButton(16px, 10px);
+          @include activeThemeBotton(16px, 10px);
           @include fontSize();
           height: 40px;
           padding: 5px 10px !important;
@@ -186,7 +189,12 @@
     width: 100%;
 
     &__box {
-      @include flexProperties(column, flex-start, flex-start, $fullWidth: false);
+      @include flexProperties(
+        column,
+        flex-start,
+        flex-start,
+        $fullWidth: false
+      );
       width: 100%;
       gap: 20px;
 
@@ -195,7 +203,7 @@
 
       &__adetails {
         width: 100%;
-        background: $secondary-bg-color-1;
+        background: #222c41;
         border-radius: 12px;
         padding: 20px;
 
@@ -208,8 +216,8 @@
           }
 
           &__btn {
-            background: $contract-btn !important;
-            color: $base-text-color !important;
+            background: #4ffcb7 !important;
+            color: #4ffcb7 !important;
             border-radius: 10px !important;
             font-size: 16px !important;
             cursor: pointer;
@@ -220,14 +228,19 @@
             padding: 5px 20px !important;
 
             &:hover {
-              background: $contract-btn !important;
-              border-color: $contract-btn !important;
+              background: #4ffcb7 !important;
+              border-color: #4ffcb7 !important;
             }
           }
         }
 
         &__content {
-          @include flexProperties(row, space-between, center, $fullWidth: false);
+          @include flexProperties(
+            row,
+            space-between,
+            center,
+            $fullWidth: false
+          );
           flex-wrap: wrap;
           gap: 10px;
           margin-top: 40px;
@@ -239,7 +252,7 @@
             width: 45%;
 
             &__title {
-              color: $base-text-color;
+              color: #4ffcb7;
               font-size: 16px;
 
               &__image {
@@ -259,8 +272,8 @@
 
       &__tracks {
         width: 100%;
-        background-color: #222c41 !important;
-        border: 2px solid #4ffcb7 !important;
+        background-color: $base-container-backgroung-color !important;
+        border: 2px solid $base-search-container-icon-color !important;
         border-radius: 12px;
         padding: 20px;
 
@@ -269,15 +282,15 @@
           width: 100%;
 
           &__title {
-            color: $base-text-color;
+            color: #4ffcb7;
             font-size: 16px;
             font-weight: bold;
             text-transform: uppercase;
           }
 
           &__btn {
-            background: $secondary-bg-color-3 !important;
-            color: $base-text-color !important;
+            background: #4ffcb7 !important;
+            color: #4ffcb7 !important;
             border-radius: 25px !important;
             font-size: 14px;
             cursor: pointer;
@@ -286,7 +299,7 @@
             padding: 5px 20px !important;
 
             &:hover {
-              background: #01a177 !important;
+              background: #4ffcb7 !important;
             }
           }
         }
@@ -319,7 +332,12 @@
       &__box {
         &__adetails {
           &__content {
-            @include flexProperties(column, flex-start, flex-start, $fullWidth: false);
+            @include flexProperties(
+              column,
+              flex-start,
+              flex-start,
+              $fullWidth: false
+            );
             gap: 20px;
           }
         }

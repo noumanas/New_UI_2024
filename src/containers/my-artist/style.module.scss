@@ -2,102 +2,18 @@
 @import "../../styles/scss.scss";
 
 .page {
-  @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
+  // @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
+  // width: 100% !important;
   // gap: 10px;
 
   &__banner {
-    @include flexProperties(row, space-between, flex-start, $fullWidth: true);
-    // width: calc(100% - 250px);
-    &__text {
-      width: 30%;
-      color: #ffffff;
-      font-size: (28px);
-      font-weight: 700;
-    }
-
-    &__searcharea {
-      width: 50%;
-      &__search {
-        width: 100%;
-        padding: 20px;
-        border-radius: 12px;
-        border-style: none;
-        background-color: rgba(0, 0, 0, 0.3) !important;
-        color: #ffffff;
-        font-family: "DM Sans";
-
-        &::placeholder {
-          color: white;
-        }
-      }
-    }
-
-    &__searchbtnarea {
-      width: 20%;
-      align-items: center;
-      justify-content: center;
-      border-style: none;
-      margin-left: 10px;
-
-      &__searchbtn {
-        width: 141px;
-        height: 40px;
-        margin-left: 20px !important;
-        background-color: #4ffcb7 !important;
-        font-family: "DM Sans";
-        border-style: none;
-        border-radius: 12px !important;
-        color: #000000 !important;
-        font-weight: 700 !important;
-        filter: drop-shadow(5px 5px 10px #000);
-      }
-    }
-
-    &__background {
-      &__conatiner {
-        @include flexProperties(column, space-between, flex-start, $fullWidth: false);
-        // gap: 20px;
-        height: 2.2rem !important;
-
-        &__title {
-          @include fontSize(20px);
-          color: $base-text-color !important;
-          letter-spacing: 0.1rem !important;
-        }
-
-        &__content {
-          display: grid;
-          grid-template-columns: 3fr 1fr;
-          align-items: flex-end;
-          justify-content: center;
-          width: 100%;
-          gap: 20px;
-
-          &__title {
-            color: $base-text-color;
-            @include fontSize(40px);
-            // font-weight: bold;
-          }
-
-          &__text {
-            color: $base-text-color;
-          }
-
-          &__button {
-            background: #1a1a1a !important;
-            color: $base-text-color !important;
-            @include disabledCss();
-          }
-        }
-      }
-    }
+    // @include flexProperties(column, center, center, $fullWidth: true);
+    // width: calc(100% + 250px) !important;
   }
 
   &__main_content {
-    // width: calc(100% - 250px);
-    height: 100% !important;
-
-    // background-color: #ffffff;
+    // @include flexProperties(column, center, center, $fullWidth: true);
+    // height: 100% !important;
   }
 }
 

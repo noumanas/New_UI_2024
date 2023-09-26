@@ -11,7 +11,7 @@ const InitiateContract = ({
   marketing_budget,
 }) => {
   const [containerExpanded, setContainerExpanded] = useState([
-    false,
+    true,
     false,
     false,
   ]);
@@ -21,13 +21,19 @@ const InitiateContract = ({
       i === index ? !expanded : false
     );
     setContainerExpanded(updatedExpanded);
+    console.log("working");
   };
-
   const data = [
     {
       name: "Contract Details",
       function: () => toggleExpansion(0),
-      component: <SignStepper contract_length={contract_length} />,
+      component: (
+        <SignStepper
+          contract_length={contract_length}
+          // nextGo={toggleExpansion(1)}
+          nextGo={() => toggleExpansion(1)}
+        />
+      ),
     },
     {
       name: "Payment Details",
@@ -64,7 +70,6 @@ const InitiateContract = ({
               className={classess.list}
               style={{
                 maxHeight: containerExpanded[index] ? "100%" : "85px",
-                // transition: "max-height 0.3s ease",
               }}
             >
               <Box className={classess.listContent}>
@@ -87,9 +92,9 @@ const InitiateContract = ({
                     onClick={item.function}
                   >
                     {containerExpanded[index] ? (
-                      <IoIosArrowForward />
-                    ) : (
                       <IoIosArrowDown />
+                    ) : (
+                      <IoIosArrowForward />
                     )}
                   </IconButton>
                 </Box>

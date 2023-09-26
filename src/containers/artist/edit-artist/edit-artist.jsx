@@ -11,7 +11,7 @@ import {
   updateArtist,
   updateArtistWithProfile,
 } from "../../../redux/slice/artist";
-import { Avatar } from "@mui/material";
+import { Avatar, Grid } from "@mui/material";
 import editIcon from "../../../assets/icons/edit.svg";
 import IconButton from "@mui/material/IconButton";
 import LoadingButton from "@mui/lab/LoadingButton";
@@ -156,280 +156,286 @@ const EditArtist = () => {
   };
 
   return (
-    <Container maxWidth="xxl">
-      <Box varient="div" component="div" className={classess.page}>
-        <Box varient="div" component="div" className={classess.page__title_bar}>
-          <Typography
-            variant="h4"
-            gutterBottom
-            component="div"
-            className={classess.page__title_bar__title}
-          >
-            Edit Artist Details
-          </Typography>
-        </Box>
-        <Box
-          varient="div"
-          component="div"
-          sx={{ p: { xs: 2, sm: 3, lg: 5 }, mt: 3 }}
-          className={classess.page__fieldsContainer}
-        >
+    <Grid container pl={2.5}>
+      <Grid item sm={12} lg={9} xl={9}>
+        <Box varient="div" component="div" className={classess.page}>
           <Box
             varient="div"
             component="div"
-            className={classess.page__fieldsContainer__image_container}
-            sx={{ flexDirection: { xs: "column", sm: "row" } }}
+            className={classess.page__title_bar}
           >
-            <Box
-              varient="div"
+            <Typography
+              variant="h4"
+              gutterBottom
               component="div"
-              className={
-                classess.page__fieldsContainer__image_container__avatar_container
-              }
+              className={classess.page__title_bar__title}
             >
-              <Avatar
-                src={image}
-                alt={name}
-                sx={{ height: 150, width: 150, border: "5px solid #4FFCB7" }}
-              />
-              <div
-                className={
-                  classess.page__fieldsContainer__image_container__avatar_container__icon
-                }
-              >
-                <IconButton
-                  color="primary"
-                  aria-label="upload picture"
-                  component="label"
-                >
-                  <input
-                    hidden
-                    accept="image/*"
-                    type="file"
-                    onChange={handleProfileChange}
-                  />
-                  <img src={editIcon} alt="edit button" />
-                </IconButton>
-              </div>
-            </Box>
-            <Typography variant="h3" gutterBottom component="div">
-              {artist?.name}
+              Edit Artist Details
             </Typography>
           </Box>
-
-          <form
-            action=""
-            className={classess.page__fieldsContainer__form}
-            autoComplete="off"
-            onSubmit={handleOnSubmit}
+          <Box
+            varient="div"
+            component="div"
+            sx={{ p: { xs: 2, sm: 3, lg: 5 }, mt: 3 }}
+            className={classess.page__fieldsContainer}
           >
-            <Stack
-              direction="row"
-              sx={{
-                gap: { xs: 3, sm: 8, lg: 15 },
-                flexWrap: { xs: "wrap", sm: "nowrap" },
-              }}
-            >
-              <Box
-                varient="div"
-                component="div"
-                className={classess.page__fieldsContainer__form__formfield}
-                sx={{ width: "100%" }}
-              >
-                <label
-                  className={
-                    classess.page__fieldsContainer__form__formfield__label
-                  }
-                >
-                  Artist Name *
-                </label>
-                <input
-                  className={
-                    classess.page__fieldsContainer__form__formfield__input
-                  }
-                  value={name || ""}
-                  name="name"
-                  placeholder="Enter Artist Name"
-                  onInput={(event) => setName(event.target.value)}
-                  type="text"
-                  minLength={3}
-                  maxLength={25}
-                  required
-                />
-              </Box>
-              <Box
-                varient="div"
-                component="div"
-                className={classess.page__fieldsContainer__form__formfield}
-                sx={{ width: "100%" }}
-              >
-                <label
-                  className={
-                    classess.page__fieldsContainer__form__formfield__label
-                  }
-                >
-                  Phone
-                </label>
-
-                <PhoneInput
-                  international
-                  className={
-                    classess.page__fieldsContainer__form__formfield__phoneinput
-                  }
-                  defaultCountry={country}
-                  placeholder="Enter phone number"
-                  value={telephone}
-                  name="telephone"
-                  onChange={setTelephone}
-                  limitMaxLength={16}
-                  autoComplete="off"
-                  countryCallingCodeEditable={false}
-                />
-              </Box>
-            </Stack>
-            <Stack
-              direction="row"
-              sx={{
-                gap: { xs: 3, sm: 8, lg: 15 },
-                flexWrap: { xs: "wrap", sm: "nowrap" },
-              }}
-            >
-              <Box
-                varient="div"
-                component="div"
-                className={classess.page__fieldsContainer__form__formfield}
-                sx={{ width: "100%" }}
-              >
-                <label
-                  className={
-                    classess.page__fieldsContainer__form__formfield__label
-                  }
-                >
-                  E-mail Address
-                </label>
-                <input
-                  type="email"
-                  className={
-                    classess.page__fieldsContainer__form__formfield__input
-                  }
-                  value={email}
-                  name="email"
-                  maxLength={80}
-                  placeholder="Enter Email Address"
-                  onInput={(event) => setEmail(event.target.value)}
-                  required
-                />
-              </Box>
-            </Stack>
-            <Stack
-              direction="row"
-              sx={{
-                gap: { xs: 3, sm: 8, lg: 15 },
-                flexWrap: { xs: "wrap", sm: "nowrap" },
-              }}
-            >
-              <Box
-                varient="div"
-                component="div"
-                className={classess.page__fieldsContainer__form__formfield}
-                sx={{ width: "100%" }}
-              >
-                <label
-                  className={
-                    classess.page__fieldsContainer__form__formfield__label
-                  }
-                >
-                  Country
-                </label>
-                <select
-                  value={country}
-                  className={
-                    classess.page__fieldsContainer__form__formfield__input
-                  }
-                  onChange={(event) => setCountry(event.target.value)}
-                >
-                  {allCountries && allCountries.length ? (
-                    <>
-                      <option value="">Select Country</option>
-                      {allCountries.map((item) => (
-                        <option key={item.value} value={item.value}>
-                          {item.label}
-                        </option>
-                      ))}
-                    </>
-                  ) : (
-                    <option value="">Select Country</option>
-                  )}
-                </select>
-              </Box>
-              <Box
-                varient="div"
-                component="div"
-                className={classess.page__fieldsContainer__form__formfield}
-                sx={{ width: "100%" }}
-              >
-                <label
-                  className={
-                    classess.page__fieldsContainer__form__formfield__label
-                  }
-                >
-                  <img
-                    className={
-                      classess.page__fieldsContainer__form__formfield__label__image
-                    }
-                    alt="spotify"
-                    src={SpotifySvg}
-                  />
-                  <>Spotify ID *</>
-                </label>
-                <input
-                  className={
-                    classess.page__fieldsContainer__form__formfield__input
-                  }
-                  value={artist?.spotify_id || "N/A"}
-                  name="spotify_id"
-                  placeholder="Enter Spotify Id"
-                  readOnly
-                  disabled
-                />
-              </Box>
-            </Stack>
             <Box
               varient="div"
               component="div"
-              className={classess.page__fieldsContainer__form__action}
+              className={classess.page__fieldsContainer__image_container}
+              sx={{ flexDirection: { xs: "column", sm: "row" } }}
             >
-              <Button
-                variant="contained"
+              <Box
+                varient="div"
+                component="div"
                 className={
-                  classess.page__fieldsContainer__form__action__cancel_btn
+                  classess.page__fieldsContainer__image_container__avatar_container
                 }
-                sx={{ width: { xs: "100%", sm: "100%", lg: "20%" } }}
-                onClick={() => {
-                  // navigate(`/blig/view-artist/${id}`);
-                  navigate(-1);
-                  scrollTopObserver();
-                }}
-                disabled={isLoading}
               >
-                Cancel
-              </Button>
-              <LoadingButton
-                type="submit"
-                className={
-                  classess.page__fieldsContainer__form__action__submit_btn
-                }
-                variant="contained"
-                loading={isLoading}
-                sx={{ width: { xs: "100%", sm: "100%", lg: "20%" } }}
-              >
-                Update Artist
-              </LoadingButton>
+                <Avatar
+                  src={image}
+                  alt={name}
+                  sx={{ height: 89, width: 89, border: "5px solid #4FFCB7" }}
+                />
+                <div
+                  className={
+                    classess.page__fieldsContainer__image_container__avatar_container__icon
+                  }
+                >
+                  <IconButton
+                    color="primary"
+                    aria-label="upload picture"
+                    component="label"
+                  >
+                    <input
+                      hidden
+                      accept="image/*"
+                      type="file"
+                      onChange={handleProfileChange}
+                    />
+                    <img src={editIcon} alt="edit button" />
+                  </IconButton>
+                </div>
+              </Box>
+              <span className={classess.page__fieldsContainer__title}>
+                {artist?.name}
+              </span>
             </Box>
-          </form>
+
+            <form
+              action=""
+              className={classess.page__fieldsContainer__form}
+              autoComplete="off"
+              onSubmit={handleOnSubmit}
+            >
+              <Stack
+                direction="row"
+                sx={{
+                  gap: { xs: 3, sm: 8, lg: 15 },
+                  flexWrap: { xs: "wrap", sm: "nowrap" },
+                }}
+              >
+                <Box
+                  varient="div"
+                  component="div"
+                  className={classess.page__fieldsContainer__form__formfield}
+                  sx={{ width: "100%" }}
+                >
+                  <label
+                    className={
+                      classess.page__fieldsContainer__form__formfield__label
+                    }
+                  >
+                    Artist Name *
+                  </label>
+                  <input
+                    className={
+                      classess.page__fieldsContainer__form__formfield__input
+                    }
+                    value={name || ""}
+                    name="name"
+                    placeholder="Enter Artist Name"
+                    onInput={(event) => setName(event.target.value)}
+                    type="text"
+                    minLength={3}
+                    maxLength={25}
+                    required
+                  />
+                </Box>
+                <Box
+                  varient="div"
+                  component="div"
+                  className={classess.page__fieldsContainer__form__formfield}
+                  sx={{ width: "100%" }}
+                >
+                  <label
+                    className={
+                      classess.page__fieldsContainer__form__formfield__label
+                    }
+                  >
+                    Phone
+                  </label>
+
+                  <PhoneInput
+                    international
+                    className={
+                      classess.page__fieldsContainer__form__formfield__phoneinput
+                    }
+                    defaultCountry={country}
+                    placeholder="Enter phone number"
+                    value={telephone}
+                    name="telephone"
+                    onChange={setTelephone}
+                    limitMaxLength={16}
+                    autoComplete="off"
+                    countryCallingCodeEditable={false}
+                  />
+                </Box>
+              </Stack>
+              <Stack
+                direction="row"
+                sx={{
+                  gap: { xs: 3, sm: 8, lg: 15 },
+                  flexWrap: { xs: "wrap", sm: "nowrap" },
+                }}
+              >
+                <Box
+                  varient="div"
+                  component="div"
+                  className={classess.page__fieldsContainer__form__formfield}
+                  sx={{ width: "100%" }}
+                >
+                  <label
+                    className={
+                      classess.page__fieldsContainer__form__formfield__label
+                    }
+                  >
+                    E-mail Address
+                  </label>
+                  <input
+                    type="email"
+                    className={
+                      classess.page__fieldsContainer__form__formfield__input
+                    }
+                    value={email}
+                    name="email"
+                    maxLength={80}
+                    placeholder="Enter Email Address"
+                    onInput={(event) => setEmail(event.target.value)}
+                    required
+                  />
+                </Box>
+              </Stack>
+              <Stack
+                direction="row"
+                sx={{
+                  gap: { xs: 3, sm: 8, lg: 15 },
+                  flexWrap: { xs: "wrap", sm: "nowrap" },
+                }}
+              >
+                <Box
+                  varient="div"
+                  component="div"
+                  className={classess.page__fieldsContainer__form__formfield}
+                  sx={{ width: "100%" }}
+                >
+                  <label
+                    className={
+                      classess.page__fieldsContainer__form__formfield__label
+                    }
+                  >
+                    Country
+                  </label>
+                  <select
+                    value={country}
+                    className={
+                      classess.page__fieldsContainer__form__formfield__input
+                    }
+                    onChange={(event) => setCountry(event.target.value)}
+                  >
+                    {allCountries && allCountries.length ? (
+                      <>
+                        <option value="">Select Country</option>
+                        {allCountries.map((item) => (
+                          <option key={item.value} value={item.value}>
+                            {item.label}
+                          </option>
+                        ))}
+                      </>
+                    ) : (
+                      <option value="">Select Country</option>
+                    )}
+                  </select>
+                </Box>
+                <Box
+                  varient="div"
+                  component="div"
+                  className={classess.page__fieldsContainer__form__formfield}
+                  sx={{ width: "100%" }}
+                >
+                  <label
+                    className={
+                      classess.page__fieldsContainer__form__formfield__label
+                    }
+                  >
+                    <img
+                      className={
+                        classess.page__fieldsContainer__form__formfield__label__image
+                      }
+                      alt="spotify"
+                      src={SpotifySvg}
+                    />
+                    <>Spotify ID *</>
+                  </label>
+                  <input
+                    className={
+                      classess.page__fieldsContainer__form__formfield__input
+                    }
+                    value={artist?.spotify_id || "N/A"}
+                    name="spotify_id"
+                    placeholder="Enter Spotify Id"
+                    readOnly
+                    disabled
+                  />
+                </Box>
+              </Stack>
+              <Box
+                varient="div"
+                component="div"
+                className={classess.page__fieldsContainer__form__action}
+              >
+                <Button
+                  variant="contained"
+                  className={
+                    classess.page__fieldsContainer__form__action__cancel_btn
+                  }
+                  sx={{ width: { xs: "100%", sm: "100%", lg: "20%" } }}
+                  onClick={() => {
+                    // navigate(`/blig/view-artist/${id}`);
+                    navigate(-1);
+                    scrollTopObserver();
+                  }}
+                  disabled={isLoading}
+                >
+                  Cancel
+                </Button>
+                <LoadingButton
+                  type="submit"
+                  className={
+                    classess.page__fieldsContainer__form__action__submit_btn
+                  }
+                  variant="contained"
+                  loading={isLoading}
+                  sx={{ width: { xs: "100%", sm: "100%", lg: "20%" } }}
+                >
+                  Update Artist
+                </LoadingButton>
+              </Box>
+            </form>
+          </Box>
         </Box>
-      </Box>
-    </Container>
+      </Grid>
+    </Grid>
   );
 };
 

@@ -2,11 +2,9 @@
 @import "../../styles/colors.scss";
 
 .page {
-    border: 1px solid #4ffcb7;
-    background-color: #192233;
-    border-radius: 10px;
-    padding: 20px;
-    color: $base-text-color;
-    text-align: center;
-    font-size: 20px;
+  text-align: center;
+  color: #fff;
+  padding: 30px;
+  background-color: #222c41;
+  border-radius: 12px;
 }

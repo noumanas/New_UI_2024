@@ -9,12 +9,12 @@
         padding: 15px;
 
         &__title {
-            color: $base-text-color;
+            color: #4ffcb7;
             font-weight: bold;
         }
 
         &__action {
-            background: $secondary-bg-color-2  !important;
+            // background: $secondary-bg-color-2 !important;
             border-radius: 50px !important;
         }
     }
@@ -28,7 +28,7 @@
             border-bottom: 2px solid #a9a9a9;
             outline: none;
             padding: 10px;
-            color: $base-text-color;
+            color: #4ffcb7;
             border-radius: 0px;
         }
 
@@ -37,13 +37,11 @@
             border: 2px solid #a9a9a9;
             outline: none;
             padding: 10px;
-            color: $base-text-color;
+            color: #4ffcb7;
             border-radius: 5px;
             option {
-                color: #000
+                color: #000;
             }
-           
-
         }
     }
 
@@ -58,14 +56,13 @@
 
             &__card {
                 @include flexProperties(column, space-between, center, $fullWidth: false);
-                box-shadow: 3px 3px 6px $primary-shadow-color;
-                background: $secondary-bg-color-1;
+                box-shadow: 3px 3px 6px #2f3443;
+                background: #222c41;
                 border-radius: 15px;
                 // height: 310px;
                 padding: 20px;
                 gap: 20px;
                 width: 30%;
-                
 
                 &__main {
                     @include flexProperties(column, space-between, center, $fullWidth: false);
@@ -78,7 +75,7 @@
                     &__title {
                         @include fontSize(22px);
                         color: white;
-                        white-space: nowrap
+                        white-space: nowrap;
                     }
 
                     &__subtitle {
@@ -107,8 +104,8 @@
                 font-size: 16px;
                 font-weight: bold;
                 text-transform: uppercase;
-                color: $base-text-color;
-                background: $secondary-bg-color-1;
+                color: #4ffcb7;
+                background: #222c41;
                 border: none;
                 border-radius: 5px;
                 box-shadow: 2px 2px 2px #01081e;
@@ -171,7 +168,7 @@
             &__card_box {
                 gap: 30px;
                 &__card {
-                    width: 44%
+                    width: 44%;
                 }
             }
         }
@@ -184,7 +181,7 @@
             &__card_box {
                 gap: 30px;
                 &__card {
-                    width: 44%
+                    width: 44%;
                 }
             }
         }

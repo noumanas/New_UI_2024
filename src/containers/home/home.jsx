@@ -16,14 +16,16 @@ import { IconButton } from "@mui/material";
 // import CreateIcon from "@mui/icons-material/Create";
 import { MdClose } from "react-icons/md";
 import { messages, artits } from "./data";
-import Chartapexline from "./dashLineGraph";
+import Chartapexline from "./dash-line-gragh/dashLineGraph";
 import { Button } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import { config as URLconfig } from "../../enviorment/enviorment";
 import { getItemToLocalStorage } from "../../services/storage";
 import axios from "axios";
 import { toast } from "react-toastify";
-
+import { TiStarOutline } from "react-icons/ti";
+import { countries } from "country-data";
+import Tooltip from "@mui/material/Tooltip";
 const Home = () => {
   const user = useSelector((state) => state.auth.user);
   const storedToken = getItemToLocalStorage("accessToken");
@@ -54,6 +56,7 @@ const Home = () => {
   };
   useEffect(() => {
     fetchSpotlightartist();
+    console.log("spotlightartist", spotlightartist);
   }, []);
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -404,7 +407,7 @@ const Home = () => {
     axios
       .put(`${URLconfig.BASE_URL}/spotlight/${_id}`, body)
       .then((response) => {
-        toast.success("Remove Succuss fully");
+        toast.success("Spotlight Removed");
         fetchSpotlightartist();
       })
       .catch((error) => {
@@ -417,39 +420,61 @@ const Home = () => {
     <Grid container spacing={2} className={classess.page}>
       <Grid item xs={12} md={12} lg={9}>
         <Grid>
-          <Box component="div" variant="div" className={classess.bg}>
-            <Box>
-              <Typography
-                sx={{
-                  color: "white",
-                  fontSize: "24px",
-                  fontWeight: "bold",
-                }}
-              >
-                {`  Recoupment by Artists`}
-              </Typography>
-            </Box>
-            <Box
-              sx={{
-                width: "100%",
-                alignItems: "center",
-              }}
-            >
+          <Box
+            component="div"
+            variant="div"
+            className={classess.chartMainContainer}
+          >
+            <span className={classess.topHeading}>Recoupment by Artists</span>
+
+            <Box className={classess.tabContainer}>
               <TabContext value={value}>
-                <Box
-                  sx={{
-                    borderBottom: 1,
-                    borderColor: "divider",
-                    justifyContent: "space-evenly",
-                  }}
-                >
-                  <TabList onChange={handleChange}>
-                    <Tab label="Earnings" value="1" sx={{ color: "white" }} />
-                    <Tab label="Spotify" value="2" sx={{ color: "white" }} />
-                    <Tab label="Youtube" value="3" sx={{ color: "white" }} />
+                <Box className={classess.tabInnerContainer}>
+                  <TabList
+                    onChange={handleChange}
+                    TabIndicatorProps={
+                      classess.page__tabindicatorcolorline
+
+                      //   {
+                      //   style: {
+                      //     backgroundColor: "#4FFCB7",
+                      //   },
+                      // }
+                    }
+                  >
+                    <Tab
+                      label="Earnings"
+                      value="1"
+                      className={classess.page__tabindicatorcolor}
+                      sx={{
+                        opacity: value === "1" ? "1" : "0.5",
+                        // color: value === "1" ? "#4FFCB7 !important" : "#ffffff",
+                      }}
+                    />
+                    <Tab
+                      label="Spotify"
+                      value="2"
+                      className={classess.page__tabindicatorcolor}
+                      sx={{
+                        opacity: value === "2" ? "1" : "0.5",
+
+                        // color: value === "2" ? "#4FFCB7 !important" : "#ffffff",
+                      }}
+                    />
+                    <Tab
+                      label="Youtube"
+                      value="3"
+                      className={classess.page__tabindicatorcolor}
+                      sx={{
+                        opacity: value === "3" ? "1" : "0.5",
+
+                        // color: value === "3" ? "#4FFCB7 !important" : "#ffffff",
+                      }}
+                    />
                   </TabList>
                 </Box>
-                <TabPanel value="1" sx={{ padding: 0, color: "white" }}>
+
+                <TabPanel value="1" sx={{ padding: 0, color: "#fff" }}>
                   <Box
                     component="div"
                     variant="div"
@@ -464,13 +489,14 @@ const Home = () => {
                     <Chartapexline
                       options={options.option}
                       series={options.series}
-                      height={548}
+                      height={500}
                       type={"line"}
                       Revenue={"Revenue"}
                     />
                   </Box>
                 </TabPanel>
-                <TabPanel value="2" sx={{ padding: 0, color: "white" }}>
+
+                <TabPanel value="2" sx={{ padding: 0, color: "#fff" }}>
                   <Box
                     component="div"
                     variant="div"
@@ -485,13 +511,14 @@ const Home = () => {
                     <Chartapexline
                       options={optionsspotify.option}
                       series={optionsspotify.series}
-                      height={548}
+                      height={500}
                       type={"line"}
                       Revenue={"Streams"}
                     />
                   </Box>
                 </TabPanel>
-                <TabPanel value="3" sx={{ padding: 0, color: "white" }}>
+
+                <TabPanel value="3" sx={{ padding: 0, color: "#fff" }}>
                   <Box
                     component="div"
                     variant="div"
@@ -506,7 +533,7 @@ const Home = () => {
                     <Chartapexline
                       options={optionsyoutube.option}
                       series={optionsyoutube.series}
-                      height={548}
+                      height={500}
                       type={"line"}
                       Revenue={"Youtube Views"}
                     />
@@ -518,43 +545,19 @@ const Home = () => {
         </Grid>
       </Grid>
 
-      <Grid item sm={12} md={12} lg={3}>
-        <Grid>
-          <Box className={classess.message}>
-            <Box className={classess.topHeading}>Messages</Box>
-            <Box className={classess.mesContainer}>
-              {messages.map((item, index) => (
-                <Box
-                  className={`${classess.mesBox} ${item.onlinStatus}`}
-                  // ? onlinStatus class in app.scss
-                  key={index}
-                >
-                  <Box className={classess.imgAndName}>
-                    <Box>
-                      <img src={item.img} alt="message img" />
-                    </Box>
-                    <Box>
-                      <span className={classess.name}>{item.name}</span>
-                    </Box>
-                  </Box>
-
-                  <Box className={classess.mes}>{item.message}</Box>
-                  <Box className={classess.time}>{item.time}</Box>
-                </Box>
-              ))}
-            </Box>
-            <Box className={classess.viewBtn}>
-              <Button>View All Messages</Button>
-            </Box>
+      <Grid item spacing={2} sm={12} md={12} lg={9} xl={9}>
+        <Box className={classess.artistList}>
+          <Box className={classess.headAndBtn}>
+            <span className={classess.heading}>Artist Spotlight</span>
+            <Button
+              className={classess.spotBtn}
+              onClick={() => navigate("/blig/my-artist")}
+              startIcon={<TiStarOutline />}
+            >
+              Add to Spotlight
+            </Button>
           </Box>
 
-          {/* <ArtistViewConatiner selectedView="list" /> */}
-        </Grid>
-      </Grid>
-
-      <Grid item s={12} md={12} lg={12}>
-        <Box className={classess.artistList}>
-          <span className={classess.heading}>Artist Spotlight</span>
           <Box className={classess.allArtist}>
             {spotlightartist.map((item, index) => (
               <Box
@@ -566,43 +569,44 @@ const Home = () => {
               >
                 <Box className={classess.details}>
                   <Box className={classess.artistImg}>
-                    <img src={item.image} alt="artist img" />
+                    <Avatar
+                      src={item.image}
+                      alt="artist img"
+                      className={classess.avatar}
+                    />
+                    {console.log(item.image)}
                     <Box className={classess.onLine} />
                   </Box>
                   <Box>
-                    <span
-                      className={classess.name}
-                      onClick={() =>
-                        navigate(`/blig/view-artist/${item.artist_id}`)
-                      }
-                    >
-                      {item.name.split(" ", 2).join(" ")}
-                    </span>
+                    <Tooltip title={item?.name} placement="top">
+                      <span
+                        className={classess.name}
+                        onClick={() =>
+                          navigate(`/blig/view-artist/${item.artist_id}`)
+                        }
+                      >
+                        {item?.name ? item.name.split(" ", 2).join(" ") : ""}
+                        {/* {item?.name} */}
+                      </span>
+                    </Tooltip>
                     <Typography className={classess.email}>
-                      {item.email ? item.email : `${item.name}@spotify.com`}
+                      {item.email
+                        ? item.email
+                        : item.name.replace(/\s+/g, "").toLowerCase() +
+                          "@blacklionapp.xyz"}
                     </Typography>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        gap: "5px",
-                        paddingTop: "5px",
-                      }}
-                    >
-                      <Box>
-                        {/* <img
-                          src={item.flag}
-                          alt="flag "
-                          style={{
-                            width: "16px",
-                            height: "11px",
-                          }}
-                        /> */}
+                    <Box className={classess.coutry_continer}>
+                      <Box className={classess.coutry_flag}>
+                        {item?.country ? countries[item?.country].emoji : "N/A"}
                       </Box>
-                      <Box sx={{ fontSize: "14px" }}>{item?.country}</Box>
+                      <Box className={classess.coutry_name}>
+                        {item?.country ? countries[item?.country].name : null}
+                      </Box>
                     </Box>
                   </Box>
                 </Box>
-                <Box className={classess.icon}>
+
+                <Box className={classess.icon_container}>
                   <Box
                     onMouseEnter={() => handleMouseEnter(index)}
                     onMouseLeave={() => handleMouseLeave(index)}
@@ -610,39 +614,10 @@ const Home = () => {
                     <Box>
                       <IconButton
                         size="small"
-                        style={{
-                          backgroundColor: hoveredStates[index]
-                            ? "#4FFCB7"
-                            : "#4FFCB7",
-                          width: hoveredStates[index] ? "100px" : "30px",
-                          height: hoveredStates[index] ? "30" : "30px",
-                          borderRadius: hoveredStates[index] ? "12px" : "50%",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          gap: "10px",
-                          transition: "all 0.3s ease",
-                        }}
+                        className={classess.icon}
                         onClick={() => removespotlightartist(item._id)}
                       >
-                        <MdClose
-                          style={{
-                            color: hoveredStates[index] ? "#000" : "#000",
-                            width: hoveredStates[index] ? "15px" : "15px",
-                            height: "15px",
-                          }}
-                        />
-                        {hoveredStates[index] && (
-                          <span
-                            style={{
-                              fontSize: "15px",
-                              fontWeight: "600",
-                              color: "#222c41",
-                            }}
-                          >
-                            Remove
-                          </span>
-                        )}
+                        <MdClose className={classess.innerIcon} />
                       </IconButton>
                     </Box>
                   </Box>

@@ -4,7 +4,7 @@
 .page {
     @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
     gap: 30px;
-    
+
     &__heading {
         @include fontSize(20px);
     }
@@ -14,7 +14,7 @@
     }
 
     &__submit_btn {
-        @include pinkThemeButton(16px, 10px);
+        @include activeThemeBotton(16px, 10px);
         @include fontSize();
         width: auto;
         height: 40px;

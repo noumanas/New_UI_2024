@@ -1,78 +1,133 @@
 import React from "react";
-import classess from "./style.module.scss";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { sideBarUseStyles } from "../../custom-mui-style/custom-mui-styles";
-import { useLocation, useNavigate } from "react-router-dom";
-import { logout } from "../../redux/slice/auth";
-import { useDispatch, useSelector } from "react-redux";
-import HomeIcon from "@mui/icons-material/GridView";
-import PersonIcon from "@mui/icons-material/PeopleAltOutlined";
+import Box from "@mui/material/Box";
 import LogoutIcon from "@mui/icons-material/Logout";
-import NoteIcon from "@mui/icons-material/NotificationsNone";
-import DomainVerificationIcon from "@mui/icons-material/DomainVerification";
+import { logout } from "../../redux/slice/auth";
 import { scrollTopObserver } from "../../utils/helper";
 import logo from "./../../assets/logo/logo-trans.png";
-import Box from "@mui/material/Box";
+import { sideBarUseStyles } from "../../custom-mui-style/custom-mui-styles";
+import classess from "./style.module.scss";
 import HeaderMenu from "../header-menu/header-menu";
-// import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import ReceiptLongIcon from "@mui/icons-material/ContactPageOutlined";
-import PaymentIcon from "@mui/icons-material/CreditCardOutlined";
-import { Typography } from "@mui/material";
+import DashboardIcon from "../../assets/drawer/DashboardIcon.png";
+import ArtistIcon from "../../assets/drawer/ArtistIcon.png";
+import ContractIcon from "../../assets/drawer/ContractIcon.png";
+import PaymentsIcon from "../../assets/drawer/PaymentIcon.png";
+import NortificationIcon from "../../assets/drawer/NortificationIcon.png";
+import KycIcon from "../../assets/drawer/KycIcon.png";
+
+import DashboardIcons from "@mui/icons-material/Dashboard";
+import PeopleIcon from "@mui/icons-material/People";
+import { RxDashboard } from "react-icons/rx";
+import { FaUsers } from "react-icons/fa";
+import { TbNotes } from "react-icons/tb";
+import { FaFileContract } from "react-icons/fa6";
+import { FaBell } from "react-icons/fa";
+import { TbSettingsPlus } from "react-icons/tb";
 
 const DrawerItems = ({ handleClose }) => {
+  // Redux state and dispatch
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
-  const navigation = useNavigate();
   const location = useLocation();
+  const navigation = useNavigate();
+
+  // Handle navigation to a route
   const handleNavigate = (route) => {
     navigation(route);
     handleClose();
     scrollTopObserver();
   };
 
+  // Configuration for the primary menu items
   const config = {
     primaryMenu: [
       {
         name: "Dashboard",
         path: "/blig/home",
-        icon: <HomeIcon sx={{ color: "#4FFCB7", fontSize: 24 }} />,
+        icon: <RxDashboard className={classess.page__icon_colors} />,
+        // (
+        //   <img
+        //     src={DashboardIcon}
+        //     alt="Dashboard Icon"
+        //     className={classess.drawer_icon}
+        //   />
+        // ),
       },
       {
         name: "Artists",
         path: "/blig/my-artist",
         path2: "/blig/view-artist/:id",
         path3: "/blig/view-funding-dashboard/:id",
-        icon: <PersonIcon sx={{ color: "#4FFCB7", fontSize: 24 }} />,
+        icon: <FaUsers className={classess.page__icon_colors} />,
+
+        // icon: (
+        //   <img
+        //     src={ArtistIcon}
+        //     alt="Artist Icon"
+        //     className={classess.drawer_icon}
+        //   />
+        // ),
       },
-      ,
       {
         name: "Contracts",
         path: "/blig/contracts",
         path2: "/blig/contracts/:id",
-        icon: <ReceiptLongIcon sx={{ color: "#4FFCB7", fontSize: 24 }} />,
+        icon: <TbNotes className={classess.page__icon_colors} />,
+
+        // icon: (
+        //   <img
+        //     src={ContractIcon}
+        //     alt="Contract Icon"
+        //     className={classess.drawer_icon}
+        //     style={{ width: "14px" }}
+        //   />
+        // ),
       },
       {
         name: "Payments",
         path: "/blig/payments",
         path2: "/blig/payment/:id",
-        icon: <PaymentIcon sx={{ color: "#4FFCB7", fontSize: 24 }} />,
+        icon: <FaFileContract className={classess.page__icon_colors} />,
+
+        // icon: (
+        //   <img
+        //     src={PaymentsIcon}
+        //     alt="Payment Icon"
+        //     className={classess.drawer_icon}
+        //     style={{ width: "14px" }}
+        //   />
+        // ),
       },
       {
         name: "Notification",
         path: "/blig/docu-sign",
-        icon: <NoteIcon sx={{ color: "#4FFCB7", fontSize: 24 }} />,
+        icon: <FaBell className={classess.page__icon_colors} />,
+
+        // icon: (
+        //   <img
+        //     src={NortificationIcon}
+        //     alt="Nortification Icon"
+        //     className={classess.drawer_icon}
+        //   />
+        // ),
       },
-      {
-        name: "Verification",
-        path: "/blig/kyc",
-        icon: (
-          <DomainVerificationIcon sx={{ color: "#4FFCB7", fontSize: 24 }} />
-        ),
-      },
+      // {
+      //   name: "Verification",
+      //   path: "/blig/kyc",
+      //   icon: (
+      //     <img
+      //       src={KycIcon}
+      //       alt="Dashboard Icon"
+      //       className={classess.drawer_icon}
+      //     />
+      //   ),
+      // },
     ],
   };
 
@@ -80,31 +135,17 @@ const DrawerItems = ({ handleClose }) => {
 
   return (
     user && (
-      <>
-        {/* // ? top logo */}
-        <Box
-          variant="div"
-          component="div"
-          className={styles.root}
-          sx={{
-            background: "#222C41",
-            // padding: "25px 20px",
-            borderTopRightRadius: "12px",
-            borderBottom: "1px solid #5A7380",
-            height: "139px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <img src={logo} height="50" width="150" alt="logo" />
+      <Box variant="div" component="div" className={classess.page}>
+        <Box variant="div" component="div" className={classess.topHead}>
+          <img src={logo} height="69" alt="logo" />
+          {/* <img src={LoginTopLogoBlack} height="69" alt="logo" /> */}
         </Box>
 
-        {/* // ? Menu list */}
         <List className={classess.mainMenu}>
           {user.role !== "artist" && (
             <>
               {config.primaryMenu.map((menu, index) => {
+                // Check if the current route is active
                 const isPathActive =
                   location.pathname === menu.path ||
                   (menu.path2 &&
@@ -119,103 +160,69 @@ const DrawerItems = ({ handleClose }) => {
                 return (
                   <ListItem key={menu.name} className={classess.mainMenu__list}>
                     <ListItemButton
+                      component={Link}
+                      to={menu.path}
                       className={classess.mainMenu__button}
+                      // Handle navigation and other actions
                       onClick={() => {
-                        handleNavigate(menu.path);
+                        handleClose();
+                        scrollTopObserver();
                       }}
                     >
-                      <ListItemIcon sx={{ mr: "-20px" }}>
-                        {menu.icon}
+                      <ListItemIcon className={classess.mainMenu__button__icon}>
+                        {/* Render the active or inactive icon */}
+                        {isPathActive ? (
+                          menu.icon
+                        ) : (
+                          <div className={classess.inactive_icon}>
+                            {menu.icon}
+                          </div>
+                        )}
                       </ListItemIcon>
 
+                      {/* Render the menu item text */}
                       <ListItemText
                         primary={menu.name}
+                        className={classess.mainMenu__button__text}
                         primaryTypographyProps={{
                           fontSize: "14px",
                           fontWeight: "500",
                           fontFamily: "DM Sans",
                         }}
                         sx={{
-                          borderRight: isPathActive && "5px solid #4FFCB7",
-                          color: isPathActive ? "white" : "",
+                          borderRight: isPathActive ? "5px solid " : null,
+                          opacity: isPathActive ? "1" : "0.3",
                         }}
                       />
                     </ListItemButton>
                   </ListItem>
                 );
               })}
-
-              {/* {config.primaryMenu.map((menu, index) => (
-                <ListItem key={menu.name} className={classess.mainMenu__list}>
-                  <ListItemButton
-                    className={classess.mainMenu__button}
-                    onClick={() => {
-                      handleNavigate(menu.path);
-                    }}
-                  >
-                    <ListItemIcon sx={{ mr: "-20px" }}>
-                      {menu.icon}
-                    </ListItemIcon>
-
-                    <ListItemText
-                      primary={menu.name}
-                      primaryTypographyProps={{
-                        fontSize: "14px",
-                        fontWeight: "500",
-                        fontFamily: "DM Sans",
-                      }}
-                      sx={{
-                        borderRight:
-                          location.pathname === menu.path &&
-                          "5px solid #4FFCB7",
-                        color: location.pathname === menu.path && "white",
-                      }}
-                    />
-                  </ListItemButton>
-                </ListItem>
-              ))} */}
             </>
           )}
         </List>
 
-        {/* // ? bottom - name and logout */}
         <Box
           variant="div"
           component="div"
-          sx={{
-            textAlign: "center",
-            background: "#222C41",
-            padding: "20px",
-            borderBottomRightRadius: "12px",
-            borderTop: "1px solid #5e5e5e",
-          }}
+          className={classess.bottom_container}
         >
           <HeaderMenu />
 
           <Box
-            className={classess.logOutbtn}
+            className={classess.bottom_container__logOutbtn}
             onClick={() => {
               dispatch(logout());
               navigation("/login");
             }}
           >
-            <button>
-              <div>
-                <LogoutIcon />
-              </div>
-              <Typography
-                sx={{
-                  fontSize: 14,
-                  fontFamily: "DM Sans",
-                  fontWeight: "700",
-                }}
-              >
-                Logout
-              </Typography>
-            </button>
+            <LogoutIcon />
+            <span className={classess.bottom_container__logOutbtn__button_text}>
+              Logout
+            </span>
           </Box>
         </Box>
-      </>
+      </Box>
     )
   );
 };

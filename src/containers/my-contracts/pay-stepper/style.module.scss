@@ -2,23 +2,46 @@
 @import "../../../styles/colors.scss";
 
 .page {
-    &__stepper_btn_wrapper {
-        &__steps {
-            background-color: #222c41;
-            border: 1px solid #4ffcb7;
-            border-radius: 10px;
-            padding: 8px 8px !important;
-            width: 20%;
-            text-align: center;
-            color: $base-text-color !important;
-        }
+  font-family: "DM Sans";
+  &__stepper_btn_wrapper {
+    &__steps {
+      background-color: $base-container-backgroung-color;
+      border: 1px solid $base-button-background-color;
+      border-radius: 10px;
+      padding: 8px 8px !important;
+      width: 20%;
+      text-align: center;
+      color: $base-button-background-color !important;
     }
+  }
 
-    &__button_save {
-        @include activeThemeBotton();
-    }
+  &__review_contract {
+    @include activeThemeBotton();
+    padding: 7px 20px;
+    // background: $base-button-background-color !important;
+    // color: $base-container-backgroung-color !important;
+    // border-radius: 12px !important;
+    // font-size: 16px;
+    // font-weight: 700 !important;
+    // cursor: pointer;
+    // text-transform: capitalize !important;
+    // width: 100%;
+    // border: none;
 
-    &__button_cancel {
-        @include deActiveThemeBotton();
-    }
+    // &:hover {
+    //   background: $base-button-background-color !important;
+    //   color: #fff !important;
+    // }
+  }
+
+  &__saveBtn {
+    @include activeThemeBotton();
+    padding: 5px 30px !important;
+  }
+
+  &__backBtn {
+    @include cancelDeactiveBtn(14px);
+    padding: 5px 30px !important;
+    margin-right: 15px;
+  }
 }

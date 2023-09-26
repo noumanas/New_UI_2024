@@ -1,9 +1,12 @@
+@import "../../../styles/colors.scss";
+@import "../../../styles/scss.scss";
+
 .customPanel {
   font-family: "DM Sans";
   width: 100% !important;
   height: 100% !important;
-  background: #222c41 !important;
-  color: white !important;
+  background: $base-container-backgroung-color !important;
+  color: $base-heading-color !important;
   border-radius: 12px;
   padding: 20px;
   // margin-top: 20px;
@@ -15,7 +18,7 @@
       gap: 20px;
       .list {
         width: 100%;
-        background-color: #192233;
+        background-color: $base-inner-container-background-color;
         border-radius: 12px;
         padding: 20px 30px;
         .listContent {

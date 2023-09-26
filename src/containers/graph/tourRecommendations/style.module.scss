@@ -6,16 +6,13 @@
     gap: 20px;
 
     &__banner {
-        background: $secondary-bg-color-1;
+        background: $base-container-backgroung-color;
         width: 100%;
         border-radius: 12px;
         padding: 20px;
         height: 370px;
         max-height: 370px;
-        overflow-y: scroll;
-        &::-webkit-scrollbar {
-            display: none;
-        }
+        // overflow-y: scroll;
 
         &__topheading {
             @include customHeading(20px);
@@ -30,9 +27,19 @@
             &__bg {
                 width: 100%;
                 height: 100px;
-                background: $profile-gradient-color !important;
+                // background: $profile-gradient-color !important;
                 overflow: hidden;
             }
+        }
+    }
+
+    &__container {
+        min-height: 280px !important;
+        max-height: 280px !important;
+        margin: 20px 0px 0px 0px !important;
+        overflow-y: scroll;
+        &::-webkit-scrollbar {
+            display: none;
         }
     }
 
@@ -40,7 +47,7 @@
         width: 100%;
         display: flex;
         flex-direction: row;
-        background-color: #192233;
+        background-color: $base-inner-container-background-color;
         margin-bottom: 10px !important;
         padding: 10px !important;
         border-radius: 12px !important;
@@ -63,21 +70,18 @@
             margin-left: 20px !important;
             color: #fff;
             &__top_heading {
-                color: #fff;
-                font-size: 16px !important;
-                font-weight: 700;
+                @include customHeading(16px);
             }
             &__platform_streaming_container {
-                display: flex;
-                flex-direction: row;
+                @include flexProperties(row, flex-start, center, $fullWidth: true);
                 width: 100% !important;
-                justify-content: flex-start;
                 &__logo_stream {
-                    width: 25% !important;
-                    max-width: 25%;
-                    display: flex;
-                    flex-direction: row;
+                    @include flexProperties(row, flex-start, center, $fullWidth: true);
                     margin-right: 10px !important;
+                    margin-top: 10px !important;
+                }
+                &__text {
+                    @include customParagraph(12px);
                 }
             }
         }

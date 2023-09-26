@@ -2,136 +2,146 @@
 @import "../../styles/colors.scss";
 
 .page {
-    @include flexProperties(row, center, center, $fullWidth: true);
-    min-height: 100vh;
+  @include flexProperties(row, center, center, $fullWidth: true);
+  min-height: 100vh;
+  height: 100%;
+  width: 100%;
+  font-family: "DM Sans";
+
+  &__dialog {
     height: 100%;
+    overflow: auto;
     width: 100%;
-    font-family: "DM Sans";
+    background-color: #222c41;
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px #000000;
+    padding: 20px;
+    color: #ffffff;
 
-    &__dialog {
-        height: 100%;
-        overflow: auto;
-        width: 100%;
-        background-color: #222c41;
-        border-radius: 10px;
-        box-shadow: 2px 2px 4px #000000;
-        padding: 20px;
-        color: #ffffff;
-
-        &__header {
-            &__title {
-                @include customHeading(20px);
-            }
-        }
-
-        &__form {
-            @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
-            gap: 30px;
-            margin-top: 30px;
-            margin-bottom: 30px;
-
-            &__field_container {
-                @include flexProperties(row, flex-start, flex-start, $fullWidth: true);
-                gap: 24px;
-                width: 100%;
-
-                &__field {
-                    @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
-                    gap: 10px;
-
-                    &__label {
-                        @include customFontsSmallTags();
-                    }
-
-                    &__input {
-                        width: 100%;
-                        color: #c2c2c2 !important;
-                        border: 1px solid #4ffcb7 !important;
-                        background: #192233 !important;
-                        outline: none;
-                        padding: 15px;
-                        font-size: 18px;
-                        border-radius: 8px;
-                        // border-style: none !important;
-                        &:focus {
-                            outline: #4ffcb7 solid 2px !important;
-                        }
-                    }
-                    &__input_date {
-                        width: 100%;
-                        color: #ffffff !important;
-                        border: 1px solid #4ffcb7 !important;
-                        background: #192233;
-                        outline: none;
-                        font-size: 18px;
-                        border-radius: 8px;
-                        // border-style: none !important;
-                        &:focus {
-                            outline: #4ffcb7 solid 2px !important;
-                        }
-                        &::placeholder {
-                            color: #fff;
-                        }
-                    }
-
-                    &__select {
-                        width: 100%;
-                        color: #c2c2c2;
-                        border: 1px solid #4ffcb7 !important;
-                        background: transparent;
-                        outline: none;
-                        padding: 15px;
-                        font-size: 18px;
-                        border-radius: 8px;
-                    }
-                }
-            }
-
-            &__actions {
-                @include flexProperties(row, flex-end, center, $fullWidth: true);
-                width: 100%;
-
-                &__cancel_btn {
-                    @include deActiveThemeBotton(16px, 10px);
-                }
-
-                &__submit_btn {
-                    gap: 20px;
-                    @include activeThemeBotton(16px, 10px);
-                }
-            }
-        }
+    &__header {
+      &__title {
+        @include customHeading(20px);
+      }
     }
+
+    &__form {
+      @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
+      gap: 30px;
+      margin-top: 30px;
+      margin-bottom: 30px;
+
+      &__field_container {
+        @include flexProperties(row, flex-start, flex-start, $fullWidth: true);
+        gap: 24px;
+        width: 100%;
+
+        &__field {
+          @include flexProperties(
+            column,
+            flex-start,
+            flex-start,
+            $fullWidth: true
+          );
+          gap: 10px;
+
+          &__label {
+            @include customFontsSmallTags();
+          }
+
+          &__input {
+            width: 100%;
+            color: #c2c2c2 !important;
+            border: 1px solid #4ffcb7 !important;
+            background: #192233 !important;
+            outline: none;
+            padding: 15px;
+            font-size: 18px;
+            border-radius: 8px;
+            // border-style: none !important;
+            &:focus {
+              outline: #4ffcb7 solid 2px !important;
+            }
+          }
+          &__input_date {
+            width: 100%;
+            color: #ffffff !important;
+            border: 1px solid #4ffcb7 !important;
+            background: #192233;
+            outline: none;
+            font-size: 18px;
+            border-radius: 8px;
+            // border-style: none !important;
+            &:focus {
+              outline: #4ffcb7 solid 2px !important;
+            }
+            &::placeholder {
+              color: #fff;
+            }
+          }
+
+          &__select {
+            width: 100%;
+            color: #c2c2c2;
+            border: 1px solid #4ffcb7 !important;
+            background: transparent;
+            outline: none;
+            padding: 15px;
+            font-size: 18px;
+            border-radius: 8px;
+          }
+        }
+      }
+
+      &__actions {
+        @include flexProperties(row, flex-end, center, $fullWidth: true);
+        width: 100%;
+
+        &__cancel_btn {
+          @include cancelDeactiveBtn();
+        }
+
+        &__submit_btn {
+          gap: 20px;
+          @include activeThemeBotton(16px, 12px);
+        }
+      }
+    }
+  }
 }
 
 @media only screen and (max-width: 767px) {
-    .page {
-        &__dialog {
-            &__form {
-                overflow: auto;
-                height: calc(100vh - 180px);
+  .page {
+    &__dialog {
+      &__form {
+        overflow: auto;
+        height: calc(100vh - 180px);
 
-                &__field_container {
-                    @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
-                    width: 100%;
+        &__field_container {
+          @include flexProperties(
+            column,
+            flex-start,
+            flex-start,
+            $fullWidth: true
+          );
+          width: 100%;
 
-                    &__field {
-                        width: 100%;
+          &__field {
+            width: 100%;
 
-                        &__input {
-                            padding: 10px;
-                            font-size: 14px;
-                            border-radius: 3px;
-                        }
-
-                        &__select {
-                            padding: 10px;
-                            font-size: 14px;
-                            border-radius: 3px;
-                        }
-                    }
-                }
+            &__input {
+              padding: 10px;
+              font-size: 14px;
+              border-radius: 3px;
             }
+
+            &__select {
+              padding: 10px;
+              font-size: 14px;
+              border-radius: 3px;
+            }
+          }
         }
+      }
     }
+  }
 }

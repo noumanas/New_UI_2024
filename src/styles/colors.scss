@@ -1,31 +1,88 @@
-$base-gradient-color: linear-gradient(90deg, #0970a4 20%, hsl(337, 100%, 26%));
-$base-gradient-color-secondary: linear-gradient(90deg, #4ffcb7 20%, #ffffff);
-$drawer-gradient-color: linear-gradient(70deg, rgba(1, 0, 42, 1) 45%, rgba(64, 1, 50, 1) 100%);
-$component-gradient-color: transparent linear-gradient(137deg, #0078ac 0%, #870033f2 100%) 0% 0% no-repeat padding-box;
-$component-box-gradient-color: transparent linear-gradient(220deg, #016da7 20%, #870033f2 100%) 0% 0% no-repeat
-  padding-box;
-$profile-gradient-color: linear-gradient(118deg, #de3870 0%, #5cc2ef 100%) 0% 0% no-repeat padding-box;
-// $base-content-app-bg: radial-gradient(#4ffcb7, #060219);
+// ******************************************* Dark Theme *******************************************
 $base-content-app-bg: radial-gradient(circle, rgba(79, 252, 183, 1) 0%, rgba(0, 0, 0, 1) 100%);
-$base-text-color: #4ffcb7;
-$base-text-color-secondary: #ffffff;
-$text-color: #858997;
-$tablecell-color: #858997;
-$contract-btn: #267dff;
-$secondary-text-color: #675d5c;
-$primary-header-color: #100000;
-$secondary-bg-color-1: #222c41;
-$secondary-bg-color-1-darken: #222c41;
-$secondary-bg-color-2: #ec1086;
-$secondary-bg-color-3: #00cd98;
+$base-heading-color: #ffffff;
+$base-paragraph-color: #ffffff;
+$base-tags-color: #4ffcb7;
+$base-border-line-color: #5a7380;
+$base-container-backgroung-color: #222c41;
+$base-side-menu-fonts-color: #9196a0;
+$base-inner-container-background-color: #192233;
+$base-button-background-color: #4ffcb7;
+$base-button-text-color: #222c41;
+$base-button-deactive-text-color: #ffffff;
+$base-button-inner-icon-color: #4ffcb7;
+$base-search-artist-gredient: linear-gradient(to right, #175668, #175668, #19c39e, #e4f1ee, #e4f1ee);
+$base-input-background-color: #192233;
+$base-input-text-color: #979797;
+$base-list-hover-color: rgba(255, 255, 255, 0.1);
+$base-search-container-background: #192233;
+$base-search-container-icon-color: #4ffcb7;
+$base-table-row-background-color: #192233;
+$base-icon-colors: #4ffcb7;
+$base-img-border-color: #4ffcb7;
 
-// $secondary-bg-color-3: #1976d2;
-$secondary-bg-color-4: grey;
-$circle-box-primary-gradient-color: linear-gradient(90deg, #36a1ff, #0a1230);
-$circle-box-secondary-gradient-color: linear-gradient(117deg, #016da7 86%, #870033f2 100%);
-$primary-shadow-color: #2f3443;
-$white-glass: rgba(255, 255, 255, 0.1);
+// ******************************************* Light Theme *******************************************
+
+// $base-content-app-bg: radial-gradient(
+//   circle,
+//   rgba(255, 255, 255, 1),
+//   rgba(178, 190, 181, 1),
+//   rgba(54, 69, 79, 1) 100%
+// );
+// $base-heading-color: #000000;
+// $base-paragraph-color: #000000;
+// $base-tags-color: #000000;
+// $base-border-line-color: #5a7380;
+// $base-container-backgroung-color: #dfe7df;
+// $base-side-menu-fonts-color: #d9d9d9;
+// $base-inner-container-background-color: #b2beb5;
+// $base-button-background-color: #54626f;
+// $base-button-text-color: #fff;
+// $base-button-deactive-text-color: #ffffff;
+// $base-button-inner-icon-color: #000000;
+// $base-search-artist-gredient: linear-gradient(
+//   to right,
+//   #dfe7df,
+//   #e3ebe3,
+//   #e7efe7,
+//   #ebf3eb,
+//   #eff7ef
+// );
+// $base-input-background-color: #b2beb5;
+// $base-input-text-color: #000000;
+// $base-list-hover-color: rgba(0, 0, 0, 0.2);
+// $base-search-container-background: #b2beb5;
+// $base-search-container-icon-color: #54626f;
+// $base-table-row-background-color: #b2beb5;
+// $base-icon-colors: #000000;
+// $base-img-border-color: #000000;
 
 @function darkenColor($color) {
   @return darken($color, 30%);
 }
+// ******************************************* old Theme *******************************************
+// $base-gradient-color: linear-gradient(90deg, #0970a4 20%, hsl(337, 100%, 26%));
+// $base-gradient-color-secondary: linear-gradient(90deg, #4ffcb7 20%, #ffffff);
+// $drawer-gradient-color: linear-gradient(70deg, rgba(1, 0, 42, 1) 45%, rgba(64, 1, 50, 1) 100%);
+// $component-gradient-color: transparent linear-gradient(137deg, #0078ac 0%, #870033f2 100%) 0% 0% no-repeat padding-box;
+// $component-box-gradient-color: transparent linear-gradient(220deg, #016da7 20%, #870033f2 100%) 0% 0% no-repeat padding-box;
+// $profile-gradient-color: linear-gradient(118deg, #de3870 0%, #5cc2ef 100%) 0% 0% no-repeat padding-box;
+// $base-content-app-bg: radial-gradient(#4ffcb7, #060219);
+// $base-content-app-bg: radial-gradient(circle, rgba(79, 252, 183, 1) 0%, rgba(0, 0, 0, 1) 100%);
+// $base-text-color: #4ffcb7;
+// $base-text-color-secondary: #ffffff;
+// $text-color: #858997;
+// $tablecell-color: #858997;
+// $contract-btn: #4ffcb7;
+// $secondary-text-color: #675d5c;
+// $primary-header-color: #100000;
+// $secondary-bg-color-1: #222c41;
+// $secondary-bg-color-1-darken: #222c41;
+// $secondary-bg-color-2: #ec1086;
+// $secondary-bg-color-3: #4ffcb7;
+// $secondary-bg-color-3: #4FFCB7;
+// $secondary-bg-color-4: grey;
+// $circle-box-primary-gradient-color: linear-gradient(90deg, #36a1ff, #0a1230);
+// $circle-box-secondary-gradient-color: linear-gradient(117deg, #016da7 86%, #870033f2 100%);
+// $primary-shadow-color: #2f3443;
+// $white-glass: rgba(255, 255, 255, 0.1);

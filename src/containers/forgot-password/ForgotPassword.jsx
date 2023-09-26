@@ -17,68 +17,7 @@ const ForgotPassword = () => {
     >
       <MainAppBar>
         <Box varient="div" component="div" className={classess.page__login}>
-          <Box
-            varient="div"
-            component="div"
-            className={classess.page__login__info}
-          >
-            <span className={classess.page__login__info__text}>
-              Get Your Music on Social Platforms and{" "}
-              <span className={classess.page__login__info__text__highlighted}>
-                150+ Digital Stores
-              </span>{" "}
-              like Spotify, Apple Music, Tidal, YouTube, Instagram, TikTok and
-              more
-            </span>
-            <ul className={classess.page__login__info__list}>
-              <li className={classess.page__login__info__list__item}>
-                <ArrowForwardIcon
-                  sx={{ fontSize: 18, fontWeight: 900, color: "#4FFCB7" }}
-                />
-                <span className={classess.page__login__info__list__item__text}>
-                  Unlimited Worldwide Music Distribution
-                </span>
-              </li>
-              <li className={classess.page__login__info__list__item}>
-                <ArrowForwardIcon
-                  sx={{ fontSize: 18, fontWeight: 900, color: "#4FFCB7" }}
-                />
-                <span className={classess.page__login__info__list__item__text}>
-                  Unlimited Releases to Social Platforms
-                </span>
-              </li>
-              <li className={classess.page__login__info__list__item}>
-                <ArrowForwardIcon
-                  sx={{ fontSize: 18, fontWeight: 900, color: "#4FFCB7" }}
-                />
-                <span className={classess.page__login__info__list__item__text}>
-                  Comprehensive Sales Data
-                </span>
-              </li>
-            </ul>
-            <GradientButton text={"LEARN MORE"} style={{ marginTop: 40 }} />
-          </Box>
-          <Box
-            varient="div"
-            component="div"
-            className={classess.page__login__form}
-          >
-            <Box
-              varient="div"
-              component="div"
-              className={classess.page__login__form__box}
-            >
-              <ForgotPasswordForm />
-            </Box>
-            <Typography
-              variant="caption"
-              display="block"
-              className={classess.page__login__form__coptrights}
-              gutterBottom
-            >
-              © {new Date().getFullYear()}. Black Lion. All rights reserved.
-            </Typography>
-          </Box>
+          <ForgotPasswordForm />
         </Box>
       </MainAppBar>
     </Box>

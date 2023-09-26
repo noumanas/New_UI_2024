@@ -1,19 +1,19 @@
 import React from "react";
 import classess from "./style.module.scss";
-import BlacklionLogo from "../../assets/logo/BlacklionLogo.png";
+import PreLoaderImg from "../../assets/logo/PreLoader.png";
 
 const PreLoader = () => {
   return (
     <div className={classess.page}>
-      <div className={classess.page__loader}>
-        <img src={BlacklionLogo} />
-        {/* <div className={classess.page__loader__bar}></div>
+      {/* <div className={classess.page__loader}> */}
+      <img src={PreLoaderImg} className={classess.page__center_img} />
+      {/* <div className={classess.page__loader__bar}></div>
         <div className={classess.page__loader__bar}></div>
         <div className={classess.page__loader__bar}></div>
         <div className={classess.page__loader__bar}></div>
         <div className={classess.page__loader__bar}></div>
         <div className={classess.page__loader__ball}></div> */}
-      </div>
+      {/* </div> */}
     </div>
   );
 };

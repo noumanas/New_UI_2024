@@ -19,8 +19,12 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { abbreviateNumber, addCommasToNumber } from "../../utils/helper";
+import { IconButton } from "@mui/material";
+import TrendingUpIcon from "@mui/icons-material/TrendingUp";
+import TrendingDownIcon from "@mui/icons-material/TrendingDown";
+import Skeleton from "@mui/material/Skeleton";
 
-const SimilarArtist = ({ similarArtist }) => {
+const SimilarArtist = ({ similarArtist, loader }) => {
   const [selected, setSelected] = useState(null);
   const [AConfirm, setAConfirm] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -46,6 +50,7 @@ const SimilarArtist = ({ similarArtist }) => {
         genres: selected?.genres,
       },
     };
+
     let response = dispatch(
       addArtist({
         data: payload,
@@ -87,94 +92,168 @@ const SimilarArtist = ({ similarArtist }) => {
             Similar Artists
           </Box>
         </Box>
+
         <Box component="div" varient="div" className={classess.page__list}>
-          {similarArtist && similarArtist.length ? (
-            <ImageList className={classess.abc}>
+          {loader && (
+            <ImageList className={classess.page__list__list_continer}>
+              {Array.from({ length: 10 }).map((_, index) => (
+                <>
+                  <ImageListItem
+                    className={classess.page__list__list_continer__list_items}
+                  >
+                    <Box
+                      className={
+                        classess.page__list__list_continer__list_items__img_details
+                      }
+                    >
+                      <Box
+                        component="div"
+                        varient="div"
+                        className={classess.page__list__wrapper}
+                      >
+                        <Skeleton variant="circular" width={40} height={40} />
+                      </Box>
+                      <Box
+                        component="div"
+                        varient="div"
+                        className={classess.page__list__ul__li__content}
+                      >
+                        <span
+                          className={classess.page__list__ul__li__content__name}
+                        >
+                          <Skeleton variant="text" fontSize="1rem" />
+                        </span>
+
+                        <span
+                          className={
+                            classess.page__list__ul__li__content__listners
+                          }
+                        >
+                          <Skeleton variant="text" fontSize="1rem" />
+                        </span>
+                      </Box>
+                    </Box>
+                  </ImageListItem>
+                </>
+              ))}
+            </ImageList>
+          )}
+          {similarArtist && similarArtist.length > 0 && (
+            <ImageList className={classess.page__list__list_continer}>
               {similarArtist.slice(0, 19).map((artist, idx) => (
                 <ImageListItem
                   key={idx}
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    gap: "20px",
-                    margin: "0px 20px",
-                    backgroundColor: "#192233",
-                    borderRadius: "10px",
-                    padding: "10px",
-                  }}
+                  className={classess.page__list__list_continer__list_items}
                 >
                   <Box
-                    component="div"
-                    varient="div"
-                    className={classess.page__list__wrapper}
+                    className={
+                      classess.page__list__list_continer__list_items__img_details
+                    }
                   >
-                    <Box className={classess.page__list__wrapper__controls}>
-                      {artist.status === true ? (
-                        <Link
-                          to={`/blig/view-artist/${artist?.ref_artist_id}`}
-                          style={{ color: "#FFF", textDecoration: "none" }}
-                        >
+                    <Box
+                      component="div"
+                      varient="div"
+                      className={classess.page__list__wrapper}
+                    >
+                      <Box className={classess.page__list__wrapper__controls}>
+                        {artist.status === true ? (
+                          <Link
+                            to={`/blig/view-artist/${artist?.ref_artist_id}`}
+                            style={{ color: "#FFF", textDecoration: "none" }}
+                          >
+                            <Box
+                              className={
+                                classess.page__list__wrapper__controls__view
+                              }
+                            >
+                              <RemoveRedEyeOutlinedIcon
+                                sx={{ fontSize: 20, color: "#4FFCB7" }}
+                              />
+                            </Box>
+                          </Link>
+                        ) : (
                           <Box
                             className={
-                              classess.page__list__wrapper__controls__view
+                              classess.page__list__wrapper__controls__add
                             }
+                            onClick={() => handleOpen(artist)}
                           >
-                            <RemoveRedEyeOutlinedIcon sx={{ fontSize: 15 }} />
-                            &nbsp;View
+                            <PersonAddAltIcon
+                              sx={{ fontSize: 20, color: "#4FFCB7" }}
+                            />
                           </Box>
-                        </Link>
-                      ) : (
-                        <Box
-                          className={
-                            classess.page__list__wrapper__controls__add
-                          }
-                          onClick={() => handleOpen(artist)}
-                        >
-                          <PersonAddAltIcon sx={{ fontSize: 15 }} />
-                          &nbsp;Add
-                        </Box>
-                      )}
+                        )}
+                      </Box>
+
+                      <Avatar
+                        className={classess.page__list__ul__li__image}
+                        src={artist?.image}
+                        alt={artist?.name}
+                        sx={{ width: "50px", height: "50px" }}
+                      />
                     </Box>
 
-                    <Avatar
-                      className={classess.page__list__ul__li__image}
-                      src={artist?.image}
-                      alt={artist?.name}
-                      sx={{ width: "80px", height: "80px" }}
-                    />
+                    <Box
+                      component="div"
+                      varient="div"
+                      className={classess.page__list__ul__li__content}
+                    >
+                      <span
+                        className={classess.page__list__ul__li__content__name}
+                      >
+                        {artist?.name}
+                      </span>
+
+                      <span
+                        className={
+                          classess.page__list__ul__li__content__listners
+                        }
+                      >
+                        {addCommasToNumber(artist?.followers)}{" "}
+                        <span>followers</span>
+                      </span>
+                    </Box>
                   </Box>
-
                   <Box
-                    component="div"
-                    varient="div"
-                    className={classess.page__list__ul__li__content}
+                    className={classess.page__list__list_continer__list_items}
                   >
-                    <span
-                      className={classess.page__list__ul__li__content__name}
-                    >
-                      {artist?.name}
-                    </span>
-
-                    <span
-                      className={classess.page__list__ul__li__content__listners}
-                    >
-                      {addCommasToNumber(artist?.followers)}{" "}
-                      <span>listeners</span>
-                    </span>
+                    {artist?.followers > 100000 ? (
+                      <TrendingUpIcon
+                        sx={{
+                          height: 18,
+                          width: 18,
+                          color: "#5FF979",
+                        }}
+                      />
+                    ) : (
+                      <TrendingDownIcon
+                        sx={{
+                          height: 18,
+                          width: 18,
+                          color: "#F13838",
+                        }}
+                      />
+                    )}
+                    {/* <TrendingUpIcon
+                    sx={{
+                      height: 18,
+                      width: 18,
+                      color: "#5FF979",
+                    }}
+                  />
+                  <TrendingDownIcon
+                    sx={{
+                      height: 18,
+                      width: 18,
+                      color: "#F13838",
+                    }}
+                  /> */}
                   </Box>
                 </ImageListItem>
               ))}
             </ImageList>
-          ) : (
-            <Box
-              component="div"
-              varient="div"
-              className={classess.page__list__loader}
-            >
-              <CircularProgress size={40} color="secondary" />
-            </Box>
           )}
+
           <Modal
             open={open}
             onClose={handleClose}
@@ -197,7 +276,7 @@ const SimilarArtist = ({ similarArtist }) => {
                   <Grid className={classess.modalbox__artistbox__image}>
                     <Avatar
                       className={classess.page__list__ul__li__image}
-                      sx={{ width: "80px", height: "80px" }}
+                      sx={{ width: "50px", height: "50px" }}
                       src={selected?.image}
                     />
                   </Grid>
@@ -219,10 +298,10 @@ const SimilarArtist = ({ similarArtist }) => {
                       size="large"
                       onClick={BeforeHandler}
                       sx={{
-                        backgroundColor: "#00CD98",
+                        backgroundColor: "#4FFCB7",
                         color: "#000",
                         borderRadius: "12px",
-                        "&:hover": { backgroundColor: "#00CD98" },
+                        "&:hover": { backgroundColor: "#4FFCB7" },
                       }}
                     >
                       Confirm
@@ -252,7 +331,7 @@ const SimilarArtist = ({ similarArtist }) => {
               <Box className={classess.modalbox}>
                 <Box sx={{ display: "flex", alignItems: "center" }}>
                   <CheckCircleIcon
-                    sx={{ fontSize: 30, marginRight: "5px", color: "#00CD98" }}
+                    sx={{ fontSize: 30, marginRight: "5px", color: "#4FFCB7" }}
                   />
                   <Typography
                     id="modal-modal-title"
@@ -272,7 +351,7 @@ const SimilarArtist = ({ similarArtist }) => {
                   <Grid className={classess.modalbox__artistboxx__image}>
                     <Avatar
                       className={classess.page__list__ul__li__image}
-                      sx={{ width: "80px", height: "80px" }}
+                      sx={{ width: "50px", height: "50px" }}
                       src={selected?.image}
                     />
                   </Grid>
@@ -287,7 +366,7 @@ const SimilarArtist = ({ similarArtist }) => {
                     variant="contained"
                     type="button"
                     size="large"
-                    sx={{ width: "100%", backgroundColor: "#1976d2" }}
+                    sx={{ width: "100%", backgroundColor: "#4FFCB7" }}
                     onClick={() => AfterHandler()}
                   >
                     Take me to my Artist Page{" "}

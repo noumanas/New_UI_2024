@@ -11,37 +11,11 @@
     &::-webkit-scrollbar {
       display: none;
     }
-    &__ul {
-      &__li {
-        &__name {
-          font-size: 15px;
-          text-transform: capitalize;
-          letter-spacing: 0px;
-          color: $base-text-color;
-          font-weight: normal;
-          @include textEllipsisLineClamp(2);
-        }
-        &__tracktype {
-          font-size: 15px;
-          line-height: 25px;
-          text-transform: capitalize;
-          letter-spacing: 0px;
-          color: $base-text-color;
-          font-weight: normal;
-        }
-      }
-    }
-
-    &__loader {
-      @include flexProperties(column, center, center, $fullWidth: true);
-      width: 100%;
-      height: 100%;
-    }
   }
 }
 
 .table {
-  background: #222c41 !important;
+  background: $base-container-backgroung-color !important;
   overflow: scroll;
   height: 500px;
   &::-webkit-scrollbar {
@@ -56,22 +30,20 @@
   }
 
   &__col {
-    background: #222c41 !important;
+    background: $base-container-backgroung-color !important;
     text-align: left !important;
-    border-bottom: 1px solid #474d5e;
+    border-bottom: 1px solid $base-border-line-color;
     @include textEllipsis();
     &__heading {
       @include customFontsSmallTags();
     }
 
     &__last {
-      color: white !important;
-      background: #2f3443 !important;
+      background: $base-container-backgroung-color !important;
       text-align: center !important;
     }
     &__lastdays {
-      color: rgb(145, 144, 144) !important;
-      background: #2f3443 !important;
+      background: $base-container-backgroung-color !important;
       text-align: center !important;
       font-size: 9px;
     }
@@ -79,23 +51,32 @@
 
   &__row {
     border-bottom: 0px !important;
-    background-color: #192233;
+    background-color: $base-inner-container-background-color;
     height: 53px !important ;
-    color: #fff;
     @include textEllipsis();
-    color: #fff;
 
+    &__transection_id {
+      @include customParagraph(14px);
+      text-decoration: underline;
+    }
+
+    &__date {
+      @include customParagraph(14px);
+    }
+
+    &__mode {
+      @include customParagraph(14px);
+    }
     &__artist_image {
       width: 70px !important;
       height: 70px !important;
     }
 
     &__href {
-      font-size: 24px;
-      font-family: "DM Sans";
-      font-weight: 700;
+      @include customHeading(24px);
       text-decoration: none;
     }
+
     &__href:hover {
       color: #4ffcb7;
     }
@@ -103,6 +84,7 @@
     &__placement {
       @include flexProperties(row, flex-start, center, $fullWidth: false);
     }
+
     &__green {
       color: green;
     }
@@ -117,6 +99,7 @@
       justify-content: flex-start;
       align-items: center;
     }
+
     &__sosi {
       // width: 10%;
       font-size: 12px;
@@ -132,6 +115,7 @@
       @include activeThemeBotton(16px, 12px);
       padding: 15px 10px !important;
     }
+
     &__button:hover {
       background: #4ffcb7 !important;
       color: #000 !important;

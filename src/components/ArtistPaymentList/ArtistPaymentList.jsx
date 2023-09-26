@@ -34,6 +34,11 @@ import Avatar from "@mui/material/Avatar";
 import { Modal } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
 import CircularProgress from "@mui/material/CircularProgress";
+import Skeleton from "@mui/material/Skeleton";
+import EyeIcon from "../../assets/buttonsicons/EyeIcon.png";
+import DownloadIcon from "../../assets/buttonsicons/DownloadIcon.png";
+import EditIcon from "../../assets/buttonsicons/EditIcon.png";
+import { useDispatch, useSelector } from "react-redux";
 
 const ArtistPaymentList = ({ props, handleNotes, setNotesComments }) => {
   const navigate = useNavigate();
@@ -50,6 +55,7 @@ const ArtistPaymentList = ({ props, handleNotes, setNotesComments }) => {
   const internationalNumberFormat = new Intl.NumberFormat("en-US");
   const [modalOpen, setModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const user = useSelector((state) => state.auth.user);
   const handleToggle = (id) => {
     setVisibility(visibility === id ? null : id);
   };
@@ -158,25 +164,96 @@ const ArtistPaymentList = ({ props, handleNotes, setNotesComments }) => {
       <Box varient="div" component="div" className={classess.page}>
         <Box component="div" varient="div" className={classess.page__list}>
           {isLoading ? (
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center", // Center horizontally
-                alignItems: "center", // Center vertically
-                height: "64vh", // Optional: Set a fixed height for vertical centering
-              }}
-            >
-              <CircularProgress color="success" />
-            </Box>
+            //Skeleton Loader
+            <TableContainer className={classess.table}>
+              <Table stickyHeader aria-label="sticky table">
+                <TableHead className={classess.table__head}>
+                  <TableRow className={classess.table__myTableCss}>
+                    <TableCell
+                      className={classess.table__col}
+                      sx={{ width: 35, maxWidth: 35 }}
+                    />
+
+                    <TableCell
+                      className={classess.table__col}
+                      sx={{
+                        maxWidth: 150,
+                      }}
+                    >
+                      <span className={classess.table__col__heading}>
+                        ARTIST NAME
+                      </span>
+                    </TableCell>
+                    <TableCell className={classess.table__col}>
+                      <span className={classess.table__col__heading}>
+                        CREATED ON
+                      </span>
+                    </TableCell>
+                    <TableCell className={classess.table__col}>
+                      <span className={classess.table__col__heading}>
+                        SUBMITTED BY
+                      </span>
+                    </TableCell>
+                    <TableCell
+                      className={classess.table__col}
+                      sx={{ maxWidth: 150 }}
+                    >
+                      <span className={classess.table__col__heading}>
+                        STATUS
+                      </span>
+                    </TableCell>
+                    <TableCell className={classess.table__col}>
+                      <span className={classess.table__col__heading}>
+                        ACTION
+                      </span>
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {Array.from({ length: 5 }).map((_, index) => (
+                    <>
+                      <Box sx={{ m: "1rem" }}></Box>
+                      <TableRow key={index}>
+                        <TableCell
+                          className={classess.table__row}
+                          sx={{ width: 35, maxWidth: 35 }}
+                        >
+                          <Skeleton variant="circular" width={40} height={40} />
+                        </TableCell>
+                        <TableCell
+                          className={classess.table__row}
+                          sx={{ maxWidth: 150 }}
+                        >
+                          <Skeleton variant="text" fontSize="1rem" />
+                        </TableCell>
+                        <TableCell className={classess.table__row}>
+                          <Skeleton variant="text" fontSize="1rem" />
+                        </TableCell>
+                        <TableCell className={classess.table__row}>
+                          <Skeleton variant="text" fontSize="1rem" />
+                        </TableCell>
+                        <TableCell className={classess.table__row}>
+                          <Skeleton variant="text" fontSize="1rem" />
+                        </TableCell>
+                        <TableCell className={classess.table__row}>
+                          <Skeleton variant="text" fontSize="1rem" />
+                        </TableCell>
+                      </TableRow>
+                    </>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
           ) : (
             <TableContainer className={classess.table}>
               <Table stickyHeader aria-label="sticky table">
                 <TableHead className={classess.table__head}>
-                  <TableRow>
+                  <TableRow className={classess.table__myTableCss}>
                     <TableCell
                       className={classess.table__col}
                       sx={{ width: 50, maxWidth: 50 }}
                     ></TableCell>
+
                     <TableCell className={classess.table__col}>
                       <span className={classess.table__col__heading}>
                         ARTIST NAME
@@ -200,6 +277,7 @@ const ArtistPaymentList = ({ props, handleNotes, setNotesComments }) => {
                         CREATED BY
                       </span>
                     </TableCell>
+
                     <TableCell className={classess.table__col}>
                       <span className={classess.table__col__heading}>
                         ACTION
@@ -224,34 +302,29 @@ const ArtistPaymentList = ({ props, handleNotes, setNotesComments }) => {
                           }}
                         >
                           <Avatar
-                            src={items?.avatar}
+                            src={items?.artist.avatar}
                             alt={items?.name}
                             className={classess.table__row__artist_image}
                           />
                         </TableCell>
 
-                        <TableCell
-                          className={classess.table__row}
-                          style={{
-                            width: "100px",
-                            maxWidth: "100px",
-                            color: "#ffffff",
-                          }}
-                        >
+                        <TableCell className={classess.table__row}>
                           <Tooltip
                             title="View Artist"
                             placement="top"
                             arrow
                             enterDelay={100}
                           >
-                            <a
-                              className={classess.table__row__href}
-                              rel="noopener noreferrer"
-                              href={"/blig/view-artist/" + items?.artist_id}
-                              target="_blank"
-                            >
-                              {items?.artist_name}
-                            </a>
+                            <span className={classess.table__row__name}>
+                              <a
+                                className={classess.table__row__name__href}
+                                rel="noopener noreferrer"
+                                href={"/blig/view-artist/" + items?.artist_id}
+                                target="_blank"
+                              >
+                                {items?.artist_name}
+                              </a>
+                            </span>
                           </Tooltip>
                         </TableCell>
 
@@ -261,30 +334,27 @@ const ArtistPaymentList = ({ props, handleNotes, setNotesComments }) => {
                             color: "#ffffff",
                           }}
                         >
-                          {items?.lastPayment}
+                          $
+                          {internationalNumberFormat.format(
+                            items?.last_payment_paid
+                          )}
                         </TableCell>
 
-                        <TableCell
-                          className={classess.table__row}
-                          sx={{ textDecoration: "underline", color: "#ffffff" }}
-                        >
-                          {new Date(items?.createdAt).toLocaleDateString({
-                            weekday: "short",
-                            year: "numeric",
-                            month: "2-digit",
-                            day: "numeric",
-                          })}
+                        <TableCell className={classess.table__row}>
+                          <span className={classess.table__row__created}>
+                            {new Date(items?.createdAt).toLocaleDateString({
+                              weekday: "short",
+                              year: "numeric",
+                              month: "2-digit",
+                              day: "numeric",
+                            })}
+                          </span>
                         </TableCell>
 
-                        <TableCell
-                          className={classess.table__row}
-                          sx={{
-                            maxWidth: 50,
-                            textDecoration: "underline",
-                            color: "#ffffff",
-                          }}
-                        >
-                          {items?.created_by}
+                        <TableCell className={classess.table__row}>
+                          <span className={classess.table__row__created_by}>
+                            {items?.created_by}
+                          </span>
                         </TableCell>
 
                         <TableCell
@@ -297,25 +367,26 @@ const ArtistPaymentList = ({ props, handleNotes, setNotesComments }) => {
                           <span className={classess.table__row__action}>
                             <Stack spacing={1} direction="row">
                               <Tooltip
-                                title="View Contracts"
+                                title="View Payments"
                                 placement="top"
                                 arrow
                                 enterDelay={100}
                               >
                                 <IconButton
                                   style={{
-                                    backgroundColor: "#F831FF",
+                                    backgroundColor: "#4ffcb7",
                                     height: "30px",
                                     width: "30px",
                                   }}
-                                  onClick={() => getContract(items?.artist_id)}
+                                  onClick={() =>
+                                    navigate(`/blig/payment/${items?._id}`)
+                                  }
+                                  // onClick={() => getContract(items?.artist_id)}
                                 >
-                                  <VisibilityIcon
-                                    style={{
-                                      color: "#000",
-                                      fontSize: "20px",
-                                    }}
-                                    className={classess.page__table__row__icon}
+                                  <img
+                                    src={EyeIcon}
+                                    alt="Eye"
+                                    style={{ height: "12px", width: "15.96px" }}
                                   />
                                 </IconButton>
                               </Tooltip>
@@ -328,70 +399,91 @@ const ArtistPaymentList = ({ props, handleNotes, setNotesComments }) => {
                               >
                                 <IconButton
                                   style={{
-                                    backgroundColor: "#4FB7FC",
+                                    backgroundColor: "#4ffcb7",
                                     height: "30px",
                                     width: "30px",
                                   }}
                                   onClick={() => handleToggle(index)}
                                 >
-                                  <CloudDownloadOutlinedIcon
+                                  <img
+                                    src={DownloadIcon}
+                                    alt="Download Icon"
+                                    style={{ height: "13.91px", width: "16px" }}
+                                  />
+                                  {/* <CloudDownloadOutlinedIcon
                                     className={
                                       classess.table__row__action__icons
                                     }
                                     sx={{
-                                      backgroundColor: "#4FB7FC",
+                                      backgroundColor: "#4ffcb7",
                                       color: "#000000",
                                       cursor: "pointer",
-                                      fontSize: "20px",
+                                      height: "15px",
+                                      width: "15px",
                                     }}
-                                  />
+                                  /> */}
                                 </IconButton>
                               </Tooltip>
-
-                              <Tooltip
-                                title="Add Notes"
-                                placement="top"
-                                arrow
-                                enterDelay={100}
-                              >
+                              {user.role === "admin" ? (
+                                <Tooltip
+                                  title="Add Notes"
+                                  placement="top"
+                                  arrow
+                                  enterDelay={100}
+                                >
+                                  <IconButton
+                                    style={{
+                                      backgroundColor: "#4ffcb7",
+                                      height: "30px",
+                                      width: "30px",
+                                    }}
+                                    onClick={() => {
+                                      if (index === 0) {
+                                        handleToggleForComment(index + 1);
+                                      } else {
+                                        handleToggleForComment(index);
+                                      }
+                                    }}
+                                  >
+                                    <img
+                                      src={EditIcon}
+                                      alt="Edit"
+                                      style={{
+                                        height: "12.02px",
+                                        width: "12.02px",
+                                      }}
+                                    />
+                                  </IconButton>
+                                </Tooltip>
+                              ) : (
                                 <IconButton
                                   style={{
-                                    backgroundColor: "#FCB74F",
+                                    backgroundColor: "#dddddd",
                                     height: "30px",
                                     width: "30px",
                                   }}
-                                  onClick={() => {
-                                    if (index === 0) {
-                                      handleToggleForComment(index + 1);
-                                    } else {
-                                      handleToggleForComment(index);
-                                    }
-                                  }}
+                                  desibled={true}
                                 >
-                                  <CreateIcon
-                                    fontSize="medium"
-                                    className={
-                                      classess.table__row__action__icons
-                                    }
-                                    sx={{
-                                      backgroundColor: "#FCB74F",
-                                      color: "#000",
-                                      cursor: "pointer",
-                                      fontSize: "20px",
+                                  <img
+                                    src={EditIcon}
+                                    alt="Edit"
+                                    style={{
+                                      height: "12.02px",
+                                      width: "12.02px",
                                     }}
                                   />
                                 </IconButton>
-                              </Tooltip>
+                              )}
 
-                              <Tooltip
-                                title="Make Payment"
+                              {/* <Tooltip
+                                title="Approve Payment "
                                 placement="top"
                                 arrow
                                 enterDelay={100}
                               >
                                 <IconButton
                                   style={{
-                                    backgroundColor: "#1BB86A",
+                                    backgroundColor: "#4ffcb7",
                                     height: "30px",
                                     width: "30px",
                                   }}
@@ -405,14 +497,14 @@ const ArtistPaymentList = ({ props, handleNotes, setNotesComments }) => {
                                       classess.table__row__action__icons
                                     }
                                     sx={{
-                                      backgroundColor: "#1BB86A",
+                                      backgroundColor: "#4ffcb7",
                                       color: "#000",
                                       cursor: "pointer",
                                       fontSize: "20px",
                                     }}
                                   />
                                 </IconButton>
-                              </Tooltip>
+                              </Tooltip> */}
                             </Stack>
                           </span>
                         </TableCell>
@@ -688,13 +780,14 @@ const ArtistPaymentList = ({ props, handleNotes, setNotesComments }) => {
                                       }
                                     >
                                       <img
-                                        src={frontId}
+                                        src={items?.artist_photo_id_front}
                                         className={
                                           classess.table__bank_info_wrapper__image
                                         }
                                         style={{ width: "60%" }}
                                         alt=""
                                       />
+                                      {console.log("ImagesLink", items)}
 
                                       <Button
                                         variant="contained"
@@ -718,7 +811,7 @@ const ArtistPaymentList = ({ props, handleNotes, setNotesComments }) => {
                                       classess.table__bank_info_wrapper__name
                                     }
                                   >
-                                    ID Front
+                                    ID Back
                                   </label>
                                   <div
                                     className={
@@ -731,7 +824,7 @@ const ArtistPaymentList = ({ props, handleNotes, setNotesComments }) => {
                                       }
                                     >
                                       <img
-                                        src={frontId}
+                                        src={items?.artist_photo_id_back}
                                         className={
                                           classess.table__bank_info_wrapper__image
                                         }
@@ -765,14 +858,15 @@ const ArtistPaymentList = ({ props, handleNotes, setNotesComments }) => {
                           <TableCell colSpan={6}>
                             <Grid container spacing={2}>
                               <Grid item xs={6} md={10}>
-                                <FormControl sx={{ width: "100%" }}>
+                                <FormControl
+                                  className={
+                                    classess.table__brow__comment_row_container
+                                  }
+                                >
                                   <Input
-                                    sx={{
-                                      backgroundColor: "#192233",
-                                      borderRadius: "12px",
-                                      color: "#fff",
-                                      padding: "10px",
-                                    }}
+                                    className={
+                                      classess.table__brow__comment_row_container__input
+                                    }
                                     rows={6}
                                     multiline="true"
                                     value={note}
@@ -783,7 +877,9 @@ const ArtistPaymentList = ({ props, handleNotes, setNotesComments }) => {
                               <Grid item xs={6} md={2}>
                                 <Button
                                   variant="contained"
-                                  className={classess.table__row__button}
+                                  className={
+                                    classess.table__brow__comment_row_container__button
+                                  }
                                   onClick={() => noteHandler(items?._id)}
                                 >
                                   Add Comments

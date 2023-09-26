@@ -2,18 +2,25 @@ import React, { useState, useEffect } from "react";
 import classess from "./style.module.scss";
 import Box from "@mui/material/Box";
 import { CustomSliderWithStyles } from "../../../../custom-mui-style/custom-mui-styles";
-import { setIsLoading } from "../../../../redux/slice/artist";
+import {
+  setIsLoading,
+  setLicenceType,
+  setMultiple,
+} from "../../../../redux/slice/artist";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import Input from "@mui/material/Input";
 import Typography from "@mui/material/Typography";
 import WalletImg from "../../../../assets/wallet.png";
+// import WalletImg from "../../../../assets/walletPng.png";
 import { LiaSaveSolid } from "react-icons/lia";
+import { AiOutlineCloudDownload } from "react-icons/ai";
 import {
   FormControl,
   FormControlLabel,
   Radio,
   RadioGroup,
+  Tooltip,
 } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
@@ -42,9 +49,17 @@ const CustomizedConfig = ({
   internationalNumberFormat,
   onClick,
   isBorderChanged,
+  artAdvance,
+  setArtAdvance,
+  marketBudget,
+  setMarketBudget,
+  downloadPDF,
+  isPending,
+  setRECOUPMENTPERIOD,
+  setRECOUPMENTPERIOD_IN_ENG,
 }) => {
-  const [multiple, setMultiple] = useState(30);
-  const [licenceType, setLicenceType] = useState("license");
+  const multiple = useSelector((state) => state.artist.multiple);
+  const licenceType = useSelector((state) => state.artist.licenseType);
   const dispatch = useDispatch();
   const tracks = useSelector((state) => state.artist.tracks);
   const selected = useSelector((state) => state.artist.selectedTracks);
@@ -69,8 +84,9 @@ const CustomizedConfig = ({
   }
 
   const handleRadioChange = (event) => {
-    setLicenceType(event.target.value);
+    dispatch(setLicenceType(event.target.value));
   };
+
   //artist Advanced
   const new_music_estimiate_given_market_budget = (value) => {
     if (value === 0) {
@@ -80,29 +96,16 @@ const CustomizedConfig = ({
       const artist_advance_payment = value;
       set_artist_advance(artist_advance_payment);
 
-      const Marketing_budget_payment = change_marketing_budget;
+      const Marketing_budget_payment = marketing_budget;
       setTotal_of_Advance_and_Marketing_budget(
-        Math.round(artist_advance_payment + Marketing_budget_payment)
+        Math.round(
+          parseInt(artist_advance_payment) +
+            parseInt(Marketing_budget_payment) || 0
+        )
       );
 
-      const dataByMonthArray = Object.entries(monthlyIncome).map(
-        ([key, value]) => ({
-          date: key,
-          income: value.income,
-        })
-      );
-      const sortedData = dataByMonthArray.sort(
-        (a, b) => new Date(a.date) - new Date(b.date)
-      );
-      const monthsArray = sortedData.map((data) => data?.date);
-      const Monthlyincome = sortedData?.map((data) => data?.income);
-      const lastsixmonthincome = Monthlyincome.slice(-7, -1);
-      const sum_of_last_six_month_income = lastsixmonthincome.reduce(
-        (accumulator, currentValue) => accumulator + currentValue,
-        0
-      );
-      console.log("sum_of_last_six_month_income", lastsixmonthincome);
-      calculate_Recoupment_income_And_period(sum_of_last_six_month_income);
+      // console.log("sum_of_last_six_month_income", lastsixmonthincome);
+      // calculate_Recoupment_income_And_period(sum_of_last_six_month_income);
     }
   };
 
@@ -144,31 +147,34 @@ const CustomizedConfig = ({
   const calculate_marketing_budget = (value) => {
     if (value === 0) {
       set_marketing_budget(0);
+      calculate_Recoupment_income_And_period(0);
     } else {
-      const cal_marketing_budget =
-        ((new_music_estimiate + totalFunding) * value) / 100;
+      // const Percentage = (value/ (new_music_estimiate + totalFunding)) * 100
+      const cal_marketing_budget = value;
+      // ((new_music_estimiate + totalFunding) * value) / 100;
       set_marketing_budget(cal_marketing_budget);
       setTotal_of_Advance_and_Marketing_budget(
-        Math.round(cal_marketing_budget + artist_advance)
+        Math.round(parseInt(cal_marketing_budget) + parseInt(artist_advance)) ||
+          0
       );
-      const dataByMonthArray = Object.entries(monthlyIncome).map(
-        ([key, value]) => ({
-          date: key,
-          income: value.income,
-        })
-      );
-      const sortedData = dataByMonthArray.sort(
-        (a, b) => new Date(a.date) - new Date(b.date)
-      );
-      const monthsArray = sortedData.map((data) => data?.date);
-      const Monthlyincome = sortedData?.map((data) => data?.income);
-      const lastsixmonthincome = Monthlyincome.slice(-7, -1);
-      const sum_of_last_six_month_income = lastsixmonthincome.reduce(
-        (accumulator, currentValue) => accumulator + currentValue,
-        0
-      );
-      console.log("sum_of_last_six_month_income", lastsixmonthincome);
-      calculate_Recoupment_income_And_period(sum_of_last_six_month_income);
+      // const dataByMonthArray = Object.entries(monthlyIncome).map(
+      //   ([key, value]) => ({
+      //     date: key,
+      //     income: value.income,
+      //   })
+      // );
+      // const sortedData = dataByMonthArray.sort(
+      //   (a, b) => new Date(a.date) - new Date(b.date)
+      // );
+      // const monthsArray = sortedData.map((data) => data?.date);
+      // const Monthlyincome = sortedData?.map((data) => data?.income);
+      // const lastsixmonthincome = Monthlyincome.slice(-7, -1);
+      // const sum_of_last_six_month_income = lastsixmonthincome.reduce(
+      //   (accumulator, currentValue) => accumulator + currentValue,
+      //   0
+      // );
+      // console.log("sum_of_last_six_month_income", lastsixmonthincome);
+      // calculate_Recoupment_income_And_period(sum_of_last_six_month_income);
     }
   };
   const [chartData, setChartData] = useState({
@@ -251,14 +257,39 @@ const CustomizedConfig = ({
       },
     ],
   });
+  useEffect(() => {
+    if (total_of_Advance_and_Marketing_budget > 0) {
+      calculate_Recoupment_income_And_period();
+    } else {
+      console.log("error..");
+    }
+  }, [total_of_Advance_and_Marketing_budget]);
   const calculate_Recoupment_income_And_period = (Value) => {
-    const avgSixMonthRevenue = Value / 6;
+    const dataByMonthArray = Object.entries(monthlyIncome).map(
+      ([key, value]) => ({
+        date: key,
+        income: value.income,
+      })
+    );
+    const sortedData = dataByMonthArray.sort(
+      (a, b) => new Date(a.date) - new Date(b.date)
+    );
+    const monthsArray = sortedData.map((data) => data?.date);
+    const Monthlyincome = sortedData?.map((data) => data?.income);
+    const lastsixmonthincome = Monthlyincome.slice(-7, -1);
+    const sum_of_last_six_month_income = lastsixmonthincome.reduce(
+      (accumulator, currentValue) => accumulator + currentValue,
+      0
+    );
+    const avgSixMonthRevenue = sum_of_last_six_month_income / 6;
     const no_of_month =
       total_of_Advance_and_Marketing_budget / avgSixMonthRevenue;
     console.log("Value", Value);
     console.log("(AVG Monthly Revenue)", avgSixMonthRevenue);
     console.log("No of months to compleste:", no_of_month);
-    const decimalNumber = no_of_month + 6;
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth() + 1;
+    const decimalNumber = no_of_month + currentMonth;
     const referenceYear = 2023; // Provide your reference year here
     let RecoupmentIncome = [];
     const year = Math.floor(decimalNumber / 12) + referenceYear;
@@ -270,6 +301,8 @@ const CustomizedConfig = ({
     const date = new Date(`${year}-${Math.round(month)}-01`);
     const monthName = date.toLocaleString("en-US", { month: "short" });
     setRecoupment_Period_months_in_English(`${year}-${monthName}`);
+    setRECOUPMENTPERIOD(Math.round(no_of_month));
+    setRECOUPMENTPERIOD_IN_ENG(`${year}-${monthName}`);
     console.log("monthName", `${year}-${monthName}`);
   };
   useEffect(() => {
@@ -327,24 +360,56 @@ const CustomizedConfig = ({
   }, [monthlyIncome]);
   const ariaLabel = { "aria-label": "description" };
 
-  const [contractLength, setContractLength] = useState(contract_length); // Initialize with the value from the backend
-  const [recoupmentRate, setRecoupmentRate] = useState(catelog_income); // Initialize with the value from the backend
-
   const handleContractLengthChange = (event) => {
     const value = parseInt(event.target.value);
     if (!isNaN(value) && value >= 1 && value <= 12) {
-      setContractLength(value);
+      set_contract_length(value);
+      dispatch(setMultiple(value));
+      dispatch(setIsLoading(true));
+      let selected_tracks =
+        selected.length > 0 ? selected.map((e) => getSingleTrack(e)) : tracks;
+      const new_music = newMusicTracks.map((e) => getSingleTrack(e));
+
+      let val = {
+        included_music,
+        contract_length: value,
+        catelog_income,
+        new_music_income,
+        selected_tracks,
+        new_music_tracks: new_music,
+      };
+
+      calcalute_tracks_estimate(val);
     } else if (event.target.value === "") {
-      setContractLength(""); // Allow clearing the input field
+      set_contract_length(1);
     }
   };
 
   const handleRecoupmentRate = (event) => {
     const value = parseInt(event.target.value);
     if (!isNaN(value) && value >= 1 && value <= 100) {
-      setRecoupmentRate(value);
+      set_catelog_income(value);
+
+      dispatch(setIsLoading(true));
+
+      let selected_tracks =
+        selected.length > 0 ? selected.map((e) => getSingleTrack(e)) : tracks;
+
+      const new_music = newMusicTracks.map((e) => getSingleTrack(e));
+
+      let val = {
+        included_music,
+        contract_length,
+        catelog_income: value,
+        new_music_income,
+        selected_tracks,
+        new_music_tracks: new_music,
+      };
+
+      calcalute_tracks_estimate(val);
     } else if (event.target.value === "") {
-      setRecoupmentRate("");
+      set_catelog_income("");
+      setChangeButton("");
     }
   };
   // console.log("Chart Dataset", chartData.datasets[0].data);
@@ -365,9 +430,9 @@ const CustomizedConfig = ({
         height: 550,
         type: "line",
       },
-      forecastDataPoints: {
-        count: 7,
-      },
+      // forecastDataPoints: {
+      //   count: 7,
+      // },
       stroke: {
         width: 5,
         curve: "smooth",
@@ -397,22 +462,69 @@ const CustomizedConfig = ({
       yaxis: {
         min: 0,
         max: yAxisMax,
+        showAlways: false,
+        labels: {
+          formatter: function (value) {
+            if (typeof value !== "undefined" && !isNaN(value)) {
+              if (value >= 1000000) {
+                return "$" + (value / 1000000).toFixed(1) + "M";
+              } else if (value >= 1000) {
+                return "$" + (value / 1000).toFixed(1) + "K";
+              } else {
+                return "$" + value.toFixed(0);
+              }
+            } else {
+              return "";
+            }
+          },
+        },
       },
     },
   };
+  const [isInputFocused, setIsInputFocused] = useState(false);
+  const [isInputFocused2, setIsInputFocused2] = useState(false);
+
+  const [changeButton, setChangeButton] = useState("");
+  const [initialButton, setInitialValues] = useState("");
+  const isInputChanged = changeButton !== initialButton;
+  const buttonStyle = {
+    backgroundColor: isInputChanged ? "#4ffcb7" : "#498E72",
+  };
+  const isLoading = useSelector((state) => state.artist.isLoading);
+
   return (
     <>
       <Box className={classess.header}>
-        <Box className={classess.saveBtn}>
-          <Button
-            variant="contained"
-            startIcon={<LiaSaveSolid />}
-            onClick={onClick}
-          >
-            Save
-          </Button>
+        <Box className={classess.btnsPos}>
+          <Box className={classess.downloadBtn}>
+            <Button
+              variant="contained"
+              startIcon={<AiOutlineCloudDownload />}
+              onClick={downloadPDF}
+              disabled={isLoading}
+            >
+              {isPending && isPending ? (
+                <div>Processing...</div>
+              ) : (
+                <div>Download PDF</div>
+              )}
+            </Button>
+          </Box>
+          <Box className={classess.saveBtn}>
+            <Button
+              variant="contained"
+              startIcon={<LiaSaveSolid />}
+              onClick={onClick}
+              disabled={!isInputChanged}
+              style={buttonStyle}
+            >
+              Save
+            </Button>
+          </Box>
         </Box>
+        <Box className={classess.searchBarMob}></Box>
       </Box>
+
       <Box varient="div" component="div" className={classess.page}>
         <Box
           varient="div"
@@ -452,9 +564,9 @@ const CustomizedConfig = ({
                     control={
                       <Radio
                         sx={{
-                          color: "#4ffcb7",
                           "&.Mui-checked": { color: "#4ffcb7" },
                         }}
+                        className={classess.radioBtn}
                       />
                     }
                     onChange={(e) => setLicenceType(e.target.value)}
@@ -465,9 +577,9 @@ const CustomizedConfig = ({
                     control={
                       <Radio
                         sx={{
-                          color: "#4ffcb7",
                           "&.Mui-checked": { color: "#4ffcb7" },
                         }}
+                        className={classess.radioBtn}
                       />
                     }
                     label="Buyout"
@@ -518,12 +630,12 @@ const CustomizedConfig = ({
                       </span>
                       <Box
                         sx={{
-                          "& > :not(style)": { m: 1 },
+                          "& > :not(style)": { m: 1, ml: 0 },
                         }}
                         className={classess.mainInputField}
                       >
                         <Input
-                          value={contractLength}
+                          value={contract_length}
                           onChange={handleContractLengthChange}
                           type="number"
                           inputMode="numeric"
@@ -535,64 +647,11 @@ const CustomizedConfig = ({
                       <Typography
                         sx={{
                           fontSize: "10px",
-                          ml: 1,
+                          // ml: 1,
                         }}
                       >
-                        Input Should be 1 to 12
+                        Input should be 1 to 12
                       </Typography>
-                      {/* <Box
-                varient='div'
-                component='div'
-                className={classess.page__slider_container__slider_box__slider}
-              >
-                <CustomSliderWithStyles
-                  defaultValue={3}
-                  value={contract_length}
-                  min={1}
-                  max={12}
-                  step={1}
-                  marks
-                  aria-label='Default'
-                  valueLabelDisplay='auto'
-                  name='contract_length'
-                  onChange={(e) => {
-                    set_contract_length(e.target.value);
-                  }}
-                  onChangeCommitted={async (e, v) => {
-                    setMultiple(v);
-
-                    dispatch(setIsLoading(true));
-
-                    let selected_tracks =
-                      selected.length > 0
-                        ? selected.map((e) => getSingleTrack(e))
-                        : tracks;
-
-                    const new_music = newMusicTracks.map((e) =>
-                      getSingleTrack(e)
-                    );
-
-                    let val = {
-                      included_music,
-                      contract_length: v,
-                      catelog_income,
-                      new_music_income,
-                      selected_tracks,
-                      new_music_tracks: new_music,
-                    };
-
-                    calcalute_tracks_estimate(val);
-                  }}
-                />
-                <span
-                  component='div'
-                  className={
-                    classess.page__slider_container__slider_box__slider__text
-                  }
-                >
-                  {contract_length} Years
-                </span>
-              </Box> */}
                     </Box>
                   </Box>
 
@@ -616,12 +675,12 @@ const CustomizedConfig = ({
                       </span>
                       <Box
                         sx={{
-                          "& > :not(style)": { m: 1 },
+                          "& > :not(style)": { m: 1, ml: 0 },
                         }}
                         className={classess.mainInputField}
                       >
                         <Input
-                          value={recoupmentRate}
+                          value={catelog_income}
                           onChange={handleRecoupmentRate}
                           type="number"
                           inputMode="numeric"
@@ -633,59 +692,11 @@ const CustomizedConfig = ({
                       <Typography
                         sx={{
                           fontSize: "10px",
-                          ml: 1,
+                          // ml: 1,
                         }}
                       >
-                        Input Should be 1 to 100
+                        Input should be 1 to 100
                       </Typography>
-                      {/* <Box
-                varient='div'
-                component='div'
-                className={classess.page__slider_container__slider_box__slider}
-              >
-                <CustomSliderWithStyles
-                  defaultValue={10}
-                  value={catelog_income}
-                  aria-label='Default'
-                  valueLabelDisplay='auto'
-                  onChange={(e) => {
-                    set_catelog_income(e.target.value);
-                  }}
-                  onChangeCommitted={async (e, v) => {
-                    set_catelog_income(v);
-
-                    dispatch(setIsLoading(true));
-
-                    let selected_tracks =
-                      selected.length > 0
-                        ? selected.map((e) => getSingleTrack(e))
-                        : tracks;
-
-                    const new_music = newMusicTracks.map((e) =>
-                      getSingleTrack(e)
-                    );
-
-                    let val = {
-                      included_music,
-                      contract_length,
-                      catelog_income: v,
-                      new_music_income,
-                      selected_tracks,
-                      new_music_tracks: new_music,
-                    };
-
-                    calcalute_tracks_estimate(val);
-                  }}
-                />
-                <span
-                  component='div'
-                  className={
-                    classess.page__slider_container__slider_box__slider__text
-                  }
-                >
-                  {catelog_income} %
-                </span>
-              </Box> */}
                     </Box>
                   </Box>
                 </Box>
@@ -720,21 +731,47 @@ const CustomizedConfig = ({
                       </span>
                       <Box
                         sx={{
-                          "& > :not(style)": { m: 1 },
+                          "& > :not(style)": { m: 1, ml: 0 },
                         }}
                         className={classess.mainInputField}
                       >
-                        <span className={classess.dollar}>$</span>
+                        <span
+                          className={`${classess.dollar} 
+                        `}
+                          style={{
+                            color: isInputFocused ? "white" : "#6d7480",
+                          }}
+                        >
+                          $
+                        </span>
 
                         <Input
                           type="number"
                           className={`${classess.inputFileds} ${classess.dollarField}`}
                           sx={{ pl: 2 }}
-                          // placeholder="0"
-                          placeholder={change_new_music_estimiate}
+                          min={0}
+                          max={totalFunding}
+                          value={artist_advance}
+                          placeholder={"0"}
                           aria-label="Default"
                           valueLabelDisplay="auto"
                           onChange={(e) => {
+                            const newValue = e.target.value;
+                            if (newValue < 0) {
+                              newValue = 0;
+                            } else if (newValue > totalFunding) {
+                              newValue = totalFunding;
+                            }
+                            setChangeButton(newValue);
+                            new_music_estimiate_given_market_budget(
+                              e.target.value
+                            );
+                            set_artist_advance(newValue);
+                          }}
+                          onFocus={() => setIsInputFocused(true)}
+                          onBlur={() => setIsInputFocused(false)}
+                        />
+                        {/* onChange={(e) => {
                             set_change_new_music_estimiate(e.target.value);
                             new_music_estimiate_given_market_budget(
                               e.target.value
@@ -742,8 +779,7 @@ const CustomizedConfig = ({
                           }}
                           onChangeCommitted={async (e, v) => {
                             new_music_estimiate_given_market_budget(v);
-                          }}
-                        />
+                          }} */}
                         {/* <span className={classess.yrs}>$</span> */}
                       </Box>
                       {/* <Box
@@ -797,18 +833,38 @@ const CustomizedConfig = ({
                       </span>
                       <Box
                         sx={{
-                          "& > :not(style)": { m: 1 },
+                          "& > :not(style)": { m: 1, ml: 0 },
                         }}
                         className={classess.mainInputField}
                       >
-                        <span className={classess.dollar}>$</span>
+                        <span
+                          className={classess.dollar}
+                          style={{
+                            color: isInputFocused2 ? "white" : "#6d7480",
+                          }}
+                        >
+                          $
+                        </span>
                         <Input
-                          placeholder={internationalNumberFormat.format(
-                            Math.round(marketing_budget)
-                          )}
+                          value={marketing_budget}
+                          type="number"
+                          placeholder={"0"}
+                          onChange={(e) => {
+                            const newValue = e.target.value;
+                            if (newValue < 0) {
+                              newValue = 0;
+                            } else if (newValue > totalFunding) {
+                              newValue = totalFunding;
+                            }
+                            setChangeButton(newValue);
+                            set_marketing_budget(newValue);
+                            calculate_marketing_budget(e.target.value);
+                          }}
                           inputProps={ariaLabel}
                           className={`${classess.inputFileds} ${classess.dollarField}`}
                           sx={{ pl: 2 }}
+                          onFocus={() => setIsInputFocused2(true)}
+                          onBlur={() => setIsInputFocused2(false)}
                         />
                       </Box>
                       {/* <Box
@@ -874,7 +930,7 @@ const CustomizedConfig = ({
                       </span>
                       <Box
                         sx={{
-                          "& > :not(style)": { m: 1 },
+                          "& > :not(style)": { m: 1, ml: 0 },
                         }}
                       >
                         <Typography
@@ -882,15 +938,22 @@ const CustomizedConfig = ({
                           className={classess.fontSize}
                         >
                           ${" "}
-                          {internationalNumberFormat
-                            .format(total_of_Advance_and_Marketing_budget)
+                          {internationalNumberFormat.format(
+                            total_of_Advance_and_Marketing_budget
+                          )}
+                          {/* {internationalNumberFormat
+                            .format(
+                              parseInt(artAdvance) + parseInt(marketBudget)
+                            )
                             .slice(0, -1)
                             .replace(/,/g, "").length > 0
                             ? internationalNumberFormat
-                                .format(total_of_Advance_and_Marketing_budget)
+                                .format(
+                                  parseInt(artAdvance) + parseInt(marketBudget)
+                                )
                                 .slice(0, -1)
                                 .replace(/,/g, "")
-                            : "0"}
+                            : "0"} */}
                         </Typography>
                       </Box>
                     </Box>
@@ -904,12 +967,11 @@ const CustomizedConfig = ({
                       </span>
                       <Box
                         sx={{
-                          "& > :not(style)": { m: 1 },
+                          "& > :not(style)": { m: 1, ml: 0 },
                         }}
                       >
                         <Typography
-                          sx={{ fontSize: "38px", fontWeight: "bold" }}
-                          className={classess.fontSize}
+                          className={`${classess.page__slider_container__slider_box__title__recoup} ${classess.fontSize}`}
                         >
                           {Recoupment_Period_months +
                             " Months ~ " +
@@ -927,7 +989,7 @@ const CustomizedConfig = ({
                 </span>
                 <Box
                   sx={{
-                    "& > :not(style)": { m: 1 },
+                    "& > :not(style)": { m:1,ml:0  },
                   }}
                 >
                   <Typography sx={{ fontSize: "38px", fontWeight: "bold" }}>
@@ -952,7 +1014,7 @@ const CustomizedConfig = ({
                 </span>
                 <Box
                   sx={{
-                    "& > :not(style)": { m: 1 },
+                    "& > :not(style)": { m:1,ml:0  },
                   }}
                 >
                   <Typography sx={{ fontSize: "38px", fontWeight: "bold" }}>
@@ -1002,9 +1064,133 @@ const CustomizedConfig = ({
               <Box
                 varient="div"
                 component="div"
-                className={classess.page__main}
+                // className={classess.page__main}
               >
                 <Box
+                  sx={{
+                    display: "flex",
+                    // justifyContent: "center",
+                    alignContent: "center",
+                    flexWrap: "wrap",
+                    gap: "30px",
+                    mt: 5,
+                  }}
+                >
+                  <Box
+                    varient="div"
+                    component="div"
+                    className={classess.page__slider_container}
+                    mt={2}
+                  >
+                    <Box
+                      varient="div"
+                      component="div"
+                      className={classess.page__slider_container__slider_box}
+                    >
+                      <span
+                        className={
+                          classess.page__slider_container__slider_box__title
+                        }
+                      >
+                        Blended DSP Rate
+                      </span>
+                      <Box
+                        sx={{
+                          "& > :not(style)": { mt: 2, ml: 0 },
+                        }}
+                        className={classess.mainInputField}
+                      >
+                        {/* <span className={classess.dollar}>$</span> */}
+
+                        <Input
+                          type="number"
+                          className={classess.inputFileds}
+                          defaultValue={funding_metadata?.dsp_rate}
+                          value={funding_metadata?.dsp_rate}
+                          min={0}
+                          max={0.005}
+                          maxLength={6}
+                          minLength={3}
+                          onChange={(e) => {
+                            if (e.target.value <= 0.005) {
+                              set_funding_metadata((prevState) => ({
+                                ...prevState,
+                                dsp_rate: e.target.value,
+                              }));
+                            } else {
+                              toast.warning("DPS Rate invalid");
+                            }
+                          }}
+                          sx={{ fontSize: "30px !important" }}
+                        />
+                      </Box>
+                    </Box>
+                  </Box>
+                  <Box
+                    varient="div"
+                    component="div"
+                    className={classess.page__slider_container}
+                    mt={2}
+                  >
+                    <Box
+                      varient="div"
+                      component="div"
+                      className={classess.page__slider_container__slider_box}
+                    >
+                      <span
+                        className={
+                          classess.page__slider_container__slider_box__title
+                        }
+                      >
+                        Missing Report Compensation Rate
+                      </span>
+                      <Box
+                        sx={{
+                          "& > :not(style)": { mt: 2, ml: 0 },
+                        }}
+                        className={classess.mainInputField}
+                      >
+                        {/* <span className={classess.dollar}>$</span> */}
+                        <Input
+                          className={`${classess.inputFileds}`}
+                          defaultValue={
+                            funding_metadata?.missing_reports_compensation
+                          }
+                          value={funding_metadata?.missing_reports_compensation}
+                          max={3.5}
+                          maxLength={4}
+                          minLength={1}
+                          onChange={(e) => {
+                            if (e.target.value <= 3.5) {
+                              set_funding_metadata((prevState) => ({
+                                ...prevState,
+                                missing_reports_compensation: e.target.value,
+                              }));
+                            } else {
+                              toast.warning(
+                                "Missing Reports Compensation value invalid"
+                              );
+                            }
+                          }}
+                          sx={{ fontSize: "30px !important" }}
+                        />
+                      </Box>
+                    </Box>
+                  </Box>
+                  <Box
+                    varient="div"
+                    component="div"
+                    className={classess.page__field}
+                  >
+                    <button
+                      onClick={() => updateArtistFunding()}
+                      className={classess.page__button}
+                    >
+                      Save
+                    </button>
+                  </Box>{" "}
+                </Box>
+                {/* <Box
                   varient="div"
                   component="div"
                   className={classess.page__field}
@@ -1074,7 +1260,7 @@ const CustomizedConfig = ({
                   >
                     Save
                   </button>
-                </Box>
+                </Box> */}
               </Box>
             )}
           </>
@@ -1109,10 +1295,9 @@ const CustomizedConfig = ({
                   value={multiple}
                   aria-label="Default"
                   valueLabelDisplay="auto"
-                  onChange={(e) => setMultiple(e.target.value)}
+                  onChange={(e) => dispatch(setMultiple(e.target.value))}
                   onChangeCommitted={async (e, v) => {
-                    setMultiple(v);
-
+                    dispatch(setMultiple(v));
                     dispatch(setIsLoading(true));
 
                     let selected_tracks =
@@ -1143,8 +1328,24 @@ const CustomizedConfig = ({
                       multiple: v,
                       new_music_tracks: new_music,
                     };
-                    set_contract_length(1);
+                    // set_contract_length(1);
                     calcalute_tracks_estimate(val);
+                  }}
+                  sx={{
+                    "& .MuiSlider-rail": {
+                      backgroundImage:
+                        "linear-gradient(90deg, #222C41, #222C41)", // Background color
+                    },
+
+                    "& .MuiSlider-thumb": {
+                      backgroundColor: "#ffff", // Thumb color
+                      width: "12px",
+                      height: "12px",
+                    },
+                    "& .MuiSlider-track": {
+                      borderColor: "#4ffcb7",
+                      height: "2px",
+                    },
                   }}
                 />
                 <span
@@ -1159,39 +1360,10 @@ const CustomizedConfig = ({
             </Box>
           </Box>
         )}
-        {/* <Line
-        data={chartData}
-        options={{
-          maintainAspectRatio: true,
-          scales: {
-            y: {
-              stacked: false,
-              grid: {
-                display: true,
-                color: "rgba(255,99,132,0.2)",
-              },
-            },
-            x: {
-              grid: {
-                display: false,
-              },
-            },
-          },
-          legend: { display: true, position: "bottom" },
-        }}
-      /> */}
-        {/* <Chartapexline chartdata={chartData.datasets[0].data} /> */}
 
         <Box sx={{ mt: 3 }}>
           <Box>
-            <Typography
-              sx={{
-                color: "white",
-                fontSize: "24px",
-                fontWeight: "bold",
-                paddingBottom: "10px",
-              }}
-            >
+            <Typography className={classess.recoupHeading}>
               Recoupment Period
             </Typography>
           </Box>

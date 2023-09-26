@@ -13,6 +13,8 @@ import TableRow from "@mui/material/TableRow";
 import { Skeleton, Typography } from "@mui/material";
 import { IconButton } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import Tooltip from "@mui/material/Tooltip";
+import EyeIcon from "../../assets/buttonsicons/EyeIcon.png";
 
 const ArtistTopTracks = ({
   tracks,
@@ -24,6 +26,78 @@ const ArtistTopTracks = ({
   return (
     <Box varient="div" component="div" className={classess.page}>
       <Box component="div" varient="div" className={classess.page__list}>
+        {/* Display a loader while loader prop is true */}
+        {loader && (
+          //Skeleton Loader
+          <TableContainer className={classess.table}>
+            <Table stickyHeader={true} aria-label="sticky table">
+              <TableHead className={classess.table__head}>
+                <TableRow>
+                  <TableCell className={classess.table__col}>
+                    {/* <span className={classess.table__col__heading}></span> */}
+                  </TableCell>
+                  <TableCell className={classess.table__col}>
+                    <span className={classess.table__col__heading}>TITLE</span>
+                  </TableCell>
+                  <TableCell className={classess.table__col}>
+                    <span className={classess.table__col__heading}>TYPE</span>
+                  </TableCell>
+                  <TableCell className={classess.table__col}>
+                    <span className={classess.table__col__heading}>EST</span>
+
+                    <span className={classess.table__col__lastdays}>
+                      {" "}
+                      Last Month
+                    </span>
+                  </TableCell>
+                  <TableCell className={classess.table__col}>
+                    <span className={classess.table__col__heading}>
+                      % OF OWNERSHIP
+                    </span>
+                  </TableCell>
+                  <TableCell className={classess.table__col}>
+                    <span></span>
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {Array.from({ length: 7 }).map((_, index) => (
+                  <>
+                    <Box sx={{ m: "1rem" }}></Box>
+                    <TableRow key={index}>
+                      <TableCell
+                        className={classess.table__row}
+                        sx={{ width: 35, maxWidth: 35 }}
+                      >
+                        <Skeleton variant="circular" width={40} height={40} />
+                      </TableCell>
+                      <TableCell
+                        className={classess.table__row}
+                        sx={{ maxWidth: 150 }}
+                      >
+                        <Skeleton variant="text" fontSize="1rem" />
+                      </TableCell>
+                      <TableCell className={classess.table__row}>
+                        <Skeleton variant="text" fontSize="1rem" />
+                      </TableCell>
+                      <TableCell className={classess.table__row}>
+                        <Skeleton variant="text" fontSize="1rem" />
+                      </TableCell>
+                      <TableCell className={classess.table__row}>
+                        <Skeleton variant="text" fontSize="1rem" />
+                      </TableCell>
+                      <TableCell className={classess.table__row}>
+                        <Skeleton variant="text" fontSize="1rem" />
+                      </TableCell>
+                    </TableRow>
+                  </>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        )}
+
+        {/* Check if sortedTopTract exists and has items */}
         {sortedTopTract && sortedTopTract.length > 0 && (
           <TableContainer className={classess.table}>
             <Table stickyHeader={true} aria-label="sticky table">
@@ -43,12 +117,12 @@ const ArtistTopTracks = ({
 
                     <span className={classess.table__col__lastdays}>
                       {" "}
-                      LAST 60 DAYS
+                      Last Month
                     </span>
                   </TableCell>
                   <TableCell className={classess.table__col}>
                     <span className={classess.table__col__heading}>
-                      % OF OWN
+                      % OF OWNERSHIP
                     </span>
                   </TableCell>
                   <TableCell className={classess.table__col}>
@@ -89,12 +163,16 @@ const ArtistTopTracks = ({
                       </TableCell>
 
                       <TableCell className={classess.table__row}>
-                        <span
-                          className={classess.page__list__ul__li__name}
+                        <Tooltip
                           title={track?.name}
+                          placement="top"
+                          arrow
+                          enterDelay={100}
                         >
-                          {track?.name}
-                        </span>
+                          <span className={classess.page__list__ul__li__name}>
+                            {track?.name}
+                          </span>
+                        </Tooltip>
                       </TableCell>
 
                       <TableCell
@@ -116,19 +194,21 @@ const ArtistTopTracks = ({
                         <span
                           className={classess.page__list__ul__li__tracktype}
                         >
-                          <span style={{ color: "white" }}>$</span>{" "}
+                          <span>$</span>{" "}
                           {internationalNumberFormat.format(track?.funding)}
                         </span>
                       </TableCell>
 
                       <TableCell className={classess.table__row}>
-                        <Typography>
+                        <span
+                          className={classess.page__list__ul__li__tracktype}
+                        >
                           {track?.stream_income_share}
                           {"%"}
-                        </Typography>
+                        </span>
                         {/* <LinearProgressWithLabel
-                        value={track?.stream_income_share}
-                      /> */}
+                     value={track?.stream_income_share}
+                   /> */}
                       </TableCell>
 
                       <TableCell
@@ -140,18 +220,15 @@ const ArtistTopTracks = ({
                       >
                         <IconButton
                           style={{
-                            backgroundColor: "#4FFCB7",
+                            backgroundColor: "#4ffcb7",
                             height: "30px",
                             width: "30px",
                           }}
                         >
-                          <VisibilityIcon
-                            style={{
-                              color: "#000",
-                              height: "15px",
-                              width: "15px",
-                            }}
-                            className={classess.page__table__row__icon}
+                          <img
+                            src={EyeIcon}
+                            alt="Eye"
+                            style={{ height: "12px", width: "16px" }}
                           />
                         </IconButton>
                       </TableCell>
@@ -163,7 +240,8 @@ const ArtistTopTracks = ({
           </TableContainer>
         )}
 
-        {loader === false && sortedTopTract && sortedTopTract.length < 1 && (
+        {/* Display a message when loader is false and no tracks are available */}
+        {!loader && sortedTopTract && sortedTopTract.length < 1 && (
           <Box component="div" varient="div">
             <p
               style={{
@@ -173,23 +251,47 @@ const ArtistTopTracks = ({
                 marginTop: 150,
               }}
             >
-              There is no tracks
+              There are no tracks
             </p>
-          </Box>
-        )}
-
-        {loader && (
-          <Box
-            component="div"
-            varient="div"
-            className={classess.page__list__loader}
-          >
-            <CircularProgress size={40} color="secondary" />
           </Box>
         )}
       </Box>
     </Box>
   );
+  // return (
+  //   <Box varient="div" component="div" className={classess.page}>
+  //     <Box component="div" varient="div" className={classess.page__list}>
+  //       {sortedTopTract && sortedTopTract.length > 0 && (
+
+  //       )}
+
+  //       {loader === false && sortedTopTract && sortedTopTract.length < 1 && (
+  //         <Box component="div" varient="div">
+  //           <p
+  //             style={{
+  //               color: "#ccc",
+  //               fontSize: "12px",
+  //               textAlign: "center",
+  //               marginTop: 150,
+  //             }}
+  //           >
+  //             There is no tracks
+  //           </p>
+  //         </Box>
+  //       )}
+
+  //       {loader && (
+  //         <Box
+  //           component="div"
+  //           varient="div"
+  //           className={classess.page__list__loader}
+  //         >
+  //           <CircularProgress size={40} color="secondary" />
+  //         </Box>
+  //       )}
+  //     </Box>
+  //   </Box>
+  // );
 };
 
 export default ArtistTopTracks;

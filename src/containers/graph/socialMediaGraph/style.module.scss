@@ -6,7 +6,7 @@
   gap: 20px;
 
   &__banner {
-    background: $secondary-bg-color-1;
+    background-color: $base-container-backgroung-color;
     width: 100%;
     height: 370px;
     max-height: 370px;
@@ -90,7 +90,7 @@
           @include flexProperties(row, center, center, $fullWidth: true);
         }
         &__button {
-          @include normalThemeButton(14px, 10px);
+          @include activeThemeBotton(14px, 10px);
           @include fontSize(14px);
           flex-wrap: wrap;
           padding: 2px 15px !important;

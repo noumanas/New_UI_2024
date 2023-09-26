@@ -49,9 +49,9 @@ const TransferPaymentList = ({ props, transefered_payments }) => {
                 <TableCell className={classess.table__col}>
                   <span className={classess.table__col__heading}>STATUS</span>
                 </TableCell>
-                <TableCell className={classess.table__col}>
+                {/* <TableCell className={classess.table__col}>
                   <span className={classess.table__col__heading}>COMMENTS</span>
-                </TableCell>
+                </TableCell> */}
                 <TableCell className={classess.table__col}>
                   <span className={classess.table__col__heading}>RECEIPT</span>
                 </TableCell>
@@ -71,59 +71,42 @@ const TransferPaymentList = ({ props, transefered_payments }) => {
                         borderBottomLeftRadius: "12px",
                       }}
                     >
-                      <span className={classess.table__row__artistname}>
-                        <a
-                          className={classess.table__row__href}
-                          rel="noopener noreferrer"
-                        >
-                          {transaction.transection_id}
-                        </a>
+                      <span className={classess.table__row__transection_id}>
+                        {transaction.transection_id}
                       </span>
                     </TableCell>
 
-                    <TableCell
-                      className={classess.table__row}
-                      sx={{ color: "#fff" }}
-                    >
-                      {moment(transaction.createdAt).format("MMMM-DD-YYYY")}
+                    <TableCell className={classess.table__row}>
+                      <span className={classess.table__row__date}>
+                        {moment(transaction.createdAt).format("MMM DD YYYY")}
+                      </span>
                     </TableCell>
 
-                    <TableCell
-                      className={classess.table__row}
-                      sx={{ maxWidth: 50, color: "#fff" }}
-                    >
-                      {transaction.mode}
+                    <TableCell className={classess.table__row}>
+                      <span className={classess.table__row__mode}>
+                        {transaction.mode}
+                      </span>
                     </TableCell>
 
-                    <TableCell
-                      className={classess.table__row}
-                      sx={{ color: "#fff" }}
-                    >
-                      ${" "}
-                      {internationalNumberFormat.format(
-                        transaction.amount_paid
-                      )}
+                    <TableCell className={classess.table__row}>
+                      <span className={classess.table__row__mode}>
+                        ${" "}
+                        {internationalNumberFormat.format(
+                          transaction.amount_paid
+                        )}
+                      </span>
                     </TableCell>
 
-                    <TableCell
-                      className={classess.table__row}
-                      sx={{ color: "#fff" }}
-                    >
-                      {transaction.paid_against}
+                    <TableCell className={classess.table__row}>
+                      <span className={classess.table__row__mode}>
+                        {transaction.paid_against}
+                      </span>
                     </TableCell>
 
-                    <TableCell
-                      className={classess.table__row}
-                      sx={{ color: "#fff" }}
-                    >
-                      {transaction.status}
-                    </TableCell>
-
-                    <TableCell
-                      className={classess.table__row}
-                      sx={{ color: "#fff" }}
-                    >
-                      View
+                    <TableCell className={classess.table__row}>
+                      <span className={classess.table__row__mode}>
+                        {transaction.status}
+                      </span>
                     </TableCell>
 
                     <TableCell
@@ -131,10 +114,9 @@ const TransferPaymentList = ({ props, transefered_payments }) => {
                       sx={{
                         borderTopRightRadius: "12px",
                         borderBottomRightRadius: "12px",
-                        color: "#fff",
                       }}
                     >
-                      .
+                      <span className={classess.table__row__mode}>.</span>
                     </TableCell>
                   </TableRow>
                 </>
