@@ -28,6 +28,7 @@ import PaymentPreview from "../containers/payment-preview/PaymentPreview";
 
 import MyPayments from "../containers/my-payments/MyPayments";
 import KYC from "../containers/kyc/KYC";
+import EditDashboard from "../containers/artist/edit-dashboard/edit-dashboard";
 
 const Navigation = () => {
   const user = useSelector((state) => state.auth.user);
@@ -76,6 +77,15 @@ const Navigation = () => {
           element={
             <ProtectedRoute isLoggedIn={user}>
               <UserListing />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          index
+          path="edit-dashboard/:id"
+          element={
+            <ProtectedRoute isLoggedIn={user}>
+              <EditDashboard />
             </ProtectedRoute>
           }
         />

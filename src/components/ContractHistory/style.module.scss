@@ -11,8 +11,8 @@
     overflow-x: hidden !important;
     border-collapse: separate !important;
     border-spacing: 4px !important;
-    min-height: 39.1rem;
-    max-height: 39.1rem;
+    min-height: 574px !important;
+    max-height: 574px !important;
     width: 100% !important;
     &::-webkit-scrollbar {
       display: none;
@@ -21,7 +21,7 @@
     &__head {
       background-color: $base-container-backgroung-color !important;
       position: sticky;
-      z-index: 9999 !important;
+      // z-index: 9999 !important;
     }
 
     &__brow {
@@ -42,7 +42,7 @@
       background: $base-container-backgroung-color !important;
       text-align: left !important;
       width: 50px !important;
-      border-bottom: 1px solid $base-border-line-color;
+      border-bottom: 1px solid $base-border-line-color !important;
       @include textEllipsis();
       &__heading {
         @include customFontsSmallTags();
@@ -53,7 +53,7 @@
       background: $base-container-backgroung-color !important;
       text-align: left !important;
       width: 50px !important;
-      border-bottom: 1px solid $base-border-line-color;
+      border-bottom: 1px solid $base-border-line-color !important;
       @include textEllipsis();
       &__heading {
         @include customFontsSmallTags();
@@ -92,11 +92,8 @@
     &__notes_row {
       background-color: $base-container-backgroung-color;
       text-align: left !important;
-      max-width: 500px;
-      padding-top: 12px !important;
-      padding-bottom: 12px !important;
-      padding-right: 60px !important;
-      padding-top: 40px !important;
+      width: 200px !important;
+      max-width: 200px !important;
       border-bottom: 3px solid $base-container-backgroung-color !important;
     }
   }
@@ -109,10 +106,10 @@
 
   &__notes {
     flex: 1;
-    width: 100%;
+    width: 100% !important;
 
     &__notebox {
-      width: 100%;
+      width: 100% !important;
       background: $base-inner-container-background-color;
       border-radius: 12px;
       padding: 20px;
@@ -120,12 +117,12 @@
         display: flex;
         justify-content: space-between;
         &__label_chip {
-          background-color: $base-button-background-color;
+          background-color: $base-button-background-color !important;
           max-width: 120px !important;
           @include customHeading(12px);
         }
         &__moment_chip {
-          background-color: $base-button-background-color;
+          background-color: $base-button-background-color !important;
           @include customHeading(12px);
         }
       }
@@ -267,24 +264,24 @@
   }
 
   &__button {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+    @include flexProperties(column, center, center, $fullWidth: true);
+    width: 100% !important;
     &__container {
-      display: flex;
-      flex-direction: row;
-      width: 20% !important;
+      @include flexProperties(row, flex-end, center, $fullWidth: true);
+      width: 100% !important;
     }
 
     &__urev {
       @include activeThemeBotton();
       font-size: 14px !important;
       margin-right: 20px !important;
+      width: 20% !important;
     }
 
     &__cmnt {
       @include activeThemeBotton();
       font-size: 14px !important;
+      width: 20% !important;
     }
   }
 }

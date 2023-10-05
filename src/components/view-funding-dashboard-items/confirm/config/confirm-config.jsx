@@ -227,23 +227,6 @@ const ConfirmConfig = ({
             required
           />
         </Box>
-        {/* <Box varient="div" component="div" sx={{ position: "relative" }}>
-          <input
-            className={classess.page__header__search}
-            placeholder="Search..."
-            type="search"
-            onInput={(e) => handleSearch(e)}
-            required
-          />
-          <SearchIcon
-            sx={{
-              color: "white",
-              position: "absolute",
-              top: "8px",
-              right: "0px",
-            }}
-          />
-        </Box> */}
       </Box>
       <Box className={classess.searchBarMob}></Box>
 

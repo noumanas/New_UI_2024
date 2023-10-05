@@ -55,7 +55,12 @@
       gap: 20px;
 
       &__form {
-        @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
+        @include flexProperties(
+          column,
+          flex-start,
+          flex-start,
+          $fullWidth: true
+        );
         gap: 30px;
 
         &__form_fields {
@@ -103,6 +108,7 @@
             @include fontSize(20px);
             color: #6d7480;
             font-weight: bold !important;
+
             option {
               background-color: $base-heading-color;
               font-size: 18px !important;
@@ -167,7 +173,12 @@
       }
 
       &__slider_box {
-        @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
+        @include flexProperties(
+          column,
+          flex-start,
+          flex-start,
+          $fullWidth: true
+        );
         width: 100%;
 
         &__title {
@@ -255,7 +266,12 @@
   .page {
     &__music_container {
       &__button_container {
-        @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
+        @include flexProperties(
+          column,
+          flex-start,
+          flex-start,
+          $fullWidth: true
+        );
 
         &__button {
           width: 100%;
@@ -273,7 +289,12 @@
           width: 100%;
 
           &__form_fields {
-            @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
+            @include flexProperties(
+              column,
+              flex-start,
+              flex-start,
+              $fullWidth: true
+            );
             width: 100%;
 
             &__input {

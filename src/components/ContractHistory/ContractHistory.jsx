@@ -269,6 +269,9 @@ const ContractHistory = ({ props, open, onvaluechange }) => {
           </TableHead>
 
           <TableBody className={classess.page__table__brow}>
+            <>
+              <Box sx={{ m: "1rem" }}></Box>
+            </>
             <TableRow>
               <TableCell
                 className={classess.page__table__row}
@@ -374,30 +377,30 @@ const ContractHistory = ({ props, open, onvaluechange }) => {
                               width: "15px",
                             }}
                           /> */}
-                        </IconButton>
-                      </Tooltip>
-                      {user.role === "admin" && (
-                        <Tooltip
-                          title="Contract Approve"
-                          placement="top"
-                          arrow
-                          enterDelay={100}
+                      </IconButton>
+                    </Tooltip>
+                    {user.role === "admin" && (
+                      <Tooltip
+                        title="Contract Approve"
+                        placement="top"
+                        arrow
+                        enterDelay={100}
+                      >
+                        <IconButton
+                          variant=""
+                          onClick={() => eventHandler(id)}
+                          style={{
+                            backgroundColor: "#4FFCB7",
+                            height: "30px",
+                            width: "30px",
+                          }}
                         >
-                          <IconButton
-                            variant=""
-                            onClick={() => eventHandler(id)}
-                            style={{
-                              backgroundColor: "#4FFCB7",
-                              height: "30px",
-                              width: "30px",
-                            }}
-                          >
-                            <img
-                              src={CheckIcon}
-                              alt="Eye"
-                              style={{ height: "12px", width: "16px" }}
-                            />
-                            {/* <CheckOutlinedIcon
+                          <img
+                            src={CheckIcon}
+                            alt="Eye"
+                            style={{ height: "12px", width: "16px" }}
+                          />
+                          {/* <CheckOutlinedIcon
                             fontSize="small"
                             style={{
                               color: "#000000",
@@ -405,13 +408,13 @@ const ContractHistory = ({ props, open, onvaluechange }) => {
                               width: "15px",
                             }}
                           /> */}
-                          </IconButton>
-                        </Tooltip>
-                      )}
-                    </Stack>
-                  </span>
-                </TableCell>
-              </TableRow>
+                        </IconButton>
+                      </Tooltip>
+                    )}
+                  </Stack>
+                </span>
+              </TableCell>
+            </TableRow>
           </TableBody>
 
           {notes.map((data, key) => {

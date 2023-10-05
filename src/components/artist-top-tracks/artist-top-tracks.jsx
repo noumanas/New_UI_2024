@@ -52,7 +52,7 @@ const ArtistTopTracks = ({
                   </TableCell>
                   <TableCell className={classess.table__col}>
                     <span className={classess.table__col__heading}>
-                      % OF OWNERSHIP
+                      % OWNERSHIP
                     </span>
                   </TableCell>
                   <TableCell className={classess.table__col}>
@@ -122,7 +122,7 @@ const ArtistTopTracks = ({
                   </TableCell>
                   <TableCell className={classess.table__col}>
                     <span className={classess.table__col__heading}>
-                      % OF OWNERSHIP
+                      % OWNERSHIP
                     </span>
                   </TableCell>
                   <TableCell className={classess.table__col}>

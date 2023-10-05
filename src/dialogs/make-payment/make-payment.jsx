@@ -305,18 +305,16 @@ export default function MakeaPaymentModal({ payment }) {
                     >
                       Add Comments
                     </label>
-                    <input
+                    <TextField
                       className={
                         classess.page__dialog__form__field_container__field__inputComment
                       }
-                      sx={{ height: "150px" }}
-                      name="Add Comments"
-                      type="text"
+                      multiline="true"
+                      rows="5"
                       onChange={(e) => {
                         setComment(e.target.value);
                       }}
-                      maxLength={200}
-                      required
+                      placeholder="Add Comments"
                     />
                   </Box>
                 </Box>

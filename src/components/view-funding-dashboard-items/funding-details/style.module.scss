@@ -101,7 +101,7 @@
             }
           }
           &__email {
-            font-size: 14px;
+            @include customParagraph(14px);
             text-decoration: underline;
           }
           &__country {
@@ -268,7 +268,12 @@
     width: 100%;
 
     &__box {
-      @include flexProperties(column, flex-start, flex-start, $fullWidth: false);
+      @include flexProperties(
+        column,
+        flex-start,
+        flex-start,
+        $fullWidth: false
+      );
       width: 100%;
       gap: 20px;
 
@@ -310,7 +315,12 @@
         }
 
         &__content {
-          @include flexProperties(row, space-between, center, $fullWidth: false);
+          @include flexProperties(
+            row,
+            space-between,
+            center,
+            $fullWidth: false
+          );
           flex-wrap: wrap;
           gap: 10px;
           margin-top: 40px;
@@ -531,7 +541,7 @@
       }
     }
     .updateArtist {
-      font-size: 10px;
+      // font-size: 10px;
     }
   }
   .page__artist__box__topdetails__details__artistname__name {
@@ -599,7 +609,7 @@
       }
     }
     .updateArtist {
-      font-size: 10px;
+      // font-size: 10px;
     }
   }
 }
@@ -635,8 +645,12 @@
         }
       }
     }
-    .contract {
-      // margin-top: 5rem !important;
+    .page__artist__box__topdetails__details__email {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
+      width: 150px;
     }
   }
 }
@@ -659,7 +673,12 @@
       &__box {
         &__adetails {
           &__content {
-            @include flexProperties(column, flex-start, flex-start, $fullWidth: false);
+            @include flexProperties(
+              column,
+              flex-start,
+              flex-start,
+              $fullWidth: false
+            );
             gap: 20px;
           }
         }
@@ -766,7 +785,7 @@
         }
         .updateArtist {
           width: 100%;
-          font-size: 10px;
+          // font-size: 10px;
           white-space: nowrap;
         }
         &__tracks_info {
@@ -865,7 +884,7 @@
       }
     }
     .updateArtist {
-      font-size: 10px !important;
+      // font-size: 10px !important;
     }
   }
   .page__artist__box__topdetails__details__artistname__name {

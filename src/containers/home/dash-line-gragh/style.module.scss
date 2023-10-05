@@ -9,8 +9,8 @@
     background-color: $base-inner-container-background-color;
     padding: 20px !important;
     border-radius: 12px !important;
-    min-height: 38.55rem;
-    max-height: 38.55rem;
+    min-height: 100% !important;
+    max-height: 100% !important;
     &__side_text {
       @include customHeading(18px);
       transform: rotate(270deg);

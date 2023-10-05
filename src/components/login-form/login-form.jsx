@@ -175,7 +175,13 @@ const LoginForm = () => {
                   />
                 }
                 label="Remember me"
-                sx={{ color: "white", fontWeight: "500", fontSize: 14 }}
+                sx={{
+                  color: "white",
+                  fontWeight: "500",
+                  "& .MuiTypography-root": {
+                    fontSize: "14px",
+                  },
+                }}
               />
 
               <Button
@@ -183,8 +189,7 @@ const LoginForm = () => {
                 variant="text"
                 sx={{
                   color: "#4FFCB7",
-                  // backgroundColor: "orange",
-                  // borderColor: "green",
+                  fontSize: "14px",
                 }}
               >
                 <u>Reset Password?</u>

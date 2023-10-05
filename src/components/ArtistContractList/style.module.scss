@@ -13,11 +13,13 @@
 }
 
 .table {
-  height: 100% !important;
+  height: 95% !important;
   width: 100% !important;
   background: $base-container-backgroung-color !important;
   overflow: scroll;
-
+  &::-webkit-scrollbar {
+    display: none;
+  }
   &__head {
     background-color: $base-container-backgroung-color !important;
     position: sticky;
@@ -40,7 +42,7 @@
     background: $base-container-backgroung-color !important;
     text-align: left !important;
     width: 50px !important;
-    border-bottom: 1px solid $base-border-line-color;
+    border-bottom: 1px solid $base-border-line-color !important;
     @include textEllipsis();
     &__heading {
       @include customFontsSmallTags();

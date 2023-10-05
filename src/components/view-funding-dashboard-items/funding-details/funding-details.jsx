@@ -126,6 +126,7 @@ const FundingDetails = ({
 
   // const handleOpen = () => setOpen(true);
   // const handleClose = () => setOpen(false);
+
   const handleButtonClick = () => {
     openPanel();
   };
@@ -253,6 +254,7 @@ const FundingDetails = ({
         console.log(error);
       });
   };
+
   //calculate the top10track Funding for last 60 days
   async function calcalute_tracks_estimate(tracks) {
     axios
@@ -417,18 +419,8 @@ const FundingDetails = ({
               component="div"
               className={classess.page__artist__box}
             >
-              <Box
-              // sx={{
-              //   paddingBottom: "10px",
-              // }}
-              >
-                <Box
-                  className={classess.page__artist__box__topdetails}
-                  // sx={{
-                  //   mt: 4.5,
-                  //   marginBottom: "5px",
-                  // }}
-                >
+              <Box>
+                <Box className={classess.page__artist__box__topdetails}>
                   <Box
                     sx={{
                       display: "flex",
@@ -504,13 +496,6 @@ const FundingDetails = ({
                               navigate(`/blig/edit-artist/${id}`);
                             }}
                           >
-                            {/* <CreateIcon
-                      style={{
-                        color: "#4ffcb7",
-                        fontSize: "18px",
-                        cursor: "pointer",
-                      }}
-                    /> */}
                             <img src={GreenPencil} alt="pencil icon" />
                           </Box>
                         </Tooltip>
@@ -577,40 +562,6 @@ const FundingDetails = ({
                       )}
                     </Box>
                   </Box>
-
-                  {/* <Box
-                    className={
-                      classess.page__artist__box__listnership__innerlyer__trending
-                    }
-                  >
-                    <Box>
-                      <IconButton
-                        size='small'
-                        style={{
-                          backgroundColor: "#222C41",
-                          width: "40px",
-                          height: "40px",
-                        }}
-                      >
-                        <TimelineIcon
-                          size='small'
-                          style={{
-                            color: "red",
-                            width: "30px",
-                            height: "30px",
-                          }}
-                        ></TimelineIcon>
-                      </IconButton>
-                    </Box>
-
-                    <Typography
-                      className={
-                        classess.page__artist__box__listnership__innerlyer__text3
-                      }
-                    >
-                      TRENDING
-                    </Typography>
-                  </Box> */}
                 </Box>
               </Box>
 
@@ -679,10 +630,6 @@ const FundingDetails = ({
                 >
                   <Typography
                     className={classess.page__artist__box__smallHeading}
-                    sx={{
-                      fontSize: "12px",
-                      // paddingLeft: "10px",
-                    }}
                   >
                     TOTAL TRACKS:
                   </Typography>
@@ -750,6 +697,7 @@ const FundingDetails = ({
                     classess.page__artist__box__buttons_containers__editDash
                   }
                   startIcon={<InventoryRoundedIcon />}
+                  onClick={() => navigate(`/blig/edit-dashboard/${id}`)}
                 >
                   Edit Dashboard
                 </Button>
@@ -790,9 +738,6 @@ const FundingDetails = ({
                   className={classess.page__artist__box__listnership}
                   variant="div"
                   component="div"
-                  // sx={{
-                  //   height: "102px",
-                  // }}
                 >
                   <Typography
                     className={classess.page__artist__box__smallHeading}
@@ -805,7 +750,6 @@ const FundingDetails = ({
                     className={
                       classess.page__artist__box__listnership__innerlyer
                     }
-                    // sx={{ justifyContent: "flex-start" }}
                   >
                     <Box variant="div" component="div">
                       {isLoading ? (
@@ -1047,10 +991,6 @@ const FundingDetails = ({
               varient="div"
               component="div"
               className={`${classess.page__artist__box} ${classess.page__artist__box__endBox}`}
-              // style={{
-              //   height: containerHeight + "rem",
-              //   transition: "height 0.3s ease",
-              // }}
             >
               <Box className={classess.blankHeight}>
                 <Box
@@ -1059,7 +999,6 @@ const FundingDetails = ({
                     justifyContent: "flex-end",
                     padding: "30px 40px 0px 0px",
                   }}
-                  // style={{ height: containerHeight + "px" }}
                 >
                   <IconButton
                     sx={{
@@ -1083,16 +1022,7 @@ const FundingDetails = ({
                   </IconButton>
                 </Box>
               </Box>
-              {/* <Divider className={classess.page__artist__box__horizontalline} /> */}
               <Box
-                sx={
-                  {
-                    // width: "100%",
-                    // height: "calc(100% - 155px);",
-                    // borderLeft: "1px solid #5a7380",
-                    // borderTop: "1px solid #5a7380",
-                  }
-                }
                 className={classess.page__artist__box__endBox__last}
                 style={borderStyle}
               >
@@ -1229,22 +1159,6 @@ const FundingDetails = ({
                           </Tooltip>
                         </Box>
                       </Box>
-
-                      {/* <Box>
-                        <Box
-                          sx={{
-                            color: " #4ffcb7",
-                            textTransform: "uppercase",
-                            marginTop: "-10px",
-                          }}
-                          className={classess.fontSize}
-                        >
-                          ROI:
-                        </Box>
-                        <Box className={classess.page__artist__box__fontSize}>
-                          $378,857
-                        </Box>
-                      </Box> */}
                     </Box>
                   </Box>
                 </Box>

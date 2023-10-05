@@ -18,6 +18,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "../../redux/slice/modal";
 import TransferPaymentlist from "../../components/ArtistPaymentList/transfer-payment-list/TransferPaymentlist";
 import { Avatar } from "@mui/material";
+import PaymentIcon from "@mui/icons-material/Payment";
+import MdOutlinePayment from "react-icons/md";
+import DownloadIcon from "../../assets/buttonsicons/DownloadIcon.png";
 
 const PaymentPreview = () => {
   const { id } = useParams();
@@ -129,6 +132,7 @@ const PaymentPreview = () => {
                           })
                         )
                       }
+                      startIcon={<PaymentIcon />}
                     >
                       Make Payment
                     </Button>

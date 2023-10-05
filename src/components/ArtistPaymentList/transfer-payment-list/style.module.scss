@@ -32,7 +32,8 @@
   &__col {
     background: $base-container-backgroung-color !important;
     text-align: left !important;
-    border-bottom: 1px solid $base-border-line-color;
+    width: 50px !important;
+    border-bottom: 1px solid $base-border-line-color !important;
     @include textEllipsis();
     &__heading {
       @include customFontsSmallTags();
@@ -66,6 +67,16 @@
 
     &__mode {
       @include customParagraph(14px);
+      &__iconContainer {
+        height: 30px !important;
+        width: 30px !important;
+        background-color: #4fb7fc !important;
+        &__icon {
+          height: 15px !important;
+          width: 15px !important;
+          color: #000000 !important;
+        }
+      }
     }
     &__artist_image {
       width: 70px !important;

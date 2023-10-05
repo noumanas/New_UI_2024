@@ -79,7 +79,7 @@ const Home = () => {
     series: artistincomedata,
     option: {
       chart: {
-        height: 550,
+        height: 455,
         type: "line",
         zoom: {
           enabled: true,
@@ -153,7 +153,7 @@ const Home = () => {
     series: artistspotifydata,
     option: {
       chart: {
-        height: 550,
+        height: 455,
         type: "line",
         zoom: {
           enabled: true,
@@ -227,7 +227,7 @@ const Home = () => {
     series: artistyoutubeydata,
     option: {
       chart: {
-        height: 550,
+        height: 455,
         type: "line",
         zoom: {
           enabled: true,
@@ -418,7 +418,7 @@ const Home = () => {
   return (
     // <Container maxWidth="xxl">
     <Grid container spacing={2} className={classess.page}>
-      <Grid item xs={12} md={12} lg={9}>
+      <Grid item sm={12} md={12} lg={9} xl={9}>
         <Grid>
           <Box
             component="div"
@@ -489,7 +489,7 @@ const Home = () => {
                     <Chartapexline
                       options={options.option}
                       series={options.series}
-                      height={500}
+                      height={455}
                       type={"line"}
                       Revenue={"Revenue"}
                     />
@@ -511,7 +511,7 @@ const Home = () => {
                     <Chartapexline
                       options={optionsspotify.option}
                       series={optionsspotify.series}
-                      height={500}
+                      height={455}
                       type={"line"}
                       Revenue={"Streams"}
                     />
@@ -533,7 +533,7 @@ const Home = () => {
                     <Chartapexline
                       options={optionsyoutube.option}
                       series={optionsyoutube.series}
-                      height={500}
+                      height={455}
                       type={"line"}
                       Revenue={"Youtube Views"}
                     />

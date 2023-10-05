@@ -5,8 +5,9 @@ import Grid from "@mui/material/Grid";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import Modal from "@mui/material/Modal"; // Import Modal
-import { Button, Tooltip, Typography } from "@mui/material";
-
+import { Button, IconButton, Tooltip, Typography } from "@mui/material";
+import { border } from "@mui/system";
+import { RxCross2 } from "react-icons/rx";
 const MAX_DISPLAY_GENRES = 2; // Maximum number of genres to display
 
 const GenreGraph = ({ artist }) => {
@@ -46,7 +47,7 @@ const GenreGraph = ({ artist }) => {
         component="div"
         variant="div"
         className={classess.page__banner}
-        p={3}
+        sx={{ padding: "20px" }}
       >
         <Box
           variant="div"
@@ -64,28 +65,45 @@ const GenreGraph = ({ artist }) => {
             <Grid>
               <Box>
                 <Stack direction="row" gap={1}>
-                  {displayedGenres.map((genre, index) => (
-                    <Chip
-                      key={index}
-                      className={classess.page__banner__conatiner__chip}
-                      label={genre}
-                      sx={{
-                        backgroundColor: "#5A7380",
-                        color: "#fff",
-                        fontSize: "11px",
-                      }}
-                    />
-                  ))}
+                  {displayedGenres.map((genre, index) => {
+                    const isTooltipRequired = genre.length > 12;
+                    return (
+                      <Tooltip
+                        key={index}
+                        title={genre}
+                        placement="top"
+                        arrow
+                        enterDelay={100}
+                      >
+                        <Chip
+                          className={classess.page__banner__container__chip}
+                          label={
+                            isTooltipRequired
+                              ? `${genre.slice(0, 12)}...`
+                              : genre
+                          }
+                          onClick={handleShowModal} // Open modal on click
+                          sx={{
+                            backgroundColor: "#5A7380",
+                            color: "#fff",
+                            fontSize: "11px",
+                          }}
+                        />
+                      </Tooltip>
+                    );
+                  })}
                   {remainingGenres.length > 0 && (
                     <Tooltip
-                      title="Remaining Genres"
+                      title="Genres"
                       placement="top"
                       arrow
                       enterDelay={100}
                     >
                       <Chip
-                        className={classess.page__banner__conatiner__chip}
-                        label={`+${remainingGenres.length}`}
+                        className={classess.page__banner__container__chip}
+                        label={`+${
+                          remainingGenres.length + displayedGenres.length
+                        }`}
                         onClick={handleShowModal} // Open modal on click
                         sx={{
                           backgroundColor: "#5A7380",
@@ -110,31 +128,63 @@ const GenreGraph = ({ artist }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style} className={classess.modalCss}>
-          <Box className={classess.modalCss__heading}>Genres: </Box>
-          <Box sx={{ pt: 3, pl: 3, pr: 3, pb: 1 }}>
-            {remainingGenres.map((genre, index) => (
+          <Box className={classess.modalCss__heading}>
+            Genres
+            <Box className={classess.modalCss__heading__icon}>
+              <IconButton
+                className={classess.modalCss__heading__icon__inner}
+                onClick={handleCloseModal}
+              >
+                <RxCross2 />
+              </IconButton>
+            </Box>
+          </Box>
+          <Box
+            sx={{
+              p: 3,
+              display: "flex",
+              justifyContent: "center",
+              gap: "10px",
+              flexWrap: "wrap",
+              backgroundColor: "#222C41",
+              borderRadius: "12px",
+            }}
+          >
+            {displayedGenres.map((genre, index) => (
               <Chip
                 key={index}
                 label={genre}
                 sx={{
                   backgroundColor: "#5A7380",
                   color: "#fff",
-                  marginBottom: "8px",
-                  marginLeft: "5px",
                   cursor: "pointer",
                   fontSize: "11px",
                 }}
               />
+            ))}{" "}
+            {remainingGenres.map((genre, index) => (
+              <>
+                <Chip
+                  key={index}
+                  label={genre}
+                  sx={{
+                    backgroundColor: "#5A7380",
+                    color: "#fff",
+                    cursor: "pointer",
+                    fontSize: "11px",
+                  }}
+                />
+              </>
             ))}
           </Box>
-          <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
+          {/* <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
             <Button
               className={classess.modalCss__button}
               onClick={handleCloseModal}
             >
               Close
             </Button>
-          </Box>
+          </Box> */}
         </Box>
       </Modal>
     </div>

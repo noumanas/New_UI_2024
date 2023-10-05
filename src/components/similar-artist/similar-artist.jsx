@@ -293,36 +293,31 @@ const SimilarArtist = ({ similarArtist, loader }) => {
                 ) : (
                   <Stack direction="row" justifyContent="flex-end" spacing={2}>
                     <Button
-                      variant="contained"
-                      type="button"
-                      size="large"
-                      onClick={BeforeHandler}
-                      sx={{
-                        backgroundColor: "#4FFCB7",
-                        color: "#000",
-                        borderRadius: "12px",
-                        "&:hover": { backgroundColor: "#4FFCB7" },
-                      }}
-                    >
-                      Confirm
-                    </Button>
-                    <Button
-                      variant="contained"
-                      type="submit"
-                      color="error"
-                      size="large"
-                      sx={{
-                        backgroundColor: "transparent",
-                        borderWidth: "1px",
-                        borderColor: "#FF0000",
-                        borderStyle: "solid",
-                        color: "#FF0000",
-                        borderRadius: "12px",
-                        "&:hover": { color: "#000" },
-                      }}
+                      className={classess.modalbox__cancelBtn}
+                      // sx={{
+                      //   backgroundColor: "transparent",
+                      //   borderWidth: "1px",
+                      //   borderColor: "#FF0000",
+                      //   borderStyle: "solid",
+                      //   color: "#FF0000",
+                      //   borderRadius: "12px",
+                      //   "&:hover": { color: "#000" },
+                      // }}
                       onClick={() => handleClose()}
                     >
                       Cancel
+                    </Button>
+                    <Button
+                      className={classess.modalbox__confirmBtn}
+                      onClick={BeforeHandler}
+                      // sx={{
+                      //   backgroundColor: "#4FFCB7",
+                      //   color: "#000",
+                      //   borderRadius: "12px",
+                      //   "&:hover": { backgroundColor: "#4FFCB7" },
+                      // }}
+                    >
+                      Confirm
                     </Button>
                   </Stack>
                 )}

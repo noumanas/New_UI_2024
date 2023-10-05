@@ -77,11 +77,11 @@
                     }
                     &__inputComment {
                         width: 100%;
-                        color: $base-input-text-color !important;
+                        // color:  !important;
+                        @include customParagraph(14px);
                         border: 1px solid $base-input-background-color !important;
                         background: $base-input-background-color;
                         outline: none;
-                        padding: 15px;
                         font-size: 18px;
                         border-radius: 12px;
                         height: 150px;

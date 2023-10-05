@@ -8,6 +8,9 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Box from "@mui/material/Box";
 import moment from "moment";
+import { IconButton } from "@mui/material";
+import { BiCloudDownload } from "react-icons/bi";
+import DownloadIcon from "../../../assets/buttonsicons/DownloadIcon.png";
 
 const TransferPaymentList = ({ props, transefered_payments }) => {
   const internationalNumberFormat = new Intl.NumberFormat("en-US");
@@ -116,7 +119,17 @@ const TransferPaymentList = ({ props, transefered_payments }) => {
                         borderBottomRightRadius: "12px",
                       }}
                     >
-                      <span className={classess.table__row__mode}>.</span>
+                      <span className={classess.table__row__mode}>
+                        <IconButton
+                          className={classess.table__row__mode__iconContainer}
+                        >
+                          <img
+                            src={DownloadIcon}
+                            alt="Eye"
+                            style={{ height: "12px", width: "16px" }}
+                          />
+                        </IconButton>
+                      </span>
                     </TableCell>
                   </TableRow>
                 </>

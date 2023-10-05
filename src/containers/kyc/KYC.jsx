@@ -69,7 +69,7 @@ const KYC = () => {
               <Box
                 varient="div"
                 component="div"
-                className={classess.page__details__box__tracks__main_content}
+                className={classess.page__details__box__adetails__main_content}
               >
                 <KYCList />
               </Box>

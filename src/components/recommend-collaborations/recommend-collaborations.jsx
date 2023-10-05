@@ -14,6 +14,7 @@ import { config as URLconfig } from "../../enviorment/enviorment";
 import { useDispatch, useSelector } from "react-redux";
 import { getArtistById } from "../../redux/slice/artist";
 import CircularProgress from "@mui/material/CircularProgress";
+import CachedIcon from "@mui/icons-material/Cached";
 
 const RecommendCollaborations = () => {
   const artist = useSelector((state) => state.artist.artist);
@@ -148,6 +149,7 @@ const RecommendCollaborations = () => {
               className={classess.page__banner__header__refresh_btn}
               disabled={isLoading}
               onClick={() => refresh()}
+              startIcon={<CachedIcon />}
             >
               {isLoading ? "Please wait" : "Refresh"}
             </Button>

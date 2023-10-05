@@ -25,6 +25,8 @@
         background: $base-container-backgroung-color;
         border-radius: 12px;
         padding: 20px;
+        height: 675px !important;
+        max-height: 675px !important;
 
         &__header {
           @include flexProperties(row, space-between, center, $fullWidth: true);
@@ -74,6 +76,9 @@
           width: 100% !important;
           height: 95% !important;
           overflow: scroll;
+          &::-webkit-scrollbar {
+            display: none;
+          }
         }
       }
     }

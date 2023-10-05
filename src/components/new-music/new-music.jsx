@@ -100,6 +100,7 @@ const NewMusic = ({
     } else {
       toast.error("please fill year field ");
     }
+    setIsEditMode(false);
     hideTracks();
   };
 
@@ -776,18 +777,10 @@ const NewMusic = ({
           classes={{
             actions: "custom-pagination-actions",
             select: "custom-pagination-select",
-            // input: "custom-select-style",
             displayedRows: "custom-select-style",
-            // menuItem: "custom-select-style",
-            // root: "custom-select-style",
-            // selectIcon: "custom-select-style",
             selectLabel: "custom-select-style",
-            // selectRoot: "custom-select-style",
-            // spacer: "custom-select-style",
-            // toolbar: "custom-select-style",
           }}
           SelectProps={{
-            // Leave the SelectProps empty; styles will be applied via the class
             classes: {
               select: "custom-select", // Apply the custom-select class to the Select component
             },

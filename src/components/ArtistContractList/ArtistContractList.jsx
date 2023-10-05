@@ -190,8 +190,6 @@ const ArtistContractList = () => {
                   </TableCell>
                 </TableRow>
               </TableHead>
-
-              {console.log("List Items in Contracts", list[0])}
               {list[0] === undefined ? (
                 <span className={classess.table__no_contracts}>
                   No Contract

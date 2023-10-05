@@ -159,16 +159,11 @@
       }
 
       &__genre {
-        // @include flexProperties(column, center, flex-start, $fullWidth: true);
+        @include flexProperties(column, center, flex-start, $fullWidth: true);
         width: 100%;
-        // overflow-x: scroll;
-        // overflow-y: hidden;
         min-height: 13.78% !important;
         max-height: 13.78% !important;
         background: $base-container-backgroung-color;
-        // &::-webkit-scrollbar {
-        //   display: none;
-        // }
       }
 
       &__tracks_info {
@@ -288,6 +283,57 @@
       overflow: hidden;
     }
   }
+  &__MainBox {
+    background-color: $base-container-backgroung-color !important;
+    border-radius: 12px;
+    border: 2px solid #4ffcb7;
+    height: 460px;
+    // transition: display 0.3s ease, height 0.3s ease;
+
+    &__edit {
+      padding: 15px 20px;
+      border-bottom: 2px solid #4ffcb7;
+      &__mode {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        &__text {
+          color: #4ffcb7 !important;
+          font-size: 14px !important;
+        }
+        &__icons {
+          background-color: #4ffcb7 !important;
+          width: 38px !important;
+          height: 38px !important;
+          font-weight: bold !important;
+        }
+      }
+    }
+  }
+
+  &__checkAndBtn {
+    // display: flex;
+    // margin: 10px !important;
+    gap: 10px;
+    background-color: $base-container-backgroung-color;
+    padding: 10px 20px;
+    border-radius: 12px !important;
+    &__text {
+      color: #4ffcb7;
+      white-space: nowrap;
+      font-size: 12px !important;
+    }
+    &__checkBox {
+      svg {
+        color: #4ffcb7;
+      }
+    }
+    &__hideAndShow {
+      @include activeThemeBotton();
+      padding: 1px 20px !important;
+      font-size: 12px !important;
+    }
+  }
 }
 
 @media only screen and (max-width: 434px) {
@@ -352,9 +398,6 @@
     }
   }
   .page__artist__box__topdetails__details__artistname__name {
-    width: 100% !important;
-  }
-  .page__artist__box__topdetails__details__email {
     width: 100% !important;
   }
 }
@@ -464,13 +507,6 @@
   .page {
     flex-wrap: wrap;
   }
-  .page__artist__box__topdetails__details__email {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: block;
-    width: 150px;
-  }
 }
 
 @media only screen and (max-width: 1821px) {
@@ -578,13 +614,6 @@
     bottom: 10px !important;
   }
   .page__artist__box__topdetails__details__artistname__name {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: block;
-    width: 110px;
-  }
-  .page__artist__box__topdetails__details__email {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

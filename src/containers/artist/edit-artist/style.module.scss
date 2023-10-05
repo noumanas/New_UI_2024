@@ -23,7 +23,8 @@
 
   &__fieldsContainer {
     background: #222c41;
-    border-radius: 8px;
+    border-radius: 12px;
+    height: 615px !important;
 
     &__image_container {
       display: flex;
@@ -86,7 +87,7 @@
         }
 
         &__phoneinput {
-          border: 1px solid #4ffcb7 !important;
+          border: 2px solid #4ffcb7 !important;
           border-radius: 8px;
           padding: 15px;
           color: #979797 !important;
@@ -108,10 +109,10 @@
       }
 
       &__action {
-        gap: 40px;
+        gap: 20px;
         @include flexProperties(row, flex-end, center, $fullWidth: true);
         width: 100%;
-
+        margin-top: 20px;
         &__cancel_btn {
           @include cancelDeactiveBtn(16px, 10px);
           height: 40px;
@@ -120,9 +121,7 @@
 
         &__submit_btn {
           @include activeThemeBotton(16px, 10px);
-          @include fontSize();
           height: 40px;
-          padding: 5px 10px !important;
         }
       }
     }

@@ -13,7 +13,7 @@
     color: $base-button-background-color !important;
     background: $base-container-backgroung-color !important;
     border-bottom: 1px solid $base-border-line-color !important;
-    // @include textEllipsis();
+    white-space: nowrap;
     text-transform: uppercase;
     font-size: 12px !important;
     &__checkBox {
@@ -46,6 +46,7 @@
         background-color: $base-container-backgroung-color !important;
         color: $base-heading-color !important;
         padding: 15px 5px !important;
+        cursor: pointer !important;
       }
     }
 
@@ -105,18 +106,34 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: $base-container-backgroung-color;
+    color: #222c41;
     font-size: 20px;
     font-weight: bold;
-    background-color: $base-button-background-color;
+    background-color: #4ffcb7;
     width: 100%;
     height: 46px;
     border-radius: 12px 12px 0px 0px;
+    position: relative;
+
+    &__icon {
+      position: absolute;
+      right: 10px;
+      &__inner {
+        background-color: #222c41 !important;
+        color: #4ffcb7 !important;
+        font-size: 15px !important;
+        font-weight: bold !important;
+        &:hover {
+          background-color: #222c41;
+          color: #4ffcb7;
+        }
+      }
+    }
   }
   &__button {
     color: #e12020 !important;
     border: 1px solid #e12020 !important;
     border-radius: 12px !important;
-    padding: 5px 60px !important;
+    padding: 5px 50px !important;
   }
 }

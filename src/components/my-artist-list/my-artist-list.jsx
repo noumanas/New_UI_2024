@@ -70,6 +70,7 @@ const MyArtistList = () => {
   // const startIndex = page * rowsPerPage;
   // const endIndex = startIndex + rowsPerPage;
   // const paginatedArtistList = artistList.slice(startIndex, endIndex);
+
   const handleSortClick = (column) => {
     if (sort.column === column) {
       // Toggle the sorting direction if the same column is clicked again
@@ -222,52 +223,53 @@ const MyArtistList = () => {
         toast.error(error.response.data.message);
       });
   };
-  // useEffect(() => {
-  //   if (pageNumber >= 1) {
-  //     loadArtists(pageNumber);
-  //   }
-  // }, [pageNumber]);
-  // const loadArtists = (x) => {
-  //   try {
-  //     let configAuth = {
-  //       headers: {
-  //         authorization: `Bearer ${getItemToLocalStorage(AuthEnum["TOKEN"])}`,
-  //       },
-  //     };
-  //     axios
-  //       .get(`${URLconfig.BASE_URL}/artists?page=${x}`, configAuth)
-  //       .then((res) => {
-  //         const response = res.data.data;
-  //         setArtistList(artistList.concat(response));
-  //       });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-  // const handleInfiniteScroll = async () => {
-  //   try {
-  //     let innerHeight = window.innerHeight;
-  //     let pageHeight = document.documentElement.scrollHeight;
-  //     let scrollHeight = document.documentElement.scrollTop;
-  //     console.log("innerHeight", innerHeight);
-  //     console.log("pageHeight", pageHeight);
-  //     console.log("scrollHeight", scrollHeight);
-  //     if (innerHeight + scrollHeight >= pageHeight) {
-  //       setPageNumber((prevPageNumber) => prevPageNumber + 1);
-  //       console.log(pageNumber + 1);
-  //       console.log("load more...");
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-  const onclickloadmore = async () => {
-    setPageNumber((prevPageNumber) => prevPageNumber + 1);
-  };
+  useEffect(() => {
+    if (pageNumber >= 1) {
+      loadArtists(pageNumber);
+    }
+  }, [pageNumber]);
 
-  // useEffect(() => {
-  //   window.addEventListener("scroll", handleInfiniteScroll);
-  // }, []);
+  const loadArtists = (x) => {
+    try {
+      let configAuth = {
+        headers: {
+          authorization: `Bearer ${getItemToLocalStorage(AuthEnum["TOKEN"])}`,
+        },
+      };
+      axios
+        .get(`${URLconfig.BASE_URL}/artists?page=${x}`, configAuth)
+        .then((res) => {
+          const response = res.data.data;
+          setArtistList(artistList.concat(response));
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleInfiniteScroll = async () => {
+    try {
+      let innerHeight = window.innerHeight;
+      let pageHeight = document.documentElement.scrollHeight;
+      let scrollHeight = document.documentElement.scrollTop;
+      // console.log("innerHeight", innerHeight);
+      // console.log("pageHeight", pageHeight);
+      // console.log("scrollHeight", scrollHeight);
+      if (innerHeight + scrollHeight >= pageHeight) {
+        setPageNumber((prevPageNumber) => prevPageNumber + 1);
+        // console.log(pageNumber + 1);
+        // console.log("load more...");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // const onclickloadmore = async () => {
+  //   setPageNumber((prevPageNumber) => prevPageNumber + 1);
+  // };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleInfiniteScroll);
+  }, []);
   const handleOpenDeleteDialog = (artist) => {
     setSelectedArtistToDelete(artist);
     setOpen(true);
@@ -281,16 +283,29 @@ const MyArtistList = () => {
   };
   return (
     <Box varient="div" component="div" className={classess.page}>
-      <Box
+      <Box varient="div" component="div" className={classess.page__header}>
+        <span className={classess.page__header__title}>My Artists</span>
+        <Box
+          varient="div"
+          component="div"
+          className={classess.page__header__actionBar}
+        >
+          <SearchIcon className={classess.page__header__actionBar__icon} />
+          <input
+            className={classess.page__header__actionBar__search}
+            placeholder="Search"
+            type="search"
+            onInput={(e) => handleSearch(e)}
+            required
+          />
+        </Box>
+      </Box>
+      {/* <Box
         varient="div"
         component="div"
         className={classess.page__statusBar}
         // sx={{ position: "relative" }}
       >
-        <Box>
-          <span className={classess.page__statusBar__title}>My Artists</span>
-        </Box>
-
         <Box
           varient="div"
           component="div"
@@ -305,7 +320,7 @@ const MyArtistList = () => {
             required
           />
         </Box>
-      </Box>
+      </Box> */}
 
       {/* Display a loader while artistApiStatus is "loading" */}
       {artistApiStatus === "loading" ? (
@@ -339,11 +354,12 @@ const MyArtistList = () => {
                   <TableRow
                     key={index}
                     // className={classess.page__table__row}
-                    className={`${classess.table__row} ${cellUseStyles.row}`}
+                    className={`${classess.page__table__row} ${cellUseStyles.row}`}
                   >
-                    <TableCell className={classess.table__row}>
+                    <TableCell className={classess.page__table__row}>
                       <Skeleton variant="circular" width={40} height={40} />
                     </TableCell>
+
                     <TableCell className={classess.page__table__row}>
                       <Skeleton variant="text" fontSize="1rem" />
                     </TableCell>
@@ -598,6 +614,23 @@ const MyArtistList = () => {
           </TableContainer>
         </>
       )}
+      {artistApiStatus === "succeeded" &&
+      artistList &&
+      artistList.length === 0 ? (
+        <span
+          style={{
+            height: "100%",
+            width: "100%",
+            alignItems: "center",
+            color: "#fff",
+            fontSize: "28px",
+            fontWeight: "700",
+            fontFamily: "DM Sans",
+          }}
+        >
+          Add New Artist
+        </span>
+      ) : null}
       <DeleteConformationDialog
         onClose={handleCloseDeleteDialog}
         open={open}

@@ -2,18 +2,24 @@
 @import "../../styles/scss.scss";
 
 .page {
-  // @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
-  // width: 100% !important;
-  // gap: 10px;
+  @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
+  width: 100% !important;
+  // height: 100% !important;
 
   &__banner {
-    // @include flexProperties(column, center, center, $fullWidth: true);
-    // width: calc(100% + 250px) !important;
+    @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
+    width: 100% !important;
   }
 
   &__main_content {
-    // @include flexProperties(column, center, center, $fullWidth: true);
-    // height: 100% !important;
+    @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
+    width: 100% !important;
+    height: 1200px !important;
+    max-height: 1200px !important;
+    overflow: hidden;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 }
 

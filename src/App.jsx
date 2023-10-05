@@ -17,6 +17,7 @@ import { config as URLconfig } from "./enviorment/enviorment";
 import axios from "axios";
 import useArtist from "./hooks/useArtist";
 import ArtistPreLoader from "./components/pre-loader/artist-loader";
+import { GridLayoutProvider } from "./containers/artist/edit-dashboard/GridLayoutContext";
 
 function App() {
   const dispatch = useDispatch();
@@ -147,7 +148,9 @@ function App() {
 
   return (
     <React.Fragment>
-      {isLoading ? <PreLoader /> : <Navigation />}
+      <GridLayoutProvider>
+        {isLoading ? <PreLoader /> : <Navigation />}
+      </GridLayoutProvider>
     </React.Fragment>
   );
 }

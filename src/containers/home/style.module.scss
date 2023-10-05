@@ -10,8 +10,8 @@
     margin-left: 20px;
     background-color: $base-container-backgroung-color;
     // height: 100%;
-    min-height: 47.55rem;
-    max-height: 47.55rem;
+    min-height: 675px !important;
+    max-height: 675px !important;
     // height: 100% !important;
     border-radius: 12px;
     padding: 20px 20px;
@@ -93,7 +93,7 @@
             content: "";
             position: absolute;
             // top: 0;
-            bottom: 15px;
+            bottom: 13px;
             right: 5px;
             width: 16px;
             height: 16px;
@@ -170,7 +170,6 @@
       padding-top: 20px !important;
       &__bg {
         width: 100%;
-        height: 140px;
         // background: $profile-gradient-color !important;
         overflow: hidden;
       }

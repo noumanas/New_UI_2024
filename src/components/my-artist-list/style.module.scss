@@ -2,25 +2,24 @@
 @import "../../styles/scss.scss";
 
 .page {
-  @include flexProperties(column, space-between, center, $fullWidth: false);
+  @include flexProperties(column, flex-start, flex-start, $fullWidth: true);
   background: $base-container-backgroung-color;
   border-radius: 12px;
+  height: 100% !important;
+  width: 100% !important;
+  padding: 20px !important;
 
   &__statusBar {
-    @include flexProperties(row, space-between, center, $fullWidth: true);
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
     width: 100% !important;
-    padding: 20px;
-
-    &__title {
-      @include customHeading(24px);
-    }
 
     &__actionBar {
       display: flex;
       flex-direction: row;
       align-items: center;
       background: $base-search-container-background;
-      // background: red;
       border-radius: 12px;
       padding: 21px 10px 21px 15px;
       height: 40px;
@@ -32,7 +31,44 @@
       &__search {
         // background: $base-search-container-background;
         background: transparent;
-        // outline: none;
+        // outline: none !important;
+        color: $base-input-text-color;
+        border-radius: 12px;
+        border: none;
+        font-size: 14px;
+        margin-left: 10px;
+        &::placeholder {
+          color: $base-heading-color;
+          // opacity: 0.5;
+        }
+      }
+    }
+  }
+
+  &__header {
+    @include flexProperties(row, space-between, center, $fullWidth: false);
+    height: 40px !important;
+    width: 100% !important;
+    margin-bottom: 20px !important;
+    &__title {
+      @include customHeading(24px);
+    }
+
+    &__actionBar {
+      @include flexProperties(row, center, center, $fullWidth: false);
+      background: $base-search-container-background;
+      border-radius: 12px;
+      padding: 21px 10px 21px 15px;
+      height: 40px;
+      &__icon {
+        color: $base-search-container-icon-color;
+        top: 8px;
+      }
+
+      &__search {
+        // background: $base-search-container-background;
+        background: transparent;
+        outline: none;
         color: $base-input-text-color;
         border-radius: 12px;
         border: none;
@@ -48,18 +84,17 @@
 
   &__table {
     background: $base-container-backgroung-color !important;
-    padding: 20px;
     &__head {
       background-color: $base-container-backgroung-color !important;
       position: sticky;
-      z-index: 9999 !important;
+      z-index: 1 !important;
     }
 
     &__col {
       background: $base-container-backgroung-color !important;
       text-align: left !important;
       width: 50px !important;
-      border-bottom: 1px solid $base-border-line-color;
+      border-bottom: 1px solid $base-border-line-color !important;
       @include textEllipsis();
 
       &__heading {

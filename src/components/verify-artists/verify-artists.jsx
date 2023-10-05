@@ -23,6 +23,7 @@ import Paper from "@mui/material/Paper";
 import Checkbox from "@mui/material/Checkbox";
 import EditIcon from "@mui/icons-material/Edit";
 import Avatar from "@mui/material/Avatar";
+import { RxCross2 } from "react-icons/rx";
 
 // import DeleteIcon from "@mui/icons-material/Clear";
 import axios from "axios";
@@ -426,6 +427,7 @@ export default function BasicTable({
                                 textOverflow: "ellipsis",
                                 display: "block",
                                 width: "200px",
+                                marginLeft: "10px",
                               }}
                             >
                               {row?.title}
@@ -812,6 +814,7 @@ export default function BasicTable({
                                     textOverflow: "ellipsis",
                                     display: "block",
                                     width: "200px",
+                                    marginLeft: "10px",
                                   }}
                                 >
                                   {row?.title}
@@ -893,13 +896,24 @@ export default function BasicTable({
                                       .map((genre, index) => (
                                         <React.Fragment key={index}>
                                           {index > 0 && "  "}
-                                          <Chip
-                                            label={genre.trim()}
-                                            size="small"
-                                            className={
-                                              classess.table__row__genre__chip
-                                            }
-                                          />
+                                          <Tooltip
+                                            title={genre}
+                                            placement="top"
+                                            arrow
+                                            enterDelay={100}
+                                          >
+                                            <Chip
+                                              label={
+                                                genre.length > 12
+                                                  ? `${genre.slice(0, 12)}...`
+                                                  : genre
+                                              }
+                                              size="small"
+                                              className={
+                                                classess.table__row__genre__chip
+                                              }
+                                            />
+                                          </Tooltip>
                                         </React.Fragment>
                                       ))
                                   : ""}
@@ -914,7 +928,7 @@ export default function BasicTable({
                                       >
                                         <Chip
                                           label={`+${
-                                            row.genres.split(",").length - 2
+                                            row.genres.split(",").length
                                           }`}
                                           size="small"
                                           className={
@@ -923,7 +937,6 @@ export default function BasicTable({
                                           onClick={() => {
                                             const remaining = row.genres
                                               .split(",")
-                                              .slice(2)
                                               .map((genre) => genre.trim());
                                             setRemainingGenres(remaining);
                                             setModalOpen(true);
@@ -1084,18 +1097,10 @@ export default function BasicTable({
             classes={{
               actions: "custom-pagination-actions",
               select: "custom-pagination-select",
-              // input: "custom-select-style",
               displayedRows: "custom-select-style",
-              // menuItem: "custom-select-style",
-              // root: "custom-select-style",
-              // selectIcon: "custom-select-style",
               selectLabel: "custom-select-style",
-              // selectRoot: "custom-select-style",
-              // spacer: "custom-select-style",
-              // toolbar: "custom-select-style",
             }}
             SelectProps={{
-              // Leave the SelectProps empty; styles will be applied via the class
               classes: {
                 select: "custom-select", // Apply the custom-select class to the Select component
               },
@@ -1116,36 +1121,45 @@ export default function BasicTable({
         aria-describedby="modal-modal-description"
       >
         <Box sx={style} className={classess.modalCss}>
-          <Box className={classess.modalCss__heading}>Genres </Box>
+          <Box className={classess.modalCss__heading}>
+            Genres
+            <Box className={classess.modalCss__heading__icon}>
+              <IconButton
+                className={classess.modalCss__heading__icon__inner}
+                onClick={() => setModalOpen(false)}
+              >
+                <RxCross2 />
+              </IconButton>
+            </Box>
+          </Box>
           <Box
             sx={{
-              pt: 3,
-              pl: 3,
-              pr: 3,
-              pb: 1,
-              color: "white",
-              fontSize: "14px",
-              textAlign: "center",
+              p: 3,
+              display: "flex",
+              justifyContent: "center",
+              gap: "10px",
+              flexWrap: "wrap",
+              backgroundColor: "#222C41",
+              borderRadius: "12px",
             }}
           >
             {remainingGenres.map((genre, index) => (
-              <Chip
-                key={index}
-                label={genre}
-                size="small"
-                sx={{
-                  backgroundColor: "#5A7380",
-                  color: "white",
-                  fontSize: "12px",
-                }}
-                // className={
-                //   classess.table__row__genre__chip
-                // }
-                style={{ marginBottom: "5px" }}
-              />
+              <>
+                <Chip
+                  key={index}
+                  label={genre}
+                  sx={{
+                    backgroundColor: "#5A7380",
+                    color: "#fff",
+                    cursor: "pointer",
+                    fontSize: "11px",
+                  }}
+                  style={{ marginBottom: "5px" }}
+                />
+              </>
             ))}
           </Box>
-          <Box
+          {/* <Box
             sx={{
               display: "flex",
               justifyContent: "center",
@@ -1158,7 +1172,7 @@ export default function BasicTable({
             >
               Close
             </Button>
-          </Box>
+          </Box> */}
         </Box>
       </Modal>
     </>

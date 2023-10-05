@@ -99,8 +99,10 @@ const AddArtist = () => {
       })
       .finally(() => {
         setIsLoading(false);
-        // navigate("/blig/my-artist");
-        navigate(-1);
+        handleClose(); // Close the modal
+        setTimeout(() => {
+          window.location.href = "/blig/my-artist"; // Refresh the page by changing the URL
+        }, 100); // Adjust the delay time as needed
       });
   };
 
@@ -368,7 +370,7 @@ const AddArtist = () => {
                           className={
                             classess.page__fieldsContainer__form__formfield__input
                           }
-                          disabled={spotifyDisabled}
+                          readOnly={spotifyDisabled}
                           value={spotify_id}
                           onInput={(event) => setSpotify_id(event.target.value)}
                           placeholder="Enter Spotify Id"
@@ -448,12 +450,13 @@ const AddArtist = () => {
                             Cancel
                           </Button>
                           <LoadingButton
-                            type="submit"
+                            onClick={handleSubmit}
                             loading={isLoading}
+                            loadingPosition="start"
+                            variant="contained"
                             className={
                               classess.page__fieldsContainer__form__submit_btn
                             }
-                            variant="contained"
                           >
                             Submit
                           </LoadingButton>

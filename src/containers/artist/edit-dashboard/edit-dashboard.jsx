@@ -19,13 +19,11 @@ import RevenueGraph from "../../graph/revenuegraph/graph";
 import SwotGraph from "../../graph/swotanalysisgraph/graph";
 import GenreGraph from "../../graph/streamGraph/graph";
 import SocialMediaGraph from "../../graph/socialMediaGraph/graph";
-import { useQuery } from "@tanstack/react-query";
-import LoadingButton from "@mui/lab/LoadingButton";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { config as URLconfig } from "../../../enviorment/enviorment";
-import { Skeleton, Typography } from "@mui/material";
+import { Checkbox, Skeleton, Typography } from "@mui/material";
 import { viewArtistUseStyles } from "../../../custom-mui-style/custom-mui-styles";
 import RecommendCollaborations from "../../../components/recommend-collaborations/recommend-collaborations";
 import { getItemToLocalStorage } from "../../../services/storage";
@@ -40,8 +38,10 @@ import InventoryRoundedIcon from "@mui/icons-material/InventoryRounded";
 import { addCommasToNumber } from "../../../utils/helper";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import Tooltip from "@mui/material/Tooltip";
-import { useGridLayout } from "../edit-dashboard/GridLayoutContext";
-
+// import {  } from "react-icons/ai";
+import { AiOutlineDrag, AiOutlineSetting, AiOutlineEye } from "react-icons/ai";
+// import { AiOutlineEyeInvisible } from "react-icons/ai";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import {
   setTotalTracks,
   getArtist,
@@ -55,6 +55,7 @@ import {
   setTracks,
   emptySingularArtist,
 } from "../../../redux/slice/artist";
+import { useGridLayout } from "./GridLayoutContext";
 
 import appleMusicIcon from "../../../assets/social/social-icon1.png";
 import youtubeIcon from "../../..//assets/social/social-icon2.png";
@@ -70,7 +71,9 @@ import LinearProgress from "@mui/material/LinearProgress";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import GreenPencil from "../../../assets/buttonsicons/pencil2.png";
-const ViewArtist = () => {
+import { main } from "@popperjs/core";
+import { grid } from "@mui/system";
+const EditDashboard = () => {
   const dispatch = useDispatch();
   const dispatchRef = useRef(dispatch);
   const navigate = useNavigate();
@@ -79,6 +82,8 @@ const ViewArtist = () => {
   const status = useSelector((state) => state.artist.status);
   const totalTracks = useSelector((state) => state.artist.totalTracks);
   // const authUser = useSelector((state) => state.auth.user);
+  const { gridLayout, setGridLayout, setIsChangesSaved } = useGridLayout();
+
   const similarArtist = useSelector(
     (state) => state.similar_artist.similarArtist
   );
@@ -96,6 +101,10 @@ const ViewArtist = () => {
   const storedToken = getItemToLocalStorage("accessToken");
   const [socialLinks, setSocialLinks] = useState([]);
   const [progress, setProgress] = React.useState(0);
+  const [containerHeight1, setContainerHeight1] = useState(460); // Default height
+  const [containerHeight2, setContainerHeight2] = useState(460); // Default height
+  const [containerHeight3, setContainerHeight3] = useState(460); // Default height
+
   React.useEffect(() => {
     const timer = setInterval(() => {
       setProgress((oldProgress) => {
@@ -377,16 +386,78 @@ const ViewArtist = () => {
     }
 
     const newName = name ? name.replace(/\s+/, "") : "Unknown";
-    return `${newName}@blacklionapp.xyz`;
+    return `${newName}@spotify.com`;
   };
-  const { gridLayout, isChangesSaved, setIsChangesSaved } = useGridLayout();
 
-  useEffect(() => {
-    if (isChangesSaved) {
-      setIsChangesSaved(false);
+  const [gridData, setGridData] = useState([
+    {
+      id: "draggable-1",
+      component: <RevenueGraph artist={artist} />,
+      hidden: false,
+      position: 0,
+      isChecked: true,
+      xl: 3,
+      lg: 12,
+    },
+    {
+      id: "draggable-2",
+      component: <TourRecommendations />,
+      hidden: false,
+      position: 1,
+      isChecked: true,
+      xl: 5,
+      lg: 6,
+    },
+    {
+      id: "draggable-3",
+      component: <SocialMediaGraph artist={artist} />,
+      hidden: false,
+      position: 2,
+      isChecked: true,
+      xl: 4,
+      lg: 6,
+    },
+  ]);
+
+  const onDragEndFunc = (result) => {
+    if (!result.destination) return;
+
+    const startIndex = result.source.index;
+    const endIndex = result.destination.index;
+
+    const updatedGridData = [...gridData];
+    const [reorderedItem] = updatedGridData.splice(startIndex, 1);
+    updatedGridData.splice(endIndex, 0, reorderedItem);
+    updatedGridData.forEach((item, index) => {
+      item.position = index;
+    });
+
+    setGridData(updatedGridData);
+  };
+  const toggleGridVisibility = (id) => {
+    const updatedGridData = [...gridData];
+    const gridItem = updatedGridData.find((item) => item.id === id);
+    if (gridItem) {
+      gridItem.hidden = !gridItem.hidden;
+      setGridData(updatedGridData);
     }
-  }, [isChangesSaved]);
+  };
 
+  const toggleAllGridVisibility = () => {
+    const updatedGridData = [...gridData];
+    const shouldHide = !gridData.some((item) => item.hidden);
+
+    updatedGridData.forEach((item) => {
+      item.hidden = shouldHide;
+    });
+
+    setGridData(updatedGridData);
+  };
+  const handleSaveChanges = () => {
+    setGridLayout(gridData);
+    setIsChangesSaved(true);
+    navigate(-1);
+  };
   return (
     <Container maxWidth="xxl" className={styles.root}>
       <Grid
@@ -487,23 +558,20 @@ const ViewArtist = () => {
                   </Box>
                 </Box>
 
-                <Tooltip
-                  title={getEmail(artist?.email, artist?.name)}
-                  placement="bottom"
-                  arrow
-                  enterDelay={100}
+                <Box
+                  variant="div"
+                  component="div"
+                  className={
+                    classess.page__artist__box__topdetails__details__email
+                  }
                 >
-                  <Box
-                    variant="div"
-                    component="div"
-                    className={
-                      classess.page__artist__box__topdetails__details__email
-                    }
-                  >
-                    {getEmail(artist?.email, artist?.name)}
-                  </Box>
-                </Tooltip>
-
+                  {getEmail(artist?.email, artist?.name)}
+                  {/* {artist?.email ? artist.email : "N/A"} */}
+                  {/* {artist?.email
+                    ? artist.email
+                    : artist.name.replace(/\s+/g, "").toLowerCase() +
+                      "@spotify.com"} */}
+                </Box>
                 <Box
                   variant="div"
                   component="div"
@@ -721,9 +789,12 @@ const ViewArtist = () => {
                     }
                   />
                 }
-                onClick={() => navigate(`/blig/edit-dashboard/${id}`)}
+                onClick={handleSaveChanges}
               >
-                Edit Dashboard
+                {/* Close Edit Mode */}
+                {gridData.some((item) => item.hidden)
+                  ? "Save Dashboard"
+                  : "Close Edit Mode"}
               </Button>
             </Box>
           </Box>
@@ -770,63 +841,155 @@ const ViewArtist = () => {
         {/* Top Grid Ends Here */}
 
         {/* Mid Grid Starts From Here */}
-        {/* 
-        <Grid item xs={12} sm={12} lg={12} xl={3}>
-          <Box component="div" variant="div">
-            <RevenueGraph artist={artist} />
-          </Box>
-        </Grid>
 
-        <Grid item xs={12} sm={12} lg={6} xl={5}>
-          <Box>
-            <TourRecommendations />
-          </Box>
-        </Grid>
+        <DragDropContext onDragEnd={onDragEndFunc}>
+          <Droppable droppableId="droppable" direction="horizontal">
+            {(provided) => (
+              <Grid
+                container
+                spacing={2}
+                xs={12}
+                sm={12}
+                lg={12}
+                xl={12}
+                ml={0}
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+              >
+                {gridData.map(
+                  (item, index) =>
+                    !item.hidden && (
+                      <>
+                        <Draggable
+                          key={item.id}
+                          draggableId={item.id}
+                          index={index}
+                        >
+                          {(provided) => (
+                            <Grid
+                              item
+                              xs={12}
+                              sm={12}
+                              lg={item.lg}
+                              xl={item.xl}
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                            >
+                              <Box component="div" variant="div" sx={{ pt: 2 }}>
+                                <Box className={classess.page__MainBox}>
+                                  <Box className={classess.page__MainBox__edit}>
+                                    <Box
+                                      className={
+                                        classess.page__MainBox__edit__mode
+                                      }
+                                    >
+                                      <Box>
+                                        <Typography
+                                          className={
+                                            classess.page__MainBox__edit__mode__text
+                                          }
+                                        >
+                                          Edit Mode
+                                        </Typography>
+                                      </Box>
+                                      <Box sx={{ display: "flex", gap: "5px" }}>
+                                        <IconButton
+                                          className={
+                                            classess.page__MainBox__edit__mode__icons
+                                          }
+                                        >
+                                          <AiOutlineDrag />
+                                        </IconButton>
+                                        <IconButton
+                                          // onClick={item.toggleHeight}
+                                          onClick={() =>
+                                            toggleGridVisibility(item.id)
+                                          }
+                                          className={
+                                            classess.page__MainBox__edit__mode__icons
+                                          }
+                                        >
+                                          <AiOutlineEye />
 
-        <Grid item xs={12} sm={12} lg={6} xl={4}>
-          <Box varient="div" component="div">
-            <SocialMediaGraph artist={artist} />
-          </Box>
-        </Grid> */}
-        {gridLayout?.map(
-          (item, index) =>
-            // Check if item is not hidden, then render the grid
-            !item.hidden && (
-              <Grid item xs={12} sm={12} lg={item.lg} xl={item.xl} key={index}>
-                <Box component="div" variant="div">
-                  {item.id === "draggable-1" && (
-                    <RevenueGraph artist={artist} />
-                  )}
-                  {item.id === "draggable-2" && <TourRecommendations />}
-                  {item.id === "draggable-3" && (
-                    <SocialMediaGraph artist={artist} />
-                  )}
-                </Box>
+                                          {/* {item.containerHeight === 70 ? (
+                                          <AiOutlineEyeInvisible />
+                                        ) : (
+                                          <AiOutlineEye />
+                                        )} */}
+                                        </IconButton>
+                                      </Box>
+                                    </Box>
+                                  </Box>
+                                  {item.component}
+                                </Box>
+                              </Box>
+                            </Grid>
+                          )}
+                        </Draggable>
+                      </>
+                    )
+                )}
+                {provided.placeholder}
               </Grid>
-            )
-        )}
+            )}
+          </Droppable>
+        </DragDropContext>
+        <Box my={2} ml={2} className={classess.page__checkAndBtn}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              pb: 1,
+            }}
+          >
+            <Typography sx={{ color: "#4ffcb7" }}>Setting</Typography>
+            <AiOutlineSetting style={{ color: "#4ffcb7", fontSize: "20px" }} />
+          </Box>
+          <Box display={"flex"} gap={"5px"} alignItems={"center"}>
+            <Typography className={classess.page__checkAndBtn__text}>
+              Platform
+            </Typography>
+            <Checkbox
+              type="checkbox"
+              checked={
+                !gridData.find((item) => item.id === "draggable-1").hidden
+              }
+              onChange={() => toggleGridVisibility("draggable-1")}
+              className={classess.page__checkAndBtn__checkBox}
+            />
+            <Typography className={classess.page__checkAndBtn__text}>
+              Top Countries
+            </Typography>
+            <Checkbox
+              type="checkbox"
+              checked={
+                !gridData.find((item) => item.id === "draggable-2").hidden
+              }
+              onChange={() => toggleGridVisibility("draggable-2")}
+              className={classess.page__checkAndBtn__checkBox}
+            />
+            <Typography className={classess.page__checkAndBtn__text}>
+              Social Media
+            </Typography>
+            <Checkbox
+              type="checkbox"
+              checked={
+                !gridData.find((item) => item.id === "draggable-3").hidden
+              }
+              onChange={() => toggleGridVisibility("draggable-3")}
+              className={classess.page__checkAndBtn__checkBox}
+            />
 
-        {gridLayout.length === 0 && (
-          <>
-            <Grid item xs={12} sm={12} lg={12} xl={3}>
-              <Box component="div" variant="div">
-                <RevenueGraph artist={artist} />
-              </Box>
-            </Grid>
-
-            <Grid item xs={12} sm={12} lg={6} xl={5}>
-              <Box>
-                <TourRecommendations />
-              </Box>
-            </Grid>
-
-            <Grid item xs={12} sm={12} lg={6} xl={4}>
-              <Box varient="div" component="div">
-                <SocialMediaGraph artist={artist} />
-              </Box>
-            </Grid>
-          </>
-        )}
+            <Button
+              onClick={() => toggleAllGridVisibility()}
+              className={classess.page__checkAndBtn__hideAndShow}
+            >
+              {gridData.some((item) => item.hidden) ? "Show All" : "Hide All"}
+            </Button>
+          </Box>
+        </Box>
 
         {/* Mid Grid Ends Here */}
 
@@ -842,7 +1005,7 @@ const ViewArtist = () => {
           </Box> */}
         </Grid>
 
-        <Grid item xs={12} sm={12} lg={12} xl={12} mt={1.5}>
+        <Grid item xs={12} sm={12} lg={12} xl={12}>
           <Box>
             {artist && (
               <RecommendCollaborations
@@ -857,4 +1020,4 @@ const ViewArtist = () => {
   );
 };
 
-export default ViewArtist;
+export default EditDashboard;

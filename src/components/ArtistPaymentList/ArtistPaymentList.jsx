@@ -285,132 +285,144 @@ const ArtistPaymentList = ({ props, handleNotes, setNotesComments }) => {
                     </TableCell>
                   </TableRow>
                 </TableHead>
-                {list.map((items, index) => {
-                  return (
-                    <TableBody className={classess.table__brow}>
-                      <>
-                        <Box sx={{ m: "1rem" }}></Box>
-                      </>
-                      <TableRow>
-                        <TableCell
-                          className={classess.table__row}
-                          sx={{
-                            width: 50,
-                            maxWidth: 50,
-                            borderTopLeftRadius: "12px",
-                            borderBottomLeftRadius: "12px",
-                          }}
-                        >
-                          <Avatar
-                            src={items?.artist.avatar}
-                            alt={items?.name}
-                            className={classess.table__row__artist_image}
-                          />
-                        </TableCell>
-
-                        <TableCell className={classess.table__row}>
-                          <Tooltip
-                            title="View Artist"
-                            placement="top"
-                            arrow
-                            enterDelay={100}
+                {console.log("Payment list", list?.[0])}
+                {list[0] === undefined ? (
+                  <span className={classess.table__no_contracts}>
+                    No Payment
+                  </span>
+                ) : (
+                  list.map((items, index) => {
+                    return (
+                      <TableBody className={classess.table__brow}>
+                        <>
+                          <Box sx={{ m: "1rem" }}></Box>
+                        </>
+                        <TableRow>
+                          <TableCell
+                            className={classess.table__row}
+                            sx={{
+                              width: 50,
+                              maxWidth: 50,
+                              borderTopLeftRadius: "12px",
+                              borderBottomLeftRadius: "12px",
+                            }}
                           >
-                            <span className={classess.table__row__name}>
-                              <a
-                                className={classess.table__row__name__href}
-                                rel="noopener noreferrer"
-                                href={"/blig/view-artist/" + items?.artist_id}
-                                target="_blank"
-                              >
-                                {items?.artist_name}
-                              </a>
+                            <Avatar
+                              src={items?.artist.avatar}
+                              alt={items?.name}
+                              className={classess.table__row__artist_image}
+                            />
+                          </TableCell>
+
+                          <TableCell className={classess.table__row}>
+                            <Tooltip
+                              title="View Artist"
+                              placement="top"
+                              arrow
+                              enterDelay={100}
+                            >
+                              <span className={classess.table__row__name}>
+                                <a
+                                  className={classess.table__row__name__href}
+                                  rel="noopener noreferrer"
+                                  href={"/blig/view-artist/" + items?.artist_id}
+                                  target="_blank"
+                                >
+                                  {items?.artist_name}
+                                </a>
+                              </span>
+                            </Tooltip>
+                          </TableCell>
+
+                          <TableCell
+                            className={classess.table__row}
+                            sx={{
+                              color: "#ffffff",
+                            }}
+                          >
+                            $
+                            {internationalNumberFormat.format(
+                              items?.last_payment_paid
+                            )}
+                          </TableCell>
+
+                          <TableCell className={classess.table__row}>
+                            <span className={classess.table__row__created}>
+                              {new Date(items?.createdAt).toLocaleDateString({
+                                weekday: "short",
+                                year: "numeric",
+                                month: "2-digit",
+                                day: "numeric",
+                              })}
                             </span>
-                          </Tooltip>
-                        </TableCell>
+                          </TableCell>
 
-                        <TableCell
-                          className={classess.table__row}
-                          sx={{
-                            color: "#ffffff",
-                          }}
-                        >
-                          $
-                          {internationalNumberFormat.format(
-                            items?.last_payment_paid
-                          )}
-                        </TableCell>
+                          <TableCell className={classess.table__row}>
+                            <span className={classess.table__row__created_by}>
+                              {items?.created_by}
+                            </span>
+                          </TableCell>
 
-                        <TableCell className={classess.table__row}>
-                          <span className={classess.table__row__created}>
-                            {new Date(items?.createdAt).toLocaleDateString({
-                              weekday: "short",
-                              year: "numeric",
-                              month: "2-digit",
-                              day: "numeric",
-                            })}
-                          </span>
-                        </TableCell>
-
-                        <TableCell className={classess.table__row}>
-                          <span className={classess.table__row__created_by}>
-                            {items?.created_by}
-                          </span>
-                        </TableCell>
-
-                        <TableCell
-                          className={classess.table__row}
-                          sx={{
-                            borderTopRightRadius: "12px",
-                            borderBottomRightRadius: "12px",
-                          }}
-                        >
-                          <span className={classess.table__row__action}>
-                            <Stack spacing={1} direction="row">
-                              <Tooltip
-                                title="View Payments"
-                                placement="top"
-                                arrow
-                                enterDelay={100}
-                              >
-                                <IconButton
-                                  style={{
-                                    backgroundColor: "#4ffcb7",
-                                    height: "30px",
-                                    width: "30px",
-                                  }}
-                                  onClick={() =>
-                                    navigate(`/blig/payment/${items?._id}`)
-                                  }
-                                  // onClick={() => getContract(items?.artist_id)}
+                          <TableCell
+                            className={classess.table__row}
+                            sx={{
+                              borderTopRightRadius: "12px",
+                              borderBottomRightRadius: "12px",
+                            }}
+                          >
+                            <span className={classess.table__row__action}>
+                              <Stack spacing={1} direction="row">
+                                <Tooltip
+                                  title="View Payments"
+                                  placement="top"
+                                  arrow
+                                  enterDelay={100}
                                 >
-                                  <img
-                                    src={EyeIcon}
-                                    alt="Eye"
-                                    style={{ height: "12px", width: "15.96px" }}
-                                  />
-                                </IconButton>
-                              </Tooltip>
+                                  <IconButton
+                                    style={{
+                                      backgroundColor: "#4ffcb7",
+                                      height: "30px",
+                                      width: "30px",
+                                    }}
+                                    onClick={() =>
+                                      navigate(`/blig/payment/${items?._id}`)
+                                    }
+                                    // onClick={() => getContract(items?.artist_id)}
+                                  >
+                                    <img
+                                      src={EyeIcon}
+                                      alt="Eye"
+                                      style={{
+                                        height: "12px",
+                                        width: "15.96px",
+                                      }}
+                                    />
+                                  </IconButton>
+                                </Tooltip>
 
-                              <Tooltip
-                                title="Download Documents"
-                                placement="top"
-                                arrow
-                                enterDelay={100}
-                              >
-                                <IconButton
-                                  style={{
-                                    backgroundColor: "#4ffcb7",
-                                    height: "30px",
-                                    width: "30px",
-                                  }}
-                                  onClick={() => handleToggle(index)}
+                                <Tooltip
+                                  title="Download Documents"
+                                  placement="top"
+                                  arrow
+                                  enterDelay={100}
                                 >
-                                  <img
-                                    src={DownloadIcon}
-                                    alt="Download Icon"
-                                    style={{ height: "13.91px", width: "16px" }}
-                                  />
-                                  {/* <CloudDownloadOutlinedIcon
+                                  <IconButton
+                                    style={{
+                                      backgroundColor: "#4ffcb7",
+                                      height: "30px",
+                                      width: "30px",
+                                    }}
+                                    onClick={() => handleToggle(index)}
+                                  >
+                                    <img
+                                      src={DownloadIcon}
+                                      alt="Download Icon"
+                                      style={{
+                                        height: "13.91px",
+                                        width: "16px",
+                                      }}
+                                    />
+                                    {/* <CloudDownloadOutlinedIcon
                                     className={
                                       classess.table__row__action__icons
                                     }
@@ -422,28 +434,47 @@ const ArtistPaymentList = ({ props, handleNotes, setNotesComments }) => {
                                       width: "15px",
                                     }}
                                   /> */}
-                                </IconButton>
-                              </Tooltip>
-                              {user.role === "admin" ? (
-                                <Tooltip
-                                  title="Add Notes"
-                                  placement="top"
-                                  arrow
-                                  enterDelay={100}
-                                >
+                                  </IconButton>
+                                </Tooltip>
+                                {user.role === "admin" ? (
+                                  <Tooltip
+                                    title="Add Notes"
+                                    placement="top"
+                                    arrow
+                                    enterDelay={100}
+                                  >
+                                    <IconButton
+                                      style={{
+                                        backgroundColor: "#4ffcb7",
+                                        height: "30px",
+                                        width: "30px",
+                                      }}
+                                      onClick={() => {
+                                        if (index === 0) {
+                                          handleToggleForComment(index + 1);
+                                        } else {
+                                          handleToggleForComment(index);
+                                        }
+                                      }}
+                                    >
+                                      <img
+                                        src={EditIcon}
+                                        alt="Edit"
+                                        style={{
+                                          height: "12.02px",
+                                          width: "12.02px",
+                                        }}
+                                      />
+                                    </IconButton>
+                                  </Tooltip>
+                                ) : (
                                   <IconButton
                                     style={{
-                                      backgroundColor: "#4ffcb7",
+                                      backgroundColor: "#dddddd",
                                       height: "30px",
                                       width: "30px",
                                     }}
-                                    onClick={() => {
-                                      if (index === 0) {
-                                        handleToggleForComment(index + 1);
-                                      } else {
-                                        handleToggleForComment(index);
-                                      }
-                                    }}
+                                    desibled={true}
                                   >
                                     <img
                                       src={EditIcon}
@@ -454,28 +485,9 @@ const ArtistPaymentList = ({ props, handleNotes, setNotesComments }) => {
                                       }}
                                     />
                                   </IconButton>
-                                </Tooltip>
-                              ) : (
-                                <IconButton
-                                  style={{
-                                    backgroundColor: "#dddddd",
-                                    height: "30px",
-                                    width: "30px",
-                                  }}
-                                  desibled={true}
-                                >
-                                  <img
-                                    src={EditIcon}
-                                    alt="Edit"
-                                    style={{
-                                      height: "12.02px",
-                                      width: "12.02px",
-                                    }}
-                                  />
-                                </IconButton>
-                              )}
+                                )}
 
-                              {/* <Tooltip
+                                {/* <Tooltip
                                 title="Approve Payment "
                                 placement="top"
                                 arrow
@@ -505,393 +517,394 @@ const ArtistPaymentList = ({ props, handleNotes, setNotesComments }) => {
                                   />
                                 </IconButton>
                               </Tooltip> */}
-                            </Stack>
-                          </span>
-                        </TableCell>
-                      </TableRow>
+                              </Stack>
+                            </span>
+                          </TableCell>
+                        </TableRow>
 
-                      {visibility === index && (
-                        <>
-                          <TableRow>
-                            <TableCell colSpan={6}>
-                              <form>
-                                <Grid container spacing={3}>
-                                  <Grid item xs>
-                                    <label className={classess.table__label}>
-                                      Valuation
-                                    </label>
-                                    <input
-                                      className={classess.table__input}
-                                      value={`$${items?.valuation}`}
-                                      name="name"
-                                      onChange={(e) =>
-                                        setValuation(e.target.value)
-                                      }
-                                      type="text"
-                                      required
-                                    />
-                                  </Grid>
-                                  <Grid item xs>
-                                    <label className={classess.table__label}>
-                                      Artist Advance
-                                    </label>
-                                    <input
-                                      className={classess.table__input}
-                                      value={`$${items?.artist_advance}`}
-                                      name="name"
-                                      onChange={(e) =>
-                                        setArtistAdvance(e.target.value)
-                                      }
-                                      type="text"
-                                      required
-                                    />
-                                  </Grid>
-                                  <Grid item xs>
-                                    <label className={classess.table__label}>
-                                      Marketing Budget
-                                    </label>
-                                    <input
-                                      className={classess.table__input}
-                                      value={`$${items?.artist_marketing_budget}`}
-                                      name="name"
-                                      onChange={(e) =>
-                                        setMarketingBudget(e.target.value)
-                                      }
-                                      type="text"
-                                      required
-                                    />
-                                  </Grid>
-                                  <Grid item xs>
-                                    <label className={classess.table__label}>
-                                      No. of Songs
-                                    </label>
+                        {visibility === index && (
+                          <>
+                            <TableRow>
+                              <TableCell colSpan={6}>
+                                <form>
+                                  <Grid container spacing={3}>
+                                    <Grid item xs>
+                                      <label className={classess.table__label}>
+                                        Valuation
+                                      </label>
+                                      <input
+                                        className={classess.table__input}
+                                        value={`$${items?.valuation}`}
+                                        name="name"
+                                        onChange={(e) =>
+                                          setValuation(e.target.value)
+                                        }
+                                        type="text"
+                                        required
+                                      />
+                                    </Grid>
+                                    <Grid item xs>
+                                      <label className={classess.table__label}>
+                                        Artist Advance
+                                      </label>
+                                      <input
+                                        className={classess.table__input}
+                                        value={`$${items?.artist_advance}`}
+                                        name="name"
+                                        onChange={(e) =>
+                                          setArtistAdvance(e.target.value)
+                                        }
+                                        type="text"
+                                        required
+                                      />
+                                    </Grid>
+                                    <Grid item xs>
+                                      <label className={classess.table__label}>
+                                        Marketing Budget
+                                      </label>
+                                      <input
+                                        className={classess.table__input}
+                                        value={`$${items?.artist_marketing_budget}`}
+                                        name="name"
+                                        onChange={(e) =>
+                                          setMarketingBudget(e.target.value)
+                                        }
+                                        type="text"
+                                        required
+                                      />
+                                    </Grid>
+                                    <Grid item xs>
+                                      <label className={classess.table__label}>
+                                        No. of Songs
+                                      </label>
 
-                                    <input
-                                      className={classess.table__input}
-                                      value={items?.Selected_tracks.length}
-                                      name="name"
-                                      onChange={(e) =>
-                                        setSongsNumber(e.target.value)
-                                      }
-                                      type="text"
-                                      required
-                                    />
+                                      <input
+                                        className={classess.table__input}
+                                        value={items?.Selected_tracks.length}
+                                        name="name"
+                                        onChange={(e) =>
+                                          setSongsNumber(e.target.value)
+                                        }
+                                        type="text"
+                                        required
+                                      />
+                                    </Grid>
                                   </Grid>
-                                </Grid>
-                              </form>
+                                </form>
 
-                              <Grid
-                                container
-                                spacing={3}
-                                sx={{ marginTop: "5px" }}
-                              >
-                                <Grid item xs>
-                                  <label
-                                    className={
-                                      classess.table__bank_info_wrapper__name
-                                    }
-                                  >
-                                    Bank Information
-                                  </label>
-                                  <div
-                                    className={
-                                      classess.table__bank_info_wrapper
-                                    }
-                                  >
+                                <Grid
+                                  container
+                                  spacing={3}
+                                  sx={{ marginTop: "5px" }}
+                                >
+                                  <Grid item xs>
                                     <label
                                       className={
-                                        classess.table__bank_info_wrapper__label
+                                        classess.table__bank_info_wrapper__name
                                       }
                                     >
-                                      Bank Name
+                                      Bank Information
                                     </label>
-                                    <input
+                                    <div
                                       className={
-                                        classess.table__bank_info_wrapper__input
-                                      }
-                                      value={`${items?.bank_name}`}
-                                      disabled="true"
-                                    />
-                                    <label
-                                      className={
-                                        classess.table__bank_info_wrapper__label
+                                        classess.table__bank_info_wrapper
                                       }
                                     >
-                                      Account Holder's Name
-                                    </label>
-                                    <input
-                                      className={
-                                        classess.table__bank_info_wrapper__input
-                                      }
-                                      value={`${items?.bank_holder_name}`}
-                                      disabled="true"
-                                    />
-                                    <label
-                                      className={
-                                        classess.table__bank_info_wrapper__label
-                                      }
-                                    >
-                                      Bank Account Number
-                                    </label>
-                                    <input
-                                      className={
-                                        classess.table__bank_info_wrapper__input
-                                      }
-                                      value={`${items?.bank_account_number}`}
-                                      disabled="true"
-                                    />
-                                    <label
-                                      className={
-                                        classess.table__bank_info_wrapper__label
-                                      }
-                                    >
-                                      SWIFT/BIC Code
-                                    </label>
-                                    <input
-                                      className={
-                                        classess.table__bank_info_wrapper__input
-                                      }
-                                      value={`${items?.swift_or_BIC_code}`}
-                                      disabled="true"
-                                    />
-                                    <label
-                                      className={
-                                        classess.table__bank_info_wrapper__label
-                                      }
-                                    >
-                                      IBAN
-                                    </label>
-                                    <input
-                                      className={
-                                        classess.table__bank_info_wrapper__input
-                                      }
-                                      value={`${items?.iban}`}
-                                      disabled="true"
-                                    />
-                                    <label
-                                      className={
-                                        classess.table__bank_info_wrapper__label
-                                      }
-                                    >
-                                      Routing Number
-                                    </label>
-                                    <input
-                                      className={
-                                        classess.table__bank_info_wrapper__input
-                                      }
-                                      value={`${items?.routing_number}`}
-                                      disabled="true"
-                                    />
-                                    <label
-                                      className={
-                                        classess.table__bank_info_wrapper__label
-                                      }
-                                    >
-                                      Bank Address
-                                    </label>
-                                    <input
-                                      className={
-                                        classess.table__bank_info_wrapper__input
-                                      }
-                                      value={`${items?.bank_address}`}
-                                      disabled="true"
-                                    />
-                                    <input
-                                      className={
-                                        classess.table__bank_info_wrapper__input
-                                      }
-                                      value={`${items?.city}`}
-                                      disabled="true"
-                                    />
-                                    <input
-                                      className={
-                                        classess.table__bank_info_wrapper__input
-                                      }
-                                      value={`${items?.zip}`}
-                                      disabled="true"
-                                    />
-                                    <input
-                                      className={
-                                        classess.table__bank_info_wrapper__input
-                                      }
-                                      value={`${items?.country}`}
-                                      disabled="true"
-                                    />
-                                    {/* <p className={classess.table__bank_info_wrapper__input}>
+                                      <label
+                                        className={
+                                          classess.table__bank_info_wrapper__label
+                                        }
+                                      >
+                                        Bank Name
+                                      </label>
+                                      <input
+                                        className={
+                                          classess.table__bank_info_wrapper__input
+                                        }
+                                        value={`${items?.bank_name}`}
+                                        disabled="true"
+                                      />
+                                      <label
+                                        className={
+                                          classess.table__bank_info_wrapper__label
+                                        }
+                                      >
+                                        Account Holder's Name
+                                      </label>
+                                      <input
+                                        className={
+                                          classess.table__bank_info_wrapper__input
+                                        }
+                                        value={`${items?.bank_holder_name}`}
+                                        disabled="true"
+                                      />
+                                      <label
+                                        className={
+                                          classess.table__bank_info_wrapper__label
+                                        }
+                                      >
+                                        Bank Account Number
+                                      </label>
+                                      <input
+                                        className={
+                                          classess.table__bank_info_wrapper__input
+                                        }
+                                        value={`${items?.bank_account_number}`}
+                                        disabled="true"
+                                      />
+                                      <label
+                                        className={
+                                          classess.table__bank_info_wrapper__label
+                                        }
+                                      >
+                                        SWIFT/BIC Code
+                                      </label>
+                                      <input
+                                        className={
+                                          classess.table__bank_info_wrapper__input
+                                        }
+                                        value={`${items?.swift_or_BIC_code}`}
+                                        disabled="true"
+                                      />
+                                      <label
+                                        className={
+                                          classess.table__bank_info_wrapper__label
+                                        }
+                                      >
+                                        IBAN
+                                      </label>
+                                      <input
+                                        className={
+                                          classess.table__bank_info_wrapper__input
+                                        }
+                                        value={`${items?.iban}`}
+                                        disabled="true"
+                                      />
+                                      <label
+                                        className={
+                                          classess.table__bank_info_wrapper__label
+                                        }
+                                      >
+                                        Routing Number
+                                      </label>
+                                      <input
+                                        className={
+                                          classess.table__bank_info_wrapper__input
+                                        }
+                                        value={`${items?.routing_number}`}
+                                        disabled="true"
+                                      />
+                                      <label
+                                        className={
+                                          classess.table__bank_info_wrapper__label
+                                        }
+                                      >
+                                        Bank Address
+                                      </label>
+                                      <input
+                                        className={
+                                          classess.table__bank_info_wrapper__input
+                                        }
+                                        value={`${items?.bank_address}`}
+                                        disabled="true"
+                                      />
+                                      <input
+                                        className={
+                                          classess.table__bank_info_wrapper__input
+                                        }
+                                        value={`${items?.city}`}
+                                        disabled="true"
+                                      />
+                                      <input
+                                        className={
+                                          classess.table__bank_info_wrapper__input
+                                        }
+                                        value={`${items?.zip}`}
+                                        disabled="true"
+                                      />
+                                      <input
+                                        className={
+                                          classess.table__bank_info_wrapper__input
+                                        }
+                                        value={`${items?.country}`}
+                                        disabled="true"
+                                      />
+                                      {/* <p className={classess.table__bank_info_wrapper__input}>
                               123 Blacklion Avenue Atlanta, GA 12345 United States
                             </p> */}
-                                  </div>
-                                </Grid>
-                                <Grid item xs>
-                                  <label
-                                    className={
-                                      classess.table__bank_info_wrapper__name
-                                    }
-                                  >
-                                    WE8/W9 Form
-                                  </label>
-                                  <div
-                                    className={
-                                      classess.table__bank_info_wrapper
-                                    }
-                                  >
-                                    <div
+                                    </div>
+                                  </Grid>
+                                  <Grid item xs>
+                                    <label
                                       className={
-                                        classess.table__bank_info_wrapper__box
+                                        classess.table__bank_info_wrapper__name
                                       }
                                     >
-                                      <img
-                                        src={pdfImage}
+                                      WE8/W9 Form
+                                    </label>
+                                    <div
+                                      className={
+                                        classess.table__bank_info_wrapper
+                                      }
+                                    >
+                                      <div
                                         className={
-                                          classess.table__bank_info_wrapper__image
-                                        }
-                                        alt=""
-                                      />
-                                      <Button
-                                        variant="contained"
-                                        className={
-                                          classess.table__bank_info_wrapper__image__downloadbtn
-                                        }
-                                        onClick={() =>
-                                          handleDownload(items?.w8_ben_file)
+                                          classess.table__bank_info_wrapper__box
                                         }
                                       >
-                                        Download
-                                      </Button>
+                                        <img
+                                          src={pdfImage}
+                                          className={
+                                            classess.table__bank_info_wrapper__image
+                                          }
+                                          alt=""
+                                        />
+                                        <Button
+                                          variant="contained"
+                                          className={
+                                            classess.table__bank_info_wrapper__image__downloadbtn
+                                          }
+                                          onClick={() =>
+                                            handleDownload(items?.w8_ben_file)
+                                          }
+                                        >
+                                          Download
+                                        </Button>
+                                      </div>
                                     </div>
-                                  </div>
-                                </Grid>
-                                <Grid item xs>
-                                  <label
-                                    className={
-                                      classess.table__bank_info_wrapper__name
-                                    }
-                                  >
-                                    ID Front
-                                  </label>
-                                  <div
-                                    className={
-                                      classess.table__bank_info_wrapper
-                                    }
-                                  >
-                                    <div
+                                  </Grid>
+                                  <Grid item xs>
+                                    <label
                                       className={
-                                        classess.table__bank_info_wrapper__box
+                                        classess.table__bank_info_wrapper__name
                                       }
                                     >
-                                      <img
-                                        src={items?.artist_photo_id_front}
+                                      ID Front
+                                    </label>
+                                    <div
+                                      className={
+                                        classess.table__bank_info_wrapper
+                                      }
+                                    >
+                                      <div
                                         className={
-                                          classess.table__bank_info_wrapper__image
+                                          classess.table__bank_info_wrapper__box
                                         }
-                                        style={{ width: "60%" }}
-                                        alt=""
-                                      />
-                                      {console.log("ImagesLink", items)}
+                                      >
+                                        <img
+                                          src={items?.artist_photo_id_front}
+                                          className={
+                                            classess.table__bank_info_wrapper__image
+                                          }
+                                          style={{ width: "60%" }}
+                                          alt=""
+                                        />
+                                        {console.log("ImagesLink", items)}
 
-                                      <Button
-                                        variant="contained"
-                                        className={
-                                          classess.table__bank_info_wrapper__image__downloadbtn
-                                        }
-                                        onClick={() =>
-                                          handleDownload(
-                                            items?.artist_photo_id_front
-                                          )
-                                        }
-                                      >
-                                        Download
-                                      </Button>
+                                        <Button
+                                          variant="contained"
+                                          className={
+                                            classess.table__bank_info_wrapper__image__downloadbtn
+                                          }
+                                          onClick={() =>
+                                            handleDownload(
+                                              items?.artist_photo_id_front
+                                            )
+                                          }
+                                        >
+                                          Download
+                                        </Button>
+                                      </div>
                                     </div>
-                                  </div>
-                                </Grid>
-                                <Grid item xs>
-                                  <label
-                                    className={
-                                      classess.table__bank_info_wrapper__name
-                                    }
-                                  >
-                                    ID Back
-                                  </label>
-                                  <div
-                                    className={
-                                      classess.table__bank_info_wrapper
-                                    }
-                                  >
-                                    <div
+                                  </Grid>
+                                  <Grid item xs>
+                                    <label
                                       className={
-                                        classess.table__bank_info_wrapper__box
+                                        classess.table__bank_info_wrapper__name
                                       }
                                     >
-                                      <img
-                                        src={items?.artist_photo_id_back}
+                                      ID Back
+                                    </label>
+                                    <div
+                                      className={
+                                        classess.table__bank_info_wrapper
+                                      }
+                                    >
+                                      <div
                                         className={
-                                          classess.table__bank_info_wrapper__image
-                                        }
-                                        style={{ width: "60%" }}
-                                        alt=""
-                                      />
-
-                                      <Button
-                                        variant="contained"
-                                        className={
-                                          classess.table__bank_info_wrapper__image__downloadbtn
-                                        }
-                                        onClick={() =>
-                                          handleDownload(
-                                            items?.artist_photo_id_back
-                                          )
+                                          classess.table__bank_info_wrapper__box
                                         }
                                       >
-                                        Download
-                                      </Button>
+                                        <img
+                                          src={items?.artist_photo_id_back}
+                                          className={
+                                            classess.table__bank_info_wrapper__image
+                                          }
+                                          style={{ width: "60%" }}
+                                          alt=""
+                                        />
+
+                                        <Button
+                                          variant="contained"
+                                          className={
+                                            classess.table__bank_info_wrapper__image__downloadbtn
+                                          }
+                                          onClick={() =>
+                                            handleDownload(
+                                              items?.artist_photo_id_back
+                                            )
+                                          }
+                                        >
+                                          Download
+                                        </Button>
+                                      </div>
                                     </div>
-                                  </div>
+                                  </Grid>
+                                </Grid>
+                              </TableCell>
+                            </TableRow>
+                          </>
+                        )}
+                        {comments === index && (
+                          <TableRow>
+                            <TableCell colSpan={6}>
+                              <Grid container spacing={2}>
+                                <Grid item xs={6} md={10}>
+                                  <FormControl
+                                    className={
+                                      classess.table__brow__comment_row_container
+                                    }
+                                  >
+                                    <Input
+                                      className={
+                                        classess.table__brow__comment_row_container__input
+                                      }
+                                      rows={6}
+                                      multiline="true"
+                                      value={note}
+                                      onChange={(e) => setNote(e.target.value)}
+                                    />
+                                  </FormControl>
+                                </Grid>
+                                <Grid item xs={6} md={2}>
+                                  <Button
+                                    variant="contained"
+                                    className={
+                                      classess.table__brow__comment_row_container__button
+                                    }
+                                    onClick={() => noteHandler(items?._id)}
+                                  >
+                                    Add Comments
+                                  </Button>
                                 </Grid>
                               </Grid>
                             </TableCell>
                           </TableRow>
-                        </>
-                      )}
-                      {comments === index && (
-                        <TableRow>
-                          <TableCell colSpan={6}>
-                            <Grid container spacing={2}>
-                              <Grid item xs={6} md={10}>
-                                <FormControl
-                                  className={
-                                    classess.table__brow__comment_row_container
-                                  }
-                                >
-                                  <Input
-                                    className={
-                                      classess.table__brow__comment_row_container__input
-                                    }
-                                    rows={6}
-                                    multiline="true"
-                                    value={note}
-                                    onChange={(e) => setNote(e.target.value)}
-                                  />
-                                </FormControl>
-                              </Grid>
-                              <Grid item xs={6} md={2}>
-                                <Button
-                                  variant="contained"
-                                  className={
-                                    classess.table__brow__comment_row_container__button
-                                  }
-                                  onClick={() => noteHandler(items?._id)}
-                                >
-                                  Add Comments
-                                </Button>
-                              </Grid>
-                            </Grid>
-                          </TableCell>
-                        </TableRow>
-                      )}
-                    </TableBody>
-                  );
-                })}
+                        )}
+                      </TableBody>
+                    );
+                  })
+                )}
               </Table>
             </TableContainer>
           )}

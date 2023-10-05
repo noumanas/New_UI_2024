@@ -16,17 +16,21 @@
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: $base-container-backgroung-color;
-  border-radius: 10px;
+  border-radius: 12px;
   box-shadow: 2px 2px 4px #000000;
   padding: 20px;
   color: #ffffff;
   border: none;
+  outline: none;
 
   &__artistbox {
     padding: 20px;
     background-color: #192233;
     border-radius: 10px;
     min-width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     &__title {
       padding: 20px;
@@ -49,6 +53,12 @@
       display: flex;
       align-items: center;
     }
+  }
+  &__confirmBtn {
+    @include activeThemeBotton();
+  }
+  &__cancelBtn {
+    @include cancelDeactiveBtn();
   }
 }
 

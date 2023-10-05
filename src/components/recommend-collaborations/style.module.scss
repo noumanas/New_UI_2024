@@ -54,6 +54,7 @@
                         &__description {
                             @include customParagraph(12px);
                             @include textEllipsisLineClamp(9);
+                            margin-top: 20px !important;
                         }
                     }
                 }

@@ -1334,7 +1334,7 @@ const CustomizedConfig = ({
                   sx={{
                     "& .MuiSlider-rail": {
                       backgroundImage:
-                        "linear-gradient(90deg, #222C41, #222C41)", // Background color
+                        " linear-gradient(90deg, #4C5465, #4C5465)", // Background color
                     },
 
                     "& .MuiSlider-thumb": {
